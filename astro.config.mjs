@@ -1,7 +1,6 @@
 // @ts-check
 import { defineConfig } from "astro/config";
 
-import cloudflare from "@astrojs/cloudflare";
 import sitemap from "@astrojs/sitemap";
 
 import react from "@astrojs/react";
@@ -14,8 +13,6 @@ import { SITE } from "./site.config.mjs";
 export default defineConfig({
   site: SITE.url,
   trailingSlash: "never",
-
-  adapter: cloudflare({ imageService: "compile" }),
 
   integrations: [SITE.indexable && sitemap(), react()],
 

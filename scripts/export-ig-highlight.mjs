@@ -1,3 +1,4 @@
+/* global console, process, document -- Node script; document runs in the Playwright page. */
 import { mkdir } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";

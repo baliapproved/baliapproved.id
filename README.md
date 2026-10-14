@@ -1,46 +1,48 @@
-# Astro Starter Kit: Basics
+# Bali Approved
+
+Firsthand reviews of places around Bali. Built with Astro, React, and Tailwind
+CSS.
+
+## Development
+
+Use the Node version in `.node-version` and the pnpm version in `package.json`.
 
 ```sh
-pnpm create astro@latest -- --template basics
+pnpm install
+pnpm dev --background
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+The dev server runs at `http://localhost:4321`. Manage it with
+`pnpm astro dev status`, `pnpm astro dev logs`, and `pnpm astro dev stop`.
 
-## 🚀 Project Structure
+## Commands
 
-Inside of your Astro project, you'll see the following folders and files:
+| Command             | Purpose                              |
+| ------------------- | ------------------------------------ |
+| `pnpm typecheck`    | Check Astro and TypeScript           |
+| `pnpm lint`         | Run ESLint                           |
+| `pnpm format`       | Format files with Prettier           |
+| `pnpm format:check` | Check formatting without writing     |
+| `pnpm build`        | Build the static site into `dist/`   |
+| `pnpm preview`      | Preview the production build locally |
 
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src
-│   ├── assets
-│   │   └── astro.svg
-│   ├── components
-│   │   └── Welcome.astro
-│   ├── layouts
-│   │   └── Layout.astro
-│   └── pages
-│       └── index.astro
-└── package.json
-```
+## Project layout
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+- `src/pages/`: routes.
+- `src/data/places/`: one folder per reviewed place, loaded by `src/content.config.ts`.
+- `src/components/`: shared components.
+- `src/styles/global.css`: global styles and theme tokens.
+- `site.config.mjs`: site name, URL, and SEO defaults.
+- `scripts/`: Instagram cover and highlight exports, run against the dev server.
+- `public/`: assets served directly.
+- `wrangler.jsonc`: Cloudflare configuration for serving `dist/`.
 
-## 🧞 Commands
+## Analytics
 
-All commands are run from the root of the project, from a terminal:
+Configure the PostHog project token and ingestion host in both the local
+production build environment and Cloudflare's build environment before
+deploying. See `.env.example`. The site is static, so runtime variables cannot
+change analytics in an existing build. Leave the token empty during local
+development.
 
-| Command                | Action                                           |
-| :--------------------- | :----------------------------------------------- |
-| `pnpm install`         | Installs dependencies                            |
-| `pnpm dev`             | Starts local dev server at `localhost:4321`      |
-| `pnpm build`           | Build your production site to `./dist/`          |
-| `pnpm preview`         | Preview your build locally, before deploying     |
-| `pnpm astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `pnpm astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+See `AGENTS.md` for dependency and development rules.

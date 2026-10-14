@@ -76,9 +76,7 @@ const slides = await Promise.all(
           <span class="sr-only"> (opens in a new tab)</span>
         </a>
 
-        <p
-          class="mx-auto mt-4 max-w-[44rem] text-[0.9375rem] leading-relaxed text-pretty text-muted-foreground sm:mt-5 sm:text-[1.0625rem]"
-        >
+        <p class="mx-auto mt-4 max-w-[44rem] text-[0.9375rem] leading-relaxed text-pretty text-muted-foreground sm:mt-5 sm:text-[1.0625rem]">
           {data.description}
         </p>
       </header>
@@ -95,48 +93,36 @@ const slides = await Promise.all(
 
   <div class="px-6 sm:px-8">
     <div class="mx-auto w-full max-w-[52rem]">
-      <dl
-        class="mt-6 grid grid-cols-1 gap-4 text-center md:mt-7 md:grid-cols-3 md:gap-5"
-      >
+      <dl class="mt-6 grid grid-cols-1 gap-4 text-center md:mt-7 md:grid-cols-3 md:gap-5">
         <div>
-          <dt
-            class="text-[0.6875rem] font-semibold tracking-[0.2em] text-muted-foreground uppercase"
-          >
+          <dt class="text-[0.6875rem] font-semibold tracking-[0.2em] text-muted-foreground uppercase">
             Overall
           </dt>
-          <dd
-            class="mt-1.5 flex items-baseline justify-center gap-2 font-heading text-[1.375rem] tracking-tight sm:text-[1.75rem]"
-          >
+          <dd class="mt-1.5 flex items-baseline justify-center gap-2 font-heading text-[1.375rem] tracking-tight sm:text-[1.75rem]">
             <span
               aria-hidden="true"
-              class="text-lg text-[#d49b20] sm:text-[1.375rem]">★</span
+              class="text-lg text-[#d49b20] sm:text-[1.375rem]"
             >
+              ★
+            </span>
             <span>{data.overallRating.toFixed(1)} / 5</span>
           </dd>
         </div>
 
         <div>
-          <dt
-            class="text-[0.6875rem] font-semibold tracking-[0.2em] text-muted-foreground uppercase"
-          >
+          <dt class="text-[0.6875rem] font-semibold tracking-[0.2em] text-muted-foreground uppercase">
             Spending
           </dt>
-          <dd
-            class="mt-1.5 font-heading text-[1.375rem] tracking-tight sm:text-[1.75rem]"
-          >
+          <dd class="mt-1.5 font-heading text-[1.375rem] tracking-tight sm:text-[1.75rem]">
             {data.spending}
           </dd>
         </div>
 
         <div>
-          <dt
-            class="text-[0.6875rem] font-semibold tracking-[0.2em] text-muted-foreground uppercase"
-          >
+          <dt class="text-[0.6875rem] font-semibold tracking-[0.2em] text-muted-foreground uppercase">
             Approved at
           </dt>
-          <dd
-            class="mt-1.5 font-heading text-[1.375rem] tracking-tight sm:text-[1.75rem]"
-          >
+          <dd class="mt-1.5 font-heading text-[1.375rem] tracking-tight sm:text-[1.75rem]">
             <time datetime={data.approvedAt.toISOString()}>{approvedDate}</time>
           </dd>
         </div>

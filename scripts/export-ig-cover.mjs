@@ -1,3 +1,4 @@
+/* global console, process, document -- Node script; document runs in the Playwright page. */
 import { spawnSync } from "node:child_process";
 import { mkdir } from "node:fs/promises";
 import path from "node:path";
@@ -35,7 +36,17 @@ await mkdir(path.dirname(stagedRaw), { recursive: true });
 if (rawInput) {
   const convert = spawnSync(
     "sips",
-    ["-s", "format", "jpeg", "-s", "formatOptions", "100", rawInput, "--out", stagedRaw],
+    [
+      "-s",
+      "format",
+      "jpeg",
+      "-s",
+      "formatOptions",
+      "100",
+      rawInput,
+      "--out",
+      stagedRaw,
+    ],
     { stdio: "inherit" },
   );
   if (convert.status !== 0) {
