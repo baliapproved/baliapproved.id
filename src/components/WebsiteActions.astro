@@ -1,0 +1,63 @@
+---
+// Sends one website_action per click on a link marked with data-action and
+// data-placement. Links about a place also carry data-place-id and
+// data-place-name, so its clicks stay under place.id when the title changes.
+---
+
+<script>
+  interface PostHog {
+    capture(
+      event: string,
+      properties: Record<string, unknown>,
+      options: { transport: "sendBeacon"; send_instantly: boolean },
+    ): void;
+  }
+
+  // Ids are what the dashboard counts by; names are only what it shows.
+  const actions: Record<string, string> = {
+    maps_click: "Google Maps clicks",
+    collaboration_click: "Collaboration inquiry clicks",
+    whatsapp_click: "WhatsApp contact clicks",
+    instagram_click: "Instagram clicks",
+  };
+  const placements: Record<string, string> = {
+    place_listing: "Place listing",
+    place_review: "Place review",
+    hero: "Hero",
+    footer: "Footer",
+  };
+
+  document.addEventListener("click", (event) => {
+    if (!(event.target instanceof Element)) return;
+    const link = event.target.closest<HTMLAnchorElement>("a[data-action]");
+    if (!link) return;
+    const { action, placement, placeId, placeName } = link.dataset;
+    if (!action || !placement || !actions[action] || !placements[placement]) {
+      return;
+    }
+
+    const breakdowns = [
+      {
+        key: "placement",
+        label: "Placement",
+        value_id: placement,
+        value_name: placements[placement],
+      },
+    ];
+    if (placeId && placeName) {
+      breakdowns.unshift({
+        key: "place",
+        label: "Place",
+        value_id: placeId,
+        value_name: placeName,
+      });
+    }
+
+    // Send right away: the click may leave the page or open another app.
+    (window as Window & { posthog?: PostHog }).posthog?.capture(
+      "website_action",
+      { action_id: action, action_name: actions[action], breakdowns },
+      { transport: "sendBeacon", send_instantly: true },
+    );
+  });
+</script>

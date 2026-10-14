@@ -70,6 +70,10 @@ const slides = await Promise.all(
           href={data.mapsUrl}
           target="_blank"
           rel="noopener noreferrer"
+          data-action="maps_click"
+          data-placement="place_review"
+          data-place-id={place.id}
+          data-place-name={data.title}
           class="mt-4 inline-flex max-w-2xl items-start justify-center gap-2 text-[0.8125rem] font-medium text-pretty decoration-foreground/35 underline-offset-4 hover:underline focus-visible:rounded-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#006241] sm:text-[0.9375rem]"
         >
           📍 {data.address}

@@ -1,6 +1,7 @@
 ---
 import SEO from "@/components/SEO.astro";
 import PostHog from "@/components/posthog.astro";
+import WebsiteActions from "@/components/WebsiteActions.astro";
 import "../styles/global.css";
 
 import { SITE } from "../../site.config.mjs";
@@ -71,6 +72,7 @@ const serializedJsonLd = jsonLd
   </head>
   <body>
     <slot />
+    <WebsiteActions />
   </body>
 </html>
 
