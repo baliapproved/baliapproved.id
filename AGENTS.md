@@ -53,7 +53,7 @@ Do not write optional code or config that only repeats a tool's default behavior
 Organize by vertical (what the code does), not by technical type (`components`, `hooks`, `types`, `utils`, `constants`). See [The Vertical Codebase](https://tkdodo.eu/blog/the-vertical-codebase). Code that changes together lives together.
 
 - A vertical groups one functionality directly under `src/`. It can hold Astro components, React islands, logic, types, data, styles, and assets. What a file is technically does not decide where it goes.
-- Start from the page. Keep page-only Astro UI in its page as described below. Create verticals for shared functionality or required React islands. Do not add a `features/` wrapper around verticals.
+- Start from the page. Keep small page-only Astro UI inline by default. Extract substantial, cohesive sections into their owning verticals as described below. Verticals can also hold shared functionality or required React islands. Do not add a `features/` wrapper around verticals.
 - Keep feature-specific assets and styles with their feature. Keep Astro and React parts of the same feature together.
 - Code used by several verticals becomes its own vertical, named for what it does. Shared code that is not domain-specific belongs in `src/design-system/`: reusable assets, components, hooks, styles, and patterns.
 - Shared site layout, footer, theme controls, and site settings belong in `src/site/`. Analytics belongs in `src/analytics/`; shared SEO markup belongs in `src/seo/`.
@@ -65,11 +65,11 @@ Organize by vertical (what the code does), not by technical type (`components`, 
 
 ### Astro Pages
 
-Routes and endpoints stay in `src/pages/`. Page UI used by only one route stays inline in its page file, including page-specific Astro sections and their styles. Move that UI into a vertical only when it is reused by another route. Size alone does not override this exception.
+Routes and endpoints stay in `src/pages/`. Keep small page-only Astro UI and its styles inline by default. Extract substantial, cohesive sections into their owning verticals when keeping their markup, styles, behavior, and assets together improves maintainability. Reuse by another route is sufficient, but not required. Line count alone is not a reason to extract a section.
 
-Pages retain route handling, metadata, page-specific data loading, and markup. Do not turn a page into a wrapper that only renders an extracted whole-page component.
+Pages retain route handling, metadata, page-specific data loading, simple page markup, and section composition. Keep section ordering visible in the page. Do not turn a page into a wrapper that only renders an extracted whole-page component.
 
-React islands that require a separate framework component for hydration stay in their verticals. Shared site layouts and design-system components also stay separate. These are not reasons to extract page-only Astro markup.
+React islands that require a separate framework component for hydration stay in their verticals. Shared site layouts and design-system components also stay separate. An island alone does not require extracting its surrounding Astro markup.
 
 Keep framework entrypoints such as `src/content.config.ts` in their required locations when needed. Keep unprocessed assets that need stable public URLs in `public/`.
 
