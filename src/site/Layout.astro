@@ -15,6 +15,7 @@ interface Props {
   image?: string | URL;
   imageAlt?: string;
   type?: "website" | "article";
+  indexable?: boolean;
   jsonLd?: JsonLd;
   /** Stable analytics id; keep it if the page URL changes. */
   analyticsPageId?: string;
@@ -67,7 +68,6 @@ const serializedJsonLd = jsonLd
         is:inline
       />
     )}
-    <slot name="head" />
     <PostHog pageId={analyticsPageId} />
   </head>
   <body>

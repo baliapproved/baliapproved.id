@@ -11,6 +11,8 @@ interface Props {
   imageHeight?: number;
   imageType?: string;
   type?: "website" | "article";
+  // Set to false to keep the page out of search results and drop its canonical URL.
+  indexable?: boolean;
 }
 
 const {
@@ -23,6 +25,7 @@ const {
   imageHeight = 630,
   imageType = "image/png",
   type = "website",
+  indexable = true,
 } = Astro.props;
 
 const siteUrl = Astro.site ?? new URL(site.url);
@@ -37,7 +40,8 @@ canonicalUrl.search = "";
 <meta name="description" content={description} />
 <meta name="theme-color" content={site.themeColor} />
 
-<link rel="canonical" href={canonicalUrl} />
+{!indexable && <meta name="robots" content="noindex" />}
+{indexable && <link rel="canonical" href={canonicalUrl} />}
 <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
 <link rel="shortcut icon" href="/favicon.ico" />
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
@@ -47,7 +51,7 @@ canonicalUrl.search = "";
 <meta property="og:site_name" content={site.name} />
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
-<meta property="og:url" content={canonicalUrl} />
+{indexable && <meta property="og:url" content={canonicalUrl} />}
 <meta property="og:locale" content={site.locale} />
 <meta property="og:image" content={socialImageUrl} />
 <meta property="og:image:type" content={imageType} />
