@@ -1,5 +1,6 @@
 ---
 import type { ComponentProps } from "astro/types";
+import JsonLd from "@/seo/JsonLd.astro";
 import SEO from "@/seo/SEO.astro";
 import PostHog from "@/analytics/posthog.astro";
 import WebsiteActions from "@/analytics/WebsiteActions.astro";
@@ -7,18 +8,13 @@ import "@/design-system/global.css";
 
 import { site } from "./site";
 
-type JsonLd = Record<string, unknown> | Record<string, unknown>[];
-
 type Props = ComponentProps<typeof SEO> & {
-  jsonLd?: JsonLd;
+  jsonLd?: ComponentProps<typeof JsonLd>["schema"];
   /** Stable analytics id; keep it if the page URL changes. */
   analyticsPageId?: string;
 };
 
 const { jsonLd, analyticsPageId, ...seo } = Astro.props;
-const serializedJsonLd = jsonLd
-  ? JSON.stringify(jsonLd).replaceAll("<", "\\u003c")
-  : undefined;
 ---
 
 <!doctype html>
@@ -59,13 +55,7 @@ const serializedJsonLd = jsonLd
         .addEventListener("change", applyThemePreference);
     </script>
     <SEO {...seo} />
-    {serializedJsonLd && (
-      <script
-        type="application/ld+json"
-        set:html={serializedJsonLd}
-        is:inline
-      />
-    )}
+    {jsonLd && <JsonLd schema={jsonLd} />}
     <PostHog pageId={analyticsPageId} />
   </head>
   <body>
