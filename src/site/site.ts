@@ -6,7 +6,7 @@ export const site = {
   description:
     "Firsthand reviews of places around Bali, covering ambience, practical details, and whether each one is worth your time.",
   language: "en",
-  themeColor: "#006241",
+  themeColor: "#1d1816",
   imageAlt: "Bali Approved seal",
 } as const;
 

@@ -1,6 +1,7 @@
 ---
 import { getImage } from "astro:assets";
 import type { CollectionEntry } from "astro:content";
+import { RiMapPinLine, RiStarFill } from "@remixicon/react";
 import { PlaceCoverCarousel } from "./PlaceCoverCarousel";
 import { Seal } from "./Seal";
 
@@ -50,7 +51,6 @@ const slides = await Promise.all(
           area={data.sealArea}
           year={data.approvedAt.getUTCFullYear()}
           size={184}
-          className="bg-[#006241] [&_svg_text]:fill-white/80 [&>span]:text-white"
         />
       </div>
 
@@ -70,9 +70,10 @@ const slides = await Promise.all(
           data-placement="place_review"
           data-place-id={place.id}
           data-place-name={data.title}
-          class="mt-4 inline-flex max-w-2xl items-start justify-center gap-2 text-[0.8125rem] font-medium text-pretty decoration-foreground/35 underline-offset-4 hover:underline focus-visible:rounded-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#006241] sm:text-[0.9375rem]"
+          class="mt-4 inline-flex max-w-2xl items-start justify-center gap-2 text-[0.8125rem] font-medium text-pretty decoration-foreground/35 underline-offset-4 hover:underline focus-visible:rounded-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring sm:text-[0.9375rem]"
         >
-          📍 {data.address}
+          <RiMapPinLine aria-hidden="true" className="mt-0.5 size-4 shrink-0" />
+          <span>{data.address}</span>
           <span class="sr-only"> (opens in a new tab)</span>
         </a>
 
@@ -99,12 +100,10 @@ const slides = await Promise.all(
             Overall
           </dt>
           <dd class="mt-1.5 flex items-baseline justify-center gap-2 font-heading text-[1.375rem] tracking-tight sm:text-[1.75rem]">
-            <span
+            <RiStarFill
               aria-hidden="true"
-              class="text-lg text-[#d49b20] sm:text-[1.375rem]"
-            >
-              ★
-            </span>
+              className="size-4 text-primary sm:size-5"
+            />
             <span>{data.overallRating.toFixed(1)} / 5</span>
           </dd>
         </div>

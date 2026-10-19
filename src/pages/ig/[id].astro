@@ -2,6 +2,7 @@
 import { getCollection, type CollectionEntry } from "astro:content";
 
 import { Seal } from "@/places/Seal";
+import { RiMapPinLine, RiStarFill } from "@remixicon/react";
 
 import "@/design-system/global.css";
 
@@ -72,13 +73,19 @@ const approvedDate = new Intl.DateTimeFormat("en-GB", {
           area={data.sealArea}
           year={data.approvedAt.getUTCFullYear()}
           size={200}
-          className="bg-[#006241] [&_svg_text]:fill-white/80 [&_svg_text]:text-[13px] [&>span]:text-white"
+          className="[&_svg_text]:text-[13px]"
         />
       </div>
 
       <h1>{data.title}</h1>
 
-      <p class="location">📍 {data.address}</p>
+      <p class="location">
+        <RiMapPinLine
+          aria-hidden="true"
+          className="inline size-7 align-text-bottom"
+        />
+        {data.address}
+      </p>
 
       <img
         src={rawSrc}
@@ -91,9 +98,10 @@ const approvedDate = new Intl.DateTimeFormat("en-GB", {
         <div>
           <dt>Overall</dt>
           <dd>
-            <span class="star" aria-hidden="true">
-              ★
-            </span>
+            <RiStarFill
+              aria-hidden="true"
+              className="mr-[0.3em] inline size-8 align-text-bottom text-primary"
+            />
             <span>{data.overallRating.toFixed(1)} / 5</span>
           </dd>
         </div>
@@ -119,7 +127,7 @@ const approvedDate = new Intl.DateTimeFormat("en-GB", {
     width: 1080px;
     height: 1440px;
     overflow: hidden;
-    background: var(--site-canvas);
+    background: var(--background);
     color: var(--foreground);
   }
 
@@ -194,10 +202,5 @@ const approvedDate = new Intl.DateTimeFormat("en-GB", {
     font-size: 36px;
     line-height: 1.15;
     letter-spacing: -0.02em;
-  }
-
-  .stats dd .star {
-    margin-right: 0.3em;
-    color: #d49b20;
   }
 </style>

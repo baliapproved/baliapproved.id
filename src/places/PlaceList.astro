@@ -1,6 +1,8 @@
 ---
 import { Image } from "astro:assets";
 import type { CollectionEntry } from "astro:content";
+import { buttonVariants } from "@/design-system/button";
+import { RiArrowRightLine, RiMapPinLine, RiStarFill } from "@remixicon/react";
 import { Seal } from "./Seal";
 
 interface Props {
@@ -35,7 +37,7 @@ const dateFormatter = new Intl.DateTimeFormat("en-GB", {
         <li
           class:list={[
             "px-6 py-16 sm:px-8 sm:py-20 lg:py-28",
-            index % 2 === 0 ? "bg-site-panel" : "bg-site-canvas",
+            index % 2 === 0 ? "bg-muted" : "bg-background",
           ]}
         >
           <article
@@ -51,7 +53,7 @@ const dateFormatter = new Intl.DateTimeFormat("en-GB", {
               <a
                 href={`/places/${data.slug}`}
                 aria-label={`See why we approved ${data.title}`}
-                class="group block overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#006241]"
+                class="group block overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring"
               >
                 <Image
                   src={data.cover}
@@ -74,7 +76,6 @@ const dateFormatter = new Intl.DateTimeFormat("en-GB", {
                   area={data.sealArea}
                   year={data.approvedAt.getUTCFullYear()}
                   size={142}
-                  className="bg-[#006241] [&_svg_text]:fill-white/80 [&>span]:text-white"
                 />
               </div>
             </div>
@@ -102,7 +103,7 @@ const dateFormatter = new Intl.DateTimeFormat("en-GB", {
               >
                 <a
                   href={`/places/${data.slug}`}
-                  class="transition-colors hover:text-[#006241] focus-visible:rounded-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#006241]"
+                  class="transition-colors hover:text-primary focus-visible:rounded-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring"
                 >
                   {data.title}
                 </a>
@@ -118,9 +119,10 @@ const dateFormatter = new Intl.DateTimeFormat("en-GB", {
                     Overall
                   </dt>
                   <dd class="mt-1.5 flex items-baseline gap-1.5 font-heading text-2xl tracking-tight">
-                    <span aria-hidden="true" class="text-base text-[#d49b20]">
-                      ★
-                    </span>
+                    <RiStarFill
+                      aria-hidden="true"
+                      className="size-4 text-primary"
+                    />
                     <span>{data.overallRating.toFixed(1)} / 5</span>
                   </dd>
                 </div>
@@ -138,15 +140,17 @@ const dateFormatter = new Intl.DateTimeFormat("en-GB", {
               <div class="mt-8">
                 <a
                   href={`/places/${data.slug}`}
-                  class="group inline-flex w-full items-center justify-between gap-6 rounded-sm bg-[#006241] px-5 py-3.5 text-sm font-semibold tracking-[0.04em] text-white transition-colors hover:bg-[#004d33] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#006241] sm:w-auto"
+                  class:list={[
+                    buttonVariants({ size: "lg" }),
+                    "w-full justify-between gap-6 sm:w-auto",
+                  ]}
                 >
                   <span>See why we approved it</span>
-                  <span
+                  <RiArrowRightLine
                     aria-hidden="true"
-                    class="motion-safe:transition-transform motion-safe:group-hover:translate-x-1 motion-safe:group-focus-visible:translate-x-1"
-                  >
-                    →
-                  </span>
+                    data-icon="inline-end"
+                    className="motion-safe:transition-transform motion-safe:group-hover/button:translate-x-1 motion-safe:group-focus-visible/button:translate-x-1"
+                  />
                 </a>
               </div>
 
@@ -158,13 +162,13 @@ const dateFormatter = new Intl.DateTimeFormat("en-GB", {
                 data-placement="place_listing"
                 data-place-id={place.id}
                 data-place-name={data.title}
-                class="mt-6 inline-flex max-w-xl items-start text-sm leading-relaxed text-muted-foreground decoration-foreground/35 underline-offset-4 hover:text-foreground hover:underline focus-visible:rounded-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#006241]"
+                class="mt-6 inline-flex max-w-xl items-start gap-1 text-sm leading-relaxed text-muted-foreground decoration-foreground/35 underline-offset-4 hover:text-foreground hover:underline focus-visible:rounded-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring"
               >
-                <span>
-                  <span aria-hidden="true">📍</span>
-                  {"\u00A0"}
-                  {data.address}
-                </span>
+                <RiMapPinLine
+                  aria-hidden="true"
+                  className="mt-0.5 size-4 shrink-0"
+                />
+                <span>{data.address}</span>
                 <span class="sr-only"> (opens in a new tab)</span>
               </a>
             </div>
