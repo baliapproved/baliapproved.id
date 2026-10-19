@@ -1,7 +1,7 @@
 import { MoonIcon, SunIcon } from "lucide-react";
 import * as React from "react";
 
-import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
+import { ToggleGroup, ToggleGroupItem } from "@/design-system/toggle-group";
 
 type Theme = "light" | "dark";
 

@@ -1,9 +1,9 @@
 ---
 import { getCollection, type CollectionEntry } from "astro:content";
 
-import { Seal } from "@/components/Seal";
+import { Seal } from "@/places/Seal";
 
-import "../../styles/global.css";
+import "@/design-system/global.css";
 
 export async function getStaticPaths() {
   if (import.meta.env.PROD) {

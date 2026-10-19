@@ -4,7 +4,7 @@ import { z } from "astro/zod";
 
 export const collections = {
   places: defineCollection({
-    loader: glob({ base: "./src/data/places", pattern: "**/index.md" }),
+    loader: glob({ base: "./src/places/content", pattern: "**/index.md" }),
     schema: ({ image }) =>
       z.object({
         approvalNumber: z.number().int().positive(),

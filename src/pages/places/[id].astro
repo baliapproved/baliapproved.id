@@ -1,14 +1,12 @@
 ---
 import { getImage } from "astro:assets";
-import { getCollection, type CollectionEntry } from "astro:content";
-
-import Footer from "@/features/footer/Footer.astro";
-import { ModeToggle } from "@/components/ModeToggle";
-import PlaceCover from "@/components/PlaceCover.astro";
-import PlaceReview from "@/components/PlaceReview.astro";
-import Layout from "@/layouts/Layout.astro";
-
-import { site } from "@/config/site";
+import { getCollection, render, type CollectionEntry } from "astro:content";
+import Footer from "@/site/Footer.astro";
+import { ModeToggle } from "@/site/ModeToggle";
+import Layout from "@/site/Layout.astro";
+import { site } from "@/site/site";
+import { PlaceCoverCarousel } from "@/places/PlaceCoverCarousel";
+import { Seal } from "@/places/Seal";
 
 export async function getStaticPaths() {
   const places = await getCollection("places");
@@ -23,7 +21,7 @@ interface Props {
   place: CollectionEntry<"places">;
 }
 
-const { place } = Astro.props;
+const { place }: Props = Astro.props;
 const { data } = place;
 const siteUrl = new URL("/", Astro.site ?? site.url);
 const placeUrl = new URL(`/places/${place.id}`, siteUrl);
@@ -85,6 +83,39 @@ const jsonLd = {
     },
   ],
 };
+
+const titleId = `${place.id}-title`;
+const approvedDate = new Intl.DateTimeFormat("en-GB", {
+  day: "numeric",
+  month: "long",
+  year: "numeric",
+  timeZone: "UTC",
+}).format(data.approvedAt);
+
+const slides = await Promise.all(
+  [{ src: data.cover, alt: data.coverAlt }, ...data.gallery].map(
+    async (photo) => {
+      const image = await getImage({
+        src: photo.src,
+        widths: [360, 540, 720],
+        sizes: "(min-width: 640px) 384px, 72vw",
+        format: "webp",
+      });
+
+      return {
+        src: image.src,
+        srcSet: image.srcSet.attribute,
+        sizes: (image.attributes.sizes as string | undefined) ?? "72vw",
+        width: photo.src.width,
+        height: photo.src.height,
+        alt: photo.alt,
+      };
+    },
+  ),
+);
+
+const hasContent = Boolean(place.body?.trim());
+const { Content } = await render(place);
 ---
 
 <Layout
@@ -119,8 +150,106 @@ const jsonLd = {
     </div>
 
     <article aria-labelledby={`${place.id}-title`}>
-      <PlaceCover place={place} headingLevel="h1" />
-      <PlaceReview place={place} />
+      <div class="pt-12 pb-10 sm:pt-16 sm:pb-12 lg:pt-18 lg:pb-14">
+        <div class="px-6 sm:px-8">
+          <div class="mx-auto w-full max-w-[52rem]">
+            <div class="flex justify-center">
+              <Seal
+                number={data.approvalNumber}
+                area={data.sealArea}
+                year={data.approvedAt.getUTCFullYear()}
+                size={184}
+                className="bg-[#006241] [&_svg_text]:fill-white/80 [&>span]:text-white"
+              />
+            </div>
+
+            <header class="mx-auto mt-6 max-w-[52rem] text-center sm:mt-7">
+              <h1
+                id={titleId}
+                class="text-[clamp(2.125rem,5.5vw,4.375rem)] leading-[0.96] tracking-[-0.035em] text-balance"
+              >
+                {data.title}
+              </h1>
+
+              <a
+                href={data.mapsUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                data-action="maps_click"
+                data-placement="place_review"
+                data-place-id={place.id}
+                data-place-name={data.title}
+                class="mt-4 inline-flex max-w-2xl items-start justify-center gap-2 text-[0.8125rem] font-medium text-pretty decoration-foreground/35 underline-offset-4 hover:underline focus-visible:rounded-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#006241] sm:text-[0.9375rem]"
+              >
+                📍 {data.address}
+                <span class="sr-only"> (opens in a new tab)</span>
+              </a>
+
+              <p class="mx-auto mt-4 max-w-[44rem] text-[0.9375rem] leading-relaxed text-pretty text-muted-foreground sm:mt-5 sm:text-[1.0625rem]">
+                {data.description}
+              </p>
+            </header>
+          </div>
+        </div>
+
+        <div class="mt-8 sm:mt-10">
+          <PlaceCoverCarousel
+            client:load
+            slides={slides}
+            label={`Photos of ${data.title}`}
+          />
+        </div>
+
+        <div class="px-6 sm:px-8">
+          <div class="mx-auto w-full max-w-[52rem]">
+            <dl class="mt-6 grid grid-cols-1 gap-4 text-center md:mt-7 md:grid-cols-3 md:gap-5">
+              <div>
+                <dt class="text-[0.6875rem] font-semibold tracking-[0.2em] text-muted-foreground uppercase">
+                  Overall
+                </dt>
+                <dd class="mt-1.5 flex items-baseline justify-center gap-2 font-heading text-[1.375rem] tracking-tight sm:text-[1.75rem]">
+                  <span
+                    aria-hidden="true"
+                    class="text-lg text-[#d49b20] sm:text-[1.375rem]"
+                  >
+                    ★
+                  </span>
+                  <span>{data.overallRating.toFixed(1)} / 5</span>
+                </dd>
+              </div>
+
+              <div>
+                <dt class="text-[0.6875rem] font-semibold tracking-[0.2em] text-muted-foreground uppercase">
+                  Spending
+                </dt>
+                <dd class="mt-1.5 font-heading text-[1.375rem] tracking-tight sm:text-[1.75rem]">
+                  {data.spending}
+                </dd>
+              </div>
+
+              <div>
+                <dt class="text-[0.6875rem] font-semibold tracking-[0.2em] text-muted-foreground uppercase">
+                  Approved at
+                </dt>
+                <dd class="mt-1.5 font-heading text-[1.375rem] tracking-tight sm:text-[1.75rem]">
+                  <time datetime={data.approvedAt.toISOString()}>
+                    {approvedDate}
+                  </time>
+                </dd>
+              </div>
+            </dl>
+          </div>
+        </div>
+      </div>
+      {hasContent && (
+        <div class="px-6 pb-12 sm:px-8 sm:pb-14">
+          <div class="mx-auto w-full max-w-[52rem]">
+            <div class="w-full text-left text-foreground [&>h1]:mt-14 [&>h1]:font-heading [&>h1]:text-2xl [&>h1]:leading-tight [&>h1]:tracking-[-0.02em] sm:[&>h1]:mt-20 sm:[&>h1]:text-[2rem] [&>h1+h2]:mt-3 [&>h1+p:has(img)]:mt-6 [&>h1+p:has(img)]:block sm:[&>h1+p:has(img)]:mt-8 [&>h1+p>img]:aspect-[2/1] [&>h2]:mt-8 [&>h2]:font-heading [&>h2]:text-xl [&>h2]:leading-snug [&>h2]:tracking-[-0.01em] sm:[&>h2]:mt-10 [&>h2+h3]:mt-4 [&>h2+p]:mt-4 [&>h2+p:has(>strong)]:font-heading [&>h2+p:has(>strong)]:text-2xl [&>h2+p:has(>strong)]:text-foreground sm:[&>h2+p:has(>strong)]:text-[1.75rem] [&>h2+ul]:mt-4 [&>h3]:mt-8 [&>h3]:text-xs [&>h3]:font-semibold [&>h3]:tracking-[0.18em] [&>h3]:text-muted-foreground [&>h3]:uppercase [&>h3+p]:mt-2 [&>h3+p]:font-heading [&>h3+p]:text-2xl [&>h3+p]:text-foreground sm:[&>h3+p]:text-[1.75rem] [&>p]:text-[0.9375rem] [&>p]:leading-[1.75] [&>p]:text-pretty [&>p]:text-muted-foreground sm:[&>p]:text-base [&>p+p]:mt-4 [&>p+ul]:mt-4 [&>p:first-child]:font-heading [&>p:first-child]:text-lg [&>p:first-child]:leading-relaxed [&>p:first-child]:tracking-[-0.01em] [&>p:first-child]:text-foreground sm:[&>p:first-child]:text-xl [&>p:first-child+p]:mt-5 [&>p:has(img)]:mt-8 [&>p:has(img)]:grid [&>p:has(img)]:grid-cols-2 [&>p:has(img)]:gap-3 sm:[&>p:has(img)]:mt-10 sm:[&>p:has(img)]:gap-4 [&>p>img]:aspect-[4/5] [&>p>img]:w-full [&>p>img]:object-cover [&>p>strong]:font-semibold [&>p>strong]:text-foreground [&>ul]:flex [&>ul]:list-none [&>ul]:flex-wrap [&>ul]:gap-2 [&>ul]:p-0 [&>ul+p]:mt-4 [&>ul>li]:rounded-full [&>ul>li]:border [&>ul>li]:border-foreground/15 [&>ul>li]:bg-foreground/5 [&>ul>li]:px-3.5 [&>ul>li]:py-2 [&>ul>li]:text-sm [&>ul>li]:font-medium sm:[&>ul>li]:px-4 sm:[&>ul>li]:text-[0.9375rem]">
+              <Content />
+            </div>
+          </div>
+        </div>
+      )}
     </article>
   </main>
 

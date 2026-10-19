@@ -4,7 +4,7 @@ import {
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
-} from "@/components/ui/carousel";
+} from "@/design-system/carousel";
 
 export type PlaceCoverSlide = {
   src: string;

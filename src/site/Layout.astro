@@ -1,10 +1,10 @@
 ---
-import SEO from "@/components/SEO.astro";
-import PostHog from "@/components/posthog.astro";
-import WebsiteActions from "@/components/WebsiteActions.astro";
-import "../styles/global.css";
+import SEO from "@/seo/SEO.astro";
+import PostHog from "@/analytics/posthog.astro";
+import WebsiteActions from "@/analytics/WebsiteActions.astro";
+import "@/design-system/global.css";
 
-import { site } from "@/config/site";
+import { site } from "./site";
 
 type JsonLd = Record<string, unknown> | Record<string, unknown>[];
 

@@ -1,6 +1,6 @@
 import { useId, type CSSProperties } from "react";
 
-import { cn } from "@/lib/utils";
+import { cn } from "@/design-system/utils";
 
 export interface SealProps {
   number: number;

@@ -40,6 +40,39 @@ The only allowed production deploy is a push to the GitHub `main` branch.
 
 Keep `README.md` to what the code and config cannot tell a reader: what the product is for, setup order, and non-obvious gotchas or steps. Leave out anything a file already states, such as scripts, env values, file locations, or rules in this file, and facts that would not change what a reader does.
 
+## Code Guidelines
+
+The codebase should stay lean.
+
+Prefer inline code, logic, functions, and files first. Keep logic in place unless splitting it out is specifically requested, the complexity is already concrete, or the same implementation is being used more than two times.
+
+Do not write optional code or config that only repeats a tool's default behavior. Prefer omitted defaults over explicit self-documenting settings unless changing behavior, correctness, or a user request requires it.
+
+## Codebase Structure
+
+Organize by vertical (what the code does), not by technical type (`components`, `hooks`, `types`, `utils`, `constants`). See [The Vertical Codebase](https://tkdodo.eu/blog/the-vertical-codebase). Code that changes together lives together.
+
+- A vertical groups one functionality directly under `src/`. It can hold Astro components, React islands, logic, types, data, styles, and assets. What a file is technically does not decide where it goes.
+- Start from the page. Keep page-only Astro UI in its page as described below. Create verticals for shared functionality or required React islands. Do not add a `features/` wrapper around verticals.
+- Keep feature-specific assets and styles with their feature. Keep Astro and React parts of the same feature together.
+- Code used by several verticals becomes its own vertical, named for what it does. Shared code that is not domain-specific belongs in `src/design-system/`: reusable assets, components, hooks, styles, and patterns.
+- Shared site layout, footer, theme controls, and site settings belong in `src/site/`. Analytics belongs in `src/analytics/`; shared SEO markup belongs in `src/seo/`.
+- Place content and its images live together in `src/places/content/`, alongside the shared place UI in `src/places/`. Keep collection registration in `src/content.config.ts` and preserve entry IDs and URLs when moving content.
+- Do not split one functionality across top-level type directories such as `components`, `hooks`, `types`, `utils`, `constants`, `data`, or `styles`.
+- Import the file that defines the code, such as `@/design-system/button`. Do not add barrel files that re-export a vertical. Use relative imports within a vertical and `@/` imports between verticals.
+- Keep `components.json` aliases and its Tailwind CSS path aligned with the design system so shadcn generates files in the correct place.
+- Choosing the vertical is a judgment, not a map from file type to directory. Create a vertical only when there is a concrete need for it.
+
+### Astro Pages
+
+Routes and endpoints stay in `src/pages/`. Page UI used by only one route stays inline in its page file, including page-specific Astro sections and their styles. Move that UI into a vertical only when it is reused by another route. Size alone does not override this exception.
+
+Pages retain route handling, metadata, page-specific data loading, and markup. Do not turn a page into a wrapper that only renders an extracted whole-page component.
+
+React islands that require a separate framework component for hydration stay in their verticals. Shared site layouts and design-system components also stay separate. These are not reasons to extract page-only Astro markup.
+
+Keep framework entrypoints such as `src/content.config.ts` in their required locations when needed. Keep unprocessed assets that need stable public URLs in `public/`.
+
 ## Documentation
 
 Full documentation: https://docs.astro.build
