@@ -5,9 +5,6 @@ import { ToggleGroup, ToggleGroupItem } from "@/design-system/toggle-group";
 
 type Theme = "light" | "dark";
 
-const itemClassName =
-  "size-8 rounded-full px-0 text-muted-foreground transition-[color,background-color,box-shadow] hover:bg-background/60 hover:text-foreground aria-pressed:bg-background aria-pressed:text-foreground aria-pressed:shadow-sm";
-
 export function ModeToggle() {
   const [theme, setTheme] = React.useState<Theme>("light");
 
@@ -39,18 +36,12 @@ export function ModeToggle() {
       value={[theme]}
       onValueChange={handleThemeChange}
       size="sm"
-      spacing={1}
       aria-label="Theme"
-      className="rounded-full bg-muted p-1"
     >
-      <ToggleGroupItem
-        value="light"
-        aria-label="Light"
-        className={itemClassName}
-      >
+      <ToggleGroupItem value="light" aria-label="Light">
         <SunIcon />
       </ToggleGroupItem>
-      <ToggleGroupItem value="dark" aria-label="Dark" className={itemClassName}>
+      <ToggleGroupItem value="dark" aria-label="Dark">
         <MoonIcon />
       </ToggleGroupItem>
     </ToggleGroup>
