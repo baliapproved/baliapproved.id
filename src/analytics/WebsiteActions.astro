@@ -1,10 +1,13 @@
 ---
 // Sends one website_action per click on a link marked with data-action and
-// data-placement. Links about a place also carry data-place-id and
-// data-place-name, so its clicks stay under place.id when the title changes.
+// data-placement. Each site lists its actions, placements, and extra
+// breakdowns in ./actions.ts. Layout leaves it out of pages with their own
+// analytics id, which record their own events.
 ---
 
 <script>
+  import { actions, breakdowns, placements } from "./actions";
+
   interface PostHog {
     capture(
       event: string,
@@ -13,50 +16,54 @@
     ): void;
   }
 
-  // Ids are what the dashboard counts by; names are only what it shows.
-  const actions: Record<string, string> = {
-    maps_click: "Google Maps clicks",
-    collaboration_click: "Collaboration inquiry clicks",
-    whatsapp_click: "WhatsApp contact clicks",
-    instagram_click: "Instagram clicks",
-  };
-  const placements: Record<string, string> = {
-    place_listing: "Place listing",
-    place_review: "Place review",
-    hero: "Hero",
-    footer: "Footer",
-  };
+  interface Breakdown {
+    key: string;
+    label: string;
+    /** data-* key holding the value id. */
+    id: string;
+    /** data-* key holding the display name, or display names by value id. */
+    name: string | Record<string, string>;
+  }
+
+  const extraBreakdowns: Breakdown[] = breakdowns;
 
   document.addEventListener("click", (event) => {
     if (!(event.target instanceof Element)) return;
     const link = event.target.closest<HTMLAnchorElement>("a[data-action]");
     if (!link) return;
-    const { action, placement, placeId, placeName } = link.dataset;
+    const { action, placement } = link.dataset;
     if (!action || !placement || !actions[action] || !placements[placement]) {
       return;
     }
 
-    const breakdowns = [
-      {
-        key: "placement",
-        label: "Placement",
-        value_id: placement,
-        value_name: placements[placement],
-      },
-    ];
-    if (placeId && placeName) {
-      breakdowns.unshift({
-        key: "place",
-        label: "Place",
-        value_id: placeId,
-        value_name: placeName,
-      });
-    }
+    // Extra breakdowns go first and only when the link carries them.
+    const extra = extraBreakdowns.flatMap(({ key, label, id, name }) => {
+      const valueId = link.dataset[id];
+      const valueName =
+        typeof name === "string"
+          ? link.dataset[name]
+          : valueId && name[valueId];
+      return valueId && valueName
+        ? [{ key, label, value_id: valueId, value_name: valueName }]
+        : [];
+    });
 
     // Send right away: the click may leave the page or open another app.
     (window as Window & { posthog?: PostHog }).posthog?.capture(
       "website_action",
-      { action_id: action, action_name: actions[action], breakdowns },
+      {
+        action_id: action,
+        action_name: actions[action],
+        breakdowns: [
+          ...extra,
+          {
+            key: "placement",
+            label: "Placement",
+            value_id: placement,
+            value_name: placements[placement],
+          },
+        ],
+      },
       { transport: "sendBeacon", send_instantly: true },
     );
   });
