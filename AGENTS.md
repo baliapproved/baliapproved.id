@@ -29,6 +29,10 @@ Do not assume the registry's `latest` tag means a stable release. If it points t
 
 The only allowed production deploy is a push to the GitHub `main` branch.
 
+## README
+
+Keep `README.md` to what the code and config cannot tell a reader: what the product is for, setup order, and non-obvious gotchas or steps. Leave out anything a file already states, such as scripts, env values, file locations, or rules in this file, and facts that would not change what a reader does.
+
 ## Documentation
 
 Full documentation: https://docs.astro.build
