@@ -10,7 +10,10 @@ import { site } from "./src/site/site.ts";
 export default defineConfig({
   site: site.url,
   trailingSlash: "never",
-  integrations: [react(), sitemap()],
+  integrations: [
+    react(),
+    sitemap({ filter: (page) => page !== `${site.url}/archived` }),
+  ],
   vite: {
     plugins: [tailwindcss()],
   },
