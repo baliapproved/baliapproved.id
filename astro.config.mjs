@@ -12,7 +12,12 @@ export default defineConfig({
   trailingSlash: "never",
   integrations: [
     react(),
-    sitemap({ filter: (page) => page !== `${site.url}/archived` }),
+    sitemap({
+      filter: (page) =>
+        !["/archived", "/blog", "/about"].some(
+          (path) => page === `${site.url}${path}`,
+        ),
+    }),
   ],
   vite: {
     plugins: [tailwindcss()],

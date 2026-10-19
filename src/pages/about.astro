@@ -1,0 +1,13 @@
+---
+import Layout from "@/site/Layout.astro";
+import { site } from "@/site/site";
+---
+
+<Layout title={`About | ${site.name}`} indexable={false} footer={false}>
+  <main class="flex flex-1 items-center justify-center bg-border px-6 pb-24">
+    <div class="flex flex-col items-center gap-3 text-center">
+      <h1 class="text-3xl font-medium tracking-tight sm:text-4xl">About</h1>
+      <p class="text-foreground/65">Coming soon.</p>
+    </div>
+  </main>
+</Layout>
