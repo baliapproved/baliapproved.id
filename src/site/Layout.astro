@@ -1,4 +1,5 @@
 ---
+import type { ComponentProps } from "astro/types";
 import SEO from "@/seo/SEO.astro";
 import PostHog from "@/analytics/posthog.astro";
 import WebsiteActions from "@/analytics/WebsiteActions.astro";
@@ -8,21 +9,13 @@ import { site } from "./site";
 
 type JsonLd = Record<string, unknown> | Record<string, unknown>[];
 
-interface Props {
-  title: string;
-  description: string;
-  canonical?: string | URL;
-  image?: string | URL;
-  imageAlt?: string;
-  type?: "website" | "article";
-  indexable?: boolean;
+type Props = ComponentProps<typeof SEO> & {
   jsonLd?: JsonLd;
   /** Stable analytics id; keep it if the page URL changes. */
   analyticsPageId?: string;
-}
+};
 
-const { title, description, jsonLd, analyticsPageId, ...seoProps } =
-  Astro.props;
+const { jsonLd, analyticsPageId, ...seo } = Astro.props;
 const serializedJsonLd = jsonLd
   ? JSON.stringify(jsonLd).replaceAll("<", "\\u003c")
   : undefined;
@@ -33,6 +26,11 @@ const serializedJsonLd = jsonLd
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content={site.themeColor} />
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
     {/* Runs before first paint so the theme never flashes. */}
     <script is:inline>
       const getThemePreference = () => {
@@ -60,7 +58,7 @@ const serializedJsonLd = jsonLd
         .matchMedia("(prefers-color-scheme: dark)")
         .addEventListener("change", applyThemePreference);
     </script>
-    <SEO title={title} description={description} {...seoProps} />
+    <SEO {...seo} />
     {serializedJsonLd && (
       <script
         type="application/ld+json"
