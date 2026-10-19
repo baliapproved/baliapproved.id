@@ -6,11 +6,10 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
-    "preview": "astro build && astro preview",
+    "preview": "astro preview",
     "lint": "eslint .",
     "format": "prettier . --write",
     "typecheck": "astro check",
-    "typecheck:watch": "astro check --watch",
     "astro": "astro"
   },
   "dependencies": {
