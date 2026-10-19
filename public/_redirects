@@ -1,0 +1,2 @@
+# Pages live at /about, not /about/. Point trailing-slash URLs there permanently.
+/*/ /:splat 301
