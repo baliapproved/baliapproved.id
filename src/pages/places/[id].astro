@@ -1,7 +1,6 @@
 ---
 import { getImage } from "astro:assets";
 import { getCollection, render, type CollectionEntry } from "astro:content";
-import Footer from "@/site/Footer.astro";
 import { ModeToggle } from "@/site/ModeToggle";
 import Layout from "@/site/Layout.astro";
 import { site } from "@/site/site";
@@ -198,6 +197,4 @@ const { Content } = await render(place);
       )}
     </article>
   </main>
-
-  <Footer />
 </Layout>

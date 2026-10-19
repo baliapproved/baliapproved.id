@@ -1,7 +1,6 @@
 ---
 import type { Graph } from "schema-dts";
 import Layout from "@/site/Layout.astro";
-import Footer from "@/site/Footer.astro";
 import { Image } from "astro:assets";
 import { getCollection } from "astro:content";
 import { site } from "@/site/site";
@@ -262,5 +261,4 @@ const dateFormatter = new Intl.DateTimeFormat("en-GB", {
       </ol>
     </section>
   </main>
-  <Footer />
 </Layout>
