@@ -20,6 +20,15 @@ pnpm-debug.log*
 # macOS-specific files
 .DS_Store
 
+# editor settings
+.idea/
+.vscode/
+
+# wrangler local state
+.wrangler/
+
+# ---- project-specific ----
+
 # Original photos staged for IG cover captures (not site assets)
 public/_ig-raw/
 
@@ -28,9 +37,3 @@ exports/
 
 # Generated company-profile screenshots
 output/company-profile-screenshots/
-
-# jetbrains setting folder
-.idea/
-
-# wrangler files
-.wrangler
