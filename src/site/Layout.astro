@@ -29,33 +29,6 @@ const { footer = true, jsonLd, analyticsPageId, ...seo } = Astro.props;
     <link rel="shortcut icon" href="/favicon.ico" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="sitemap" href="/sitemap-index.xml" />
-    {/* Runs before first paint so the theme never flashes. */}
-    <script is:inline>
-      const getThemePreference = () => {
-        if (
-          typeof localStorage !== "undefined" &&
-          localStorage.getItem("theme")
-        ) {
-          return localStorage.getItem("theme");
-        }
-        return window.matchMedia("(prefers-color-scheme: dark)").matches
-          ? "dark"
-          : "light";
-      };
-
-      const applyThemePreference = () => {
-        const isDark = getThemePreference() === "dark";
-        document.documentElement.classList[isDark ? "add" : "remove"]("dark");
-      };
-
-      applyThemePreference();
-
-      // Only takes effect while no explicit choice is stored, so the OS
-      // switching themes is followed live without overriding the user.
-      window
-        .matchMedia("(prefers-color-scheme: dark)")
-        .addEventListener("change", applyThemePreference);
-    </script>
     <SEO {...seo} />
     {jsonLd && <JsonLd schema={jsonLd} />}
     <PostHog pageId={analyticsPageId} />
