@@ -1,5 +1,7 @@
 ---
 approvalNumber: 6
+place_id: tulus_coliving
+slug: tulus-coliving
 title: Tulus Coliving
 description: >-
   A comfortable and well-equipped apartment in Kuta with smooth Wi-Fi, complete in-room facilities, easy beach access, and plenty of cafes and minimarkets nearby.

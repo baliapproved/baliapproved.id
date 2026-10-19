@@ -1,5 +1,7 @@
 ---
 approvalNumber: 2
+place_id: chagee_discovery_mall
+slug: chagee-discovery-mall
 title: CHAGEE Discovery Mall
 description: >-
   A nice little getaway for tea lovers who want something other than coffee; with the smell of roasted tea, a comfortable spot to recharge, and Kuta sunset waiting just outside the door.

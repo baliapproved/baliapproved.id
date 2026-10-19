@@ -1,5 +1,7 @@
 ---
 approvalNumber: 5
+place_id: st_ali_coffee
+slug: st-ali-coffee
 title: ST. ALi Coffee
 description: >-
   A spacious Pererenan corner cafe that works best when you do not have to rush: morning coffee, breakfast outside, and watching the street wake up.

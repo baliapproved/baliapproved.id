@@ -49,7 +49,7 @@ const dateFormatter = new Intl.DateTimeFormat("en-GB", {
               ]}
             >
               <a
-                href={`/places/${place.id}`}
+                href={`/places/${data.slug}`}
                 aria-label={`See why we approved ${data.title}`}
                 class="group block overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#006241]"
               >
@@ -101,7 +101,7 @@ const dateFormatter = new Intl.DateTimeFormat("en-GB", {
                 class="mt-4 text-[clamp(2.25rem,4.5vw,4.5rem)] leading-[0.95] tracking-[-0.04em] text-balance"
               >
                 <a
-                  href={`/places/${place.id}`}
+                  href={`/places/${data.slug}`}
                   class="transition-colors hover:text-[#006241] focus-visible:rounded-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#006241]"
                 >
                   {data.title}
@@ -137,7 +137,7 @@ const dateFormatter = new Intl.DateTimeFormat("en-GB", {
 
               <div class="mt-8">
                 <a
-                  href={`/places/${place.id}`}
+                  href={`/places/${data.slug}`}
                   class="group inline-flex w-full items-center justify-between gap-6 rounded-sm bg-[#006241] px-5 py-3.5 text-sm font-semibold tracking-[0.04em] text-white transition-colors hover:bg-[#004d33] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#006241] sm:w-auto"
                 >
                   <span>See why we approved it</span>

@@ -1,5 +1,7 @@
 ---
 approvalNumber: 4
+place_id: ubud_backpacker_hostel
+slug: ubud-backpacker-hostel
 title: Ubud Backpacker Hostel
 description: >-
   From the street it looks like an ordinary hostel. Inside, it is a calm, social stay in Peliatan with a pool, a gazebo, and more community than we expected.

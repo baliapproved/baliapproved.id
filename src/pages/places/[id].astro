@@ -10,7 +10,7 @@ export async function getStaticPaths() {
   const places = await getCollection("places");
 
   return places.map((place) => ({
-    params: { id: place.id },
+    params: { id: place.data.slug },
     props: { place },
   }));
 }

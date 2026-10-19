@@ -1,5 +1,7 @@
 ---
 approvalNumber: 3
+place_id: seniman_coffee_renon
+slug: seniman-coffee-renon
 title: Seniman Coffee Renon
 description: >-
   What we really liked about Seniman Coffee is how everything feels like art; the chairs, mugs, ceiling, even the bathroom entrance. It feels thoughtful without trying too hard, which makes the place memorable.

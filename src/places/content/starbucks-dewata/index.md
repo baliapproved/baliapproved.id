@@ -1,5 +1,7 @@
 ---
 approvalNumber: 1
+place_id: starbucks_dewata
+slug: starbucks-dewata
 title: Starbucks Reserve Dewata
 description: >-
   This is the kind of place you go when you simply want to enjoy your time, whether you're being productive, catching up with people, or spending a few hours by yourself.

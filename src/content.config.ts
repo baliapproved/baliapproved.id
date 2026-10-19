@@ -4,10 +4,18 @@ import { z } from "astro/zod";
 
 export const collections = {
   places: defineCollection({
-    loader: glob({ base: "./src/places/content", pattern: "**/index.md" }),
+    loader: glob({
+      base: "./src/places/content",
+      pattern: "**/index.md",
+      // Keep content and analytics IDs independent of folder names and URL slugs.
+      generateId: ({ data }) => String(data.place_id),
+    }),
     schema: ({ image }) =>
       z.object({
         approvalNumber: z.number().int().positive(),
+        // Permanent analytics identity; preserve it when renaming, moving, or migrating a place.
+        place_id: z.string().min(1),
+        slug: z.string().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/),
         title: z.string(),
         description: z.string(),
         sealArea: z.string(),

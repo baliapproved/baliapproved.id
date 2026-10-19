@@ -1,2 +1,16 @@
+# Keep indexed place URLs working permanently, including trailing-slash variants.
+/places/starbucks_dewata /places/starbucks-dewata 301
+/places/starbucks_dewata/ /places/starbucks-dewata 301
+/places/chagee_discovery_mall /places/chagee-discovery-mall 301
+/places/chagee_discovery_mall/ /places/chagee-discovery-mall 301
+/places/seniman_coffee_renon /places/seniman-coffee-renon 301
+/places/seniman_coffee_renon/ /places/seniman-coffee-renon 301
+/places/ubud_backpacker_hostel /places/ubud-backpacker-hostel 301
+/places/ubud_backpacker_hostel/ /places/ubud-backpacker-hostel 301
+/places/st_ali_coffee /places/st-ali-coffee 301
+/places/st_ali_coffee/ /places/st-ali-coffee 301
+/places/tulus_coliving /places/tulus-coliving 301
+/places/tulus_coliving/ /places/tulus-coliving 301
+
 # Pages live at /about, not /about/. Point trailing-slash URLs there permanently.
 /*/ /:splat 301
