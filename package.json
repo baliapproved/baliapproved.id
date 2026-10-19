@@ -7,10 +7,10 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "lint": "eslint .",
-    "format": "prettier . --write",
+    "astro": "astro",
     "typecheck": "astro check",
-    "astro": "astro"
+    "lint": "eslint .",
+    "format": "prettier . --write"
   },
   "dependencies": {
     "@astrojs/react": "7.0.1",
