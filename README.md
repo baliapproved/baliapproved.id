@@ -2,6 +2,12 @@
 
 Firsthand reviews of places around Bali.
 
+## Cloudflare setup
+
+Two zone settings live in the Cloudflare dashboard, not in `wrangler.jsonc`.
+Turn on SSL/TLS → Edge Certificates → Always Use HTTPS, or the site is also
+served over plain HTTP. Add a 301 redirect from `www` to the apex domain.
+
 ## Analytics
 
 PostHog settings are baked in at build time. Set the project token and ingestion
