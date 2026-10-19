@@ -1,18 +1,15 @@
 import type { APIRoute } from "astro";
 
-import { SITE } from "../../site.config.mjs";
+import { site } from "@/config/site";
 
+// Static either way; keeps robots.txt prerendered if the site moves to server rendering.
 export const prerender = true;
 
-export const GET: APIRoute = ({ site }) => {
-  const siteUrl = site ?? new URL(SITE.url);
-  const lines = ["User-agent: *", "Allow: /"];
+export const GET: APIRoute = () => {
+  const sitemap = new URL("sitemap-index.xml", site.url).href;
+  const body = `User-agent: *\nAllow: /\n\nSitemap: ${sitemap}\n`;
 
-  if (SITE.indexable) {
-    lines.push("", `Sitemap: ${new URL("sitemap-index.xml", siteUrl).href}`);
-  }
-
-  return new Response(`${lines.join("\n")}\n`, {
+  return new Response(body, {
     headers: {
       "Content-Type": "text/plain; charset=utf-8",
     },

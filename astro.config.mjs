@@ -7,14 +7,14 @@ import react from "@astrojs/react";
 
 import tailwindcss from "@tailwindcss/vite";
 
-import { SITE } from "./site.config.mjs";
+import { site } from "./src/config/site.ts";
 
 // https://astro.build/config
 export default defineConfig({
-  site: SITE.url,
+  site: site.url,
   trailingSlash: "never",
 
-  integrations: [SITE.indexable && sitemap(), react()],
+  integrations: [react(), sitemap()],
 
   vite: {
     plugins: [tailwindcss()],

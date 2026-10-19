@@ -4,7 +4,7 @@ import { ModeToggle } from "@/components/ModeToggle";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
-import { SITE } from "../../site.config.mjs";
+import { site } from "@/config/site";
 
 export const prerender = true;
 
@@ -12,7 +12,7 @@ Astro.response.status = 404;
 ---
 
 <Layout
-  title={`Page not found | ${SITE.name}`}
+  title={`Page not found | ${site.name}`}
   description="This page isn't on the list. Head home to browse places we've actually visited."
   canonical="/"
 >
@@ -32,9 +32,9 @@ Astro.response.status = 404;
           <a
             href="/"
             class="rounded-sm transition-opacity hover:opacity-70 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-foreground/70"
-            aria-label={`${SITE.name} home`}
+            aria-label={`${site.name} home`}
           >
-            {SITE.name}
+            {site.name}
           </a>
         </p>
 

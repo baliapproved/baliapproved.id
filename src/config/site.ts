@@ -1,4 +1,5 @@
-export const SITE = {
+export const site = {
+  /** Canonical origin (no trailing slash). astro.config.mjs reads this as `site`. */
   url: "https://baliapproved.id",
   name: "Bali Approved",
   title: "Bali Approved | Honest Reviews of Places in Bali",
@@ -9,6 +10,6 @@ export const SITE = {
   themeColor: "#006241",
   defaultImage: "/og-image.png",
   defaultImageAlt: "Bali Approved seal",
+} as const;
 
-  indexable: true,
-};
+export type Site = typeof site;

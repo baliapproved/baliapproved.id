@@ -8,7 +8,7 @@ import PlaceCover from "@/components/PlaceCover.astro";
 import PlaceReview from "@/components/PlaceReview.astro";
 import Layout from "@/layouts/Layout.astro";
 
-import { SITE } from "../../../site.config.mjs";
+import { site } from "@/config/site";
 
 export async function getStaticPaths() {
   const places = await getCollection("places");
@@ -25,7 +25,7 @@ interface Props {
 
 const { place } = Astro.props;
 const { data } = place;
-const siteUrl = new URL("/", Astro.site ?? SITE.url);
+const siteUrl = new URL("/", Astro.site ?? site.url);
 const placeUrl = new URL(`/places/${place.id}`, siteUrl);
 const organizationId = new URL("#organization", siteUrl).href;
 const businessId = new URL("#business", placeUrl).href;
@@ -46,7 +46,7 @@ const jsonLd = {
       "@type": "Organization",
       "@id": organizationId,
       url: siteUrl.href,
-      name: SITE.name,
+      name: site.name,
       logo: {
         "@type": "ImageObject",
         url: new URL("/logo-512.png", siteUrl).href,

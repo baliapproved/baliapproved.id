@@ -6,9 +6,9 @@ import PlacesList from "@/components/PlacesList.astro";
 import { getImage } from "astro:assets";
 import { getCollection } from "astro:content";
 
-import { SITE } from "../../site.config.mjs";
+import { site } from "@/config/site";
 
-const siteUrl = new URL("/", Astro.site ?? SITE.url);
+const siteUrl = new URL("/", Astro.site ?? site.url);
 const organizationId = new URL("#organization", siteUrl).href;
 const websiteId = new URL("#website", siteUrl).href;
 const webpageId = new URL("#webpage", siteUrl).href;
@@ -45,17 +45,17 @@ const jsonLd = {
       "@type": "WebSite",
       "@id": websiteId,
       url: siteUrl.href,
-      name: SITE.name,
+      name: site.name,
       alternateName: "baliapproved.id",
-      description: SITE.description,
-      inLanguage: SITE.language,
+      description: site.description,
+      inLanguage: site.language,
       publisher: { "@id": organizationId },
     },
     {
       "@type": "Organization",
       "@id": organizationId,
       url: siteUrl.href,
-      name: SITE.name,
+      name: site.name,
       logo: {
         "@type": "ImageObject",
         url: new URL("/logo-512.png", siteUrl).href,
@@ -68,9 +68,9 @@ const jsonLd = {
       "@type": "CollectionPage",
       "@id": webpageId,
       url: siteUrl.href,
-      name: SITE.title,
-      description: SITE.description,
-      inLanguage: SITE.language,
+      name: site.title,
+      description: site.description,
+      inLanguage: site.language,
       isPartOf: { "@id": websiteId },
       about: places.map((place) => ({
         "@id": getBusinessId(place.id),
@@ -136,7 +136,7 @@ const jsonLd = {
 };
 ---
 
-<Layout title={SITE.title} description={SITE.description} jsonLd={jsonLd}>
+<Layout title={site.title} description={site.description} jsonLd={jsonLd}>
   <main class="min-h-[100dvh] bg-site-canvas">
     <Hero />
     <PlacesList places={places} />

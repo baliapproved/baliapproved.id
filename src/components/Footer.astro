@@ -1,5 +1,5 @@
 ---
-import { SITE } from "../../site.config.mjs";
+import { site } from "@/config/site";
 
 const currentYear = new Date().getUTCFullYear();
 const footerLinkClass =
@@ -11,10 +11,10 @@ const footerLinkClass =
     <div class="mx-auto w-full max-w-4xl px-6 py-14 sm:px-8 sm:py-16">
       <a
         href="/"
-        aria-label={`${SITE.name} home`}
+        aria-label={`${site.name} home`}
         class="inline-block rounded-sm font-heading text-4xl leading-none tracking-[-0.04em] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-foreground/70 sm:text-5xl"
       >
-        {SITE.name}
+        {site.name}
       </a>
 
       <p class="mt-4 max-w-sm leading-relaxed text-muted-foreground">
@@ -95,7 +95,7 @@ const footerLinkClass =
           baliapproved.id
         </a>
         <p>
-          &copy; {currentYear} {SITE.name}
+          &copy; {currentYear} {site.name}
         </p>
       </div>
     </div>

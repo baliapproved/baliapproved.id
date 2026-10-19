@@ -4,7 +4,7 @@ import PostHog from "@/components/posthog.astro";
 import WebsiteActions from "@/components/WebsiteActions.astro";
 import "../styles/global.css";
 
-import { SITE } from "../../site.config.mjs";
+import { site } from "@/config/site";
 
 type JsonLd = Record<string, unknown> | Record<string, unknown>[];
 
@@ -28,7 +28,7 @@ const serializedJsonLd = jsonLd
 ---
 
 <!doctype html>
-<html lang={SITE.language}>
+<html lang={site.language}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
