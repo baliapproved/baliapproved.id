@@ -16,6 +16,13 @@ Before adding or updating a dependency, always check `https://npmx.dev/package/<
 
 Do not assume the registry's `latest` tag means a stable release. If it points to a prerelease (such as an alpha, beta, or release candidate), or no stable release exists, stop before adding or updating that package. Report the exact prerelease version and the newest stable version, if available, and ask the user whether to use the stable release or approve a prerelease exception. Do not silently choose either. Record approved exceptions here with the package name and scope; they do not apply to other packages. Even an approved prerelease must be pinned to its exact version unless the user also explicitly approves a range or tag.
 
+## Commit
+
+- Always check `git log` first to follow existing commit message style and conventions.
+- Format the commit body using bulleted points to describe changes.
+- Compare the message with the whole commit, including what an amend already contains. Keep bullets that are still true, append a bullet for a change it does not mention, and fix a bullet that is now wrong.
+- Never add `Co-authored-by` tags or credit AI assistants.
+
 ## Cloudflare CLI
 
 - Choose [`cf`](https://developers.cloudflare.com/cf/) or [Wrangler](https://developers.cloudflare.com/workers/wrangler/) using current official docs.
