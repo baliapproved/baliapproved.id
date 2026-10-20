@@ -58,26 +58,27 @@ export function Search({ places }: { places: SearchPlace[] }) {
             placeholder="Search places or areas..."
             className="text-base md:text-sm"
           />
-          <CommandList className="max-h-[min(30rem,60dvh)]">
+          <CommandList className="max-h-[min(20rem,50dvh)]">
             <CommandEmpty>No places found.</CommandEmpty>
-            <CommandGroup heading="Places">
+            <CommandGroup>
               {places.map(({ title, area, href, cutout }) => (
                 <CommandItem
                   key={href}
                   value={title}
                   keywords={[area]}
                   onSelect={() => window.location.assign(href)}
-                  className="sm:text-base"
+                  className="py-1.5"
                 >
                   <img
                     src={cutout}
                     alt=""
                     loading="lazy"
-                    className="size-14 shrink-0 object-contain"
+                    className="size-9 shrink-0 object-contain"
                   />
-                  <span>
+                  <span className="truncate">
                     {title}
-                    <span className="block font-normal text-muted-foreground">
+                    <span className="font-normal text-muted-foreground">
+                      {" · "}
                       {area}
                     </span>
                   </span>

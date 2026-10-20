@@ -20,8 +20,8 @@ const places = await Promise.all(
       title: data.title,
       area: data.sealArea,
       href: `/places/${data.slug}`,
-      // 2x the 56px icon box in the search menu.
-      cutout: (await getImage({ src: data.cutout.src, width: 112 })).src,
+      // 2x the 36px icon box in the search menu.
+      cutout: (await getImage({ src: data.cutout.src, width: 72 })).src,
     })),
 );
 ---
