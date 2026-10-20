@@ -19,6 +19,14 @@ tiktok: chagee.id
 address: Discovery Shopping Mall
 spending: Rp30K-60K per person
 lastVisitedAt: 2026-07-29
+power: enough
+seating: [indoor]
+cooling: ac
+parking:
+  motorbike: plenty
+  car: plenty
+caveats: >-
+  It only provides tea, which is fine if you already know the place only sells tea. The bathroom is quite far because you need to go to the mall toilet.
 badge: good-find
 gallery:
   - src: ./chagee_1.webp

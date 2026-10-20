@@ -4,6 +4,8 @@ import { z } from "astro/zod";
 
 const handle = /^[\w.]+$/;
 const phone = /^\+[\d ]+$/;
+const amount = z.enum(["plenty", "enough", "limited"]);
+const parking = z.enum([...amount.options, "street"]);
 
 export const collections = {
   places: defineCollection({
@@ -39,6 +41,15 @@ export const collections = {
         address: z.string(),
         spending: z.string(),
         lastVisitedAt: z.coerce.date(),
+        // What we found on that visit, kept as values so places can be filtered later.
+        // Download speed in Mbps from a speed test; omit when we did not measure it.
+        wifi: z.number().positive().optional(),
+        power: amount.optional(),
+        seating: z.array(z.enum(["indoor", "outdoor"])).optional(),
+        cooling: z.enum(["ac", "open-air"]),
+        parking: z.object({ motorbike: parking, car: parking }),
+        // What we think could be better, shown above the findings.
+        caveats: z.string(),
         // Standout places, badged on catalog cards; approved ranks above good-find.
         badge: z.enum(["approved", "good-find"]).optional(),
         gallery: z

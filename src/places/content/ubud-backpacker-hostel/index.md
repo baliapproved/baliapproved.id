@@ -19,6 +19,12 @@ whatsapp: +62 851 9004 1547
 address: Jl. Yudistira No. 21, Peliatan, Banjar Kalah, Gianyar
 spending: Under Rp500K/night
 lastVisitedAt: 2026-08-14
+cooling: ac
+parking:
+  motorbike: enough
+  car: limited
+caveats: >-
+  Car parking might be tricky, but we were informed that the staff will help us with this. The shared dorm rooms might not be for those who don't like socializing, and they only provide private rooms for women.
 badge: good-find
 gallery:
   - src: ./ubud_1.webp

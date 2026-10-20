@@ -21,6 +21,14 @@ phone: +62 361 9343 482
 address: Jl. Sunset Road No. 77, Seminyak, Kuta, Badung
 spending: Rp30K-75K per person
 lastVisitedAt: 2026-07-23
+power: enough
+seating: [indoor, outdoor]
+cooling: ac
+parking:
+  motorbike: plenty
+  car: plenty
+caveats: >-
+  Since it's popular, the communal tables or the tables designed for work with plenty of outlets are often full.
 badge: good-find
 gallery:
   - src: ./starbucks_1.webp

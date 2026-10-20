@@ -19,6 +19,14 @@ website: https://stali.com.au/pages/st-ali-bali
 address: Jl. Pantai Pererenan No.121, Pererenan, Badung
 spending: Rp30K-100K per person
 lastVisitedAt: 2026-08-02
+power: limited
+seating: [indoor, outdoor]
+cooling: open-air
+parking:
+  motorbike: limited
+  car: street
+caveats: >-
+  It's a semi-outdoor space, so it might not be the best place for a long work session, and the power outlets were also quite limited at the time we visited. If you are not into dogs, you might feel annoyed because there are plenty there.
 gallery:
   - src: ./st_ali_1.webp
     alt: The ST. ALi Coffee facade with brick lattice screening, outdoor tables, and a laptop open at a sidewalk seat

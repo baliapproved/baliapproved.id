@@ -2,14 +2,20 @@
 import { getImage, Image } from "astro:assets";
 import { getCollection, type CollectionEntry } from "astro:content";
 import {
+  RiArmchairFill,
   RiArrowRightUpLine,
   RiCalendarCheckFill,
+  RiCarFill,
   RiGlobalFill,
   RiInstagramFill,
   RiMapPin2Fill,
+  RiMotorbikeFill,
   RiPhoneFill,
+  RiPlugFill,
+  RiTempColdFill,
   RiTiktokFill,
   RiWhatsappFill,
+  RiWifiFill,
 } from "@remixicon/react";
 import PlaceBadge from "@/catalog/PlaceBadge.astro";
 import PlaceCard from "@/catalog/PlaceCard.astro";
@@ -115,7 +121,7 @@ const links = [
     label: "Call",
     value: data.phone,
     href: `tel:${data.phone.replace(/ /g, "")}`,
-    tone: "bg-[#b99651]/15 text-[#a8853f]",
+    tone: "bg-[#7b61c9]/12 text-[#7b61c9]",
     icon: RiPhoneFill,
   },
   {
@@ -127,6 +133,52 @@ const links = [
     icon: RiMapPin2Fill,
   },
 ].filter((link) => !!link);
+
+const amounts = {
+  plenty: "Plenty",
+  enough: "Enough",
+  limited: "Limited",
+  street: "Street only",
+};
+// A range rather than the exact test result, which changes from test to test.
+const wifiRange = (mbps: number) => {
+  const step = mbps < 100 ? 10 : 50;
+  const low = Math.floor(mbps / step) * step;
+  return low === 0 ? "Under 10 Mbps" : `${low}–${low + step} Mbps`;
+};
+const seating = data.seating?.join(" & ");
+const findings = [
+  data.wifi !== undefined && {
+    label: "Wi-Fi",
+    value: wifiRange(data.wifi),
+    icon: RiWifiFill,
+  },
+  data.power && {
+    label: "Power outlets",
+    value: amounts[data.power],
+    icon: RiPlugFill,
+  },
+  seating && {
+    label: "Seating",
+    value: seating[0].toUpperCase() + seating.slice(1),
+    icon: RiArmchairFill,
+  },
+  {
+    label: "Cooling",
+    value: data.cooling === "ac" ? "Air-conditioned" : "Fan & open air",
+    icon: RiTempColdFill,
+  },
+  {
+    label: "Motorbike parking",
+    value: amounts[data.parking.motorbike],
+    icon: RiMotorbikeFill,
+  },
+  {
+    label: "Car parking",
+    value: amounts[data.parking.car],
+    icon: RiCarFill,
+  },
+].filter((finding) => !!finding);
 ---
 
 <Layout
@@ -251,7 +303,7 @@ const links = [
       </section>
 
       <div class="mt-8 flex items-start gap-4 rounded-3xl bg-card p-4 sm:items-center sm:px-5">
-        <span class="grid size-10 shrink-0 place-items-center rounded-full bg-[#b99651]/15 text-[#a8853f]">
+        <span class="grid size-10 shrink-0 place-items-center rounded-full bg-[#2a8c8c]/12 text-[#2a8c8c]">
           <RiCalendarCheckFill aria-hidden="true" className="size-5" />
         </span>
         <div class="pt-1.5 sm:pt-0">
@@ -270,6 +322,31 @@ const links = [
           </p>
         </div>
       </div>
+
+      <section aria-labelledby="what-we-found" class="mt-12">
+        <h2 id="what-we-found" class="text-2xl font-medium tracking-tight">
+          What we found
+        </h2>
+        <p class="mt-3 max-w-[34rem] text-base/7 text-pretty text-muted-foreground">
+          <span class="font-semibold text-foreground italic">
+            Worth knowing
+          </span>{" "}
+          {data.caveats}
+        </p>
+        <ul class="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          {findings.map(({ label, value, icon: Icon }) => (
+            <li class="flex h-full items-center gap-3 rounded-3xl bg-card p-3">
+              <span class="grid size-10 shrink-0 place-items-center rounded-full bg-[#2a8c8c]/12 text-[#2a8c8c]">
+                <Icon aria-hidden="true" className="size-5" />
+              </span>
+              <span class="min-w-0">
+                <span class="block text-sm text-muted-foreground">{label}</span>
+                <span class="block font-medium">{value}</span>
+              </span>
+            </li>
+          ))}
+        </ul>
+      </section>
     </article>
 
     <section

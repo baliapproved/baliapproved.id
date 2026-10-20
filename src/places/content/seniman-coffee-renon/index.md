@@ -19,6 +19,15 @@ website: https://www.senimancoffee.com/seniman-renon/
 address: Jl. Tukad Musi No. 19, Panjer, Denpasar Selatan, Denpasar
 spending: Rp30K-100K per person
 lastVisitedAt: 2026-08-28
+wifi: 248
+power: enough
+seating: [indoor, outdoor]
+cooling: ac
+parking:
+  motorbike: enough
+  car: limited
+caveats: >-
+  The car parking is a bit limited, though available, and there are parking attendants that will help.
 badge: approved
 gallery:
   - src: ./seniman_1.webp
