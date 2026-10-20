@@ -51,7 +51,7 @@ const dateFormatter = new Intl.DateTimeFormat("en-GB", {
               ]}
             >
               <a
-                href={`/places/${data.slug}`}
+                href={`/archived/places/${data.slug}`}
                 aria-label={`See why we approved ${data.title}`}
                 class="group block overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring"
               >
@@ -102,7 +102,7 @@ const dateFormatter = new Intl.DateTimeFormat("en-GB", {
                 class="mt-4 text-[clamp(2.25rem,4.5vw,4.5rem)] leading-[0.95] tracking-[-0.04em] text-balance"
               >
                 <a
-                  href={`/places/${data.slug}`}
+                  href={`/archived/places/${data.slug}`}
                   class="transition-colors hover:text-primary focus-visible:rounded-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring"
                 >
                   {data.title}
@@ -139,7 +139,7 @@ const dateFormatter = new Intl.DateTimeFormat("en-GB", {
 
               <div class="mt-8">
                 <a
-                  href={`/places/${data.slug}`}
+                  href={`/archived/places/${data.slug}`}
                   class:list={[
                     buttonVariants({ size: "lg" }),
                     "w-full justify-between gap-6 sm:w-auto",

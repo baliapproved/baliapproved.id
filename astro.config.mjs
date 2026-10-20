@@ -14,6 +14,7 @@ export default defineConfig({
     react(),
     sitemap({
       filter: (page) =>
+        !page.startsWith(`${site.url}/archived/`) &&
         !["/archived", "/blog", "/about"].some(
           (path) => page === `${site.url}${path}`,
         ),
