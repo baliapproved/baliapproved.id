@@ -2,7 +2,7 @@
 import { Image } from "astro:assets";
 import type { CollectionEntry } from "astro:content";
 import { buttonVariants } from "@/design-system/button";
-import { RiArrowRightLine, RiMapPinLine, RiStarFill } from "@remixicon/react";
+import { RiArrowRightLine, RiMapPinLine } from "@remixicon/react";
 import { Seal } from "./Seal";
 
 interface Props {
@@ -114,19 +114,6 @@ const dateFormatter = new Intl.DateTimeFormat("en-GB", {
               </p>
 
               <dl class="mt-8 flex flex-wrap gap-x-10 gap-y-5">
-                <div>
-                  <dt class="text-[0.625rem] font-semibold tracking-[0.18em] text-muted-foreground uppercase">
-                    Overall
-                  </dt>
-                  <dd class="mt-1.5 flex items-baseline gap-1.5 font-heading text-2xl tracking-tight">
-                    <RiStarFill
-                      aria-hidden="true"
-                      className="size-4 text-primary"
-                    />
-                    <span>{data.overallRating.toFixed(1)} / 5</span>
-                  </dd>
-                </div>
-
                 <div>
                   <dt class="text-[0.625rem] font-semibold tracking-[0.18em] text-muted-foreground uppercase">
                     Spending

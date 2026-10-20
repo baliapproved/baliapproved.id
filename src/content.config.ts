@@ -26,7 +26,6 @@ export const collections = {
         mapsUrl: z.url(),
         address: z.string(),
         spending: z.string(),
-        overallRating: z.number().min(0).max(5),
         approvedAt: z.coerce.date(),
         // Standout places, badged on catalog cards; approved ranks above good-find.
         badge: z.enum(["approved", "good-find"]).optional(),

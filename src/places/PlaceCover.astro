@@ -1,7 +1,7 @@
 ---
 import { getImage } from "astro:assets";
 import type { CollectionEntry } from "astro:content";
-import { RiMapPinLine, RiStarFill } from "@remixicon/react";
+import { RiMapPinLine } from "@remixicon/react";
 import { PlaceCoverCarousel } from "./PlaceCoverCarousel";
 import { Seal } from "./Seal";
 
@@ -94,20 +94,7 @@ const slides = await Promise.all(
 
   <div class="px-6 sm:px-8">
     <div class="mx-auto w-full max-w-[52rem]">
-      <dl class="mt-6 grid grid-cols-1 gap-4 text-center md:mt-7 md:grid-cols-3 md:gap-5">
-        <div>
-          <dt class="text-[0.6875rem] font-semibold tracking-[0.2em] text-muted-foreground uppercase">
-            Overall
-          </dt>
-          <dd class="mt-1.5 flex items-baseline justify-center gap-2 font-heading text-[1.375rem] tracking-tight sm:text-[1.75rem]">
-            <RiStarFill
-              aria-hidden="true"
-              className="size-4 text-primary sm:size-5"
-            />
-            <span>{data.overallRating.toFixed(1)} / 5</span>
-          </dd>
-        </div>
-
+      <dl class="mt-6 grid grid-cols-1 gap-4 text-center md:mt-7 md:grid-cols-2 md:gap-5">
         <div>
           <dt class="text-[0.6875rem] font-semibold tracking-[0.2em] text-muted-foreground uppercase">
             Spending

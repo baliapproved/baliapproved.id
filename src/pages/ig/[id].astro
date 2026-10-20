@@ -2,7 +2,7 @@
 import { getCollection, type CollectionEntry } from "astro:content";
 
 import { Seal } from "@/places/Seal";
-import { RiMapPinLine, RiStarFill } from "@remixicon/react";
+import { RiMapPinLine } from "@remixicon/react";
 
 import "@/design-system/global.css";
 
@@ -96,16 +96,6 @@ const approvedDate = new Intl.DateTimeFormat("en-GB", {
 
       <dl class="stats">
         <div>
-          <dt>Overall</dt>
-          <dd>
-            <RiStarFill
-              aria-hidden="true"
-              className="mr-[0.3em] inline size-8 align-text-bottom text-primary"
-            />
-            <span>{data.overallRating.toFixed(1)} / 5</span>
-          </dd>
-        </div>
-        <div>
           <dt>Spending</dt>
           <dd>{data.spending}</dd>
         </div>
@@ -182,7 +172,7 @@ const approvedDate = new Intl.DateTimeFormat("en-GB", {
   .stats {
     display: grid;
     flex: 0 0 auto;
-    grid-template-columns: 1fr 1.25fr 1fr;
+    grid-template-columns: 1.25fr 1fr;
     gap: 16px;
     margin-top: 28px;
     text-align: center;

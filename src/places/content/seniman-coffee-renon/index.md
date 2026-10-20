@@ -14,7 +14,6 @@ cutout:
 mapsUrl: https://www.google.com/maps/search/?api=1&query=Seniman%20Coffee%20Renon
 address: Jl. Tukad Musi No. 19, Panjer, Denpasar Selatan, Denpasar
 spending: Rp30K-100K per person
-overallRating: 4.6
 approvedAt: 2026-08-28
 badge: approved
 gallery:
@@ -86,8 +85,6 @@ This is a place that rewards slowing down. If you are in a rush, you will miss m
 
 ### Ambience
 
-**⭐ 4.6 / 5**
-
 ![The Seniman bar with the coffee flavor wheel and specials board behind it, and Bar Roker chairs lined up in front](./seniman_1.webp)
 ![The Tektonik Records corner, with record bins, a wall of album sleeves and leather armchairs around a table](./seniman_5.webp)
 
@@ -95,13 +92,9 @@ This is a place that rewards slowing down. If you are in a rush, you will miss m
 
 ### WFC Friendly
 
-**⭐ 4.5 / 5**
-
 The room stays calm enough to focus in, and there is a seat for most working styles: the bar, proper tables, the lounge chairs, and the covered area outside. It is not a co-working space, but nobody seems to mind a laptop open for a couple of hours.
 
 ### Wi-Fi
-
-**⭐ 4 / 5**
 
 The Wi-Fi handled normal work without complaints, though we did not push it with anything heavy.
 
@@ -152,20 +145,6 @@ The indoor area is air-conditioned, and the covered seating at the back is the b
 - Tea
 - Dessert
 - Bakery
-
-## Experience Scores
-
-### WFC Experience
-
-**⭐ 4.7 / 5**
-
-### Service
-
-**⭐ 4.6 / 5**
-
-### Comfort
-
-**⭐ 4.6 / 5**
 
 # 3. GOOD TO KNOW
 
@@ -229,8 +208,6 @@ The result is weatherproof, stackable, flat-packed, and far more comfortable tha
 
 ## Coffee
 
-**⭐ 4.6 / 5**
-
 Because the single-origin selection rotates, it is worth asking what is on the bar that week rather than defaulting to your usual order.
 
 ## What Surprised Us
@@ -279,26 +256,6 @@ It is also not the cheapest coffee in Denpasar. You are paying for beans Seniman
 If you are anywhere near Denpasar and you have been meaning to visit Seniman in Ubud, come here instead. Same coffee, same thinking, considerably less driving.
 
 Arrive in the morning, take a rocking chair, ask what single origin is on the bar, and give yourself longer than you think you need. This is a place that gets better the more attention you pay it, which is not something we can say about most cafes.
-
-### Experience
-
-**⭐ 4.6 / 5**
-
-### Ambience
-
-**⭐ 4.6 / 5**
-
-### Visual
-
-**⭐ 4.9 / 5**
-
-### Service
-
-**⭐ 4.6 / 5**
-
-### Value for Money
-
-**⭐ 4.6 / 5**
 
 ## Would We Come Back?
 

@@ -14,7 +14,6 @@ cutout:
 mapsUrl: https://maps.app.goo.gl/YDXLJGPpgXLbxemy5
 address: Discovery Shopping Mall
 spending: Rp30K-60K per person
-overallRating: 4.4
 approvedAt: 2026-07-29
 gallery:
   - src: ./chagee_1.webp
@@ -78,8 +77,6 @@ And once the afternoon starts turning, light from the direction of Kuta Beach re
 
 ### Ambience
 
-**⭐ 4.5 / 5**
-
 ![Afternoon light across the curved seating area, with someone at a table beside the planted oval window](./chagee_4.webp)
 ![The illuminated C logo on the ribbed wall above the curved tiered bench seating and round tables](./chagee_3.webp)
 
@@ -87,13 +84,9 @@ And once the afternoon starts turning, light from the direction of Kuta Beach re
 
 ### WFC Friendly
 
-**⭐ 4 / 5**
-
 CHAGEE is not the first place that comes to mind when you think about working from a cafe, but a short session here was surprisingly comfortable.
 
 ### Wi-Fi
-
-**⭐ 4 / 5**
 
 The Wi-Fi ran smoothly the whole time we were working, with no real problems.
 
@@ -138,20 +131,6 @@ If you are looking for somewhere to cool off from the Kuta heat, the indoor area
 
 - Tea
 - Non-Coffee
-
-## Experience Scores
-
-### WFC Experience
-
-**⭐ 4.3 / 5**
-
-### Service
-
-**⭐ 4.3 / 5**
-
-### Comfort
-
-**⭐ 4.4 / 5**
 
 # 3. GOOD TO KNOW
 
@@ -270,26 +249,6 @@ The tables are comfortable enough for a short stay, the Wi-Fi ran smoothly the w
 For us, this is not somewhere you travel across the island for and then settle into for hours.
 
 But if you are already around Kuta and need somewhere to **cool off, drink something other than coffee, catch up on a bit of work, or wait out the time until sunset**, this is actually a pretty good choice.
-
-### Experience
-
-**⭐ 4.6 / 5**
-
-### Ambience
-
-**⭐ 4.2 / 5**
-
-### Visual
-
-**⭐ 4.5 / 5**
-
-### Service
-
-**⭐ 4.2 / 5**
-
-### Value for Money
-
-**⭐ 4.5 / 5**
 
 ## Would We Come Back?
 

@@ -14,7 +14,6 @@ cutout:
 mapsUrl: https://www.google.com/maps/search/?api=1&query=ST.%20ALi%20Coffee%20Jl.%20Pantai%20Pererenan%20No.122%20Bali
 address: Jl. Pantai Pererenan No.122, Pererenan, Badung
 spending: Rp30K-100K per person
-overallRating: 4.6
 approvedAt: 2026-08-02
 gallery:
   - src: ./st_ali_1.webp
@@ -76,13 +75,11 @@ We came here in the morning, and that felt like the right time to experience the
 
 The outdoor seating gives you a view of the street, so you can enjoy coffee and breakfast while watching people go about their day. The mixed indoor-outdoor setup also gives you a choice depending on how you want to spend your time.
 
-For WFC, the place gets a solid score, although we have not personally done a full work session here yet. Wi-Fi speed was not checked during our visit, and power outlets are limited.
+For WFC, it looks promising, although we have not personally done a full work session here yet. Wi-Fi speed was not checked during our visit, and power outlets are limited.
 
 There are individual tables, communal tables, and sofas, with a generally quiet atmosphere when we visited.
 
 ### Ambience
-
-**⭐ 4.8 / 5**
 
 ![Looking across the indoor dining room toward the bar, communal table, and street openings, with a mirrored ceiling panel overhead](./st_ali_4.webp)
 ![Guests at a long wooden table under the mirrored ceiling, with glass walls opening onto tropical greenery outside](./st_ali_5.webp)
@@ -90,8 +87,6 @@ There are individual tables, communal tables, and sofas, with a generally quiet 
 ## Work Experience
 
 ### WFC Friendly
-
-**⭐ 4 / 5**
 
 Comfortable enough for a short session, especially at an indoor table, but not the main reason we would come here. Limited outlets make a longer laptop stretch slightly inconvenient, particularly outside.
 
@@ -150,28 +145,6 @@ The indoor side is sheltered, while the outdoor seating leans into the open Pere
 - Bakery
 - All-Day Dining
 
-## Experience Scores
-
-### Coffee / Beverage
-
-**⭐ 4.8 / 5**
-
-### Food
-
-**⭐ 4.7 / 5**
-
-### WFC Experience
-
-**⭐ 4.5 / 5**
-
-### Service
-
-**⭐ 4.3 / 5**
-
-### Comfort
-
-**⭐ 4.4 / 5**
-
 # 3. GOOD TO KNOW
 
 ![A-frame chalkboard on the sidewalk reading ST. ALi Coffee, everyday 6 AM to 6 PM, with an arrow toward the entrance](./st_ali_2.webp)
@@ -225,16 +198,12 @@ And with a pretty wide selection of food and drinks, there is enough variety whe
 
 ## Coffee
 
-**⭐ 4.8 / 5**
-
 ![Black coffee in a green-banded ST. ALi cup beside a latte with heart art on a dark outdoor table in morning light](./st_ali_11.webp)
 ![Barista tamping a portafilter beside a La Marzocco espresso machine pouring into a white cup](./st_ali_10.webp)
 
 The coffee is a clear reason to visit. House blend, espresso, cold brew, and longer barista sets sit on the menu, and what we ordered held up well.
 
 ## Food
-
-**⭐ 4.7 / 5**
 
 ![Pastry case with oat and raisin cookies and dark chocolate sea salt cookies on parchment](./st_ali_9.webp)
 
@@ -277,26 +246,6 @@ Our take is based on our visit on 2 August 2026.
 ## Is it worth your time?
 
 If you are around Pererenan and looking for a nice short stop for coffee, breakfast, and enjoying the street atmosphere, ST. ALi is definitely worth checking out; especially in the morning.
-
-### Experience
-
-**⭐ 4.6 / 5**
-
-### Ambience
-
-**⭐ 4.8 / 5**
-
-### Visual
-
-**⭐ 4.9 / 5**
-
-### Service
-
-**⭐ 4.4 / 5**
-
-### Value for Money
-
-**⭐ 4.5 / 5**
 
 ## Would We Come Back?
 

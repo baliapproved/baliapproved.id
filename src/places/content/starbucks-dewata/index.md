@@ -14,7 +14,6 @@ cutout:
 mapsUrl: https://maps.app.goo.gl/mZEYKQ7muXbURLi39
 address: Jl. Sunset Road No. 77, Seminyak, Kuta, Badung
 spending: Rp30K-75K per person
-overallRating: 4.5
 approvedAt: 2026-07-23
 badge: good-find
 gallery:
@@ -69,8 +68,6 @@ We visited after lunch on a weekday, and at that time, it was relatively quiet. 
 
 ### Ambience
 
-**⭐ 4.5 / 5**
-
 ![A long shared bar table and wooden stools running along the floor-to-ceiling windows on the upper walkway](./starbucks_4.webp)
 ![Merchandise shelves of Dewata coffee bags, tumblers and mugs with a rolling ladder, under a timber-slat ceiling](./starbucks_7.webp)
 
@@ -78,13 +75,9 @@ We visited after lunch on a weekday, and at that time, it was relatively quiet. 
 
 ### WFC Friendly
 
-**⭐ 5 / 5**
-
 Starbucks Dewata is genuinely comfortable for working. The space is large enough to spend a few hours without feeling like you're taking up someone's table.
 
 ### Wi-Fi
-
-**⭐ 4 / 5**
 
 The Wi-Fi was fast during our visit, although we occasionally had to reconnect.
 
@@ -139,20 +132,6 @@ Some spots upstairs can also get direct sunlight in the afternoon, although the 
 - Dessert
 - Bakery
 - International Food
-
-## Experience Scores
-
-### WFC Experience
-
-**⭐ 4.7 / 5**
-
-### Service
-
-**⭐ 4.4 / 5**
-
-### Comfort
-
-**⭐ 4.5 / 5**
 
 # 3. GOOD TO KNOW
 
@@ -225,9 +204,7 @@ Honestly, it left us curious enough to come back and work through more of the Re
 
 ## Coffee
 
-**⭐ 4.5 / 5**
-
-Our rating covers only what we actually ordered:
+We tried two drinks:
 
 - Americano
 - Aerocano
@@ -261,28 +238,6 @@ At the end of the day, **it still feels like Starbucks.** Just with a much bigge
 Our take is subjective, and based on one weekday afternoon visit.
 
 # 6. THE VERDICT
-
-## Is it worth your time?
-
-### Experience
-
-**⭐ 4 / 5**
-
-### Ambience
-
-**⭐ 4.7 / 5**
-
-### Visual
-
-**⭐ 4.6 / 5**
-
-### Service
-
-**⭐ 4.5 / 5**
-
-### Value for Money
-
-**⭐ 4.5 / 5**
 
 ## Would We Come Back?
 

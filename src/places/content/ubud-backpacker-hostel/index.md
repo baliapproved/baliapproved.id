@@ -14,7 +14,6 @@ cutout:
 mapsUrl: https://www.google.com/maps/search/?api=1&query=Ubud%20Backpacker%20Hostel%2C%20Jl.%20Yudistira%20No.21%2C%20Peliatan%2C%20Gianyar
 address: Jl. Yudistira No. 21, Peliatan, Banjar Kalah, Gianyar
 spending: Under Rp500K/night
-overallRating: 4.6
 approvedAt: 2026-08-14
 badge: good-find
 gallery:
@@ -88,8 +87,6 @@ Evenings tend to pull people into the common room. Mornings are slower. We saw g
 
 ### Ambience
 
-**⭐ 4.6 / 5**
-
 ![Two people in a yoga pose by the pool mural](./ubud_6.webp)
 ![Poolside gazebos with Balinese stone statues](./ubud_10.webp)
 
@@ -97,25 +94,17 @@ Evenings tend to pull people into the common room. Mornings are slower. We saw g
 
 ### Bed Comfort
 
-**⭐ 4.6 / 5**
-
 The beds were comfortable enough that sleep was not the thing we thought about. For a backpacker dorm, that is the point.
 
 ### Cleanliness
-
-**⭐ 4.7 / 5**
 
 The room and the shared areas stayed in good shape during our stay.
 
 ### Privacy
 
-**⭐ 4.4 / 5**
-
 It is still a dorm. You get a locker and a curtain of routine, not a private room. If you need real privacy, this is not the format.
 
 ### Check-in & Service
-
-**⭐ 4.9 / 5**
 
 This was one of the highlights. Arrival was straightforward, and the staff made the place feel looked after without hovering.
 
@@ -161,20 +150,6 @@ Every room is air-conditioned. The pool, gazebo, and garden are open-air.
 - Drinking water
 
 The kitchen is a proper shared setup, not a kettle in a corridor. We cooked and ate with other guests; that is part of how the place socialises you, whether you planned on it or not.
-
-## Experience Scores
-
-### Stay Experience
-
-**⭐ 4.8 / 5**
-
-### Service
-
-**⭐ 4.6 / 5**
-
-### Comfort
-
-**⭐ 4.6 / 5**
 
 # 3. GOOD TO KNOW
 
@@ -286,26 +261,6 @@ If you are tired of the usual Ubud stay — a quiet room, a scooter, not much co
 It is a good fit if you are open to meeting people and you want the hostel version of Ubud, not the villa version.
 
 Skip it if you need privacy, or if a social common room at night sounds like work.
-
-### Experience
-
-**⭐ 4.8 / 5**
-
-### Ambience
-
-**⭐ 4.6 / 5**
-
-### Visual
-
-**⭐ 4.5 / 5**
-
-### Service
-
-**⭐ 4.6 / 5**
-
-### Value for Money
-
-**⭐ 4.6 / 5**
 
 ## Would We Come Back?
 

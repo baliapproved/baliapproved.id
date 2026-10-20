@@ -14,7 +14,6 @@ cutout:
 mapsUrl: https://www.google.com/maps/search/?api=1&query=Tulus%20Coliving%20Jl.%20Raya%20Kuta%20Bali
 address: Jl. Raya Kuta, Kuta, Kec. Kuta, Bali 80361
 spending: Under Rp500K/night
-overallRating: 4.6
 approvedAt: 2026-08-27
 gallery:
   - src: ./tulus_1.webp
@@ -78,13 +77,11 @@ The first impression is of a complete room rather than a stripped-back hostel be
 
 ## A complete apartment setup for an easy Bali stay
 
-The unit feels comfortable and well equipped. The room is medium-sized, the bed scored well, cleanliness held up, and privacy is stronger than a dorm because you get your own space.
+The unit feels comfortable and well equipped. The room is medium-sized, the bed was good, cleanliness held up, and privacy is stronger than a dorm because you get your own space.
 
 Inside the room you get a large wardrobe, a full TV setup, an indoor kitchen with cooking equipment and a sink, and a private bathroom. Shared areas add a balcony, swimming pool, common room, and private parking. Free drinking-water refills are available from the dispenser.
 
 ### Ambience
-
-**⭐ 4.7 / 5**
 
 ![Sheer curtains and open glass doors looking out to a balcony tree and the street beyond](./tulus_2.webp)
 ![Narrow mosaic-tiled swimming pool in a white courtyard with green wall panels](./tulus_9.webp)
@@ -93,27 +90,19 @@ Inside the room you get a large wardrobe, a full TV setup, an indoor kitchen wit
 
 ### Bed Comfort
 
-**⭐ 4.8 / 5**
-
 The bed was comfortable enough that sleep was not the thing we thought about during the stay.
 
 ### Cleanliness
-
-**⭐ 4.8 / 5**
 
 The room and bathroom stayed in good shape for an apartment-style setup.
 
 ### Privacy
 
-**⭐ 4.7 / 5**
-
 You get a private apartment unit, not a shared dorm. That is the main upgrade over a hostel stay in the same area.
 
 ### Check-in & Service
 
-**⭐ 4.7 / 5**
-
-Check-in went smoothly. Service sat at **4.6 / 5**. One practical note: contacting the property manager usually means chatting first, though most day-to-day needs are already covered inside the apartment.
+Check-in went smoothly. One practical note: contacting the property manager usually means chatting first, though most day-to-day needs are already covered inside the apartment.
 
 ## Rooms & Space
 
@@ -159,20 +148,6 @@ The room is air-conditioned. The balcony and pool areas are open-air.
 - Wi-Fi
 - Toilet
 - Smoking Area
-
-## Experience Scores
-
-### Stay Experience
-
-**⭐ 4.7 / 5**
-
-### Service
-
-**⭐ 4.6 / 5**
-
-### Comfort
-
-**⭐ 4.7 / 5**
 
 # 3. GOOD TO KNOW
 
@@ -266,26 +241,6 @@ Our take is based on our visit on 27 August 2026.
 ## Is it worth your time?
 
 If you want a comfortable Kuta base with complete in-room facilities and easy access to the beach and daily conveniences, yes.
-
-### Experience
-
-**⭐ 4.7 / 5**
-
-### Ambience
-
-**⭐ 4.7 / 5**
-
-### Visual
-
-**⭐ 4.5 / 5**
-
-### Service
-
-**⭐ 4.6 / 5**
-
-### Value for Money
-
-**⭐ 4.7 / 5**
 
 ## Would We Come Back?
 
