@@ -1,17 +1,13 @@
 ---
-import { Image } from "astro:assets";
 import type { CollectionEntry } from "astro:content";
 import {
   RiApps2Line,
-  RiArrowRightUpLine,
   RiBookOpenLine,
   RiCompass3Line,
   RiHandHeartLine,
   RiMapPin2Line,
 } from "@remixicon/react";
-import { Card, CardContent } from "@/design-system/card";
-import approvedBadge from "./approved-badge.svg";
-import goodFindBadge from "./good-find-badge.svg";
+import PlaceCard from "./PlaceCard.astro";
 
 interface Props {
   places: CollectionEntry<"places">[];
@@ -35,15 +31,6 @@ const filters = [
   },
   { label: "Guides", value: "guides", icon: RiBookOpenLine, disabled: true },
 ];
-
-const badges = {
-  approved: { label: "Approved", icon: approvedBadge, class: "text-[#b99651]" },
-  "good-find": {
-    label: "Good Find",
-    icon: goodFindBadge,
-    class: "text-[#6ca0d6]",
-  },
-};
 ---
 
 <section
@@ -73,55 +60,9 @@ const badges = {
   </fieldset>
 
   <ul class="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-    {places.map(({ data }) => (
+    {places.map((place) => (
       <li>
-        <Card
-          size="sm"
-          className="relative gap-2 rounded-3xl pt-6 shadow-none ring-0 has-focus-visible:outline-2 has-focus-visible:outline-offset-2 has-focus-visible:outline-ring"
-        >
-          <CardContent>
-            <Image
-              src={data.cutout.src}
-              alt={data.cutout.alt}
-              widths={[440, 660, 880]}
-              sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
-              class="aspect-7/6 w-full object-contain p-5 motion-safe:transition-transform motion-safe:duration-500 motion-safe:ease-out motion-safe:group-hover/card:scale-[1.02]"
-            />
-          </CardContent>
-          <div class="absolute inset-x-4 top-4 flex items-start">
-            {data.badge && (
-              <p
-                class:list={[
-                  "flex items-center gap-1",
-                  badges[data.badge].class,
-                ]}
-              >
-                <Image
-                  src={badges[data.badge].icon}
-                  alt=""
-                  class="h-5 w-auto"
-                />
-                {badges[data.badge].label}
-              </p>
-            )}
-            <span class="ml-auto grid size-9 place-items-center rounded-full bg-muted text-foreground/65 transition-colors group-hover/card:text-foreground">
-              <RiArrowRightUpLine aria-hidden="true" className="size-5" />
-            </span>
-          </div>
-          <CardContent>
-            <p class="text-muted-foreground">
-              {data.sealArea} · {data.spending}
-            </p>
-            <h3 class="mt-1 font-medium">
-              <a
-                href={`/places/${data.slug}`}
-                class="outline-none after:absolute after:inset-0"
-              >
-                {data.title}
-              </a>
-            </h3>
-          </CardContent>
-        </Card>
+        <PlaceCard place={place} />
       </li>
     ))}
   </ul>

@@ -1,23 +1,33 @@
 ---
-import { getImage } from "astro:assets";
+import { getImage, Image } from "astro:assets";
 import { getCollection, type CollectionEntry } from "astro:content";
+import { RiArrowRightUpLine } from "@remixicon/react";
+import PlaceBadge from "@/catalog/PlaceBadge.astro";
+import PlaceCard from "@/catalog/PlaceCard.astro";
+import { buttonVariants } from "@/design-system/button";
 import Layout from "@/site/Layout.astro";
 import { site } from "@/site/site";
 
 export async function getStaticPaths() {
-  const places = await getCollection("places");
+  const places = (await getCollection("places")).sort(
+    (a, b) => b.data.approvalNumber - a.data.approvalNumber,
+  );
 
   return places.map((place) => ({
     params: { id: place.data.slug },
-    props: { place },
+    props: {
+      place,
+      morePlaces: places.filter(({ id }) => id !== place.id).slice(0, 3),
+    },
   }));
 }
 
 interface Props {
   place: CollectionEntry<"places">;
+  morePlaces: CollectionEntry<"places">[];
 }
 
-const { place }: Props = Astro.props;
+const { place, morePlaces }: Props = Astro.props;
 const { data } = place;
 const siteUrl = new URL("/", Astro.site ?? site.url);
 const socialImage = await getImage({
@@ -28,6 +38,19 @@ const socialImage = await getImage({
   format: "webp",
 });
 const socialImageUrl = new URL(socialImage.src, siteUrl).href;
+
+const details = [
+  {
+    label: "Approved",
+    value: data.approvedAt.toLocaleDateString(site.language, {
+      day: "numeric",
+      month: "long",
+      year: "numeric",
+      timeZone: "UTC",
+    }),
+  },
+  { label: "Approval", value: `No. ${data.approvalNumber}` },
+];
 ---
 
 <Layout
@@ -36,5 +59,119 @@ const socialImageUrl = new URL(socialImage.src, siteUrl).href;
   image={socialImageUrl}
   imageAlt={data.coverAlt}
 >
-  <main class="flex-1 bg-border" />
+  <main class="flex-1 bg-border">
+    <article class="mx-auto w-full max-w-[1920px] px-5 pt-6 pb-16 sm:px-8 sm:pt-10 lg:px-12 xl:px-20">
+      <header class="flex flex-wrap items-end justify-between gap-x-8 gap-y-5">
+        <div class="min-w-0">
+          <p class="text-muted-foreground">
+            {data.sealArea} · {data.spending}
+          </p>
+          <h1 class="mt-1 text-4xl/10 font-medium tracking-tight text-balance sm:text-[2.5rem]/11">
+            {data.title}
+          </h1>
+          {data.badge && (
+            <div class="mt-1">
+              <PlaceBadge badge={data.badge} />
+            </div>
+          )}
+        </div>
+
+        <a
+          href={data.mapsUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          data-action="maps_click"
+          data-placement="place_review"
+          data-place-id={place.id}
+          data-place-name={data.title}
+          class={buttonVariants({ size: "lg" })}
+        >
+          Open in Maps
+          <RiArrowRightUpLine aria-hidden="true" data-icon="inline-end" />
+          <span class="sr-only"> (opens in a new tab)</span>
+        </a>
+      </header>
+
+      <div class="mt-6 rounded-3xl bg-background px-5 py-10 sm:px-10 sm:py-16">
+        <Image
+          src={data.cutout.src}
+          alt={data.cutout.alt}
+          widths={[640, 960, 1280, 1600]}
+          sizes="(min-width: 1024px) 840px, calc(100vw - 80px)"
+          loading="eager"
+          fetchpriority="high"
+          class="mx-auto aspect-4/3 max-h-140 w-full object-contain"
+        />
+      </div>
+
+      <div class="mt-12 grid gap-10 lg:grid-cols-[minmax(0,34rem)_minmax(0,1fr)] lg:gap-20">
+        <section aria-labelledby="our-take">
+          <h2 id="our-take" class="text-2xl font-medium tracking-tight">
+            Our take
+          </h2>
+          <p class="mt-3 text-base/7 text-pretty text-muted-foreground">
+            {data.description}
+          </p>
+        </section>
+
+        <dl class="grid grid-cols-2 gap-x-8 gap-y-6 self-start lg:max-w-xl">
+          {details.map(({ label, value }) => (
+            <div class="border-t border-foreground/10 pt-3">
+              <dt class="text-sm text-muted-foreground">{label}</dt>
+              <dd class="mt-1">{value}</dd>
+            </div>
+          ))}
+          <div class="col-span-full border-t border-foreground/10 pt-3">
+            <dt class="text-sm text-muted-foreground">Address</dt>
+            <dd class="mt-1 text-pretty">{data.address}</dd>
+          </div>
+        </dl>
+      </div>
+
+      {data.gallery.length > 0 && (
+        <section aria-labelledby="photos" class="mt-16">
+          <h2 id="photos" class="text-2xl font-medium tracking-tight">
+            Photos
+          </h2>
+          <ul class="mt-4 grid grid-cols-2 gap-2 sm:grid-cols-3 sm:gap-4 lg:grid-cols-4">
+            {data.gallery.map(({ src, alt }) => (
+              <li>
+                <Image
+                  src={src}
+                  alt={alt}
+                  widths={[360, 540, 720]}
+                  sizes="(min-width: 1024px) 25vw, (min-width: 640px) 33vw, 50vw"
+                  class="aspect-3/4 w-full rounded-3xl object-cover"
+                />
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
+    </article>
+
+    <section
+      aria-labelledby="more-places"
+      class="mx-auto w-full max-w-[1920px] px-5 pb-12 sm:px-8 lg:px-12 xl:px-20"
+    >
+      <div class="flex items-baseline justify-between gap-4">
+        <h2 id="more-places" class="text-2xl font-medium tracking-tight">
+          More places
+        </h2>
+        <a
+          href="/"
+          class="text-muted-foreground transition-colors hover:text-foreground focus-visible:rounded-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring"
+        >
+          See all
+        </a>
+      </div>
+      <ul class="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {morePlaces.map((place) => (
+          <li>
+            <PlaceCard place={place} />
+          </li>
+        ))}
+      </ul>
+    </section>
+  </main>
 </Layout>
