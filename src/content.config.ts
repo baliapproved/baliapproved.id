@@ -38,7 +38,7 @@ export const collections = {
         phone: z.string().regex(phone).optional(),
         address: z.string(),
         spending: z.string(),
-        approvedAt: z.coerce.date(),
+        lastVisitedAt: z.coerce.date(),
         // Standout places, badged on catalog cards; approved ranks above good-find.
         badge: z.enum(["approved", "good-find"]).optional(),
         gallery: z

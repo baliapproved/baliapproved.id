@@ -43,12 +43,12 @@ const photoPositions: Record<string, string> = {
 };
 const photoPosition = photoPositions[id] ?? "center";
 const { data } = place;
-const approvedDate = new Intl.DateTimeFormat("en-GB", {
+const visitedDate = new Intl.DateTimeFormat("en-GB", {
   day: "numeric",
   month: "long",
   year: "numeric",
   timeZone: "UTC",
-}).format(data.approvedAt);
+}).format(data.lastVisitedAt);
 ---
 
 <!doctype html>
@@ -71,7 +71,7 @@ const approvedDate = new Intl.DateTimeFormat("en-GB", {
         <Seal
           number={data.approvalNumber}
           area={data.sealArea}
-          year={data.approvedAt.getUTCFullYear()}
+          year={data.lastVisitedAt.getUTCFullYear()}
           size={200}
           className="[&_svg_text]:text-[13px]"
         />
@@ -100,9 +100,11 @@ const approvedDate = new Intl.DateTimeFormat("en-GB", {
           <dd>{data.spending}</dd>
         </div>
         <div>
-          <dt>Approved at</dt>
+          <dt>Last visited</dt>
           <dd>
-            <time datetime={data.approvedAt.toISOString()}>{approvedDate}</time>
+            <time datetime={data.lastVisitedAt.toISOString()}>
+              {visitedDate}
+            </time>
           </dd>
         </div>
       </dl>

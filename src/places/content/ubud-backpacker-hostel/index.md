@@ -18,7 +18,7 @@ instagram: ubudbackpackerhostel
 whatsapp: +62 851 9004 1547
 address: Jl. Yudistira No. 21, Peliatan, Banjar Kalah, Gianyar
 spending: Under Rp500K/night
-approvedAt: 2026-08-14
+lastVisitedAt: 2026-08-14
 badge: good-find
 gallery:
   - src: ./ubud_1.webp

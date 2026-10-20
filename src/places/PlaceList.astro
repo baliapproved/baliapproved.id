@@ -31,7 +31,7 @@ const dateFormatter = new Intl.DateTimeFormat("en-GB", {
     {places.map((place, index) => {
       const { data } = place;
       const reversed = index % 2 === 1;
-      const approvedDate = dateFormatter.format(data.approvedAt);
+      const visitedDate = dateFormatter.format(data.lastVisitedAt);
 
       return (
         <li
@@ -74,7 +74,7 @@ const dateFormatter = new Intl.DateTimeFormat("en-GB", {
                 <Seal
                   number={data.approvalNumber}
                   area={data.sealArea}
-                  year={data.approvedAt.getUTCFullYear()}
+                  year={data.lastVisitedAt.getUTCFullYear()}
                   size={142}
                 />
               </div>
@@ -90,9 +90,9 @@ const dateFormatter = new Intl.DateTimeFormat("en-GB", {
                 <span class="text-foreground">{data.sealArea}</span>
                 <span aria-hidden="true">·</span>
                 <span>
-                  Approved{" "}
-                  <time datetime={data.approvedAt.toISOString()}>
-                    {approvedDate}
+                  Last visited{" "}
+                  <time datetime={data.lastVisitedAt.toISOString()}>
+                    {visitedDate}
                   </time>
                 </span>
               </p>

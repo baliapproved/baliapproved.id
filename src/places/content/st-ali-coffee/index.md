@@ -18,7 +18,7 @@ instagram: stali.id
 website: https://stali.com.au/pages/st-ali-bali
 address: Jl. Pantai Pererenan No.121, Pererenan, Badung
 spending: Rp30K-100K per person
-approvedAt: 2026-08-02
+lastVisitedAt: 2026-08-02
 gallery:
   - src: ./st_ali_1.webp
     alt: The ST. ALi Coffee facade with brick lattice screening, outdoor tables, and a laptop open at a sidewalk seat

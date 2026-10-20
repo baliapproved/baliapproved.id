@@ -20,7 +20,7 @@ website: https://www.starbucks.co.id/dewata
 phone: +62 361 9343 482
 address: Jl. Sunset Road No. 77, Seminyak, Kuta, Badung
 spending: Rp30K-75K per person
-approvedAt: 2026-07-23
+lastVisitedAt: 2026-07-23
 badge: good-find
 gallery:
   - src: ./starbucks_1.webp

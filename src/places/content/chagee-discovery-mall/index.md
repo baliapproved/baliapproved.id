@@ -18,7 +18,7 @@ instagram: chagee.id
 tiktok: chagee.id
 address: Discovery Shopping Mall
 spending: Rp30K-60K per person
-approvedAt: 2026-07-29
+lastVisitedAt: 2026-07-29
 gallery:
   - src: ./chagee_1.webp
     alt: The CHAGEE storefront in golden light, with two people sitting on the bench outside and a Bes-Tea Brew Crew board alongside

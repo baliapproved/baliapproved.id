@@ -12,12 +12,12 @@ const { place }: Props = Astro.props;
 const { data } = place;
 
 const titleId = `${place.id}-title`;
-const approvedDate = new Intl.DateTimeFormat("en-GB", {
+const visitedDate = new Intl.DateTimeFormat("en-GB", {
   day: "numeric",
   month: "long",
   year: "numeric",
   timeZone: "UTC",
-}).format(data.approvedAt);
+}).format(data.lastVisitedAt);
 
 const slides = await Promise.all(
   [{ src: data.cover, alt: data.coverAlt }, ...data.gallery].map(
@@ -49,7 +49,7 @@ const slides = await Promise.all(
         <Seal
           number={data.approvalNumber}
           area={data.sealArea}
-          year={data.approvedAt.getUTCFullYear()}
+          year={data.lastVisitedAt.getUTCFullYear()}
           size={184}
         />
       </div>
@@ -106,10 +106,12 @@ const slides = await Promise.all(
 
         <div>
           <dt class="text-[0.6875rem] font-semibold tracking-[0.2em] text-muted-foreground uppercase">
-            Approved at
+            Last visited
           </dt>
           <dd class="mt-1.5 font-heading text-[1.375rem] tracking-tight sm:text-[1.75rem]">
-            <time datetime={data.approvedAt.toISOString()}>{approvedDate}</time>
+            <time datetime={data.lastVisitedAt.toISOString()}>
+              {visitedDate}
+            </time>
           </dd>
         </div>
       </dl>

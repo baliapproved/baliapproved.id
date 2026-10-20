@@ -17,7 +17,7 @@ mapsUrl: https://www.google.com/maps/search/?api=1&query=Tulus%20Coliving%20Jl.%
 instagram: tuluscolivingvilla
 address: Jl. Raya Kuta, Kuta, Kec. Kuta, Bali 80361
 spending: Under Rp500K/night
-approvedAt: 2026-08-27
+lastVisitedAt: 2026-08-27
 gallery:
   - src: ./tulus_1.webp
     alt: Dark wood vanity and desk with a rustic branch chair, mirror reflecting the bed
