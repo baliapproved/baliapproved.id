@@ -5,6 +5,8 @@ slug: seniman-coffee-renon
 title: Seniman Coffee Renon
 description: >-
   What we really liked about Seniman Coffee is how everything feels like art; the chairs, mugs, ceiling, even the bathroom entrance. It feels thoughtful without trying too hard, which makes the place memorable.
+about: >-
+  Seniman is a specialty coffee roaster with cafes in Bali and Surabaya. The Renon location pairs its coffee bar with Dalam Seniman's contemporary art space.
 sealArea: Renon
 cover: ./cover.webp
 coverAlt: Seniman Coffee Renon sign against a clear blue sky
@@ -12,6 +14,8 @@ cutout:
   src: ./cutout.webp
   alt: White Seniman Coffee Renon corner building with its round red sign, Imagine You Know What You're Doing painted on the wall, and a covered terrace
 mapsUrl: https://www.google.com/maps/search/?api=1&query=Seniman%20Coffee%20Renon
+instagram: senimancoffee
+website: https://www.senimancoffee.com/seniman-renon/
 address: Jl. Tukad Musi No. 19, Panjer, Denpasar Selatan, Denpasar
 spending: Rp30K-100K per person
 approvedAt: 2026-08-28

@@ -5,6 +5,8 @@ slug: starbucks-dewata
 title: Starbucks Reserve Dewata
 description: >-
   This is the kind of place you go when you simply want to enjoy your time, whether you're being productive, catching up with people, or spending a few hours by yourself.
+about: >-
+  Starbucks Reserve Dewata opened on Sunset Road in 2019 as the largest Starbucks in Southeast Asia. Alongside the Reserve bar, it has a small coffee farm and a space that walks through how coffee goes from tree to cup.
 sealArea: Sunset Road
 cover: ./cover.webp
 coverAlt: Brick-lined interior at Starbucks Reserve Dewata in Bali
@@ -12,6 +14,10 @@ cutout:
   src: ./cutout.webp
   alt: Starbucks Reserve Dewata building at dusk, with its terracotta brick facade, glowing windows, and a garden fountain
 mapsUrl: https://maps.app.goo.gl/mZEYKQ7muXbURLi39
+instagram: starbucksreserve_dewata
+tiktok: starbucksindonesia
+website: https://www.starbucks.co.id/dewata
+phone: +62 361 9343 482
 address: Jl. Sunset Road No. 77, Seminyak, Kuta, Badung
 spending: Rp30K-75K per person
 approvedAt: 2026-07-23

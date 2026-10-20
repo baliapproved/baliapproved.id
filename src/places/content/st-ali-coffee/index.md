@@ -5,14 +5,18 @@ slug: st-ali-coffee
 title: ST. ALi Coffee
 description: >-
   A spacious Pererenan corner cafe that works best when you do not have to rush: morning coffee, breakfast outside, and watching the street wake up.
+about: >-
+  ST. ALi is a Melbourne coffee roaster founded in 2005. Its Pererenan cafe is at Further Hotel and serves coffee, breakfast, and lunch daily.
 sealArea: Pererenan
 cover: ./cover.webp
 coverAlt: ST. ALi Coffee terracotta corner building with brick lattice facade and tropical plants at the entrance
 cutout:
   src: ./cutout.webp
   alt: Terracotta ST. ALi Coffee corner building with a brick lattice upper storey, open glass walls, and potted palms along the steps
-mapsUrl: https://www.google.com/maps/search/?api=1&query=ST.%20ALi%20Coffee%20Jl.%20Pantai%20Pererenan%20No.122%20Bali
-address: Jl. Pantai Pererenan No.122, Pererenan, Badung
+mapsUrl: https://www.google.com/maps/search/?api=1&query=ST.%20ALi%20Coffee%20Jl.%20Pantai%20Pererenan%20No.121%20Bali
+instagram: stali.id
+website: https://stali.com.au/pages/st-ali-bali
+address: Jl. Pantai Pererenan No.121, Pererenan, Badung
 spending: Rp30K-100K per person
 approvedAt: 2026-08-02
 gallery:
