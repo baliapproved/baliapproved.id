@@ -1,7 +1,10 @@
 ---
-import { RiCloseLine, RiMenu2Line, RiSearchLine } from "@remixicon/react";
+import { getImage } from "astro:assets";
+import { getCollection } from "astro:content";
+import { RiCloseLine, RiMenu2Line } from "@remixicon/react";
 import { cn } from "cn";
 import { buttonVariants } from "@/design-system/button";
+import { Search } from "@/search/Search";
 import { site } from "./site";
 
 const links = [
@@ -9,6 +12,18 @@ const links = [
   { label: "Blog", href: "/blog" },
   { label: "About", href: "/about" },
 ];
+
+const places = await Promise.all(
+  (await getCollection("places"))
+    .sort((a, b) => b.data.approvalNumber - a.data.approvalNumber)
+    .map(async ({ data }) => ({
+      title: data.title,
+      area: data.sealArea,
+      href: `/places/${data.slug}`,
+      // 2x the 56px icon box in the search menu.
+      cutout: (await getImage({ src: data.cutout.src, width: 112 })).src,
+    })),
+);
 ---
 
 <header class="group/header bg-border">
@@ -91,16 +106,7 @@ const links = [
     </nav>
 
     <div class="flex items-center gap-2.5 justify-self-end">
-      <button
-        type="button"
-        aria-label="Search"
-        class={cn(
-          buttonVariants({ variant: "outline", size: "icon-lg" }),
-          "min-h-11 min-w-11 rounded-full",
-        )}
-      >
-        <RiSearchLine aria-hidden="true" />
-      </button>
+      <Search client:idle places={places} />
       <button
         type="button"
         aria-label="Menu"
