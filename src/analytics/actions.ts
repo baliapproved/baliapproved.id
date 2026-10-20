@@ -11,6 +11,7 @@ export const placements: Record<string, string> = {
   place_review: "Place review",
   hero: "Hero",
   footer: "Footer",
+  about: "About page",
 };
 
 // Links about a place carry data-place-id and data-place-name, so its clicks
