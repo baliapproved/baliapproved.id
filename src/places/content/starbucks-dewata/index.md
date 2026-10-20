@@ -8,6 +8,9 @@ description: >-
 sealArea: Sunset Road
 cover: ./cover.webp
 coverAlt: Brick-lined interior at Starbucks Reserve Dewata in Bali
+cutout:
+  src: ./cutout.webp
+  alt: Starbucks Reserve Dewata building at dusk, with its terracotta brick facade, glowing windows, and a garden fountain
 mapsUrl: https://maps.app.goo.gl/mZEYKQ7muXbURLi39
 address: Jl. Sunset Road No. 77, Seminyak, Kuta, Badung
 spending: Rp30K-75K per person

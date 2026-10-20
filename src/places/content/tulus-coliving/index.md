@@ -8,6 +8,9 @@ description: >-
 sealArea: Kuta
 cover: ./cover.webp
 coverAlt: Sunlit bedroom at Tulus Coliving with a wooden headboard, white bedding, and sheer curtains
+cutout:
+  src: ./cutout.webp
+  alt: White two-storey Tulus Coliving Apartments building with planters spilling over the balcony, glass front doors, and a narrow pool alongside
 mapsUrl: https://www.google.com/maps/search/?api=1&query=Tulus%20Coliving%20Jl.%20Raya%20Kuta%20Bali
 address: Jl. Raya Kuta, Kuta, Kec. Kuta, Bali 80361
 spending: Under Rp500K/night

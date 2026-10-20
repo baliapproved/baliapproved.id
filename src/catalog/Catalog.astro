@@ -1,0 +1,100 @@
+---
+import { Image } from "astro:assets";
+import type { CollectionEntry } from "astro:content";
+import {
+  RiApps2Line,
+  RiArrowRightUpLine,
+  RiBookOpenLine,
+  RiCompass3Line,
+  RiHandHeartLine,
+  RiMapPin2Line,
+} from "@remixicon/react";
+import { Card, CardContent } from "@/design-system/card";
+
+interface Props {
+  places: CollectionEntry<"places">[];
+}
+const { places }: Props = Astro.props;
+
+const filters = [
+  { label: "All", value: "all", icon: RiApps2Line },
+  { label: "Places", value: "places", icon: RiMapPin2Line },
+  {
+    label: "Experiences",
+    value: "experiences",
+    icon: RiCompass3Line,
+    disabled: true,
+  },
+  {
+    label: "Services",
+    value: "services",
+    icon: RiHandHeartLine,
+    disabled: true,
+  },
+  { label: "Guides", value: "guides", icon: RiBookOpenLine, disabled: true },
+];
+---
+
+<section
+  aria-labelledby="catalog-heading"
+  class="mx-auto w-full max-w-[1920px] px-5 pb-12 sm:px-8 lg:px-12 xl:px-20"
+>
+  <h2 id="catalog-heading" class="sr-only">
+    Reviews
+  </h2>
+
+  <fieldset class="flex flex-wrap gap-2">
+    <legend class="sr-only">Show</legend>
+    {filters.map(({ label, value, icon: Icon, disabled }) => (
+      <label class="inline-flex h-9 cursor-pointer items-center gap-1.5 rounded-full pr-3 pl-2.5 text-sm text-foreground/65 inset-ring inset-ring-foreground/10 transition-colors hover:bg-foreground/5 has-checked:bg-background has-checked:text-foreground has-checked:inset-ring-0 has-focus-visible:outline-2 has-focus-visible:outline-offset-2 has-focus-visible:outline-ring has-disabled:pointer-events-none has-disabled:opacity-50">
+        <input
+          type="radio"
+          name="catalog-filter"
+          value={value}
+          checked={value === "all"}
+          disabled={disabled}
+          class="sr-only"
+        />
+        <Icon aria-hidden="true" className="size-4" />
+        {label}
+      </label>
+    ))}
+  </fieldset>
+
+  <ul class="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+    {places.map(({ data }) => (
+      <li>
+        <Card
+          size="sm"
+          className="relative gap-2 rounded-3xl pt-6 shadow-none ring-0 has-focus-visible:outline-2 has-focus-visible:outline-offset-2 has-focus-visible:outline-ring"
+        >
+          <CardContent>
+            <Image
+              src={data.cutout.src}
+              alt={data.cutout.alt}
+              widths={[440, 660, 880]}
+              sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+              class="aspect-7/6 w-full object-contain p-5 motion-safe:transition-transform motion-safe:duration-500 motion-safe:ease-out motion-safe:group-hover/card:scale-[1.02]"
+            />
+          </CardContent>
+          <span class="absolute top-4 right-4 grid size-9 place-items-center rounded-full bg-muted text-foreground/65 transition-colors group-hover/card:text-foreground">
+            <RiArrowRightUpLine aria-hidden="true" className="size-5" />
+          </span>
+          <CardContent>
+            <p class="text-muted-foreground">
+              {data.sealArea} · {data.spending}
+            </p>
+            <h3 class="mt-1 font-medium">
+              <a
+                href={`/places/${data.slug}`}
+                class="outline-none after:absolute after:inset-0"
+              >
+                {data.title}
+              </a>
+            </h3>
+          </CardContent>
+        </Card>
+      </li>
+    ))}
+  </ul>
+</section>

@@ -1,126 +1,18 @@
 ---
-import {
-  InputGroup,
-  InputGroupAddon,
-  InputGroupButton,
-  InputGroupInput,
-} from "@/design-system/input-group";
+import { getCollection } from "astro:content";
+import Catalog from "@/catalog/Catalog.astro";
+import Hero from "@/hero/Hero.astro";
 import Layout from "@/site/Layout.astro";
 import { site } from "@/site/site";
+
+const places = (await getCollection("places")).sort(
+  (a, b) => b.data.approvalNumber - a.data.approvalNumber,
+);
 ---
 
 <Layout title={site.title} footer={false}>
   <main class="flex-1 bg-border">
-    <section class="mx-auto flex w-full max-w-145 flex-col items-center px-5 pt-14 pb-16 text-center sm:pt-18 sm:pb-20">
-      <p class="weekly-badge relative inline-flex items-center gap-2 rounded-full border border-transparent px-3 py-1 text-sm text-foreground/65">
-        <svg
-          viewBox="0 0 64 64"
-          class="size-3.5 animate-[weekly-tick_4s_ease-in-out_infinite] drop-shadow-[0_0_2px_#2cd88a] motion-reduce:animate-none"
-          aria-hidden="true"
-        >
-          <path
-            id="weekly-petal"
-            d="M32 30C18 29 11 25 12 17C13 9 22 5 29 11C34 15 35 22 32 30Z"
-          />
-          <use href="#weekly-petal" transform="rotate(90 32 32)" />
-          <use href="#weekly-petal" transform="rotate(180 32 32)" />
-          <use href="#weekly-petal" transform="rotate(270 32 32)" />
-        </svg>
-        Updated every Friday
-      </p>
-
-      <h1 class="mt-6 text-4xl/10 font-medium tracking-tight text-balance sm:text-[2.5rem]/11">
-        Bali places we’ve tried ourselves, rated honestly
-      </h1>
-
-      <p class="mt-3 text-base/6 text-pretty text-foreground/65">
-        We review the cafés, stays, and experiences we try, with our own photos
-        and notes from each visit. Subscribe to get each new review by email.
-      </p>
-
-      <InputGroup className="mt-7 h-12 max-w-107 bg-background bg-clip-padding sm:h-10">
-        <InputGroupInput
-          type="email"
-          aria-label="Email address"
-          placeholder="name@email.com"
-          autoComplete="email"
-        />
-        <InputGroupAddon
-          align="inline-end"
-          className="h-full py-0.5 pr-0.5 has-[>button]:mr-0"
-        >
-          <InputGroupButton size="sm" className="h-full">
-            Subscribe
-          </InputGroupButton>
-        </InputGroupAddon>
-      </InputGroup>
-    </section>
+    <Hero />
+    <Catalog places={places} />
   </main>
 </Layout>
-
-<style>
-  @property --weekly-angle {
-    syntax: "<angle>";
-    inherits: true;
-    initial-value: 0deg;
-  }
-
-  .weekly-badge {
-    --weekly-glow: color-mix(in oklab, #2cd88a 40%, transparent);
-    --weekly-edge: color-mix(
-      in oklab,
-      var(--color-foreground) 10%,
-      transparent
-    );
-    background:
-      linear-gradient(var(--color-border), var(--color-border)) padding-box,
-      conic-gradient(
-          from var(--weekly-angle),
-          var(--weekly-edge) 0 65%,
-          var(--weekly-glow) 85%,
-          var(--weekly-edge)
-        )
-        border-box;
-    animation: weekly-sweep 8s linear infinite;
-  }
-
-  /* Thicker green streak over the 1px border. */
-  .weekly-badge::before {
-    content: "";
-    position: absolute;
-    inset: -1.5px;
-    padding: 2px;
-    border-radius: inherit;
-    background: conic-gradient(
-      from var(--weekly-angle),
-      transparent 0 65%,
-      var(--weekly-glow) 85%,
-      transparent
-    );
-    mask:
-      linear-gradient(#000 0 0) content-box exclude,
-      linear-gradient(#000 0 0);
-    pointer-events: none;
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .weekly-badge {
-      animation: none;
-    }
-  }
-
-  @keyframes weekly-sweep {
-    to {
-      --weekly-angle: 360deg;
-    }
-  }
-
-  @keyframes weekly-tick {
-    75% {
-      rotate: 0deg;
-    }
-    100% {
-      rotate: 90deg;
-    }
-  }
-</style>

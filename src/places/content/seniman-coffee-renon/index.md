@@ -8,6 +8,9 @@ description: >-
 sealArea: Renon
 cover: ./cover.webp
 coverAlt: Seniman Coffee Renon sign against a clear blue sky
+cutout:
+  src: ./cutout.webp
+  alt: White Seniman Coffee Renon corner building with its round red sign, Imagine You Know What You're Doing painted on the wall, and a covered terrace
 mapsUrl: https://www.google.com/maps/search/?api=1&query=Seniman%20Coffee%20Renon
 address: Jl. Tukad Musi No. 19, Panjer, Denpasar Selatan, Denpasar
 spending: Rp30K-100K per person

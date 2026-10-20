@@ -8,6 +8,9 @@ description: >-
 sealArea: Kuta
 cover: ./cover.webp
 coverAlt: CHAGEE wall sign inside its Discovery Shopping Mall location
+cutout:
+  src: ./cutout.webp
+  alt: Cream CHAGEE storefront with a wavy lattice canopy, red logo medallion, glass doors, and a giant cup sculpture out front
 mapsUrl: https://maps.app.goo.gl/YDXLJGPpgXLbxemy5
 address: Discovery Shopping Mall
 spending: Rp30K-60K per person

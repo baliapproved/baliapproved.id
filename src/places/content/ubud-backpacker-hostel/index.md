@@ -8,6 +8,9 @@ description: >-
 sealArea: Peliatan
 cover: ./cover.webp
 coverAlt: Staff grilling chicken on an outdoor barbecue at night, with smoke rising under tropical plants
+cutout:
+  src: ./cutout.webp
+  alt: Ubud Backpacker Hostel's Balinese-roofed buildings and gazebo around a tiled pool, with sun loungers, stone statues, and a painted mural wall
 mapsUrl: https://www.google.com/maps/search/?api=1&query=Ubud%20Backpacker%20Hostel%2C%20Jl.%20Yudistira%20No.21%2C%20Peliatan%2C%20Gianyar
 address: Jl. Yudistira No. 21, Peliatan, Banjar Kalah, Gianyar
 spending: Under Rp500K/night

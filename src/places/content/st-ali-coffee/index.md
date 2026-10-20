@@ -8,6 +8,9 @@ description: >-
 sealArea: Pererenan
 cover: ./cover.webp
 coverAlt: ST. ALi Coffee terracotta corner building with brick lattice facade and tropical plants at the entrance
+cutout:
+  src: ./cutout.webp
+  alt: Terracotta ST. ALi Coffee corner building with a brick lattice upper storey, open glass walls, and potted palms along the steps
 mapsUrl: https://www.google.com/maps/search/?api=1&query=ST.%20ALi%20Coffee%20Jl.%20Pantai%20Pererenan%20No.122%20Bali
 address: Jl. Pantai Pererenan No.122, Pererenan, Badung
 spending: Rp30K-100K per person

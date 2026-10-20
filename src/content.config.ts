@@ -21,6 +21,8 @@ export const collections = {
         sealArea: z.string(),
         cover: image(),
         coverAlt: z.string(),
+        // Transparent-background subject shown on catalog cards.
+        cutout: z.object({ src: image(), alt: z.string() }),
         mapsUrl: z.url(),
         address: z.string(),
         spending: z.string(),
