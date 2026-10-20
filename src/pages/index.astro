@@ -10,7 +10,7 @@ const places = (await getCollection("places")).sort(
 );
 ---
 
-<Layout title={site.title} footer={false}>
+<Layout title={site.title}>
   <main class="flex-1 bg-border">
     <Hero />
     <Catalog places={places} />
