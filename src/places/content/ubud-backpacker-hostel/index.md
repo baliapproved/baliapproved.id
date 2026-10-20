@@ -16,6 +16,7 @@ address: Jl. Yudistira No. 21, Peliatan, Banjar Kalah, Gianyar
 spending: Under Rp500K/night
 overallRating: 4.6
 approvedAt: 2026-08-14
+badge: good-find
 gallery:
   - src: ./ubud_1.webp
     alt: Two guests playing billiards in the common room at night

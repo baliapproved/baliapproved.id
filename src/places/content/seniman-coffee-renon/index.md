@@ -16,6 +16,7 @@ address: Jl. Tukad Musi No. 19, Panjer, Denpasar Selatan, Denpasar
 spending: Rp30K-100K per person
 overallRating: 4.6
 approvedAt: 2026-08-28
+badge: approved
 gallery:
   - src: ./seniman_1.webp
     alt: The Seniman bar with the coffee flavor wheel and specials board behind it, and Bar Roker chairs lined up in front

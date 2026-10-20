@@ -16,6 +16,7 @@ address: Jl. Sunset Road No. 77, Seminyak, Kuta, Badung
 spending: Rp30K-75K per person
 overallRating: 4.5
 approvedAt: 2026-07-23
+badge: good-find
 gallery:
   - src: ./starbucks_1.webp
     alt: The large white Starbucks bear statue in a green cup-lid hat, seen from below against the sky and garden greenery
