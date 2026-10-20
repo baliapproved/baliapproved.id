@@ -4,9 +4,9 @@ place_id: chagee_discovery_mall
 slug: chagee-discovery-mall
 title: CHAGEE Discovery Mall
 description: >-
-  A nice little getaway for tea lovers who want something other than coffee; with the smell of roasted tea, a comfortable spot to recharge, and Kuta sunset waiting just outside the door.
+  We came here after work, but the place itself has very good Wi-Fi that worked well for a work session. They also have proper tables for work, though some tables are small and meant for chats only. We really like this place because it faces Kuta Beach, where we can see a beautiful sunset.
 about: >-
-  CHAGEE is a tea chain founded in Yunnan, China, in 2017, known for fresh milk tea brewed from whole tea leaves. This branch sits inside Discovery Shopping Mall, facing Kuta Beach.
+  CHAGEE is a tea chain founded in Yunnan, China, in 2017. It brews milk tea from whole tea leaves. This branch is inside Discovery Shopping Mall, facing Kuta Beach.
 sealArea: Kuta
 cover: ./cover.webp
 coverAlt: CHAGEE wall sign inside its Discovery Shopping Mall location
@@ -19,6 +19,7 @@ tiktok: chagee.id
 address: Discovery Shopping Mall
 spending: Rp30K-60K per person
 lastVisitedAt: 2026-07-29
+badge: good-find
 gallery:
   - src: ./chagee_1.webp
     alt: The CHAGEE storefront in golden light, with two people sitting on the bench outside and a Bes-Tea Brew Crew board alongside

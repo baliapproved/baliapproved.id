@@ -6,6 +6,7 @@ import {
   RiCalendarCheckFill,
   RiGlobalFill,
   RiInstagramFill,
+  RiMapPin2Fill,
   RiPhoneFill,
   RiTiktokFill,
   RiWhatsappFill,
@@ -117,6 +118,14 @@ const links = [
     tone: "bg-[#b99651]/15 text-[#a8853f]",
     icon: RiPhoneFill,
   },
+  {
+    action: "maps_click",
+    label: "Address",
+    value: data.address,
+    href: data.mapsUrl,
+    tone: "bg-[#e8710a]/12 text-[#e8710a]",
+    icon: RiMapPin2Fill,
+  },
 ].filter((link) => !!link);
 ---
 
@@ -177,20 +186,15 @@ const links = [
         />
       </div>
 
-      <section
-        aria-labelledby="about"
-        class="mt-12 grid gap-8 lg:grid-cols-[minmax(0,34rem)_minmax(0,1fr)] lg:gap-20"
-      >
-        <div>
-          <h2 id="about" class="text-2xl font-medium tracking-tight">
-            About
-          </h2>
-          <p class="mt-3 text-base/7 text-pretty text-muted-foreground">
-            {data.about}
-          </p>
-        </div>
+      <section aria-labelledby="about" class="mt-12">
+        <h2 id="about" class="text-2xl font-medium tracking-tight">
+          About
+        </h2>
+        <p class="mt-3 max-w-[34rem] text-base/7 text-pretty text-muted-foreground">
+          {data.about}
+        </p>
 
-        <ul class="grid gap-3 self-start sm:grid-cols-2">
+        <ul class="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {links.map(({ action, label, value, href, icon: Icon, tone }) => {
             const external = href.startsWith("http");
             return (
@@ -203,31 +207,26 @@ const links = [
                   data-placement="place_review"
                   data-place-id={place.id}
                   data-place-name={data.title}
-                  class="group flex h-full flex-col gap-4 rounded-3xl bg-card p-4 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
+                  class="group flex h-full items-center gap-3 rounded-3xl bg-card p-3 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
                 >
-                  <span class="flex items-start justify-between">
-                    <span
-                      class:list={[
-                        "grid size-10 place-items-center rounded-full motion-safe:transition-transform motion-safe:duration-500 motion-safe:ease-out motion-safe:group-hover:-rotate-6 motion-safe:group-hover:scale-105",
-                        tone,
-                      ]}
-                    >
-                      <Icon aria-hidden="true" className="size-5" />
-                    </span>
-                    <span class="grid size-9 place-items-center rounded-full bg-muted text-foreground/65 transition-colors group-hover:text-foreground">
-                      <RiArrowRightUpLine
-                        aria-hidden="true"
-                        className="size-5"
-                      />
-                    </span>
+                  <span
+                    class:list={[
+                      "grid size-10 shrink-0 place-items-center rounded-full motion-safe:transition-transform motion-safe:duration-500 motion-safe:ease-out motion-safe:group-hover:-rotate-6 motion-safe:group-hover:scale-105",
+                      tone,
+                    ]}
+                  >
+                    <Icon aria-hidden="true" className="size-5" />
                   </span>
-                  <span class="min-w-0">
+                  <span class="min-w-0 flex-1">
                     <span class="block text-sm text-muted-foreground">
                       {label}
                     </span>
-                    <span class="mt-0.5 block truncate font-medium">
+                    <span class="block font-medium text-pretty break-words">
                       {value}
                     </span>
+                  </span>
+                  <span class="grid size-9 shrink-0 place-items-center rounded-full bg-muted text-foreground/65 transition-colors group-hover:text-foreground">
+                    <RiArrowRightUpLine aria-hidden="true" className="size-5" />
                   </span>
                   {external && (
                     <span class="sr-only"> (opens in a new tab)</span>
@@ -239,7 +238,19 @@ const links = [
         </ul>
       </section>
 
-      <div class="mt-3 flex items-start gap-4 rounded-3xl bg-card p-4 sm:items-center sm:px-5">
+      <section aria-labelledby="our-review" class="mt-12 max-w-[34rem]">
+        <div class="flex flex-wrap items-center gap-x-3 gap-y-1">
+          <h2 id="our-review" class="text-2xl font-medium tracking-tight">
+            Our review
+          </h2>
+          {data.badge && <PlaceBadge badge={data.badge} />}
+        </div>
+        <p class="mt-3 text-base/7 text-pretty text-muted-foreground">
+          {data.description}
+        </p>
+      </section>
+
+      <div class="mt-8 flex items-start gap-4 rounded-3xl bg-card p-4 sm:items-center sm:px-5">
         <span class="grid size-10 shrink-0 place-items-center rounded-full bg-[#b99651]/15 text-[#a8853f]">
           <RiCalendarCheckFill aria-hidden="true" className="size-5" />
         </span>

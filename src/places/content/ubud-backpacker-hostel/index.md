@@ -4,9 +4,9 @@ place_id: ubud_backpacker_hostel
 slug: ubud-backpacker-hostel
 title: Ubud Backpacker Hostel
 description: >-
-  From the street it looks like an ordinary hostel. Inside, it is a calm, social stay in Peliatan with a pool, a gazebo, and more community than we expected.
+  Sharing a dorm means being around other travellers, and that was part of the appeal for us. We met people over shared meals and evenings in the common room, with quieter mornings by the pool. We ended up making lots of new friends.
 about: >-
-  Ubud Backpacker Hostel is a six-room hostel in Peliatan with bunk-bed dorms and private rooms. It has a swimming pool, a shared kitchen, and gazebos, and breakfast is included.
+  Ubud Backpacker Hostel is a hostel on Jl. Yudistira in Peliatan, Ubud. Set in a traditional Balinese house, it offers shared dormitories and private rooms.
 sealArea: Peliatan
 cover: ./cover.webp
 coverAlt: Staff grilling chicken on an outdoor barbecue at night, with smoke rising under tropical plants
@@ -260,7 +260,7 @@ If you want a door that closes on the rest of the building, a stay with almost n
 
 ## Is it worth your time?
 
-If you are tired of the usual Ubud stay — a quiet room, a scooter, not much contact — this is worth considering. You might leave with more than a stamp in a ledger: a few conversations, a slower morning by the pool, and a slightly different picture of who else is here.
+Shared meals and evenings in the common room make this worth considering if you want to meet other guests in Ubud. There is also room to spend a quiet morning by the pool.
 
 It is a good fit if you are open to meeting people and you want the hostel version of Ubud, not the villa version.
 

@@ -4,15 +4,15 @@ place_id: tulus_coliving
 slug: tulus-coliving
 title: Tulus Coliving
 description: >-
-  A comfortable and well-equipped apartment in Kuta with smooth Wi-Fi, complete in-room facilities, easy beach access, and plenty of cafes and minimarkets nearby.
+  The beach was about five minutes away by motorbike, and cafes and minimarkets were nearby. We'd stay here again for the location. The apartment was well equipped too, with a full kitchen and big closets.
 about: >-
-  Tulus Coliving is an apartment-style stay on Jl. Raya Kuta. Its furnished studios include a kitchen, private bathroom, TV, and Wi-Fi, and guests share a swimming pool.
+  Tulus Coliving is an apartment stay on Jl. Raya Kuta in Bali. Guests rent individual studios within the building, with each studio accommodating up to two people.
 sealArea: Kuta
 cover: ./cover.webp
 coverAlt: Sunlit bedroom at Tulus Coliving with a wooden headboard, white bedding, and sheer curtains
 cutout:
   src: ./cutout.webp
-  alt: White two-storey Tulus Coliving Apartments building with planters spilling over the balcony, glass front doors, and a narrow pool alongside
+  alt: Tulus Coliving Apartments entrance with a yellow rental sign, glass doors, potted plants, and four scooters parked outside
 mapsUrl: https://www.google.com/maps/search/?api=1&query=Tulus%20Coliving%20Jl.%20Raya%20Kuta%20Bali
 instagram: tuluscolivingvilla
 address: Jl. Raya Kuta, Kuta, Kec. Kuta, Bali 80361
