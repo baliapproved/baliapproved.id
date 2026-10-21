@@ -154,13 +154,16 @@ const seating = data.seating
   ?.map((area) =>
     area === "indoor"
       ? `indoor (${data.cooling === "ac" ? "AC" : "open air"})`
-      : area,
+      : area.replace("-", " "),
   )
   .join(" & ");
 const findings = [
   data.wifi !== undefined && {
     label: "Wi-Fi",
-    value: wifiRange(data.wifi),
+    value:
+      typeof data.wifi === "number"
+        ? wifiRange(data.wifi)
+        : "Available · speed not measured",
     icon: RiWifiFill,
   },
   data.power && {
@@ -186,7 +189,12 @@ const findings = [
   },
   data.music !== undefined && {
     label: "Music",
-    value: data.music ? "Available" : "Not available",
+    value:
+      data.music === null
+        ? "Unknown"
+        : data.music
+          ? "Available"
+          : "Not available",
     icon: RiMusic2Fill,
   },
   data.toilet !== undefined && {
@@ -352,8 +360,10 @@ const findings = [
             </time>
           </p>
           <p class="mt-1 text-sm text-pretty text-muted-foreground">
-            Everything here comes from our own visit. Places might change, so
-            check their socials for the latest updates.
+            {data.category === "cafes"
+              ? "Our review comes from our own visit."
+              : "Everything here comes from our own visit."}{" "}
+            Places might change, so check their socials for the latest updates.
           </p>
         </div>
       </div>

@@ -22,9 +22,15 @@ phone: +62 361 9343 482
 address: Jl. Sunset Road No. 77, Seminyak, Kuta, Badung
 spending: Rp30K-75K per person
 lastVisitedAt: 2026-07-23
+wifi: available
 power: enough
 seating: [indoor, outdoor]
 cooling: ac
+noise: quiet
+# Music reported by a visitor: https://www.lemon8-app.com/cafephiles/7140932356701012482?region=id
+music: true
+toilet: true
+reservation: not-needed
 parking:
   motorbike: plenty
   car: plenty

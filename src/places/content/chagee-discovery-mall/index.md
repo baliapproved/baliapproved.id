@@ -20,9 +20,14 @@ tiktok: chagee.id
 address: Discovery Shopping Mall
 spending: Rp30K-60K per person
 lastVisitedAt: 2026-07-29
+wifi: available
 power: enough
 seating: [indoor]
 cooling: ac
+noise: quiet
+music: null
+toilet: true
+reservation: not-needed
 parking:
   motorbike: plenty
   car: plenty

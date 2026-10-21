@@ -20,9 +20,14 @@ website: https://stali.com.au/pages/st-ali-bali
 address: Jl. Pantai Pererenan No.121, Pererenan, Badung
 spending: Rp30K-100K per person
 lastVisitedAt: 2026-08-02
+wifi: available
 power: limited
-seating: [indoor, outdoor]
+seating: [semi-outdoor]
 cooling: open-air
+noise: quiet
+music: null
+toilet: true
+reservation: not-needed
 parking:
   motorbike: limited
   car: street
