@@ -10,16 +10,7 @@ import { site } from "./src/site/site.ts";
 export default defineConfig({
   site: site.url,
   trailingSlash: "never",
-  integrations: [
-    react(),
-    sitemap({
-      filter: (page) =>
-        !page.startsWith(`${site.url}/archived/`) &&
-        !["/archived", "/blog", "/about"].some(
-          (path) => page === `${site.url}${path}`,
-        ),
-    }),
-  ],
+  integrations: [react(), sitemap()],
   vite: {
     plugins: [tailwindcss()],
   },
