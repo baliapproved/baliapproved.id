@@ -41,7 +41,16 @@ export const collections = {
           whatsapp: z.string().regex(phone).optional(),
           phone: z.string().regex(phone).optional(),
           address: z.string(),
-          spending: z.string().optional(),
+          // Rupiah per person, or per night for stays; leave out min for "under" prices.
+          spending: z
+            .object({
+              min: z.number().int().positive().optional(),
+              max: z.number().int().positive(),
+            })
+            .refine(({ min, max }) => !min || min < max, {
+              message: "min must be below max",
+            })
+            .optional(),
           // Leave out for places we haven't visited yet; once set, the visit fields are required.
           lastVisitedAt: z.coerce.date().optional(),
           // What we found on that visit, kept as values so places can be filtered later.

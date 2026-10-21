@@ -17,7 +17,9 @@ mapsUrl: https://maps.app.goo.gl/YDXLJGPpgXLbxemy5
 instagram: chagee.id
 tiktok: chagee.id
 address: Discovery Shopping Mall
-spending: Rp30K-60K per person
+spending:
+  min: 30000
+  max: 60000
 lastVisitedAt: 2026-07-29
 wifi: available
 power: enough

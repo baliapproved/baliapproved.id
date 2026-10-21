@@ -16,7 +16,8 @@ cutout:
 mapsUrl: https://www.google.com/maps/search/?api=1&query=Tulus%20Coliving%20Jl.%20Raya%20Kuta%20Bali
 instagram: tuluscolivingvilla
 address: Jl. Raya Kuta, Kuta, Kec. Kuta, Bali 80361
-spending: Under Rp500K/night
+spending:
+  max: 500000
 lastVisitedAt: 2026-08-27
 roomType: private-studio
 bathroom: private

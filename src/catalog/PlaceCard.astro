@@ -3,6 +3,7 @@ import { Image } from "astro:assets";
 import type { CollectionEntry } from "astro:content";
 import { RiArrowRightUpLine } from "@remixicon/react";
 import { Card, CardContent } from "@/design-system/card";
+import { formatSpending } from "@/places/spending";
 import PlaceBadge from "./PlaceBadge.astro";
 
 interface Props {
@@ -32,7 +33,9 @@ const { data } = Astro.props.place;
   </div>
   <CardContent>
     <p class="text-muted-foreground">
-      {[data.area, data.spending].filter(Boolean).join(" · ")}
+      {[data.area, data.spending && formatSpending(data.spending)]
+        .filter(Boolean)
+        .join(" · ")}
     </p>
     <h3 class="mt-1 font-medium">
       <a

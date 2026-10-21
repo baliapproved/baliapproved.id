@@ -28,6 +28,7 @@ import PlaceBadge from "@/catalog/PlaceBadge.astro";
 import PlaceCard from "@/catalog/PlaceCard.astro";
 import { buttonVariants } from "@/design-system/button";
 import { PlacePhotos } from "@/places/PlacePhotos";
+import { formatSpending } from "@/places/spending";
 import Layout from "@/site/Layout.astro";
 import { site } from "@/site/site";
 
@@ -309,7 +310,13 @@ const findings = (
           />
           <div class="min-w-0">
             <p class="text-muted-foreground">
-              {[data.area, data.spending].filter(Boolean).join(" · ")}
+              {[
+                data.area,
+                data.spending &&
+                  `${formatSpending(data.spending)} / ${data.category === "stays" ? "night" : "person"}`,
+              ]
+                .filter(Boolean)
+                .join(" · ")}
             </p>
             <h1 class="mt-1 text-4xl/10 font-medium tracking-tight text-balance sm:text-[2.5rem]/11">
               {data.title}

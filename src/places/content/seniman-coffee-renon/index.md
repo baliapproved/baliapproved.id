@@ -17,7 +17,9 @@ mapsUrl: https://www.google.com/maps/search/?api=1&query=Seniman%20Coffee%20Reno
 instagram: senimancoffee
 website: https://www.senimancoffee.com/seniman-renon/
 address: Jl. Tukad Musi No. 19, Panjer, Denpasar Selatan, Denpasar
-spending: Rp30K-100K per person
+spending:
+  min: 30000
+  max: 100000
 lastVisitedAt: 2026-08-28
 wifi: 248
 power: enough
