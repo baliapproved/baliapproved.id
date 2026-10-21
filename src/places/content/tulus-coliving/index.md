@@ -19,7 +19,13 @@ instagram: tuluscolivingvilla
 address: Jl. Raya Kuta, Kuta, Kec. Kuta, Bali 80361
 spending: Under Rp500K/night
 lastVisitedAt: 2026-08-27
+roomType: private-studio
+bathroom: private
 cooling: ac
+wifi: available
+noise: moderate
+kitchen: private
+pool: true
 parking:
   motorbike: plenty
   car: plenty

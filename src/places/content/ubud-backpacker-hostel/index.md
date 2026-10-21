@@ -20,7 +20,13 @@ whatsapp: +62 851 9004 1547
 address: Jl. Yudistira No. 21, Peliatan, Banjar Kalah, Gianyar
 spending: Under Rp500K/night
 lastVisitedAt: 2026-08-14
+roomType: shared-dorm
+bathroom: shared
 cooling: ac
+wifi: available
+noise: quiet
+kitchen: shared
+pool: true
 parking:
   motorbike: enough
   car: limited

@@ -8,8 +8,11 @@ import {
   RiCalendarTodoFill,
   RiCarFill,
   RiDoorOpenFill,
+  RiFridgeFill,
   RiGlobalFill,
+  RiHotelBedFill,
   RiInstagramFill,
+  RiLifebuoyFill,
   RiMapPin2Fill,
   RiMotorbikeFill,
   RiMusic2Fill,
@@ -143,7 +146,14 @@ const amounts = {
   enough: "Enough",
   limited: "Limited",
   street: "Street only",
+  unavailable: "Not available",
 };
+const cooling = {
+  ac: "Air-conditioned",
+  fan: "Fan",
+  "ac-and-fan": "AC & fan",
+  "open-air": "Fan & open air",
+}[data.cooling];
 // A range rather than the exact test result, which changes from test to test.
 const wifiRange = (mbps: number) => {
   const step = mbps < 100 ? 10 : 50;
@@ -153,64 +163,28 @@ const wifiRange = (mbps: number) => {
 const seating = data.seating
   ?.map((area) =>
     area === "indoor"
-      ? `indoor (${data.cooling === "ac" ? "AC" : "open air"})`
+      ? `indoor (${{ ac: "AC", fan: "fan", "ac-and-fan": "AC & fan", "open-air": "open air" }[data.cooling]})`
       : area.replace("-", " "),
   )
   .join(" & ");
-const findings = [
-  data.wifi !== undefined && {
-    label: "Wi-Fi",
-    value:
-      typeof data.wifi === "number"
-        ? wifiRange(data.wifi)
-        : "Available · speed not measured",
-    icon: RiWifiFill,
-  },
-  data.power && {
-    label: "Power outlets",
-    value: amounts[data.power],
-    icon: RiPlugFill,
-  },
-  seating
-    ? {
-        label: "Seating",
-        value: seating[0].toUpperCase() + seating.slice(1),
-        icon: RiArmchairFill,
-      }
-    : {
-        label: "Cooling",
-        value: data.cooling === "ac" ? "Air-conditioned" : "Fan & open air",
-        icon: RiTempColdFill,
-      },
-  data.noise && {
-    label: "Noise",
-    value: { quiet: "Quiet", moderate: "Moderate", loud: "Loud" }[data.noise],
-    icon: RiVolumeDownFill,
-  },
-  data.music !== undefined && {
-    label: "Music",
-    value:
-      data.music === null
-        ? "Unknown"
-        : data.music
-          ? "Available"
-          : "Not available",
-    icon: RiMusic2Fill,
-  },
-  data.toilet !== undefined && {
-    label: "Toilet",
-    value: data.toilet ? "Available" : "Not available",
-    icon: RiDoorOpenFill,
-  },
-  data.reservation && {
-    label: "Reservation",
-    value: {
-      "not-needed": "Not necessary",
-      recommended: "Recommended",
-      required: "Required",
-    }[data.reservation],
-    icon: RiCalendarTodoFill,
-  },
+const wifiFinding = data.wifi !== undefined && {
+  label: "Wi-Fi",
+  value:
+    typeof data.wifi === "number"
+      ? wifiRange(data.wifi)
+      : "Available · speed not measured",
+  icon: RiWifiFill,
+};
+const noiseFinding = data.noise && {
+  label: "Noise",
+  value: {
+    quiet: "Quiet",
+    moderate: "Moderate",
+    loud: "Loud",
+  }[data.noise],
+  icon: RiVolumeDownFill,
+};
+const parkingFindings = [
   {
     label: "Motorbike parking",
     value: amounts[data.parking.motorbike],
@@ -221,7 +195,85 @@ const findings = [
     value: amounts[data.parking.car],
     icon: RiCarFill,
   },
-].filter((finding) => !!finding);
+];
+const findings = (
+  data.category === "stays"
+    ? [
+        data.roomType && {
+          label: "Room type",
+          value: {
+            "private-studio": "Private studio",
+            "private-room": "Private room",
+            "shared-dorm": "Shared dorm",
+          }[data.roomType],
+          icon: RiHotelBedFill,
+        },
+        data.bathroom && {
+          label: "Bathroom",
+          value: { private: "Private", shared: "Shared" }[data.bathroom],
+          icon: RiDoorOpenFill,
+        },
+        { label: "Cooling", value: cooling, icon: RiTempColdFill },
+        wifiFinding,
+        noiseFinding,
+        data.kitchen && {
+          label: "Kitchen",
+          value: {
+            private: "Private",
+            shared: "Shared",
+            unavailable: "Not available",
+          }[data.kitchen],
+          icon: RiFridgeFill,
+        },
+        data.pool !== undefined && {
+          label: "Pool",
+          value: data.pool ? "Available" : "Not available",
+          icon: RiLifebuoyFill,
+        },
+        ...parkingFindings,
+      ]
+    : [
+        wifiFinding,
+        data.power && {
+          label: "Power outlets",
+          value: amounts[data.power],
+          icon: RiPlugFill,
+        },
+        seating
+          ? {
+              label: "Seating",
+              value: seating[0].toUpperCase() + seating.slice(1),
+              icon: RiArmchairFill,
+            }
+          : { label: "Cooling", value: cooling, icon: RiTempColdFill },
+        noiseFinding,
+        data.music !== undefined && {
+          label: "Music",
+          value:
+            data.music === null
+              ? "Unknown"
+              : data.music
+                ? "Available"
+                : "Not available",
+          icon: RiMusic2Fill,
+        },
+        data.toilet !== undefined && {
+          label: "Toilet",
+          value: data.toilet ? "Available" : "Not available",
+          icon: RiDoorOpenFill,
+        },
+        data.reservation && {
+          label: "Reservation",
+          value: {
+            "not-needed": "Not necessary",
+            recommended: "Recommended",
+            required: "Required",
+          }[data.reservation],
+          icon: RiCalendarTodoFill,
+        },
+        ...parkingFindings,
+      ]
+).filter((finding) => !!finding);
 ---
 
 <Layout

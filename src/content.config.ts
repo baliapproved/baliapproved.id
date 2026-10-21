@@ -5,7 +5,7 @@ import { z } from "astro/zod";
 const handle = /^[\w.]+$/;
 const phone = /^\+[\d ]+$/;
 const amount = z.enum(["plenty", "enough", "limited"]);
-const parking = z.enum([...amount.options, "street"]);
+const parking = z.enum([...amount.options, "street", "unavailable"]);
 
 export const collections = {
   places: defineCollection({
@@ -53,7 +53,7 @@ export const collections = {
             .array(z.enum(["indoor", "outdoor", "semi-outdoor"]))
             .min(1)
             .optional(),
-          cooling: z.enum(["ac", "open-air"]),
+          cooling: z.enum(["ac", "fan", "ac-and-fan", "open-air"]),
           noise: z.enum(["quiet", "moderate", "loud"]).optional(),
           // null means the availability has not been confirmed.
           music: z.boolean().nullable().optional(),
@@ -61,6 +61,12 @@ export const collections = {
           reservation: z
             .enum(["not-needed", "recommended", "required"])
             .optional(),
+          roomType: z
+            .enum(["private-studio", "private-room", "shared-dorm"])
+            .optional(),
+          bathroom: z.enum(["private", "shared"]).optional(),
+          kitchen: z.enum(["private", "shared", "unavailable"]).optional(),
+          pool: z.boolean().optional(),
           parking: z.object({ motorbike: parking, car: parking }),
           // What we think could be better, shown above the findings.
           caveats: z.string(),
@@ -71,22 +77,34 @@ export const collections = {
             .default([]),
         })
         .superRefine((data, ctx) => {
-          if (data.category !== "cafes") return;
+          if (data.category !== "cafes" && data.category !== "stays") return;
 
-          for (const field of [
-            "wifi",
-            "power",
-            "seating",
-            "noise",
-            "music",
-            "toilet",
-            "reservation",
-          ] as const) {
+          const fields =
+            data.category === "cafes"
+              ? ([
+                  "wifi",
+                  "power",
+                  "seating",
+                  "noise",
+                  "music",
+                  "toilet",
+                  "reservation",
+                ] as const)
+              : ([
+                  "roomType",
+                  "bathroom",
+                  "wifi",
+                  "noise",
+                  "kitchen",
+                  "pool",
+                ] as const);
+
+          for (const field of fields) {
             if (data[field] === undefined) {
               ctx.addIssue({
                 code: "custom",
                 path: [field],
-                message: "Required for cafes",
+                message: `Required for ${data.category}`,
               });
             }
           }
