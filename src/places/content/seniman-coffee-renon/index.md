@@ -4,9 +4,9 @@ place_id: seniman_coffee_renon
 slug: seniman-coffee-renon
 title: Seniman Coffee Renon
 description: >-
-  The rocking chairs and unusual mugs kept catching our attention at Seniman. Even the bathroom entrance was worth a look. It was busy on our weekday visit, but quiet enough to work or talk over coffee.
+  The rocking chairs and unusual mugs kept catching our attention at Seniman. Even the bathroom entrance was worth a look. It was busy on our weekday visit, but quiet enough to work or talk over coffee. We'd come back for the rotating Indonesian single origin coffees and a few hours of work.
 about: >-
-  Seniman is a specialty coffee roaster with cafes in Bali and Surabaya. The Renon location has a coffee bar and Dalam Seniman's contemporary art space.
+  Seniman is a specialty coffee roaster with cafes in Bali and Surabaya. It roasts Indonesian single origin coffees and designs its own furniture and tableware. The Renon location has a coffee bar, Dalam Seniman's contemporary art space, a retail shop, and a vinyl corner.
 sealArea: Renon
 cover: ./cover.webp
 coverAlt: Seniman Coffee Renon sign against a clear blue sky
@@ -23,11 +23,15 @@ wifi: 248
 power: enough
 seating: [indoor, outdoor]
 cooling: ac
+noise: quiet
+music: true
+toilet: true
+reservation: not-needed
 parking:
   motorbike: enough
   car: limited
 caveats: >-
-  The car parking is a bit limited, though available, and there are parking attendants that will help.
+  The indoor seats might all be taken during work hours. The car parking is a bit limited, though available, and there are parking attendants that will help.
 badge: approved
 gallery:
   - src: ./seniman_1.webp

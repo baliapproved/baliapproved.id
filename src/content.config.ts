@@ -47,6 +47,12 @@ export const collections = {
         power: amount.optional(),
         seating: z.array(z.enum(["indoor", "outdoor"])).optional(),
         cooling: z.enum(["ac", "open-air"]),
+        noise: z.enum(["quiet", "moderate", "loud"]).optional(),
+        music: z.boolean().optional(),
+        toilet: z.boolean().optional(),
+        reservation: z
+          .enum(["not-needed", "recommended", "required"])
+          .optional(),
         parking: z.object({ motorbike: parking, car: parking }),
         // What we think could be better, shown above the findings.
         caveats: z.string(),

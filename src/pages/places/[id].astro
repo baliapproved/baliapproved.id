@@ -5,15 +5,19 @@ import {
   RiArmchairFill,
   RiArrowRightUpLine,
   RiCalendarCheckFill,
+  RiCalendarTodoFill,
   RiCarFill,
+  RiDoorOpenFill,
   RiGlobalFill,
   RiInstagramFill,
   RiMapPin2Fill,
   RiMotorbikeFill,
+  RiMusic2Fill,
   RiPhoneFill,
   RiPlugFill,
   RiTempColdFill,
   RiTiktokFill,
+  RiVolumeDownFill,
   RiWhatsappFill,
   RiWifiFill,
 } from "@remixicon/react";
@@ -146,7 +150,13 @@ const wifiRange = (mbps: number) => {
   const low = Math.floor(mbps / step) * step;
   return low === 0 ? "Under 10 Mbps" : `${low}–${low + step} Mbps`;
 };
-const seating = data.seating?.join(" & ");
+const seating = data.seating
+  ?.map((area) =>
+    area === "indoor"
+      ? `indoor (${data.cooling === "ac" ? "AC" : "open air"})`
+      : area,
+  )
+  .join(" & ");
 const findings = [
   data.wifi !== undefined && {
     label: "Wi-Fi",
@@ -158,15 +168,40 @@ const findings = [
     value: amounts[data.power],
     icon: RiPlugFill,
   },
-  seating && {
-    label: "Seating",
-    value: seating[0].toUpperCase() + seating.slice(1),
-    icon: RiArmchairFill,
+  seating
+    ? {
+        label: "Seating",
+        value: seating[0].toUpperCase() + seating.slice(1),
+        icon: RiArmchairFill,
+      }
+    : {
+        label: "Cooling",
+        value: data.cooling === "ac" ? "Air-conditioned" : "Fan & open air",
+        icon: RiTempColdFill,
+      },
+  data.noise && {
+    label: "Noise",
+    value: { quiet: "Quiet", moderate: "Moderate", loud: "Loud" }[data.noise],
+    icon: RiVolumeDownFill,
   },
-  {
-    label: "Cooling",
-    value: data.cooling === "ac" ? "Air-conditioned" : "Fan & open air",
-    icon: RiTempColdFill,
+  data.music !== undefined && {
+    label: "Music",
+    value: data.music ? "Available" : "Not available",
+    icon: RiMusic2Fill,
+  },
+  data.toilet !== undefined && {
+    label: "Toilet",
+    value: data.toilet ? "Available" : "Not available",
+    icon: RiDoorOpenFill,
+  },
+  data.reservation && {
+    label: "Reservation",
+    value: {
+      "not-needed": "Not necessary",
+      recommended: "Recommended",
+      required: "Required",
+    }[data.reservation],
+    icon: RiCalendarTodoFill,
   },
   {
     label: "Motorbike parking",
