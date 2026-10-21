@@ -1,5 +1,4 @@
 ---
-approvalNumber: 4
 place_id: ubud_backpacker_hostel
 slug: ubud-backpacker-hostel
 title: Ubud Backpacker Hostel
@@ -8,7 +7,7 @@ description: >-
   Sharing a dorm means being around other travellers, and that was part of the appeal for us. We met people over shared meals and evenings in the common room, with quieter mornings by the pool. We ended up making lots of new friends.
 about: >-
   Ubud Backpacker Hostel is a hostel on Jl. Yudistira in Peliatan, Ubud. Set in a traditional Balinese house, it offers shared dormitories and private rooms.
-sealArea: Peliatan
+area: Ubud
 cover: ./cover.webp
 coverAlt: Staff grilling chicken on an outdoor barbecue at night, with smoke rising under tropical plants
 cutout:

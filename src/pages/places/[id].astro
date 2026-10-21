@@ -33,7 +33,9 @@ import { site } from "@/site/site";
 
 export async function getStaticPaths() {
   const places = (await getCollection("places")).sort(
-    (a, b) => b.data.approvalNumber - a.data.approvalNumber,
+    (a, b) =>
+      (b.data.lastVisitedAt?.getTime() ?? 0) -
+      (a.data.lastVisitedAt?.getTime() ?? 0),
   );
 
   return places.map((place) => ({
@@ -53,40 +55,47 @@ interface Props {
 const { place, morePlaces }: Props = Astro.props;
 const { data } = place;
 const siteUrl = new URL("/", Astro.site ?? site.url);
-const socialImage = await getImage({
-  src: data.cover,
-  width: 1200,
-  height: 630,
-  fit: "cover",
-  format: "webp",
-});
-const socialImageUrl = new URL(socialImage.src, siteUrl).href;
-const visitedDate = new Intl.DateTimeFormat("en-GB", {
-  day: "numeric",
-  month: "long",
-  year: "numeric",
-  timeZone: "UTC",
-}).format(data.lastVisitedAt);
+const socialImage =
+  data.cover &&
+  (await getImage({
+    src: data.cover,
+    width: 1200,
+    height: 630,
+    fit: "cover",
+    format: "webp",
+  }));
+const socialImageUrl = socialImage && new URL(socialImage.src, siteUrl).href;
+const visitedDate =
+  data.lastVisitedAt &&
+  new Intl.DateTimeFormat("en-GB", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+    timeZone: "UTC",
+  }).format(data.lastVisitedAt);
+
+const NoteIcon = data.lastVisitedAt ? RiCalendarCheckFill : RiCalendarTodoFill;
 
 const photos = await Promise.all(
-  [{ src: data.cover, alt: data.coverAlt }, ...data.gallery].map(
-    async ({ src, alt }) => {
-      const image = await getImage({
-        src,
-        widths: [360, 540, 720],
-        sizes: "(min-width: 1024px) 25vw, (min-width: 640px) 40vw, 72vw",
-      });
+  [
+    ...(data.cover ? [{ src: data.cover, alt: data.coverAlt ?? "" }] : []),
+    ...data.gallery,
+  ].map(async ({ src, alt }) => {
+    const image = await getImage({
+      src,
+      widths: [360, 540, 720],
+      sizes: "(min-width: 1024px) 25vw, (min-width: 640px) 40vw, 72vw",
+    });
 
-      return {
-        src: image.src,
-        srcSet: image.srcSet.attribute,
-        sizes: String(image.attributes.sizes),
-        alt,
-        width: src.width,
-        height: src.height,
-      };
-    },
-  ),
+    return {
+      src: image.src,
+      srcSet: image.srcSet.attribute,
+      sizes: String(image.attributes.sizes),
+      alt,
+      width: src.width,
+      height: src.height,
+    };
+  }),
 );
 
 const links = [
@@ -148,12 +157,14 @@ const amounts = {
   street: "Street only",
   unavailable: "Not available",
 };
-const cooling = {
-  ac: "Air-conditioned",
-  fan: "Fan",
-  "ac-and-fan": "AC & fan",
-  "open-air": "Fan & open air",
-}[data.cooling];
+const cooling =
+  data.cooling &&
+  {
+    ac: "Air-conditioned",
+    fan: "Fan",
+    "ac-and-fan": "AC & fan",
+    "open-air": "Fan & open air",
+  }[data.cooling];
 // A range rather than the exact test result, which changes from test to test.
 const wifiRange = (mbps: number) => {
   const step = mbps < 100 ? 10 : 50;
@@ -162,7 +173,7 @@ const wifiRange = (mbps: number) => {
 };
 const seating = data.seating
   ?.map((area) =>
-    area === "indoor"
+    area === "indoor" && data.cooling
       ? `indoor (${{ ac: "AC", fan: "fan", "ac-and-fan": "AC & fan", "open-air": "open air" }[data.cooling]})`
       : area.replace("-", " "),
   )
@@ -184,18 +195,20 @@ const noiseFinding = data.noise && {
   }[data.noise],
   icon: RiVolumeDownFill,
 };
-const parkingFindings = [
-  {
-    label: "Motorbike parking",
-    value: amounts[data.parking.motorbike],
-    icon: RiMotorbikeFill,
-  },
-  {
-    label: "Car parking",
-    value: amounts[data.parking.car],
-    icon: RiCarFill,
-  },
-];
+const parkingFindings = data.parking
+  ? [
+      {
+        label: "Motorbike parking",
+        value: amounts[data.parking.motorbike],
+        icon: RiMotorbikeFill,
+      },
+      {
+        label: "Car parking",
+        value: amounts[data.parking.car],
+        icon: RiCarFill,
+      },
+    ]
+  : [];
 const findings = (
   data.category === "stays"
     ? [
@@ -278,7 +291,7 @@ const findings = (
 
 <Layout
   title={`${data.title} | Bali Approved`}
-  description={data.description}
+  description={data.description ?? data.about}
   image={socialImageUrl}
   imageAlt={data.coverAlt}
 >
@@ -296,7 +309,7 @@ const findings = (
           />
           <div class="min-w-0">
             <p class="text-muted-foreground">
-              {data.sealArea} · {data.spending}
+              {[data.area, data.spending].filter(Boolean).join(" · ")}
             </p>
             <h1 class="mt-1 text-4xl/10 font-medium tracking-tight text-balance sm:text-[2.5rem]/11">
               {data.title}
@@ -325,13 +338,15 @@ const findings = (
         </a>
       </header>
 
-      <div class="mt-6">
-        <PlacePhotos
-          client:load
-          photos={photos}
-          label={`Photos of ${data.title}`}
-        />
-      </div>
+      {photos.length > 0 && (
+        <div class="mt-6">
+          <PlacePhotos
+            client:load
+            photos={photos}
+            label={`Photos of ${data.title}`}
+          />
+        </div>
+      )}
 
       <section aria-labelledby="about" class="mt-12">
         <h2 id="about" class="text-2xl font-medium tracking-tight">
@@ -392,65 +407,81 @@ const findings = (
           </h2>
           {data.badge && <PlaceBadge badge={data.badge} />}
         </div>
-        <p class="mt-3 text-base/7 text-pretty text-muted-foreground">
-          {data.description}
-        </p>
+        {data.description && (
+          <p class="mt-3 text-base/7 text-pretty text-muted-foreground">
+            {data.description}
+          </p>
+        )}
         <div class="relative mt-6 overflow-hidden rounded-2xl border border-[#2a8c8c]/15 bg-[#2a8c8c]/8 p-1 lg:w-[38rem]">
-          <RiCalendarCheckFill
+          <NoteIcon
             aria-hidden="true"
             className="pointer-events-none absolute -right-5 -bottom-8 size-32 -rotate-12 text-[#2a8c8c]/10"
           />
           <div class="relative flex gap-3 rounded-xl border border-[#2a8c8c]/25 px-4 py-3">
-            <RiCalendarCheckFill
+            <NoteIcon
               aria-hidden="true"
               className="mt-0.5 size-5 shrink-0 text-[#2a8c8c]"
             />
-            <div>
-              <p class="italic">
-                Last visited on{" "}
-                <time
-                  datetime={data.lastVisitedAt.toISOString()}
-                  class="font-medium"
-                >
-                  {visitedDate}
-                </time>
-              </p>
-              <p class="mt-1 text-sm text-pretty text-muted-foreground">
-                {data.category === "cafes"
-                  ? "Our review comes from our own visit."
-                  : "Everything here comes from our own visit."}{" "}
-                Places might change, so check their socials for the latest
-                updates.
-              </p>
-            </div>
+            {data.lastVisitedAt ? (
+              <div>
+                <p class="italic">
+                  Last visited on{" "}
+                  <time
+                    datetime={data.lastVisitedAt.toISOString()}
+                    class="font-medium"
+                  >
+                    {visitedDate}
+                  </time>
+                </p>
+                <p class="mt-1 text-sm text-pretty text-muted-foreground">
+                  {data.category === "cafes"
+                    ? "Our review comes from our own visit."
+                    : "Everything here comes from our own visit."}{" "}
+                  Places might change, so check their socials for the latest
+                  updates.
+                </p>
+              </div>
+            ) : (
+              <div>
+                <p class="font-medium italic">Not visited yet</p>
+                <p class="mt-1 text-sm text-pretty text-muted-foreground">
+                  We'll add our review and photos after our visit. Until then,
+                  check their socials for the latest updates.
+                </p>
+              </div>
+            )}
           </div>
         </div>
       </section>
 
-      <section aria-labelledby="what-we-found" class="mt-12">
-        <h2 id="what-we-found" class="text-2xl font-medium tracking-tight">
-          What we found
-        </h2>
-        <p class="mt-3 max-w-[34rem] text-base/7 text-pretty text-muted-foreground">
-          <span class="font-semibold text-foreground italic">
-            Worth knowing
-          </span>{" "}
-          {data.caveats}
-        </p>
-        <ul class="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-          {findings.map(({ label, value, icon: Icon }) => (
-            <li class="flex h-full items-center gap-3 rounded-3xl bg-card p-3">
-              <span class="grid size-10 shrink-0 place-items-center rounded-full bg-[#2a8c8c]/12 text-[#2a8c8c]">
-                <Icon aria-hidden="true" className="size-5" />
-              </span>
-              <span class="min-w-0">
-                <span class="block text-sm text-muted-foreground">{label}</span>
-                <span class="block font-medium">{value}</span>
-              </span>
-            </li>
-          ))}
-        </ul>
-      </section>
+      {data.lastVisitedAt && (
+        <section aria-labelledby="what-we-found" class="mt-12">
+          <h2 id="what-we-found" class="text-2xl font-medium tracking-tight">
+            What we found
+          </h2>
+          <p class="mt-3 max-w-[34rem] text-base/7 text-pretty text-muted-foreground">
+            <span class="font-semibold text-foreground italic">
+              Worth knowing
+            </span>{" "}
+            {data.caveats}
+          </p>
+          <ul class="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+            {findings.map(({ label, value, icon: Icon }) => (
+              <li class="flex h-full items-center gap-3 rounded-3xl bg-card p-3">
+                <span class="grid size-10 shrink-0 place-items-center rounded-full bg-[#2a8c8c]/12 text-[#2a8c8c]">
+                  <Icon aria-hidden="true" className="size-5" />
+                </span>
+                <span class="min-w-0">
+                  <span class="block text-sm text-muted-foreground">
+                    {label}
+                  </span>
+                  <span class="block font-medium">{value}</span>
+                </span>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
     </article>
 
     <section

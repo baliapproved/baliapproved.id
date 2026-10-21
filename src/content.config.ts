@@ -18,18 +18,18 @@ export const collections = {
     schema: ({ image }) =>
       z
         .object({
-          approvalNumber: z.number().int().positive(),
           // Permanent analytics identity; preserve it when renaming, moving, or migrating a place.
           place_id: z.string().min(1),
           slug: z.string().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/),
           title: z.string(),
           category: z.enum(["cafes", "restaurants", "stays", "clubs"]),
-          description: z.string(),
+          // Our review.
+          description: z.string().optional(),
           // Short factual intro shown in About, separate from our review.
           about: z.string(),
-          sealArea: z.string(),
-          cover: image(),
-          coverAlt: z.string(),
+          area: z.string(),
+          cover: image().optional(),
+          coverAlt: z.string().optional(),
           // Transparent-background subject shown on catalog cards.
           cutout: z.object({ src: image(), alt: z.string() }),
           mapsUrl: z.url(),
@@ -41,8 +41,9 @@ export const collections = {
           whatsapp: z.string().regex(phone).optional(),
           phone: z.string().regex(phone).optional(),
           address: z.string(),
-          spending: z.string(),
-          lastVisitedAt: z.coerce.date(),
+          spending: z.string().optional(),
+          // Leave out for places we haven't visited yet; once set, the visit fields are required.
+          lastVisitedAt: z.coerce.date().optional(),
           // What we found on that visit, kept as values so places can be filtered later.
           // Download speed in Mbps, or confirmed availability without a speed test.
           wifi: z
@@ -53,7 +54,7 @@ export const collections = {
             .array(z.enum(["indoor", "outdoor", "semi-outdoor"]))
             .min(1)
             .optional(),
-          cooling: z.enum(["ac", "fan", "ac-and-fan", "open-air"]),
+          cooling: z.enum(["ac", "fan", "ac-and-fan", "open-air"]).optional(),
           noise: z.enum(["quiet", "moderate", "loud"]).optional(),
           // null means the availability has not been confirmed.
           music: z.boolean().nullable().optional(),
@@ -67,9 +68,9 @@ export const collections = {
           bathroom: z.enum(["private", "shared"]).optional(),
           kitchen: z.enum(["private", "shared", "unavailable"]).optional(),
           pool: z.boolean().optional(),
-          parking: z.object({ motorbike: parking, car: parking }),
+          parking: z.object({ motorbike: parking, car: parking }).optional(),
           // What we think could be better, shown above the findings.
-          caveats: z.string(),
+          caveats: z.string().optional(),
           // Standout places, badged on catalog cards; approved ranks above good-find.
           badge: z.enum(["approved", "good-find"]).optional(),
           gallery: z
@@ -77,10 +78,17 @@ export const collections = {
             .default([]),
         })
         .superRefine((data, ctx) => {
-          if (data.category !== "cafes" && data.category !== "stays") return;
+          if (!data.lastVisitedAt) return;
 
-          const fields =
-            data.category === "cafes"
+          const fields = [
+            "description",
+            "cover",
+            "coverAlt",
+            "spending",
+            "cooling",
+            "parking",
+            "caveats",
+            ...(data.category === "cafes"
               ? ([
                   "wifi",
                   "power",
@@ -90,21 +98,24 @@ export const collections = {
                   "toilet",
                   "reservation",
                 ] as const)
-              : ([
-                  "roomType",
-                  "bathroom",
-                  "wifi",
-                  "noise",
-                  "kitchen",
-                  "pool",
-                ] as const);
+              : data.category === "stays"
+                ? ([
+                    "roomType",
+                    "bathroom",
+                    "wifi",
+                    "noise",
+                    "kitchen",
+                    "pool",
+                  ] as const)
+                : []),
+          ] as const;
 
           for (const field of fields) {
             if (data[field] === undefined) {
               ctx.addIssue({
                 code: "custom",
                 path: [field],
-                message: `Required for ${data.category}`,
+                message: "Required for visited places",
               });
             }
           }

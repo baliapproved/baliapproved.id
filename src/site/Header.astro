@@ -15,10 +15,14 @@ const links = [
 
 const places = await Promise.all(
   (await getCollection("places"))
-    .sort((a, b) => b.data.approvalNumber - a.data.approvalNumber)
+    .sort(
+      (a, b) =>
+        (b.data.lastVisitedAt?.getTime() ?? 0) -
+        (a.data.lastVisitedAt?.getTime() ?? 0),
+    )
     .map(async ({ data }) => ({
       title: data.title,
-      area: data.sealArea,
+      area: data.area,
       href: `/places/${data.slug}`,
       // 2x the 36px icon box in the search menu.
       cutout: (await getImage({ src: data.cutout.src, width: 72 })).src,

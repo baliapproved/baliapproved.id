@@ -29,9 +29,6 @@ pnpm-debug.log*
 
 # ---- project-specific ----
 
-# Original photos staged for IG cover captures (not site assets)
-public/_ig-raw/
-
 # Generated Instagram covers and captions
 exports/
 

@@ -1,5 +1,4 @@
 ---
-approvalNumber: 6
 place_id: tulus_coliving
 slug: tulus-coliving
 title: Tulus Coliving
@@ -8,7 +7,7 @@ description: >-
   The beach was about five minutes away by motorbike, and cafes and minimarkets were nearby. We'd stay here again for the location. The apartment was well equipped too, with a full kitchen and big closets.
 about: >-
   Tulus Coliving is an apartment stay on Jl. Raya Kuta in Bali. Guests rent individual studios within the building, with each studio accommodating up to two people.
-sealArea: Kuta
+area: Kuta
 cover: ./cover.webp
 coverAlt: Sunlit bedroom at Tulus Coliving with a wooden headboard, white bedding, and sheer curtains
 cutout:
