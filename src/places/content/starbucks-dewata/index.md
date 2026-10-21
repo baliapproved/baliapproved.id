@@ -3,6 +3,7 @@ approvalNumber: 1
 place_id: starbucks_dewata
 slug: starbucks-dewata
 title: Starbucks Reserve Dewata
+category: cafes
 description: >-
   The place is super spacious, and the mix of modern and Balinese styles works really well. We always come here as our safe choice for work because there are proper areas to work, with tables and power outlets. Even though it's almost always crowded, it's still not noisy.
 about: >-

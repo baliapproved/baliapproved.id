@@ -22,6 +22,7 @@ export const collections = {
         place_id: z.string().min(1),
         slug: z.string().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/),
         title: z.string(),
+        category: z.enum(["cafes", "restaurants", "stays", "clubs"]),
         description: z.string(),
         // Short factual intro shown in About, separate from our review.
         about: z.string(),

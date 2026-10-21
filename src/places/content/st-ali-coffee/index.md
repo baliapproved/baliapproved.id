@@ -3,6 +3,7 @@ approvalNumber: 5
 place_id: st_ali_coffee
 slug: st-ali-coffee
 title: ST. ALi Coffee
+category: cafes
 description: >-
   We liked the outdoor seats for morning coffee and watching people pass by in Pererenan. The cafe felt quiet during our visit. Power outlets are limited if you're bringing a laptop. With the partly outdoor setup, we'd mainly come for coffee or breakfast, so that wouldn't be a problem for us.
 about: >-

@@ -3,6 +3,7 @@ approvalNumber: 6
 place_id: tulus_coliving
 slug: tulus-coliving
 title: Tulus Coliving
+category: stays
 description: >-
   The beach was about five minutes away by motorbike, and cafes and minimarkets were nearby. We'd stay here again for the location. The apartment was well equipped too, with a full kitchen and big closets.
 about: >-

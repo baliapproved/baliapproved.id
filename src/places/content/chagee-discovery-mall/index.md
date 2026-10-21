@@ -3,6 +3,7 @@ approvalNumber: 2
 place_id: chagee_discovery_mall
 slug: chagee-discovery-mall
 title: CHAGEE Discovery Mall
+category: cafes
 description: >-
   We came here after work, but the place itself has very good Wi-Fi that worked well for a work session. They also have proper tables for work, though some tables are small and meant for chats only. We really like this place because it faces Kuta Beach, where we can see a beautiful sunset.
 about: >-

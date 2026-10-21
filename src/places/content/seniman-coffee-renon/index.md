@@ -3,6 +3,7 @@ approvalNumber: 3
 place_id: seniman_coffee_renon
 slug: seniman-coffee-renon
 title: Seniman Coffee Renon
+category: cafes
 description: >-
   The rocking chairs and unusual mugs kept catching our attention at Seniman. Even the bathroom entrance was worth a look. It was busy on our weekday visit, but quiet enough to work or talk over coffee. We'd come back for the rotating Indonesian single origin coffees and a few hours of work.
 about: >-
