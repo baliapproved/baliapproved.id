@@ -9,5 +9,3 @@ export const site = {
   themeColor: "#1d1816",
   imageAlt: "Bali Approved seal",
 } as const;
-
-export type Site = typeof site;
