@@ -298,7 +298,7 @@ const findings = (
 >
   <main class="flex-1 bg-border">
     <article class="mx-auto w-full max-w-[1920px] px-5 pt-6 pb-16 sm:px-8 sm:pt-10 lg:px-12 xl:px-20">
-      <header class="flex flex-wrap items-end justify-between gap-x-8 gap-y-5">
+      <header class="flex flex-wrap items-end gap-x-8 gap-y-5">
         <div class="flex min-w-0 flex-col items-start gap-3 sm:flex-row sm:items-center sm:gap-4">
           <Image
             src={data.cutout.src}
@@ -309,15 +309,7 @@ const findings = (
             class="w-24 shrink-0 object-contain"
           />
           <div class="min-w-0">
-            <p class="text-muted-foreground">
-              {[
-                data.area,
-                data.spending &&
-                  `${formatSpending(data.spending)} / ${data.category === "stays" ? "night" : "person"}`,
-              ]
-                .filter(Boolean)
-                .join(" · ")}
-            </p>
+            <p class="text-muted-foreground">{data.area}</p>
             <h1 class="mt-1 text-4xl/10 font-medium tracking-tight text-balance sm:text-[2.5rem]/11">
               {data.title}
             </h1>
@@ -329,20 +321,31 @@ const findings = (
           </div>
         </div>
 
-        <a
-          href={data.mapsUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          data-action="maps_click"
-          data-placement="place_review"
-          data-place-id={place.id}
-          data-place-name={data.title}
-          class={buttonVariants({ size: "lg" })}
-        >
-          Open in Maps
-          <RiArrowRightUpLine aria-hidden="true" data-icon="inline-end" />
-          <span class="sr-only"> (opens in a new tab)</span>
-        </a>
+        <div class="flex flex-col items-start gap-4 sm:ml-auto sm:flex-row sm:items-end sm:gap-8">
+          {data.spending && (
+            <p>
+              <span class="block text-sm text-muted-foreground">Spending</span>
+              <span class="block font-medium">
+                {formatSpending(data.spending)} /{" "}
+                {data.category === "stays" ? "night" : "person"}
+              </span>
+            </p>
+          )}
+          <a
+            href={data.mapsUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            data-action="maps_click"
+            data-placement="place_review"
+            data-place-id={place.id}
+            data-place-name={data.title}
+            class={buttonVariants({ size: "lg" })}
+          >
+            Open in Maps
+            <RiArrowRightUpLine aria-hidden="true" data-icon="inline-end" />
+            <span class="sr-only"> (opens in a new tab)</span>
+          </a>
+        </div>
       </header>
 
       {photos.length > 0 && (
