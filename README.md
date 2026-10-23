@@ -21,5 +21,9 @@ analytics in a site that is already built.
 token. Keep the local key in `.env.local`. Do not create `.dev.vars`: when that
 file exists, Wrangler ignores `.env` files.
 
+After a reader confirms, send them to `https://baliapproved.id/subscribed`.
+Set that URL on the Kit form, under Confirmation email, After confirming
+redirect to.
+
 The measured signup CPU and the rate limit's per-location behavior are in
 [closed issue #15](https://github.com/baliapproved/baliapproved.id/issues/15).
