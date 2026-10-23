@@ -1,103 +1,107 @@
 ---
+import { SubscribeForm } from "@/newsletter/SubscribeForm";
 import { site } from "./site";
 
 const currentYear = new Date().getUTCFullYear();
-const footerLinkClass =
-  "inline-flex min-h-6 items-center font-medium decoration-foreground/30 underline-offset-4 transition-colors hover:text-foreground hover:underline focus-visible:rounded-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-foreground/70";
+
+const columns: {
+  title: string;
+  links: { label: string; href: string; action?: string }[];
+}[] = [
+  {
+    title: "Explore",
+    links: [
+      { label: "Discover", href: "/" },
+      { label: "Blog", href: "/blog" },
+      { label: "About", href: "/about" },
+    ],
+  },
+  {
+    title: "Follow",
+    links: [
+      {
+        label: "Instagram",
+        href: "https://www.instagram.com/bali.approved/",
+        action: "instagram_click",
+      },
+      {
+        label: "WhatsApp",
+        href: "https://wa.me/6285117325144",
+        action: "whatsapp_click",
+      },
+    ],
+  },
+  {
+    title: "Reviews by",
+    links: [
+      { label: "@lifeisshorj", href: "https://www.instagram.com/lifeisshorj/" },
+      { label: "shorj.com", href: "https://shorj.com/" },
+    ],
+  },
+];
 ---
 
-<div class="bg-background pt-20 sm:pt-24">
-  <footer class="bg-muted">
-    <div class="mx-auto w-full max-w-4xl px-6 py-14 sm:px-8 sm:py-16">
-      <a
-        href="/"
-        aria-label={`${site.name} home`}
-        class="inline-block rounded-sm font-heading text-4xl leading-none tracking-[-0.04em] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-foreground/70 sm:text-5xl"
-      >
-        {site.name}
-      </a>
-
-      <p class="mt-4 max-w-sm leading-relaxed text-muted-foreground">
-        Our honest take on places around Bali, based on firsthand experience.
-      </p>
-
-      <dl class="mt-12 grid grid-cols-1 gap-8 md:grid-cols-3">
-        <div>
-          <dt class="text-[0.6875rem] font-semibold tracking-[0.16em] text-muted-foreground uppercase">
-            Instagram
-          </dt>
-          <dd class="mt-2">
-            <a
-              href="https://www.instagram.com/bali.approved/"
-              target="_blank"
-              rel="noopener noreferrer"
-              data-action="instagram_click"
-              data-placement="footer"
-              class={footerLinkClass}
-            >
-              @bali.approved
-              <span class="sr-only"> (opens in a new tab)</span>
-            </a>
-          </dd>
-        </div>
-
-        <div>
-          <dt class="text-[0.6875rem] font-semibold tracking-[0.16em] text-muted-foreground uppercase">
-            Reviews by
-          </dt>
-          <dd class="mt-2 flex flex-col items-start gap-1">
-            <a
-              href="https://www.instagram.com/lifeisshorj/"
-              target="_blank"
-              rel="noopener noreferrer"
-              class={footerLinkClass}
-            >
-              @lifeisshorj
-              <span class="sr-only"> (opens in a new tab)</span>
-            </a>
-            <a
-              href="https://shorj.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-              class={footerLinkClass}
-            >
-              shorj.com
-              <span class="sr-only"> (opens in a new tab)</span>
-            </a>
-          </dd>
-        </div>
-
-        <div>
-          <dt class="text-[0.6875rem] font-semibold tracking-[0.16em] text-muted-foreground uppercase">
-            WhatsApp
-          </dt>
-          <dd class="mt-2">
-            <a
-              href="https://wa.me/6285117325144"
-              target="_blank"
-              rel="noopener noreferrer"
-              data-action="whatsapp_click"
-              data-placement="footer"
-              class={footerLinkClass}
-            >
-              +62 851-1732-5144
-              <span class="sr-only"> (opens in a new tab)</span>
-            </a>
-          </dd>
-        </div>
-      </dl>
-
-      <div class="mt-12 flex flex-col items-start gap-2 text-[0.6875rem] font-semibold tracking-[0.16em] text-muted-foreground uppercase md:flex-row md:items-baseline md:justify-between">
+<footer class="bg-border">
+  <div class="mx-auto w-full max-w-[1920px] px-5 pt-12 pb-8 text-sm sm:px-8 lg:px-12 xl:px-20">
+    <div class="grid gap-10 lg:grid-cols-[1fr_auto]">
+      <div class="max-w-95">
         <a
           href="/"
-          class="rounded-sm underline-offset-4 hover:text-foreground hover:underline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-foreground/70"
+          aria-label={`${site.name} home`}
+          class="inline-block rounded-full transition-opacity hover:opacity-80 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring"
         >
-          baliapproved.id
+          <img
+            src="/logo-512.png"
+            alt=""
+            width="40"
+            height="40"
+            loading="lazy"
+            class="size-10 rounded-full"
+          />
         </a>
-        <p>
-          &copy; {currentYear} {site.name}
+
+        <SubscribeForm client:load className="mt-6" />
+
+        <p class="mt-4 text-pretty text-muted-foreground">
+          Honest reviews of cafés, stays, and experiences around Bali, from our
+          own visits. Subscribe to get each new review by email.
         </p>
       </div>
+
+      <div class="grid grid-cols-2 gap-8 sm:grid-cols-3 lg:gap-x-16">
+        {columns.map(({ title, links }) => (
+          <div>
+            <h2 class="text-muted-foreground">{title}</h2>
+            <ul class="mt-3 flex flex-col gap-2">
+              {links.map(({ label, href, action }) => {
+                const external = href.startsWith("http");
+
+                return (
+                  <li>
+                    <a
+                      href={href}
+                      target={external ? "_blank" : undefined}
+                      rel={external ? "noopener noreferrer" : undefined}
+                      data-action={action}
+                      data-placement={action && "footer"}
+                      class="transition-colors hover:text-muted-foreground focus-visible:rounded-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring"
+                    >
+                      {label}
+                      {external && (
+                        <span class="sr-only"> (opens in a new tab)</span>
+                      )}
+                    </a>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        ))}
+      </div>
     </div>
-  </footer>
-</div>
+
+    <p class="mt-12 text-muted-foreground">
+      &copy; {`${currentYear} ${site.name}`}
+    </p>
+  </div>
+</footer>
