@@ -1,0 +1,49 @@
+---
+import { Image } from "astro:assets";
+import type { CollectionEntry } from "astro:content";
+import { RiArrowRightUpLine } from "@remixicon/react";
+import { Card, CardContent } from "@/design-system/card";
+import { formatSpending } from "@/places/spending";
+import PlaceBadge from "./PlaceBadge.astro";
+
+interface Props {
+  place: CollectionEntry<"places">;
+}
+const { data } = Astro.props.place;
+---
+
+<Card
+  size="sm"
+  className="relative gap-2 rounded-3xl pt-6 shadow-none ring-0 has-focus-visible:outline-2 has-focus-visible:outline-offset-2 has-focus-visible:outline-ring"
+>
+  <CardContent>
+    <Image
+      src={data.cutout.src}
+      alt={data.cutout.alt}
+      widths={[440, 660, 880]}
+      sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+      class="aspect-7/6 w-full object-contain p-5 motion-safe:transition-transform motion-safe:duration-500 motion-safe:ease-out motion-safe:group-hover/card:scale-[1.02]"
+    />
+  </CardContent>
+  <div class="absolute inset-x-4 top-4 flex items-start">
+    {data.badge && <PlaceBadge badge={data.badge} />}
+    <span class="ml-auto grid size-9 place-items-center rounded-full bg-muted text-foreground/65 transition-colors group-hover/card:text-foreground">
+      <RiArrowRightUpLine aria-hidden="true" className="size-5" />
+    </span>
+  </div>
+  <CardContent>
+    <p class="text-muted-foreground">
+      {[data.area, data.spending && formatSpending(data.spending)]
+        .filter(Boolean)
+        .join(" · ")}
+    </p>
+    <h3 class="mt-1 font-medium">
+      <a
+        href={`/places/${data.slug}`}
+        class="outline-none after:absolute after:inset-0"
+      >
+        {data.title}
+      </a>
+    </h3>
+  </CardContent>
+</Card>

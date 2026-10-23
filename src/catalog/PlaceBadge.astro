@@ -1,0 +1,25 @@
+---
+import { Image } from "astro:assets";
+import type { CollectionEntry } from "astro:content";
+import approvedBadge from "./approved-badge.svg";
+import goodFindBadge from "./good-find-badge.svg";
+
+interface Props {
+  badge: NonNullable<CollectionEntry<"places">["data"]["badge"]>;
+}
+const { badge } = Astro.props;
+
+const badges = {
+  approved: { label: "Approved", icon: approvedBadge, class: "text-[#b99651]" },
+  "good-find": {
+    label: "Good Find",
+    icon: goodFindBadge,
+    class: "text-[#6ca0d6]",
+  },
+};
+---
+
+<p class:list={["flex items-center gap-1", badges[badge].class]}>
+  <Image src={badges[badge].icon} alt="" class="h-5 w-auto" />
+  {badges[badge].label}
+</p>
