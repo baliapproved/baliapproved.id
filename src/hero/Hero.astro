@@ -1,10 +1,5 @@
 ---
-import {
-  InputGroup,
-  InputGroupAddon,
-  InputGroupButton,
-  InputGroupInput,
-} from "@/design-system/input-group";
+import { SubscribeForm } from "@/newsletter/SubscribeForm";
 ---
 
 <section class="mx-auto flex w-full max-w-145 flex-col items-center px-5 pt-14 pb-16 text-center sm:pt-18 sm:pb-20">
@@ -34,22 +29,7 @@ import {
     notes from each visit. Subscribe to get each new review by email.
   </p>
 
-  <InputGroup className="mt-7 h-12 max-w-107 bg-background bg-clip-padding sm:h-10">
-    <InputGroupInput
-      type="email"
-      aria-label="Email address"
-      placeholder="name@email.com"
-      autoComplete="email"
-    />
-    <InputGroupAddon
-      align="inline-end"
-      className="h-full py-0.5 pr-0.5 has-[>button]:mr-0"
-    >
-      <InputGroupButton size="sm" className="h-full">
-        Subscribe
-      </InputGroupButton>
-    </InputGroupAddon>
-  </InputGroup>
+  <SubscribeForm client:load className="mt-7 w-full max-w-107" />
 </section>
 
 <style>

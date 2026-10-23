@@ -1,10 +1,5 @@
 ---
-import {
-  InputGroup,
-  InputGroupAddon,
-  InputGroupButton,
-  InputGroupInput,
-} from "@/design-system/input-group";
+import { SubscribeForm } from "@/newsletter/SubscribeForm";
 import { site } from "./site";
 
 const currentYear = new Date().getUTCFullYear();
@@ -65,22 +60,7 @@ const columns: {
           />
         </a>
 
-        <InputGroup className="mt-6 h-12 bg-background bg-clip-padding sm:h-10">
-          <InputGroupInput
-            type="email"
-            aria-label="Email address"
-            placeholder="name@email.com"
-            autoComplete="email"
-          />
-          <InputGroupAddon
-            align="inline-end"
-            className="h-full py-0.5 pr-0.5 has-[>button]:mr-0"
-          >
-            <InputGroupButton size="sm" className="h-full">
-              Subscribe
-            </InputGroupButton>
-          </InputGroupAddon>
-        </InputGroup>
+        <SubscribeForm client:load className="mt-6" />
 
         <p class="mt-4 text-pretty text-muted-foreground">
           Honest reviews of cafés, stays, and experiences around Bali, from our
