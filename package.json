@@ -4,11 +4,11 @@
   "version": "0.0.1",
   "packageManager": "pnpm@12.9.1",
   "scripts": {
-    "dev": "astro dev",
-    "build": "astro build",
+    "dev": "pnpm exec wrangler types && astro dev",
+    "build": "pnpm typecheck && astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "typecheck": "astro check",
+    "typecheck": "pnpm exec wrangler types && astro check",
     "lint": "eslint .",
     "format": "prettier . --write"
   },
