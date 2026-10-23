@@ -16,7 +16,7 @@ export default defineConfig({
   integrations: [
     react(),
     sitemap({
-      filter: (page) => page !== `${site.url}/subscribed`,
+      filter: (page) => page !== `${site.url}/newsletter/subscribed`,
     }),
   ],
   vite: {
