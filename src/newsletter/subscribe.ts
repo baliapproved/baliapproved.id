@@ -17,6 +17,7 @@ export async function subscribe(email: string) {
     method: "POST",
     headers,
     body: JSON.stringify({ email_address: email, state: "inactive" }),
+    signal: AbortSignal.timeout(5000),
   });
   if (!createResponse.ok) {
     throw new Error(`Kit create failed: ${createResponse.status}`);
@@ -32,6 +33,7 @@ export async function subscribe(email: string) {
       method: "POST",
       headers,
       body: JSON.stringify({ email_address: email }),
+      signal: AbortSignal.timeout(5000),
     },
   );
   if (!enrollResponse.ok) {

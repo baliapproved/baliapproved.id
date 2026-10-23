@@ -38,9 +38,12 @@ Build before previewing or deploying so Wrangler can use Astro's generated
 deployment configuration. The adapter keeps a release static until a request-time
 route is added, then generates the server configuration for that build.
 
-The Kit API key in `.env.local` is not uploaded with a Git push. Before enabling
-the signup endpoint, add `KIT_API_KEY` as a Secret under the Worker's Settings →
-Variables and Secrets in the Cloudflare dashboard. Keep it out of `.dev.vars`:
+The Kit API key in `.env.local` is not uploaded with a Git push. The signup
+endpoint reads `KIT_API_KEY` at request time, so it must be a runtime Secret, not
+a Build variable like PostHog's. The dashboard only accepts runtime secrets once
+the production Worker has server code; before that, add it to an uploaded
+preview version with `pnpm exec wrangler versions secret put KIT_API_KEY`, which
+does not deploy. Later versions keep it. Keep the local key out of `.dev.vars`:
 when that file exists, Wrangler ignores `.env` files.
 
 ## Instagram exports
