@@ -6,6 +6,7 @@ import {
   type SubmitEvent,
 } from "react";
 
+import { actions as websiteActions, placements } from "@/analytics/actions";
 import {
   Dialog,
   DialogClose,
@@ -26,7 +27,17 @@ import { results, type Result } from "./results";
 
 const subscribeToNothing = () => () => {};
 
-export function SubscribeForm({ className }: { className?: string }) {
+interface PostHog {
+  capture(event: string, properties: Record<string, unknown>): void;
+}
+
+export function SubscribeForm({
+  className,
+  placement,
+}: {
+  className?: string;
+  placement: "hero" | "footer";
+}) {
   // False in the server HTML and during hydration, true after. The button
   // stays disabled until then, so an early Enter can't submit the form
   // natively and put the email in the URL.
@@ -59,7 +70,28 @@ export function SubscribeForm({ className }: { className?: string }) {
     setSubmitting(false);
     setResult(next);
     setOpen(true);
-    if (next === "check-inbox") form.reset();
+    if (next === "check-inbox") {
+      form.reset();
+      try {
+        (window as Window & { posthog?: PostHog }).posthog?.capture(
+          "website_action",
+          {
+            action_id: "newsletter_signup_accepted",
+            action_name: websiteActions.newsletter_signup_accepted,
+            breakdowns: [
+              {
+                key: "placement",
+                label: "Placement",
+                value_id: placement,
+                value_name: placements[placement],
+              },
+            ],
+          },
+        );
+      } catch {
+        // Analytics must never change an accepted signup's result.
+      }
+    }
   }
 
   return (

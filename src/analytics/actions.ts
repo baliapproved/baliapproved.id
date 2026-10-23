@@ -7,6 +7,7 @@ export const actions: Record<string, string> = {
   tiktok_click: "TikTok clicks",
   website_click: "Website clicks",
   phone_click: "Phone call clicks",
+  newsletter_signup_accepted: "Newsletter signup submissions",
 };
 
 export const placements: Record<string, string> = {
