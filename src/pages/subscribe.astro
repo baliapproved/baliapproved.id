@@ -1,0 +1,39 @@
+---
+import Layout from "@/site/Layout.astro";
+import { buttonVariants } from "@/design-system/button";
+import { cn } from "@/design-system/utils";
+import { results, type Result } from "@/newsletter/results";
+
+import { site } from "@/site/site";
+
+export const prerender = false;
+
+// Native form posts to /api/subscribe land here.
+const key = Astro.url.searchParams.get("result");
+if (!key || !Object.hasOwn(results, key)) return Astro.redirect("/");
+
+const result = results[key as Result];
+Astro.response.status = result.status;
+---
+
+<Layout
+  title={`${result.title} | ${site.name}`}
+  description={result.message}
+  indexable={false}
+>
+  <main class="flex flex-1 flex-col px-6 py-16 sm:py-24">
+    <div class="mx-auto w-full max-w-xl">
+      <h1 class="text-xl leading-tight tracking-tight sm:text-3xl">
+        {result.title}
+      </h1>
+      <p class="mt-4 max-w-md text-base leading-relaxed text-muted-foreground">
+        {result.message}
+      </p>
+      <div class="mt-8">
+        <a href="/" class={cn(buttonVariants({ size: "lg" }))}>
+          See the places
+        </a>
+      </div>
+    </div>
+  </main>
+</Layout>

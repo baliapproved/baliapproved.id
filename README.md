@@ -39,6 +39,8 @@ and Kit-latency findings are archived in
 Kit call timings from Cloudflare locations, and why the endpoint keeps waiting
 for Kit, are archived in
 [closed issue #12](https://github.com/baliapproved/baliapproved.id/issues/12).
+The signup response contract and its verification are archived in
+[closed issue #13](https://github.com/baliapproved/baliapproved.id/issues/13).
 
 Build before previewing or deploying so Wrangler can use Astro's generated
 deployment configuration. The adapter keeps a release static until a request-time
