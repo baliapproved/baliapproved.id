@@ -13,6 +13,8 @@ import { site } from "./site";
 type Props = ComponentProps<typeof SEO> & {
   header?: boolean;
   footer?: boolean;
+  /** Footer email form. Off on the post-confirmation page. */
+  subscribe?: boolean;
   jsonLd?: ComponentProps<typeof JsonLd>["schema"];
   /** Stable analytics id; keep it if the page URL changes. */
   analyticsPageId?: string;
@@ -21,6 +23,7 @@ type Props = ComponentProps<typeof SEO> & {
 const {
   header = true,
   footer = true,
+  subscribe = true,
   jsonLd,
   analyticsPageId,
   ...seo
@@ -44,7 +47,7 @@ const {
   <body class="flex min-h-dvh flex-col">
     {header && <Header />}
     <slot />
-    {footer && <Footer />}
+    {footer && <Footer subscribe={subscribe} />}
     {!analyticsPageId && <WebsiteActions />}
   </body>
 </html>

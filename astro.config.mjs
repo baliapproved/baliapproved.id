@@ -13,7 +13,12 @@ export default defineConfig({
   trailingSlash: "never",
   adapter: cloudflare({ imageService: "compile" }),
   session: false,
-  integrations: [react(), sitemap()],
+  integrations: [
+    react(),
+    sitemap({
+      filter: (page) => page !== `${site.url}/subscribed`,
+    }),
+  ],
   vite: {
     plugins: [tailwindcss()],
   },
