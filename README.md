@@ -33,6 +33,9 @@ Runtime type generation, routing verification, and reproduction steps are archiv
 in [closed issue #9](https://github.com/baliapproved/baliapproved.id/issues/9).
 The server-side Kit signup flow and its live lifecycle checks are archived in
 [closed issue #10](https://github.com/baliapproved/baliapproved.id/issues/10).
+The protected signup endpoint, its Cloudflare checks, and the deferred rate-limit
+and Kit-latency findings are archived in
+[closed issue #11](https://github.com/baliapproved/baliapproved.id/issues/11).
 
 Build before previewing or deploying so Wrangler can use Astro's generated
 deployment configuration. The adapter keeps a release static until a request-time
