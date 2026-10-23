@@ -44,6 +44,9 @@ The signup response contract and its verification are archived in
 The connected website forms, Astro Action migration, and confirmation-dialog
 verification are archived in
 [closed issue #14](https://github.com/baliapproved/baliapproved.id/issues/14).
+The first production release, signup verification, and CPU-budget observations
+are archived in
+[closed issue #15](https://github.com/baliapproved/baliapproved.id/issues/15).
 
 Build before previewing or deploying so Wrangler can use Astro's generated
 deployment configuration. The adapter keeps a release static until a request-time
