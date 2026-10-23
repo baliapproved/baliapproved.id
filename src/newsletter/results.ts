@@ -1,5 +1,5 @@
-// What a signup attempt tells the reader. The status is the same for the JSON
-// response and the result page, and no result reveals subscriber state.
+// What a signup attempt tells the reader: the endpoint sends the status and the
+// form shows the copy. No result reveals subscriber state.
 export const results = {
   "check-inbox": {
     status: 200,

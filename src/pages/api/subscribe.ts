@@ -10,13 +10,9 @@ export const prerender = false;
 const emailField = z.string().trim().max(254).pipe(z.email());
 
 // Astro's default checkOrigin already rejects cross-site form posts with 403.
-export const POST: APIRoute = async ({ request, clientAddress, redirect }) => {
-  // Enhanced forms ask for JSON; native form posts get the result page, which
-  // keeps the email out of the URL and survives a reload.
+export const POST: APIRoute = async ({ request, clientAddress }) => {
   const respond = (result: Result) =>
-    request.headers.get("accept")?.includes("application/json")
-      ? Response.json({ result }, { status: results[result].status })
-      : redirect(`/subscribe?result=${result}`, 303);
+    Response.json({ result }, { status: results[result].status });
 
   if (!(Number(request.headers.get("content-length")) <= 1024)) {
     return respond("invalid");
