@@ -21,7 +21,7 @@ analytics in a site that is already built.
 token. Keep the local key in `.env.local`. Do not create `.dev.vars`: when that
 file exists, Wrangler ignores `.env` files.
 
-After a reader confirms, send them to `https://baliapproved.id/subscribed`.
+After a reader confirms, send them to `https://baliapproved.id/newsletter/subscribed`.
 Set that URL on the Kit form, under Confirmation email, After confirming
 redirect to.
 
