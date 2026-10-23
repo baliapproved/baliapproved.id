@@ -5,7 +5,7 @@ import eslintPluginAstro from "eslint-plugin-astro";
 import tseslint from "typescript-eslint";
 
 export default defineConfig([
-  globalIgnores(["dist/**", ".astro/**"]),
+  globalIgnores(["dist/**", ".astro/**", "worker-configuration.d.ts"]),
   js.configs.recommended,
   tseslint.configs.recommended,
   eslintPluginAstro.configs.recommended,
