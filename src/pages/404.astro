@@ -10,7 +10,7 @@ Astro.response.status = 404;
 
 <Layout
   title={`Page not found | ${site.name}`}
-  description="This page isn’t on the list. Head home to browse places we’ve actually visited."
+  description="We couldn’t find this page. Explore cafés, stays, and experiences we’ve tried in Bali."
   indexable={false}
 >
   <main class="flex flex-1 bg-border px-5">
@@ -68,18 +68,18 @@ Astro.response.status = 404;
       </svg>
 
       <h1 class="mt-8 text-4xl/10 font-medium tracking-tight text-balance">
-        This page isn’t on the list
+        We couldn’t find this page
       </h1>
 
       <p class="mt-3 text-base/6 text-pretty text-foreground/65">
-        The link may be wrong, or we simply haven’t been there yet.
+        Head back to explore cafés, stays, and experiences we’ve tried in Bali.
       </p>
 
       <a
         href="/"
         class:list={[buttonVariants({ size: "lg" }), "mt-8 w-full sm:w-auto"]}
       >
-        See the places
+        Explore the places
       </a>
     </article>
   </main>
