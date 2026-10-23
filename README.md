@@ -31,10 +31,17 @@ The adapter's build-time image and disabled-session settings are documented in
 [closed issue #8](https://github.com/baliapproved/baliapproved.id/issues/8).
 Runtime type generation, routing verification, and reproduction steps are archived
 in [closed issue #9](https://github.com/baliapproved/baliapproved.id/issues/9).
+The server-side Kit signup flow and its live lifecycle checks are archived in
+[closed issue #10](https://github.com/baliapproved/baliapproved.id/issues/10).
 
 Build before previewing or deploying so Wrangler can use Astro's generated
 deployment configuration. The adapter keeps a release static until a request-time
 route is added, then generates the server configuration for that build.
+
+The Kit API key in `.env.local` is not uploaded with a Git push. Before enabling
+the signup endpoint, add `KIT_API_KEY` as a Secret under the Worker's Settings →
+Variables and Secrets in the Cloudflare dashboard. Keep it out of `.dev.vars`:
+when that file exists, Wrangler ignores `.env` files.
 
 ## Instagram exports
 
