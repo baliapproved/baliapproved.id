@@ -7,6 +7,7 @@ export type MapPlace = {
   slug: string;
   title: string;
   area: string;
+  cutout: string;
   lat: number;
   lng: number;
 };
@@ -25,11 +26,10 @@ export function PlacesMap({ places }: { places: MapPlace[] }) {
           [Math.min(...lngs), Math.min(...lats)],
           [Math.max(...lngs), Math.max(...lats)],
         ],
-        // The bottom clears the attribution bar.
-        fitBoundsOptions: {
-          padding: { top: 40, right: 40, bottom: 72, left: 40 },
-        },
+        fitBoundsOptions: { padding: 40 },
       }}
+      // The About page credits the map below its content instead.
+      attributionControl={false}
       cooperativeGestures
       dragRotate={false}
       touchPitch={false}
@@ -39,13 +39,6 @@ export function PlacesMap({ places }: { places: MapPlace[] }) {
         map.setPaintProperty("water", "fill-color", "#dde2e1");
         map.setLayoutProperty("label_village", "visibility", "none");
         map.setLayoutProperty("label_other", "visibility", "none");
-        // Fold the credits into the (i) button after two seconds.
-        setTimeout(() => {
-          map
-            .getContainer()
-            .querySelector(".maplibregl-compact-show")
-            ?.classList.remove("maplibregl-compact-show");
-        }, 2000);
       }}
     >
       {places.map((place) => (
@@ -53,6 +46,8 @@ export function PlacesMap({ places }: { places: MapPlace[] }) {
           key={place.slug}
           longitude={place.lng}
           latitude={place.lat}
+          // Lift the open place above the pins it overlaps.
+          style={{ zIndex: selected === place ? 1 : undefined }}
           onClick={(event) => {
             // Keep the map's own click from closing the popup it opens.
             event.originalEvent.stopPropagation();
@@ -62,8 +57,16 @@ export function PlacesMap({ places }: { places: MapPlace[] }) {
           <button
             type="button"
             aria-label={place.title}
-            className="block size-4 cursor-pointer rounded-full border-2 border-background bg-primary shadow-sm shadow-foreground/30 transition-transform hover:scale-125 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
-          />
+            aria-expanded={selected === place}
+            className="block size-10 cursor-pointer rounded-full bg-background p-1 shadow-md ring-1 ring-foreground/5 motion-safe:transition-transform motion-safe:hover:scale-110 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring aria-expanded:ring-2 aria-expanded:ring-primary"
+          >
+            <img
+              src={place.cutout}
+              alt=""
+              draggable={false}
+              className="size-full object-contain"
+            />
+          </button>
         </Marker>
       ))}
 
@@ -71,7 +74,7 @@ export function PlacesMap({ places }: { places: MapPlace[] }) {
         <Popup
           longitude={selected.lng}
           latitude={selected.lat}
-          offset={14}
+          offset={24}
           closeButton={false}
           onClose={() => setSelected(undefined)}
           className="[&_.maplibregl-popup-content]:rounded-2xl [&_.maplibregl-popup-content]:px-4 [&_.maplibregl-popup-content]:py-3 [&_.maplibregl-popup-content]:font-sans [&_.maplibregl-popup-content]:shadow-lg"
