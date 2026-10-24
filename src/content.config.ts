@@ -33,6 +33,11 @@ export const collections = {
           // Transparent-background subject shown on catalog cards.
           cutout: z.object({ src: image(), alt: z.string() }),
           mapsUrl: z.url(),
+          // The place's pin from Google Maps, plotted on the About map.
+          coordinates: z.object({
+            lat: z.number().min(-90).max(90),
+            lng: z.number().min(-180).max(180),
+          }),
           // Handles without the @; every place must have Instagram.
           instagram: z.string().regex(handle),
           tiktok: z.string().regex(handle).optional(),

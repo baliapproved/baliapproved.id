@@ -10,6 +10,9 @@ cutout:
   src: ./cutout.webp
   alt: Anka Coffee's grey and white building with a pitched roof, a brick wall, a stone Anka sign beside the entrance steps, a terrace and flowering trees
 mapsUrl: https://www.google.com/maps/search/?api=1&query=ANKA+Coffee&query_place_id=ChIJSW0xBRJB0i0RreISVFeWAi8
+coordinates:
+  lat: -8.643095
+  lng: 115.196287
 instagram: anka.idn
 address: Jl. Buluh Indah No. 88B, Pemecutan Kaja, Denpasar Utara, Denpasar
 ---

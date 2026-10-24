@@ -14,6 +14,9 @@ cutout:
   src: ./cutout.webp
   alt: Terracotta ST. ALi Coffee corner building with a brick lattice upper storey, open glass walls, and potted palms along the steps
 mapsUrl: https://www.google.com/maps/search/?api=1&query=ST.%20ALi%20Coffee%20Jl.%20Pantai%20Pererenan%20No.121%20Bali
+coordinates:
+  lat: -8.646637
+  lng: 115.125388
 instagram: stali.id
 website: https://stali.com.au/pages/st-ali-bali
 address: Jl. Pantai Pererenan No.121, Pererenan, Badung

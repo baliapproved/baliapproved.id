@@ -14,6 +14,9 @@ cutout:
   src: ./cutout.webp
   alt: Starbucks Reserve Dewata building at dusk, with its terracotta brick facade, glowing windows, and a garden fountain
 mapsUrl: https://maps.app.goo.gl/mZEYKQ7muXbURLi39
+coordinates:
+  lat: -8.691724
+  lng: 115.173136
 instagram: starbucksreserve_dewata
 tiktok: starbucksindonesia
 website: https://www.starbucks.co.id/dewata
