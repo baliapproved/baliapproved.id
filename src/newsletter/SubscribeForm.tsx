@@ -95,8 +95,11 @@ export function SubscribeForm({
   }
 
   return (
-    <form className={className} onSubmit={onSubmit}>
-      <InputGroup className="h-12 bg-background bg-clip-padding sm:h-10">
+    <form className={className} onSubmit={onSubmit} aria-busy={submitting}>
+      <InputGroup
+        data-submitting={submitting || undefined}
+        className="h-12 bg-background bg-clip-padding sm:h-10"
+      >
         <InputGroupInput
           ref={input}
           type="email"
@@ -105,18 +108,36 @@ export function SubscribeForm({
           aria-label="Email address"
           placeholder="name@email.com"
           autoComplete="email"
+          readOnly={submitting}
+          className="transition-colors read-only:text-muted-foreground"
         />
         <InputGroupAddon
           align="inline-end"
-          className="h-full py-0.5 pr-0.5 has-[>button]:mr-0"
+          className="h-full py-0.5 pr-0.5 has-[>button]:mr-0 max-sm:group-data-submitting/input-group:absolute max-sm:group-data-submitting/input-group:inset-0 max-sm:group-data-submitting/input-group:p-0"
         >
           <InputGroupButton
             type="submit"
             size="sm"
-            className="h-full"
+            variant={submitting ? "secondary" : "ghost"}
             disabled={!hydrated || submitting}
+            data-submitting={submitting || undefined}
+            className="group/subscribe relative grid h-full overflow-hidden transition-colors duration-150 data-submitting:disabled:opacity-100 max-sm:group-data-submitting/input-group:w-full"
           >
-            {submitting ? "Subscribing…" : "Subscribe"}
+            {submitting && (
+              <span
+                aria-hidden="true"
+                className="pointer-events-none absolute inset-0 bg-linear-to-r from-transparent via-primary/10 to-transparent motion-safe:animate-shimmer motion-reduce:hidden"
+              />
+            )}
+            <span
+              aria-hidden={submitting}
+              className="relative col-start-1 row-start-1 group-data-submitting/subscribe:invisible"
+            >
+              Subscribe
+            </span>
+            {submitting && (
+              <span className="relative col-start-1 row-start-1">Sending…</span>
+            )}
           </InputGroupButton>
         </InputGroupAddon>
       </InputGroup>
