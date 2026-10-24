@@ -10,6 +10,9 @@ cutout:
   src: ./cutout.webp
   alt: Sensa Koffie's coffee bar with a roaster, grinders and an espresso machine, a glowing green sk sign on the wall above a shelf of brewers and a trailing plant, and clear blue stools along the amber-lit counter
 mapsUrl: https://maps.app.goo.gl/b1Lq2BnAkaGg5ea17
+coordinates:
+  lat: -8.709053
+  lng: 115.179433
 instagram: sensakoffie
 tiktok: sensakoffieroastery
 website: https://sensakoffie.id/

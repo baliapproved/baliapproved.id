@@ -14,6 +14,9 @@ cutout:
   src: ./cutout.webp
   alt: White Seniman Coffee Renon corner building with its round red sign, Imagine You Know What You're Doing painted on the wall, and a covered terrace
 mapsUrl: https://www.google.com/maps/search/?api=1&query=Seniman%20Coffee%20Renon
+coordinates:
+  lat: -8.674793
+  lng: 115.230019
 instagram: senimancoffee
 website: https://www.senimancoffee.com/seniman-renon/
 address: Jl. Tukad Musi No. 19, Panjer, Denpasar Selatan, Denpasar

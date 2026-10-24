@@ -14,6 +14,9 @@ cutout:
   src: ./cutout.webp
   alt: Cream CHAGEE storefront with a wavy lattice canopy, red logo medallion, glass doors, and a giant cup sculpture out front
 mapsUrl: https://maps.app.goo.gl/YDXLJGPpgXLbxemy5
+coordinates:
+  lat: -8.728433
+  lng: 115.167814
 instagram: chagee.id
 tiktok: chagee.id
 address: Discovery Shopping Mall

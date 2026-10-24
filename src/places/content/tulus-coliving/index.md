@@ -14,6 +14,9 @@ cutout:
   src: ./cutout.webp
   alt: Tulus Coliving Apartments entrance with a yellow rental sign, glass doors, potted plants, and four scooters parked outside
 mapsUrl: https://www.google.com/maps/search/?api=1&query=Tulus%20Coliving%20Jl.%20Raya%20Kuta%20Bali
+coordinates:
+  lat: -8.719971
+  lng: 115.180442
 instagram: tuluscolivingvilla
 address: Jl. Raya Kuta, Kuta, Kec. Kuta, Bali 80361
 spending:

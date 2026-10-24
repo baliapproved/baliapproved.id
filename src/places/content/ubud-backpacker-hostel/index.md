@@ -14,6 +14,9 @@ cutout:
   src: ./cutout.webp
   alt: Balinese pavilion at Ubud Backpacker Hostel with a tiled roof, open kitchen, wooden dining table, and tropical plants
 mapsUrl: https://www.google.com/maps/search/?api=1&query=Ubud%20Backpacker%20Hostel%2C%20Jl.%20Yudistira%20No.21%2C%20Peliatan%2C%20Gianyar
+coordinates:
+  lat: -8.52516
+  lng: 115.268175
 instagram: ubudbackpackerhostel
 whatsapp: +62 851 9004 1547
 address: Jl. Yudistira No. 21, Peliatan, Banjar Kalah, Gianyar

@@ -10,6 +10,9 @@ cutout:
   src: ./cutout.webp
   alt: Iris Cafe Bali's brick entrance with black double doors, an upstairs cafe sign, a flowering shrub, a menu board and a parked motorbike
 mapsUrl: https://maps.app.goo.gl/U48jNyUfHLodJixq9
+coordinates:
+  lat: -8.707333
+  lng: 115.180615
 instagram: iris.cafebali
 website: https://iriscafebali.com/
 whatsapp: +62 821 3156 064
