@@ -1,6 +1,7 @@
 ---
 import { Image } from "astro:assets";
 import { buttonVariants } from "@/design-system/button";
+import baliApprovedLogo from "@/site/assets/bali-approved.png";
 import teamPhoto from "@/site/assets/team.webp";
 import Layout from "@/site/Layout.astro";
 import { site } from "@/site/site";
@@ -49,6 +50,36 @@ import { site } from "@/site/site";
           Message us on WhatsApp
           <span class="sr-only"> (opens in a new tab)</span>
         </a>
+      </section>
+
+      <section
+        aria-labelledby="bali-approved"
+        class="mt-12 flex items-center gap-5"
+      >
+        <Image
+          src={baliApprovedLogo}
+          alt="Bali Approved BA seal"
+          width={176}
+          height={176}
+          loading="lazy"
+          class="size-22 shrink-0 rounded-full bg-[#005f43] p-2"
+        />
+        <div>
+          <h2 id="bali-approved" class="text-lg font-medium">
+            Bali Approved
+          </h2>
+          <p class="mt-1 text-sm/6 text-muted-foreground">
+            Powered by{" "}
+            <a
+              href="https://shorj.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="underline underline-offset-4 transition-colors hover:text-foreground focus-visible:rounded-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring"
+            >
+              shorj.com<span class="sr-only"> (opens in a new tab)</span>
+            </a>
+          </p>
+        </div>
       </section>
     </article>
   </main>

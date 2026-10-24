@@ -2,6 +2,14 @@
 
 Firsthand reviews of places around Bali.
 
+## Brand identity
+
+The BA seal is the Bali Approved logo. Use it for browser and home-screen icons,
+the social-share image, and the brand identity in the footer and About page.
+
+The glowing petal is a decorative site graphic used in the header and weekly
+update badge. It is not a replacement for the BA logo.
+
 ## Cloudflare setup
 
 Two zone settings live in the Cloudflare dashboard, not in `wrangler.jsonc`.

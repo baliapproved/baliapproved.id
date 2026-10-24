@@ -1,5 +1,7 @@
 ---
+import { Image } from "astro:assets";
 import { SubscribeForm } from "@/newsletter/SubscribeForm";
+import baliApprovedLogo from "./assets/bali-approved.png";
 import { site } from "./site";
 
 interface Props {
@@ -53,16 +55,17 @@ const columns: {
         <a
           href="/"
           aria-label={`${site.name} home`}
-          class="inline-block rounded-full transition-opacity hover:opacity-80 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring"
+          class="inline-flex items-center gap-3 rounded-full transition-opacity hover:opacity-80 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring"
         >
-          <img
-            src="/logo-512.png"
+          <Image
+            src={baliApprovedLogo}
             alt=""
-            width="40"
-            height="40"
+            width={112}
+            height={112}
             loading="lazy"
-            class="size-10 rounded-full"
+            class="size-14 rounded-full bg-[#005f43] p-1.5"
           />
+          <span class="text-lg font-medium">{site.name}</span>
         </a>
 
         {subscribe && (
