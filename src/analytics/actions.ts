@@ -11,7 +11,6 @@ export const actions: Record<string, string> = {
 };
 
 export const placements: Record<string, string> = {
-  place_listing: "Place listing",
   place_review: "Place review",
   hero: "Hero",
   footer: "Footer",
