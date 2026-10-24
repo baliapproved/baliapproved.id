@@ -24,8 +24,8 @@ export async function subscribe(email: string) {
   }
   const { subscriber } = created.parse(await createResponse.json());
 
-  // Cancelled, bounced, and complained subscribers stay out of the form.
-  if (subscriber.state !== "inactive" && subscriber.state !== "active") return;
+  // Only unconfirmed subscribers need the confirmation email.
+  if (subscriber.state !== "inactive") return;
 
   const enrollResponse = await fetch(
     "https://api.kit.com/v4/forms/10086334/subscribers",
