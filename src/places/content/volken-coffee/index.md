@@ -20,6 +20,7 @@ coordinates:
 instagram: volkencoffee
 phone: +62 818 0318 5152
 address: Jl. Dewi Sri No.11, Legian, Kec. Kuta, Kabupaten Badung, Bali 80361
+postalCode: "80361"
 # Spending estimated from the menu in our photos; supplementary amenities checked at
 # https://cafeandcowork.com/bali/volken-coffee/
 spending:

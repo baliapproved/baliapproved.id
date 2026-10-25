@@ -20,6 +20,7 @@ coordinates:
 instagram: anka.idn
 threads: anka.idn
 address: Jl. Buluh Indah No. 88B, Pemecutan Kaja, Denpasar Utara, Denpasar
+postalCode: "80118"
 # Spending estimated from the menu in our photos; supplementary amenities checked at
 # https://www.corner.inc/place/pVVJbbmHKnUj
 spending:

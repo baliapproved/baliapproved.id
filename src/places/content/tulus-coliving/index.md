@@ -19,6 +19,7 @@ coordinates:
   lng: 115.180442
 instagram: tuluscolivingvilla
 address: Jl. Raya Kuta, Kuta, Kec. Kuta, Bali 80361
+postalCode: "80361"
 spending:
   max: 500000
 visitedAt: [2026-08-27]

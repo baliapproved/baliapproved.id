@@ -20,6 +20,7 @@ coordinates:
 instagram: stali.id
 website: https://stali.com.au/pages/st-ali-bali
 address: Jl. Pantai Pererenan No.121, Pererenan, Badung
+postalCode: "80351"
 spending:
   min: 30000
   max: 100000

@@ -17,4 +17,5 @@ instagram: bread_yard
 website: https://bread-yard.com/
 phone: +62 823 1468 4070
 address: Jl. Kayu Aya No. 12, Seminyak, Kuta, Badung
+postalCode: "80361"
 ---

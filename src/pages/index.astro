@@ -12,7 +12,29 @@ const places = (await getCollection("places")).sort(
 );
 ---
 
-<Layout title={site.title}>
+<Layout
+  title={site.title}
+  jsonLd={{
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        name: site.name,
+        url: site.url,
+        publisher: { "@id": `${site.url}/#organization` },
+      },
+      {
+        "@type": "Organization",
+        "@id": `${site.url}/#organization`,
+        name: site.name,
+        url: site.url,
+        // The BA seal.
+        logo: `${site.url}/apple-touch-icon.png`,
+        sameAs: ["https://www.instagram.com/bali.approved/"],
+      },
+    ],
+  }}
+>
   <main class="flex-1 bg-border">
     <Hero />
     <Catalog places={places} />

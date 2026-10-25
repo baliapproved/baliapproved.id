@@ -18,4 +18,5 @@ tiktok: sensakoffieroastery
 website: https://sensakoffie.id/
 whatsapp: +62 811 3860 101
 address: Jl. Dewi Sri, Ruko Parwata Blok 3-4, Kuta, Badung
+postalCode: "80361"
 ---

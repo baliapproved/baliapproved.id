@@ -20,6 +20,7 @@ coordinates:
 instagram: ubudbackpackerhostel
 whatsapp: +62 851 9004 1547
 address: Jl. Yudistira No. 21, Peliatan, Banjar Kalah, Gianyar
+postalCode: "80571"
 spending:
   max: 500000
 visitedAt: [2026-08-14]

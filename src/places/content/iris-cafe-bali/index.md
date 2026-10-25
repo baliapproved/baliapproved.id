@@ -17,4 +17,5 @@ instagram: iris.cafebali
 website: https://iriscafebali.com/
 whatsapp: +62 821 3156 064
 address: Jl. Pararaton Raya No. 101, 2nd Floor, Kuta, Badung
+postalCode: "80361"
 ---

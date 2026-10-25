@@ -17,4 +17,5 @@ instagram: pahdispecialtycoffee
 tiktok: pahdispecialtycoffee
 whatsapp: +62 811 3971 277
 address: Jl. Raya Penelokan, Batur Tengah, Kintamani, Bangli
+postalCode: "80652"
 ---

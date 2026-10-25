@@ -19,7 +19,8 @@ coordinates:
   lng: 115.167814
 instagram: chagee.id
 tiktok: chagee.id
-address: Discovery Shopping Mall
+address: Discovery Shopping Mall, Jl. Kartika Plaza, Kuta, Badung
+postalCode: "80361"
 spending:
   min: 30000
   max: 60000

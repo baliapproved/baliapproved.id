@@ -47,6 +47,8 @@ export const collections = {
           whatsapp: z.string().regex(phone).optional(),
           phone: z.string().regex(phone).optional(),
           address: z.string(),
+          // Kept apart from the shown address for search engines' structured data.
+          postalCode: z.string().regex(/^\d{5}$/),
           // Rupiah per person, or per night for stays; leave out min for "under" prices.
           spending: z
             .object({

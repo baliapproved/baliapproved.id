@@ -22,6 +22,7 @@ tiktok: starbucksindonesia
 website: https://www.starbucks.co.id/dewata
 phone: +62 361 9343 482
 address: Jl. Sunset Road No. 77, Seminyak, Kuta, Badung
+postalCode: "80361"
 spending:
   min: 30000
   max: 75000

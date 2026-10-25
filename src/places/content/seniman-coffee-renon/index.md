@@ -20,6 +20,7 @@ coordinates:
 instagram: senimancoffee
 website: https://www.senimancoffee.com/seniman-renon/
 address: Jl. Tukad Musi No. 19, Panjer, Denpasar Selatan, Denpasar
+postalCode: "80225"
 spending:
   min: 30000
   max: 100000
