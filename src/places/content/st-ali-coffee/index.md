@@ -23,7 +23,7 @@ address: Jl. Pantai Pererenan No.121, Pererenan, Badung
 spending:
   min: 30000
   max: 100000
-lastVisitedAt: 2026-08-02
+visitedAt: [2026-08-02]
 wifi: available
 power: limited
 seating: [semi-outdoor]

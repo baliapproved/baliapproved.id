@@ -19,6 +19,7 @@ import {
   RiPhoneFill,
   RiPlugFill,
   RiTempColdFill,
+  RiThreadsFill,
   RiTiktokFill,
   RiVolumeDownFill,
   RiWhatsappFill,
@@ -108,6 +109,14 @@ const links = [
     // Platform colors, so each link is recognisable at a glance.
     tone: "bg-[#e4405f]/12 text-[#e4405f]",
     icon: RiInstagramFill,
+  },
+  data.threads && {
+    action: "threads_click",
+    label: "Follow on Threads",
+    value: `@${data.threads}`,
+    href: `https://www.threads.com/@${data.threads}`,
+    tone: "bg-foreground/8 text-foreground",
+    icon: RiThreadsFill,
   },
   data.tiktok && {
     action: "tiktok_click",

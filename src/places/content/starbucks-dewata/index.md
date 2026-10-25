@@ -25,7 +25,7 @@ address: Jl. Sunset Road No. 77, Seminyak, Kuta, Badung
 spending:
   min: 30000
   max: 75000
-lastVisitedAt: 2026-07-23
+visitedAt: [2026-07-23]
 wifi: available
 power: enough
 seating: [indoor, outdoor]

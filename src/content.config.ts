@@ -40,6 +40,7 @@ export const collections = {
           }),
           // Handles without the @; every place must have Instagram.
           instagram: z.string().regex(handle),
+          threads: z.string().regex(handle).optional(),
           tiktok: z.string().regex(handle).optional(),
           website: z.url().optional(),
           // International format, e.g. +62 851 9004 1547.
@@ -56,8 +57,8 @@ export const collections = {
               message: "min must be below max",
             })
             .optional(),
-          // Leave out for places we haven't visited yet; once set, the visit fields are required.
-          lastVisitedAt: z.coerce.date().optional(),
+          // Visit history; leave out for places we haven't visited yet.
+          visitedAt: z.array(z.coerce.date()).min(1).optional(),
           // What we found on that visit, kept as values so places can be filtered later.
           // Download speed in Mbps, or confirmed availability without a speed test.
           wifi: z
@@ -92,7 +93,7 @@ export const collections = {
             .default([]),
         })
         .superRefine((data, ctx) => {
-          if (!data.lastVisitedAt) return;
+          if (!data.visitedAt) return;
 
           const fields = [
             "description",
@@ -133,6 +134,13 @@ export const collections = {
               });
             }
           }
-        }),
+        })
+        .transform((data) => ({
+          ...data,
+          // Keep the latest visit available to the UI and catalog sorting.
+          lastVisitedAt: data.visitedAt?.reduce((latest, visit) =>
+            visit > latest ? visit : latest,
+          ),
+        })),
   }),
 };

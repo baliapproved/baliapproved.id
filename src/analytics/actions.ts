@@ -4,6 +4,7 @@ export const actions: Record<string, string> = {
   collaboration_click: "Collaboration inquiry clicks",
   whatsapp_click: "WhatsApp contact clicks",
   instagram_click: "Instagram clicks",
+  threads_click: "Threads clicks",
   tiktok_click: "TikTok clicks",
   website_click: "Website clicks",
   phone_click: "Phone call clicks",

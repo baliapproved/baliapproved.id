@@ -23,7 +23,7 @@ address: Discovery Shopping Mall
 spending:
   min: 30000
   max: 60000
-lastVisitedAt: 2026-07-29
+visitedAt: [2026-07-29]
 wifi: available
 power: enough
 seating: [indoor]

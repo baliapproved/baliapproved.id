@@ -23,7 +23,7 @@ address: Jl. Tukad Musi No. 19, Panjer, Denpasar Selatan, Denpasar
 spending:
   min: 30000
   max: 100000
-lastVisitedAt: 2026-08-28
+visitedAt: [2026-08-28]
 wifi: 248
 power: enough
 seating: [indoor, outdoor]

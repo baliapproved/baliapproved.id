@@ -25,7 +25,7 @@ address: Jl. Dewi Sri No.11, Legian, Kec. Kuta, Kabupaten Badung, Bali 80361
 spending:
   min: 30000
   max: 100000
-lastVisitedAt: 2026-08-20
+visitedAt: [2026-08-20]
 wifi: 200
 power: enough
 seating: [indoor, outdoor]
