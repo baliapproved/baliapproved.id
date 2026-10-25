@@ -1,0 +1,11 @@
+/* MapLibre's unlayered defaults otherwise override the site's utility styles. */
+.places-map-popup {
+  z-index: 2;
+}
+
+.places-map-popup .maplibregl-popup-content {
+  padding: 0;
+  border-radius: var(--radius-3xl);
+  background: transparent;
+  box-shadow: none;
+}
