@@ -3,7 +3,7 @@ import { SubscribeForm } from "@/newsletter/SubscribeForm";
 import paintTexture from "./assets/paint-texture.png";
 ---
 
-<section class="relative isolate -mt-21 overflow-hidden bg-border pt-21 sm:-mt-23 sm:pt-23">
+<section class="hero-surface relative isolate -mt-21 overflow-hidden bg-border pt-21 sm:-mt-23 sm:pt-23">
   <img
     src={paintTexture.src}
     alt=""
@@ -49,6 +49,13 @@ import paintTexture from "./assets/paint-texture.png";
 </section>
 
 <style>
+  .hero-surface {
+    background-image: linear-gradient(
+      color-mix(in oklab, var(--color-border) 84%, #2cd88a),
+      transparent
+    );
+  }
+
   @property --weekly-angle {
     syntax: "<angle>";
     inherits: true;
