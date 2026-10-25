@@ -6,8 +6,8 @@ category: cafes
 description: >-
   The place is super spacious, and the mix of modern and Balinese styles works really well. We always come here as our safe choice for work because there are proper areas to work, with tables and power outlets. Even though it's almost always crowded, it's still not noisy.
 about: >-
-  Starbucks Reserve Dewata is a coffeehouse on Sunset Road in Bali that opened in January 2019. Known as the Dewata Coffee Sanctuary, it introduces visitors to Indonesian coffee and how it is grown and brewed.
-area: Sunset Road
+  Starbucks Reserve Dewata is a coffeehouse on Sunset Road in Seminyak that opened in January 2019. Known as the Dewata Coffee Sanctuary, it introduces visitors to Indonesian coffee and how it is grown and brewed.
+area: Seminyak
 cover: ./cover.webp
 coverAlt: Brick-lined interior at Starbucks Reserve Dewata in Bali
 cutout:
