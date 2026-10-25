@@ -30,7 +30,12 @@ const places = await Promise.all(
 );
 ---
 
-<header class="group/header bg-border">
+<header
+  class:list={[
+    "group/header",
+    Astro.url.pathname === "/" ? "relative z-10" : "bg-border",
+  ]}
+>
   <div class="mx-auto grid w-full max-w-[1920px] grid-cols-[1fr_auto] items-center gap-2 px-5 py-5 sm:grid-cols-[1fr_auto_1fr] sm:px-8 sm:py-6 lg:px-12 xl:px-20">
     <a
       href="/"
