@@ -1,4 +1,5 @@
 import {
+  FullscreenControl,
   Map,
   Marker,
   Popup,
@@ -83,10 +84,11 @@ export function PlacesMap({ places }: { places: MapPlace[] }) {
           [Math.min(...lngs), Math.min(...lats)],
           [Math.max(...lngs), Math.max(...lats)],
         ],
-        fitBoundsOptions: { padding: 40 },
+        // Clear the fullscreen control above the northernmost pin.
+        fitBoundsOptions: {
+          padding: { top: 80, right: 40, bottom: 40, left: 40 },
+        },
       }}
-      // The About page credits the map below its content instead.
-      attributionControl={false}
       cooperativeGestures
       dragRotate={false}
       touchPitch={false}
@@ -98,6 +100,8 @@ export function PlacesMap({ places }: { places: MapPlace[] }) {
         map.setLayoutProperty("label_other", "visibility", "none");
       }}
     >
+      <FullscreenControl />
+
       {places.map((place) => (
         <Marker
           key={place.slug}
