@@ -1,13 +1,21 @@
-import js from "@eslint/js";
-import { defineConfig, globalIgnores } from "eslint/config";
-import eslintConfigPrettier from "eslint-config-prettier/flat";
-import eslintPluginAstro from "eslint-plugin-astro";
-import tseslint from "typescript-eslint";
+//  @ts-check
 
-export default defineConfig([
-  globalIgnores(["dist/**", ".astro/**", "worker-configuration.d.ts"]),
-  js.configs.recommended,
-  tseslint.configs.recommended,
-  eslintPluginAstro.configs.recommended,
-  eslintConfigPrettier,
-]);
+import { tanstackConfig } from "@tanstack/eslint-config"
+
+export default [
+  ...tanstackConfig,
+  {
+    rules: {
+      "import/no-cycle": "off",
+      "import/order": "off",
+      "import/consistent-type-specifier-style": "off",
+      "sort-imports": "off",
+      "@typescript-eslint/array-type": "off",
+      "@typescript-eslint/require-await": "off",
+      "pnpm/json-enforce-catalog": "off",
+    },
+  },
+  {
+    ignores: ["eslint.config.js", ".prettierrc"],
+  },
+]

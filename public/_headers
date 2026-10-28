@@ -1,9 +1,0 @@
-# Astro fingerprints these assets so updated files get new URLs.
-/_astro/*
-  Cache-Control: public, max-age=31536000, immutable
-
-# After one HTTPS visit, browsers skip plain HTTP here for a year. Subdomains are
-# left out so a subdomain without HTTPS keeps working.
-/*
-  Strict-Transport-Security: max-age=31536000
-  X-Content-Type-Options: nosniff

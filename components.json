@@ -5,7 +5,7 @@
   "tsx": true,
   "tailwind": {
     "config": "",
-    "css": "src/design-system/global.css",
+    "css": "src/styles.css",
     "baseColor": "taupe",
     "cssVariables": true,
     "prefix": ""
@@ -13,11 +13,11 @@
   "iconLibrary": "remixicon",
   "rtl": false,
   "aliases": {
-    "components": "@/design-system",
-    "utils": "@/design-system/utils",
-    "ui": "@/design-system",
-    "lib": "@/design-system",
-    "hooks": "@/design-system"
+    "components": "@/components",
+    "utils": "@/lib/utils",
+    "ui": "@/components/ui",
+    "lib": "@/lib",
+    "hooks": "@/hooks"
   },
   "menuColor": "default",
   "menuAccent": "subtle",

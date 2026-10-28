@@ -1,6 +1,7 @@
-savePrefix: ""
+packages: []
 
 allowBuilds:
   esbuild: true
-  sharp: true
-  workerd: true
+  lightningcss: true
+  unrs-resolver: true
+  msw: false
