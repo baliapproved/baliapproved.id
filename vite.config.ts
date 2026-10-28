@@ -4,6 +4,7 @@ import { devtools } from '@tanstack/devtools-vite'
 import { tanstackStart } from '@tanstack/react-start/plugin/vite'
 import viteReact from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
+import { intlayer } from 'vite-intlayer'
 
 const config = defineConfig({
   server: { port: 4321 },
@@ -12,6 +13,7 @@ const config = defineConfig({
     cloudflare({ viteEnvironment: { name: 'ssr' } }),
     devtools(),
     tailwindcss(),
+    intlayer(),
     tanstackStart(),
     viteReact(),
   ],

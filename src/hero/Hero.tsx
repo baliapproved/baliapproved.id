@@ -1,9 +1,12 @@
 import { cn } from 'cn'
+import { useIntlayer } from 'react-intlayer'
 
 import paintTexture from './assets/paint-texture-green.webp'
 import styles from './hero.module.css'
 
 export function Hero() {
+  const content = useIntlayer('hero')
+
   return (
     <section
       className={cn(
@@ -40,17 +43,14 @@ export function Hero() {
             <use href="#weekly-petal" transform="rotate(180 32 32)" />
             <use href="#weekly-petal" transform="rotate(270 32 32)" />
           </svg>
-          Updated every Friday
+          {content.updateSchedule}
         </p>
 
         <h1 className="mt-6 text-4xl/10 font-medium tracking-tight text-balance sm:text-[2.5rem]/11">
-          Bali places we’ve tried ourselves, rated honestly
+          {content.heading}
         </h1>
 
-        <p className="mt-3 text-base/6 text-pretty text-foreground/65">
-          We review the cafés, stays, and experiences we try, with our own photos and notes from
-          each visit. Subscribe to get each new review by email.
-        </p>
+        <p className="mt-3 text-base/6 text-pretty text-foreground/65">{content.description}</p>
       </div>
     </section>
   )

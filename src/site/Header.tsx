@@ -1,30 +1,35 @@
 import { RiCloseLine, RiMenu2Line } from '@remixicon/react'
-import { Link, useMatchRoute } from '@tanstack/react-router'
+import { Link, useMatch } from '@tanstack/react-router'
 import { useState } from 'react'
+import { useIntlayer, useLocale } from 'react-intlayer'
 
 import { Button } from '@/design-system/button'
 import { Popover, PopoverContent, PopoverTrigger } from '@/design-system/popover'
 import { PopoverBackdrop } from '@/design-system/popover-backdrop'
 import { Search } from '@/search/Search'
-
-import { site } from './site'
+import { LocaleSwitcher } from '@/i18n/LocaleSwitcher'
+import { defaultLocale } from '@/i18n/locale'
 
 const links = [
-  { label: 'Discover', href: '/' },
-  { label: 'Blog', href: '/blog' },
-  { label: 'About', href: '/about' },
+  { label: 'discover', href: '/{-$locale}' },
+  { label: 'blog', href: '/{-$locale}/blog' },
+  { label: 'about', href: '/{-$locale}/about' },
 ] as const
 
 export function Header() {
-  const matchRoute = useMatchRoute()
+  const { navigation } = useIntlayer('site')
+  const { locale } = useLocale()
+  const params = { locale: locale === defaultLocale ? undefined : locale }
+  const homeMatch = useMatch({ from: '/{-$locale}/', shouldThrow: false })
   const [mobileNavOpen, setMobileNavOpen] = useState(false)
 
   return (
-    <header className={matchRoute({ to: '/' }) ? 'relative z-10' : 'bg-border'}>
+    <header className={homeMatch ? 'relative z-10' : 'bg-border'}>
       <div className="mx-auto grid w-full max-w-[1920px] grid-cols-[1fr_auto] items-center gap-2 px-5 py-5 sm:grid-cols-[1fr_auto_1fr] sm:px-8 sm:py-6 lg:px-12 xl:px-20">
         <Link
-          to="/"
-          aria-label={`${site.name} home`}
+          to="/{-$locale}"
+          params={params}
+          aria-label={navigation.home.value}
           className="grid size-11 place-items-center justify-self-start rounded-full transition-opacity hover:opacity-80 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring"
         >
           <svg
@@ -58,18 +63,19 @@ export function Header() {
           </svg>
         </Link>
 
-        <nav aria-label="Primary" className="hidden sm:block">
+        <nav aria-label={navigation.primary.value} className="hidden sm:block">
           <ul className="flex items-center gap-1">
             {links.map(({ label, href }) => (
               <li key={href}>
                 <Link
                   to={href}
+                  params={params}
                   activeOptions={{ exact: true }}
                   className="inline-flex min-h-11 items-center rounded-full px-4 text-base font-medium transition-colors focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-ring"
                   activeProps={{ className: 'bg-background text-foreground' }}
                   inactiveProps={{ className: 'text-foreground/65 hover:bg-foreground/5' }}
                 >
-                  {label}
+                  {navigation[label]}
                 </Link>
               </li>
             ))}
@@ -77,6 +83,7 @@ export function Header() {
         </nav>
 
         <div className="flex items-center gap-2.5 justify-self-end">
+          <LocaleSwitcher />
           <Search />
           <Popover open={mobileNavOpen} onOpenChange={setMobileNavOpen}>
             <PopoverTrigger
@@ -84,7 +91,7 @@ export function Header() {
                 <Button
                   variant="outline"
                   size="icon-lg"
-                  aria-label="Menu"
+                  aria-label={navigation.menu.value}
                   className="min-h-11 min-w-11 rounded-full sm:hidden"
                 />
               }
@@ -101,12 +108,13 @@ export function Header() {
               sideOffset={20}
               className="w-[calc(100vw-2.5rem)] gap-0 p-2 duration-150 ease-out data-[side=bottom]:slide-in-from-top-1! motion-reduce:animate-none! sm:hidden data-open:zoom-in-100! data-closed:zoom-out-100!"
             >
-              <nav aria-label="Primary">
+              <nav aria-label={navigation.primary.value}>
                 <ul className="flex flex-col">
                   {links.map(({ label, href }) => (
                     <li key={href}>
                       <Link
                         to={href}
+                        params={params}
                         activeOptions={{ exact: true }}
                         // Pages don't reload on navigation, so close the menu here.
                         onClick={() => setMobileNavOpen(false)}
@@ -114,7 +122,7 @@ export function Header() {
                         activeProps={{ className: 'bg-muted text-foreground' }}
                         inactiveProps={{ className: 'text-foreground/65' }}
                       >
-                        {label}
+                        {navigation[label]}
                       </Link>
                     </li>
                   ))}
