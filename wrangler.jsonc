@@ -1,0 +1,18 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "baliapproved-id",
+  "main": "@tanstack/react-start/server-entry",
+  "compatibility_date": "2026-10-08",
+  "compatibility_flags": ["nodejs_compat"],
+  "workers_dev": true,
+  "preview_urls": true,
+  "observability": {
+    "enabled": true,
+  },
+  "env": {
+    "staging": {
+      "name": "baliapproved-id-staging",
+      "routes": [{ "pattern": "staging.baliapproved.id", "custom_domain": true }],
+    },
+  },
+}
