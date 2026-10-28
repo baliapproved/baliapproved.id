@@ -27,6 +27,8 @@ Each vertical represents one cohesive functionality and lives directly under `sr
 
 Start from the route or page. Keep small local code close to where it is used. Extract a new vertical when a part becomes substantial, has its own behavior, or is reused.
 
+Implement page composition directly in the route or page file. Do not make route files mere re-exports or pass-through wrappers around another page component. Extract substantial functionality into verticals as needed.
+
 Code shared across multiple verticals should become its own vertical. Generic reusable UI and patterns belong in `src/design-system/`.
 
 Use relative imports within a vertical and `@/` imports between verticals. Avoid barrel files.
