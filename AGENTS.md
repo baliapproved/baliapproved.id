@@ -11,3 +11,10 @@ If `latest` is a prerelease, report its exact version and the newest stable vers
 If the version cannot be verified, stop and ask rather than proceeding.
 
 Exceptions apply only to the specified package, version, and scope. Approved prereleases must still use an exact version.
+
+## Commit
+
+- Always check `git log` first to follow existing commit message style and conventions.
+- Format the commit body using bulleted points to describe changes.
+- Compare the message with the whole commit, including what an amend already contains. Keep bullets that are still true, append a bullet for a change it does not mention, and fix a bullet that is now wrong.
+- Never add `Co-authored-by` tags or credit AI assistants.
