@@ -3,6 +3,7 @@ import { TanStackRouterDevtoolsPanel } from '@tanstack/react-router-devtools'
 import { TanStackDevtools } from '@tanstack/react-devtools'
 
 import appCss from '@/design-system/styles.css?url'
+import { Header } from '@/site/Header'
 
 export const Route = createRootRoute({
   head: () => ({
@@ -40,7 +41,8 @@ function RootDocument({ children }: { children: React.ReactNode }) {
       <head>
         <HeadContent />
       </head>
-      <body>
+      <body className="flex min-h-dvh flex-col">
+        <Header />
         {children}
         <TanStackDevtools
           config={{
