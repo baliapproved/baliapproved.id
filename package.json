@@ -3,15 +3,15 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "vite dev",
-    "build": "vite build",
+    "dev": "pnpm exec wrangler types && vite dev",
+    "build": "pnpm typecheck && vite build",
     "build:staging": "CLOUDFLARE_ENV=staging vite build",
     "preview": "vite preview",
     "lint": "oxlint .",
     "lint:fix": "oxlint --fix .",
     "format": "oxfmt .",
     "format:check": "oxfmt --check .",
-    "typecheck": "intlayer build && tsc --noEmit",
+    "typecheck": "pnpm exec wrangler types && intlayer build && tsc --noEmit",
     "prepare": "simple-git-hooks"
   },
   "dependencies": {

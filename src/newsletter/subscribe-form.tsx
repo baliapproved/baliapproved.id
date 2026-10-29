@@ -12,7 +12,7 @@ import {
 
 import { subscribe, type SubscribeResult } from './subscribe'
 
-type Status = 'idle' | 'submitting' | 'success' | 'invalid' | 'error'
+type Status = 'idle' | 'submitting' | 'success' | 'invalid' | 'rate-limited' | 'error'
 
 export function SubscribeForm() {
   const content = useIntlayer('newsletter')
@@ -55,7 +55,13 @@ export function SubscribeForm() {
   }
 
   const message =
-    status === 'invalid' ? content.invalidEmail : status === 'error' ? content.error : null
+    status === 'invalid'
+      ? content.invalidEmail
+      : status === 'rate-limited'
+        ? content.rateLimited
+        : status === 'error'
+          ? content.error
+          : null
 
   return (
     <form

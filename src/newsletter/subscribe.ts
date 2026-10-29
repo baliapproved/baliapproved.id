@@ -3,7 +3,10 @@ import { z } from 'zod'
 
 import { site } from '@/site/site'
 
-export type SubscribeResult = { status: 'success' } | { status: 'error' }
+export type SubscribeResult =
+  | { status: 'success' }
+  | { status: 'rate-limited' }
+  | { status: 'error' }
 
 const KIT_API = 'https://api.kit.com/v4'
 
@@ -30,6 +33,21 @@ export const subscribe = createServerFn({ method: 'POST' })
     if (data.company) return { status: 'success' }
 
     const { env } = await import('@/env/env.server')
+    const { env: workerEnv } = await import('cloudflare:workers')
+    const { getRequest } = await import('@tanstack/react-start/server')
+    const rateLimiter = workerEnv.SIGNUP_LIMITER
+    if (!rateLimiter) {
+      console.error('Newsletter rate limiter binding is missing')
+      return { status: 'error' }
+    }
+
+    const clientIp = getRequest().headers.get('cf-connecting-ip')
+    if (!clientIp) return { status: 'error' }
+
+    for (const key of [`ip:${clientIp}`, `email:${data.email.toLowerCase()}`]) {
+      const { success } = await rateLimiter.limit({ key })
+      if (!success) return { status: 'rate-limited' }
+    }
 
     // Kit defaults new subscribers to active, which skips confirmation. Creating is an
     // upsert that keeps an existing subscriber's state, so repeat signups are safe.
