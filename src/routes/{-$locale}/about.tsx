@@ -7,6 +7,7 @@ import workerUrl from 'maplibre-gl/dist/maplibre-gl-worker.mjs?worker&url'
 import { useRef, useState } from 'react'
 import { useIntlayer, useLocale } from 'react-intlayer'
 
+import { TeamPhoto } from '@/about/team-photo'
 import { getLocaleFromPath } from '@/i18n/locale'
 import { PlaceMapPreview } from '@/places/place-map-preview'
 import { getMapPlaces } from '@/places/places.functions'
@@ -142,6 +143,7 @@ function About() {
         <p className="mt-3 text-sm/6 text-pretty text-foreground/65 sm:text-base/6">
           {about.description}
         </p>
+        <TeamPhoto className="mt-6 sm:mt-8" />
       </article>
     </main>
   )

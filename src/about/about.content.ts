@@ -18,5 +18,19 @@ export default {
       'zh-CN':
         '在巴厘岛四处探索时，我们发现值得记下来的事情越来越多，于是开始做记录。Bali Approved记录的就是这些。这里介绍的咖啡馆、住宿和体验，都是我们亲自探访或尝试过的。我们用自己拍的照片和文字，分享当时的真实感受。这些记录主要留给我们日后回看，也希望能帮你找到下一个想去的地方。',
     }),
+    teamPhotoAlt: t({
+      en: 'The Bali Approved team together at a café',
+      id: 'Tim Bali Approved berfoto bersama di sebuah kafe',
+      ja: 'カフェでのBali Approvedチームの集合写真',
+      ko: '카페에서 함께 사진을 찍은 Bali Approved 팀',
+      'zh-CN': 'Bali Approved团队在咖啡馆的合影',
+    }),
+    teamPhotoCaption: t({
+      en: 'Yep, that’s us.',
+      id: 'Yap, ini kami.',
+      ja: 'こんな私たちです。',
+      ko: '바로 저희예요.',
+      'zh-CN': '这就是我们。',
+    }),
   },
 } satisfies Dictionary
