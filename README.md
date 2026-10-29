@@ -35,7 +35,7 @@ src/
     hero.content.ts          # Hero copy, all languages
   site/
     Header.tsx
-    site.content.ts          # Navigation and 404 copy, all languages
+    site.content.ts          # Metadata, navigation, and 404 copy, all languages
     site.ts                  # Existing site constants
   i18n/
     locale.ts                # Supported locales and URL behavior
@@ -53,7 +53,7 @@ Add copy to the owning `.content.ts` file with `t({ en: '...', id: '...', ja: '.
 
 Strict mode requires every supported language. Intlayer generates dictionary types and per-language chunks in the ignored `.intlayer/` directory. Development and builds regenerate them automatically; `pnpm typecheck` also regenerates them for a fresh checkout. Generated files are never edited or committed. Production loads the requested language's chunks.
 
-The document head retains the template defaults. SEO work, page-specific metadata, and Places content are deferred. About and Blog remain placeholders.
+The document head uses the localized Bali Approved title and description from `src/site/site.content.ts`, selected by the URL's language, with the existing favicon from `main` and a branded manifest. Shared site constants remain in `src/site/site.ts`. Page-specific metadata and Places content are deferred. About and Blog remain placeholders.
 
 ## Analytics
 

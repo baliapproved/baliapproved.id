@@ -2,6 +2,7 @@ import { HeadContent, Scripts, createRootRoute, useLocation } from '@tanstack/re
 import { TanStackRouterDevtoolsPanel } from '@tanstack/react-router-devtools'
 import { TanStackDevtools } from '@tanstack/react-devtools'
 import { IntlayerProvider, useIntlayer } from 'react-intlayer'
+import { getIntlayer } from 'intlayer'
 
 import appCss from '@/design-system/styles.css?url'
 import { getLocaleFromPath } from '@/i18n/locale'
@@ -9,26 +10,34 @@ import { Analytics } from '@/analytics/analytics'
 import { Header } from '@/site/header'
 
 export const Route = createRootRoute({
-  head: () => ({
-    meta: [
-      {
-        charSet: 'utf-8',
-      },
-      {
-        name: 'viewport',
-        content: 'width=device-width, initial-scale=1',
-      },
-      {
-        title: 'TanStack Start Starter',
-      },
-    ],
-    links: [
-      {
-        rel: 'stylesheet',
-        href: appCss,
-      },
-    ],
-  }),
+  head: ({ matches }) => {
+    const pathname = matches.at(-1)?.pathname ?? '/'
+    const { seo } = getIntlayer('site', getLocaleFromPath(pathname))
+
+    return {
+      meta: [
+        {
+          charSet: 'utf-8',
+        },
+        {
+          name: 'viewport',
+          content: 'width=device-width, initial-scale=1',
+        },
+        {
+          title: seo.title,
+        },
+        { name: 'description', content: seo.description },
+      ],
+      links: [
+        { rel: 'icon', href: '/favicon.ico' },
+        { rel: 'manifest', href: '/manifest.json' },
+        {
+          rel: 'stylesheet',
+          href: appCss,
+        },
+      ],
+    }
+  },
   notFoundComponent: NotFound,
   shellComponent: RootDocument,
 })
