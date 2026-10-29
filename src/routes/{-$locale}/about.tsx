@@ -55,7 +55,16 @@ function About() {
                 key={place.slug}
                 longitude={place.coordinates.lng}
                 latitude={place.coordinates.lat}
-              />
+              >
+                <div className="block size-10 rounded-full bg-background p-1 shadow-md ring-1 ring-foreground/5">
+                  <img
+                    src={place.cutout.src}
+                    alt={place.title}
+                    draggable={false}
+                    className="size-full object-contain"
+                  />
+                </div>
+              </Marker>
             ))}
           </Map>
         </div>

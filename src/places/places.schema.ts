@@ -42,6 +42,8 @@ export type Place = z.output<typeof placeSchema>
 
 export const mapPlaceSchema = z.object({
   slug: z.string().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/),
+  title: z.string().trim().min(1),
+  cutout: z.object({ src: z.string().trim().min(1) }),
   coordinates: z.object({
     lat: z.number().min(-90).max(90),
     lng: z.number().min(-180).max(180),

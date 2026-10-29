@@ -34,9 +34,19 @@ export async function readPlaces(locale: Locale): Promise<Place[]> {
 
 export async function readMapPlaces(locale: Locale) {
   const records = await getIntlayerAsync('place', locale)
-  return records
-    .filter((record) => record.visitedAt.length > 0)
-    .map((record) => mapPlaceSchema.parse(record))
+  return (
+    records
+      .filter((record) => record.visitedAt.length > 0)
+      .map((record) => {
+        const place = mapPlaceSchema.parse(record)
+        return {
+          ...place,
+          cutout: { src: imageUrl(place.slug, place.cutout.src) },
+        }
+      })
+      // North to south, so pins further down the map stack on top.
+      .sort((a, b) => b.coordinates.lat - a.coordinates.lat)
+  )
 }
 
 export async function readPlace(locale: Locale, slug: string) {
