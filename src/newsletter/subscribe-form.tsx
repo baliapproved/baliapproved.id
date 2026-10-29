@@ -1,7 +1,16 @@
-import { useState, type SubmitEvent } from 'react'
+import { useRef, useState, type SubmitEvent } from 'react'
 import { useIntlayer } from 'react-intlayer'
 
 import { useWebsiteAction } from '@/analytics/use-web-action'
+import { Button } from '@/design-system/button'
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from '@/design-system/dialog'
 import { Field, FieldError, FieldLabel } from '@/design-system/field'
 import {
   InputGroup,
@@ -18,10 +27,13 @@ export function SubscribeForm() {
   const content = useIntlayer('newsletter')
   const trackWebsiteAction = useWebsiteAction()
   const [status, setStatus] = useState<Status>('idle')
+  const [open, setOpen] = useState(false)
+  const emailInput = useRef<HTMLInputElement>(null)
 
   async function onSubmit(event: SubmitEvent<HTMLFormElement>) {
     event.preventDefault()
-    const form = new FormData(event.currentTarget)
+    const formElement = event.currentTarget
+    const form = new FormData(formElement)
     const email = String(form.get('email') ?? '').trim()
     const company = String(form.get('company') ?? '')
 
@@ -39,19 +51,16 @@ export function SubscribeForm() {
     }
     setStatus(result.status)
 
+    if (result.status === 'success') {
+      formElement.reset()
+      setOpen(true)
+    }
+
     // The dashboard counts website_action events by action_id. Sent after the result is
     // shown so analytics can never change an accepted signup.
     if (result.status === 'success') {
       trackWebsiteAction('newsletter_signup_accepted', 'hero')
     }
-  }
-
-  if (status === 'success') {
-    return (
-      <p role="status" className="mt-6 text-sm/6 text-pretty text-foreground">
-        {content.success}
-      </p>
-    )
   }
 
   const message =
@@ -64,41 +73,90 @@ export function SubscribeForm() {
           : null
 
   return (
-    <form
-      onSubmit={onSubmit}
-      noValidate
-      className="mt-6 w-full sm:max-w-md"
-      aria-busy={status === 'submitting'}
-    >
-      <Field data-invalid={status === 'invalid' || undefined}>
-        <FieldLabel htmlFor="newsletter-email" className="sr-only">
-          {content.emailLabel}
-        </FieldLabel>
-        <InputGroup className="bg-background">
-          <InputGroupInput
-            id="newsletter-email"
-            name="email"
-            type="email"
-            required
-            autoComplete="email"
-            inputMode="email"
-            placeholder="you@example.com"
-            aria-invalid={status === 'invalid'}
-            aria-describedby={message ? 'newsletter-message' : undefined}
-          />
-          <InputGroupAddon align="inline-end">
-            <InputGroupButton type="submit" disabled={status === 'submitting'}>
-              {status === 'submitting' ? content.submitting : content.submit}
-            </InputGroupButton>
-          </InputGroupAddon>
-        </InputGroup>
-        <FieldError id="newsletter-message">{message}</FieldError>
-      </Field>
+    <>
+      <form
+        onSubmit={onSubmit}
+        noValidate
+        className="mt-6 w-full sm:max-w-md"
+        aria-busy={status === 'submitting'}
+      >
+        <Field data-invalid={status === 'invalid' || undefined}>
+          <FieldLabel htmlFor="newsletter-email" className="sr-only">
+            {content.emailLabel}
+          </FieldLabel>
+          <InputGroup className="bg-background">
+            <InputGroupInput
+              ref={emailInput}
+              id="newsletter-email"
+              name="email"
+              type="email"
+              required
+              autoComplete="email"
+              inputMode="email"
+              placeholder="you@example.com"
+              aria-invalid={status === 'invalid'}
+              aria-describedby={message ? 'newsletter-message' : undefined}
+            />
+            <InputGroupAddon align="inline-end">
+              <InputGroupButton type="submit" disabled={status === 'submitting'}>
+                {status === 'submitting' ? content.submitting : content.submit}
+              </InputGroupButton>
+            </InputGroupAddon>
+          </InputGroup>
+          <FieldError id="newsletter-message">{message}</FieldError>
+        </Field>
 
-      {/* Honeypot. Hidden from people and assistive tech, bots fill it. */}
-      <div className="absolute -left-2499.75 size-px overflow-hidden" aria-hidden="true">
-        <input name="company" type="text" tabIndex={-1} autoComplete="off" />
-      </div>
-    </form>
+        {/* Honeypot. Hidden from people and assistive tech, bots fill it. */}
+        <div className="absolute -left-2499.75 size-px overflow-hidden" aria-hidden="true">
+          <input name="company" type="text" tabIndex={-1} autoComplete="off" />
+        </div>
+      </form>
+
+      <Dialog open={open} onOpenChange={setOpen}>
+        {status === 'success' && (
+          <DialogContent
+            finalFocus={emailInput}
+            closeLabel={content.closeDialog.value}
+            className="group/newsletter max-h-[calc(100dvh-2rem)] gap-5 overflow-y-auto px-6 pt-8 pb-6 duration-200 motion-reduce:animate-none sm:px-8 sm:pt-10 sm:pb-8"
+          >
+            <svg
+              aria-hidden="true"
+              viewBox="0 0 180 136"
+              fill="none"
+              className="mx-auto h-24 w-32 motion-safe:duration-200 motion-safe:group-data-open/newsletter:animate-in motion-safe:group-data-open/newsletter:fade-in-0 sm:h-28 sm:w-40"
+            >
+              <g
+                transform="rotate(-7 90 68)"
+                stroke="#795449"
+                strokeWidth="1.2"
+                strokeLinejoin="round"
+              >
+                <path d="M22 58 86 17a7 7 0 0 1 8 0l64 41v55H22Z" fill="#DF8B73" />
+                <rect x="40" y="25" width="100" height="82" rx="2" fill="#FFF8EB" />
+                <path d="M51 42h39m-39 8h27m-27 16h59m-59 8h47" stroke="#B6A795" />
+                <path d="M116 33h16v21h-16z" fill="#CB654C" stroke="none" />
+                <circle cx="124" cy="43.5" r="4" fill="#FFF8EB" stroke="none" />
+                <path d="m22 58 68 44 68-44v55a4 4 0 0 1-4 4H26a4 4 0 0 1-4-4Z" fill="#EEAF99" />
+                <path d="m24 115 44-27m88 27-44-27" />
+              </g>
+            </svg>
+            <DialogHeader className="items-center gap-3 text-center">
+              <DialogTitle className="text-2xl leading-tight tracking-tight sm:text-3xl">
+                {content.checkInbox}
+              </DialogTitle>
+              <DialogDescription className="text-sm/6 text-pretty">
+                {content.success}
+              </DialogDescription>
+            </DialogHeader>
+            <div className="flex flex-col items-center gap-4">
+              <DialogClose render={<Button size="lg" className="w-full" />}>
+                {content.backToExploring}
+              </DialogClose>
+              <p className="text-center text-xs/5 text-muted-foreground">{content.inboxHint}</p>
+            </div>
+          </DialogContent>
+        )}
+      </Dialog>
+    </>
   )
 }
