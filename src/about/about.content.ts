@@ -32,5 +32,36 @@ export default {
       ko: '바로 저희예요.',
       'zh-CN': '这就是我们。',
     }),
+    workWithUs: {
+      heading: t({
+        en: 'Work with us',
+        id: 'Kerja sama dengan kami',
+        ja: 'コラボレーションのご相談',
+        ko: '함께해요',
+        'zh-CN': '与我们合作',
+      }),
+      description: t({
+        en: 'Run a café, stay, or experience in Bali and want us to come by? Tell us what makes it worth a visit.',
+        id: 'Punya kafe, penginapan, atau aktivitas di Bali dan ingin kami mampir? Ceritakan apa yang membuat tempatmu layak dikunjungi.',
+        ja: 'バリでカフェや宿泊施設、体験プログラムを運営していて、私たちに訪れてほしいとお考えですか？ぜひ、その魅力を教えてください。',
+        ko: '발리에서 카페, 숙소, 체험 프로그램을 운영하며 저희를 초대하고 싶으신가요? 방문할 만한 매력을 알려주세요.',
+        'zh-CN':
+          '你在巴厘岛经营咖啡馆、住宿或体验项目，想邀请我们探访吗？聊聊你的地方有什么值得一去的特色。',
+      }),
+      contact: t({
+        en: 'Message us on WhatsApp',
+        id: 'Hubungi kami di WhatsApp',
+        ja: 'WhatsAppで連絡する',
+        ko: 'WhatsApp으로 연락하기',
+        'zh-CN': '通过WhatsApp联系我们',
+      }),
+      message: t({
+        en: 'Hi Bali Approved, I’d like to discuss a collaboration.',
+        id: 'Halo Bali Approved, saya ingin membicarakan kerja sama.',
+        ja: 'Bali Approvedの皆さま、コラボレーションについてご相談したいです。',
+        ko: '안녕하세요, Bali Approved. 협업에 대해 이야기하고 싶습니다.',
+        'zh-CN': '你好，Bali Approved，我想咨询合作事宜。',
+      }),
+    },
   },
 } satisfies Dictionary

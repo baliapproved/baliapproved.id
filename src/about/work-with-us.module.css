@@ -1,0 +1,17 @@
+.heading {
+  position: relative;
+  isolation: isolate;
+}
+
+.heading::after {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  inset-inline: -0.125rem;
+  bottom: 0;
+  height: 0.5rem;
+  background: color-mix(in oklab, var(--border) 65%, #2cd88a);
+  clip-path: polygon(0 16%, 96% 0, 100% 77%, 3% 100%);
+  transform: rotate(-1deg);
+  pointer-events: none;
+}

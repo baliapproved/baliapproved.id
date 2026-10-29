@@ -1,3 +1,4 @@
+import { RiWhatsappLine } from '@remixicon/react'
 import { createFileRoute } from '@tanstack/react-router'
 import { FullscreenControl, Map, Marker } from '@vis.gl/react-maplibre'
 import { cn } from 'cn'
@@ -8,6 +9,9 @@ import { useRef, useState } from 'react'
 import { useIntlayer, useLocale } from 'react-intlayer'
 
 import { TeamPhoto } from '@/about/team-photo'
+import workWithUsStyles from '@/about/work-with-us.module.css'
+import { useWebsiteAction } from '@/analytics/use-web-action'
+import { buttonVariants } from '@/design-system/button'
 import { getLocaleFromPath } from '@/i18n/locale'
 import { PlaceMapPreview } from '@/places/place-map-preview'
 import { getMapPlaces } from '@/places/places.functions'
@@ -28,6 +32,8 @@ function About() {
   const places = Route.useLoaderData()
   const { map } = useIntlayer('places')
   const about = useIntlayer('about')
+  const { footer } = useIntlayer('site')
+  const trackWebsiteAction = useWebsiteAction()
   const { locale } = useLocale()
   const [selectedSlug, setSelectedSlug] = useState<string>()
   const selectedMarker = useRef<HTMLButtonElement | null>(null)
@@ -144,6 +150,25 @@ function About() {
           {about.description}
         </p>
         <TeamPhoto className="mt-6 sm:mt-8" />
+        <section aria-labelledby="work-with-us" className="mt-12">
+          <h2 id="work-with-us" className="text-xl/7 font-medium tracking-tight text-balance">
+            <span className={workWithUsStyles.heading}>{about.workWithUs.heading}</span>
+          </h2>
+          <p className="mt-3 text-sm/6 text-pretty text-foreground/65 sm:text-base/6">
+            {about.workWithUs.description}
+          </p>
+          <a
+            href={`https://wa.me/6285117325144?text=${encodeURIComponent(about.workWithUs.message.value)}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => trackWebsiteAction('collaboration_click', 'about')}
+            className={cn(buttonVariants({ size: 'lg' }), 'mt-5 min-h-11 w-full sm:w-auto')}
+          >
+            <RiWhatsappLine aria-hidden="true" data-icon="inline-start" />
+            {about.workWithUs.contact}
+            <span className="sr-only"> {footer.opensInNewTab}</span>
+          </a>
+        </section>
       </article>
     </main>
   )
