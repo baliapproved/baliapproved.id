@@ -36,7 +36,7 @@ export function PlaceFindings({
     seating: Seating[]
     cooling: Cooling
     noise: 'quiet' | 'moderate' | 'loud'
-    music: boolean
+    music: boolean | null
     toilet: boolean
     reservation: 'not-needed' | 'recommended' | 'required'
     parking: { motorbike: Parking; car: Parking }
@@ -80,7 +80,12 @@ export function PlaceFindings({
       key: 'music',
       icon: RiMusic2Fill,
       label: findings.music,
-      value: place.music ? findings.availability.available : findings.availability.unavailable,
+      value:
+        place.music === null
+          ? findings.availability.unknown
+          : place.music
+            ? findings.availability.available
+            : findings.availability.unavailable,
     },
     {
       key: 'toilet',

@@ -73,7 +73,8 @@ export const placePageSchema = z.object({
   seating: z.array(z.enum(['indoor', 'outdoor', 'semi-outdoor'])).min(1),
   cooling: z.enum(['ac', 'fan', 'ac-and-fan', 'open-air']),
   noise: z.enum(['quiet', 'moderate', 'loud']),
-  music: z.boolean(),
+  // null means the visit did not confirm whether music was playing.
+  music: z.boolean().nullable(),
   toilet: z.boolean(),
   reservation: z.enum(['not-needed', 'recommended', 'required']),
   parking: z.object({ motorbike: parking, car: parking }),

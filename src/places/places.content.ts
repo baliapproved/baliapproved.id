@@ -410,6 +410,13 @@ export default {
           ko: '없음',
           'zh-CN': '无',
         }),
+        unknown: t({
+          en: 'Unknown',
+          id: 'Belum diketahui',
+          ja: '不明',
+          ko: '알 수 없음',
+          'zh-CN': '未知',
+        }),
       },
       reservation: t({
         en: 'Reservation',
