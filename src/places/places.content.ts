@@ -1,4 +1,4 @@
-import { t, type Dictionary } from 'intlayer'
+import { insert, t, type Dictionary } from 'intlayer'
 
 export default {
   key: 'places',
@@ -99,6 +99,40 @@ export default {
         ko: '클럽',
         'zh-CN': '俱乐部',
       }),
+    },
+    photos: {
+      label: insert(
+        t({
+          en: 'Photos of {{title}}',
+          id: 'Foto {{title}}',
+          ja: '{{title}}の写真',
+          ko: '{{title}} 사진',
+          'zh-CN': '{{title}}的照片',
+        }),
+      ),
+      previous: t({
+        en: 'Previous photo',
+        id: 'Foto sebelumnya',
+        ja: '前の写真',
+        ko: '이전 사진',
+        'zh-CN': '上一张照片',
+      }),
+      next: t({
+        en: 'Next photo',
+        id: 'Foto berikutnya',
+        ja: '次の写真',
+        ko: '다음 사진',
+        'zh-CN': '下一张照片',
+      }),
+      position: insert(
+        t({
+          en: '{{current}} of {{total}}',
+          id: '{{current}} dari {{total}}',
+          ja: '{{total}}枚中{{current}}枚目',
+          ko: '{{total}}장 중 {{current}}번째',
+          'zh-CN': '第{{current}}张，共{{total}}张',
+        }),
+      ),
     },
     badges: {
       approved: t({
