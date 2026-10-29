@@ -100,6 +100,15 @@ export default {
         'zh-CN': '俱乐部',
       }),
     },
+    map: {
+      viewReview: t({
+        en: 'View review',
+        id: 'Lihat ulasan',
+        ja: 'レビューを見る',
+        ko: '후기 보기',
+        'zh-CN': '查看评价',
+      }),
+    },
     header: {
       spending: t({
         en: 'Spending',

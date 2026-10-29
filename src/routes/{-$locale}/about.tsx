@@ -1,10 +1,11 @@
-import { createFileRoute } from '@tanstack/react-router'
+import { createFileRoute, Link } from '@tanstack/react-router'
 import { FullscreenControl, Map, Marker, Popup } from '@vis.gl/react-maplibre'
 import 'maplibre-gl/dist/maplibre-gl.css'
 import workerUrl from 'maplibre-gl/dist/maplibre-gl-worker.mjs?worker&url'
 import { useRef, useState } from 'react'
+import { useIntlayer, useLocale } from 'react-intlayer'
 
-import { getLocaleFromPath } from '@/i18n/locale'
+import { defaultLocale, getLocaleFromPath, getLocalePathPrefix } from '@/i18n/locale'
 import { getMapPlaces } from '@/places/places.functions'
 
 export const Route = createFileRoute('/{-$locale}/about')({
@@ -15,6 +16,8 @@ export const Route = createFileRoute('/{-$locale}/about')({
 
 function About() {
   const places = Route.useLoaderData()
+  const { map } = useIntlayer('places')
+  const { locale } = useLocale()
   const [selectedSlug, setSelectedSlug] = useState<string>()
   const selectedMarker = useRef<HTMLButtonElement | null>(null)
   const selected = places.find((place) => place.slug === selectedSlug)
@@ -105,6 +108,16 @@ function About() {
                 style={{ zIndex: 2 }}
               >
                 <p className="pr-4 font-sans text-sm font-medium">{selected.title}</p>
+                <Link
+                  to="/{-$locale}/places/$slug"
+                  params={{
+                    locale: locale === defaultLocale ? undefined : getLocalePathPrefix(locale),
+                    slug: selected.slug,
+                  }}
+                  className="mt-1 block font-sans text-sm underline underline-offset-4 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
+                >
+                  {map.viewReview}
+                </Link>
               </Popup>
             )}
           </Map>
