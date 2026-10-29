@@ -101,6 +101,13 @@ export default {
       }),
     },
     map: {
+      label: t({
+        en: 'Map of places we’ve reviewed',
+        id: 'Peta tempat yang sudah kami ulas',
+        ja: 'レビューしたスポットの地図',
+        ko: '저희가 리뷰한 장소 지도',
+        'zh-CN': '我们评价过的地点地图',
+      }),
       controls: {
         enterFullscreen: t({
           en: 'Enter fullscreen',

@@ -37,6 +37,7 @@ export function PlaceMap({ places, className }: { places: MapPlace[]; className?
         key={locale}
         workerUrl={workerUrl}
         locale={{
+          'Map.Title': map.label.value,
           'FullscreenControl.Enter': map.controls.enterFullscreen.value,
           'FullscreenControl.Exit': map.controls.exitFullscreen.value,
           'CooperativeGesturesHandler.WindowsHelpText': map.controls.zoomWithCtrl.value,
