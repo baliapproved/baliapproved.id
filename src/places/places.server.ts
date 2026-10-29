@@ -1,37 +1,8 @@
 import { getIntlayerAsync } from 'intlayer'
-import { z } from 'zod'
 
 import type { Locale } from '@/i18n/locale'
 
-import { placeSchema, type Place } from './places.schema'
-
-// Fields the place page renders so far. The listing schema stays narrow.
-const placePageSchema = z.object({
-  slug: z.string(),
-  title: z.string().trim().min(1),
-  area: z.string().trim().min(1),
-  category: z.enum(['cafes', 'restaurants', 'stays', 'clubs']),
-  badge: z.enum(['approved', 'good-find']).optional(),
-  spending: z
-    .object({
-      min: z.number().int().positive().optional(),
-      max: z.number().int().positive(),
-    })
-    .optional(),
-  cutout: z.object({
-    src: z.string().trim().min(1),
-    alt: z.string().trim().min(1),
-  }),
-  mapsUrl: z.string().trim().min(1),
-  gallery: z
-    .array(
-      z.object({
-        src: z.string().trim().min(1),
-        alt: z.string().trim().min(1),
-      }),
-    )
-    .min(1),
-})
+import { placePageSchema, placeSchema, type Place } from './places.schema'
 
 const images = import.meta.glob<string>('./content/*/*.webp', {
   eager: true,
@@ -74,6 +45,26 @@ export async function readPlace(locale: Locale, slug: string) {
     badge: place.badge,
     spending: place.spending,
     mapsUrl: place.mapsUrl,
+    about: place.about,
+    description: place.description,
+    caveats: place.caveats,
+    instagram: place.instagram,
+    threads: place.threads,
+    tiktok: place.tiktok,
+    website: place.website,
+    whatsapp: place.whatsapp,
+    phone: place.phone,
+    address: place.address,
+    lastVisitedAt: place.visitedAt.reduce((latest, visit) => (visit > latest ? visit : latest)),
+    wifi: place.wifi,
+    power: place.power,
+    seating: place.seating,
+    cooling: place.cooling,
+    noise: place.noise,
+    music: place.music,
+    toilet: place.toilet,
+    reservation: place.reservation,
+    parking: place.parking,
     cutout: { ...place.cutout, src: imageUrl(place.slug, place.cutout.src) },
     photos: place.gallery.map((photo) => ({
       alt: photo.alt,

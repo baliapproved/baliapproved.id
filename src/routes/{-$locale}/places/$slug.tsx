@@ -4,8 +4,11 @@ import { useIntlayer, useLocale } from 'react-intlayer'
 
 import { buttonVariants } from '@/design-system/button'
 import { getLocaleFromPath } from '@/i18n/locale'
+import { PlaceAbout } from '@/places/place-about'
 import { PlaceBadge } from '@/places/place-badge'
+import { PlaceFindings } from '@/places/place-findings'
 import { PlacePhotos } from '@/places/place-photos'
+import { PlaceReview } from '@/places/place-review'
 import { getPlace } from '@/places/places.functions'
 import { formatSpending } from '@/places/spending'
 import { site } from '@/site/site'
@@ -81,6 +84,10 @@ function PlacePage() {
         <div className="mt-6">
           <PlacePhotos title={place.title} photos={place.photos} />
         </div>
+
+        <PlaceAbout place={place} />
+        <PlaceReview place={place} />
+        <PlaceFindings place={place} />
       </article>
     </main>
   )

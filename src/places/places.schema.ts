@@ -1,6 +1,15 @@
 import { z } from 'zod'
 
-// Listing fields only. Content files keep the rest for the place page.
+const amounts = ['plenty', 'enough', 'limited', 'unavailable'] as const
+
+// Shared scale for any category. Street parking is not an amount.
+export const amount = z.enum(amounts)
+export const parking = z.enum([...amounts, 'street'])
+
+export type Amount = z.infer<typeof amount>
+export type Parking = z.infer<typeof parking>
+
+// Listing fields only. The page schema below keeps the rest.
 export const placeSchema = z
   .object({
     place_id: z.string().trim().min(1),
@@ -30,3 +39,50 @@ export const placeSchema = z
   }))
 
 export type Place = z.output<typeof placeSchema>
+
+export const placePageSchema = z.object({
+  slug: z.string(),
+  title: z.string().trim().min(1),
+  area: z.string().trim().min(1),
+  category: z.enum(['cafes', 'restaurants', 'stays', 'clubs']),
+  badge: z.enum(['approved', 'good-find']).optional(),
+  spending: z
+    .object({
+      min: z.number().int().positive().optional(),
+      max: z.number().int().positive(),
+    })
+    .optional(),
+  cutout: z.object({
+    src: z.string().trim().min(1),
+    alt: z.string().trim().min(1),
+  }),
+  mapsUrl: z.string().trim().min(1),
+  about: z.string().trim().min(1),
+  description: z.string().trim().min(1),
+  caveats: z.string().trim().min(1),
+  instagram: z.string().trim().min(1),
+  threads: z.string().trim().min(1).optional(),
+  tiktok: z.string().trim().min(1).optional(),
+  website: z.url().optional(),
+  whatsapp: z.string().trim().min(1).optional(),
+  phone: z.string().trim().min(1).optional(),
+  address: z.string().trim().min(1),
+  visitedAt: z.array(z.iso.date()).min(1),
+  wifi: z.union([z.number().positive(), z.literal('available')]),
+  power: amount,
+  seating: z.array(z.enum(['indoor', 'outdoor', 'semi-outdoor'])).min(1),
+  cooling: z.enum(['ac', 'fan', 'ac-and-fan', 'open-air']),
+  noise: z.enum(['quiet', 'moderate', 'loud']),
+  music: z.boolean(),
+  toilet: z.boolean(),
+  reservation: z.enum(['not-needed', 'recommended', 'required']),
+  parking: z.object({ motorbike: parking, car: parking }),
+  gallery: z
+    .array(
+      z.object({
+        src: z.string().trim().min(1),
+        alt: z.string().trim().min(1),
+      }),
+    )
+    .min(1),
+})
