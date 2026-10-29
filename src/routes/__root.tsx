@@ -2,7 +2,7 @@ import { HeadContent, Scripts, createRootRoute, useLocation } from '@tanstack/re
 import { TanStackRouterDevtoolsPanel } from '@tanstack/react-router-devtools'
 import { TanStackDevtools } from '@tanstack/react-devtools'
 import { IntlayerProvider, useIntlayer } from 'react-intlayer'
-import { getIntlayer } from 'intlayer'
+import { getIntlayerAsync } from 'intlayer'
 
 import appCss from '@/design-system/styles.css?url'
 import { getLocaleFromPath } from '@/i18n/locale'
@@ -10,9 +10,9 @@ import { Analytics } from '@/analytics/analytics'
 import { Header } from '@/site/header'
 
 export const Route = createRootRoute({
-  head: ({ matches }) => {
+  head: async ({ matches }) => {
     const pathname = matches.at(-1)?.pathname ?? '/'
-    const { seo } = getIntlayer('site', getLocaleFromPath(pathname))
+    const { seo } = await getIntlayerAsync('site', getLocaleFromPath(pathname))
 
     return {
       meta: [

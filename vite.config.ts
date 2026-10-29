@@ -9,6 +9,14 @@ import { intlayer } from 'vite-intlayer'
 const config = defineConfig({
   server: { port: 4321 },
   resolve: { tsconfigPaths: true },
+  environments: {
+    ssr: {
+      optimizeDeps: {
+        // Generated translations must stay in Vite's module graph for hot updates.
+        exclude: ['@intlayer/dictionaries-entry'],
+      },
+    },
+  },
   plugins: [
     cloudflare({ viteEnvironment: { name: 'ssr' } }),
     devtools(),
