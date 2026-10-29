@@ -13,6 +13,7 @@ import { Route as Char123LocaleChar125RouteRouteImport } from './routes/{-$local
 import { Route as Char123LocaleChar125IndexRouteImport } from './routes/{-$locale}/index'
 import { Route as Char123LocaleChar125AboutRouteImport } from './routes/{-$locale}/about'
 import { Route as Char123LocaleChar125BlogRouteImport } from './routes/{-$locale}/blog'
+import { Route as Char123LocaleChar125PlacesSlugRouteImport } from './routes/{-$locale}/places/$slug'
 
 const Char123LocaleChar125RouteRoute =
   Char123LocaleChar125RouteRouteImport.update({
@@ -38,17 +39,25 @@ const Char123LocaleChar125BlogRoute =
     path: '/blog',
     getParentRoute: () => Char123LocaleChar125RouteRoute,
   } as any)
+const Char123LocaleChar125PlacesSlugRoute =
+  Char123LocaleChar125PlacesSlugRouteImport.update({
+    id: '/places/$slug',
+    path: '/places/$slug',
+    getParentRoute: () => Char123LocaleChar125RouteRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/{-$locale}': typeof Char123LocaleChar125RouteRouteWithChildren
   '/{-$locale}/about': typeof Char123LocaleChar125AboutRoute
   '/{-$locale}/blog': typeof Char123LocaleChar125BlogRoute
   '/{-$locale}/': typeof Char123LocaleChar125IndexRoute
+  '/{-$locale}/places/$slug': typeof Char123LocaleChar125PlacesSlugRoute
 }
 export interface FileRoutesByTo {
   '/{-$locale}/about': typeof Char123LocaleChar125AboutRoute
   '/{-$locale}/blog': typeof Char123LocaleChar125BlogRoute
   '/{-$locale}': typeof Char123LocaleChar125IndexRoute
+  '/{-$locale}/places/$slug': typeof Char123LocaleChar125PlacesSlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -56,19 +65,29 @@ export interface FileRoutesById {
   '/{-$locale}/about': typeof Char123LocaleChar125AboutRoute
   '/{-$locale}/blog': typeof Char123LocaleChar125BlogRoute
   '/{-$locale}/': typeof Char123LocaleChar125IndexRoute
+  '/{-$locale}/places/$slug': typeof Char123LocaleChar125PlacesSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    '/{-$locale}' | '/{-$locale}/about' | '/{-$locale}/blog' | '/{-$locale}/'
+    | '/{-$locale}'
+    | '/{-$locale}/about'
+    | '/{-$locale}/blog'
+    | '/{-$locale}/'
+    | '/{-$locale}/places/$slug'
   fileRoutesByTo: FileRoutesByTo
-  to: '/{-$locale}/about' | '/{-$locale}/blog' | '/{-$locale}'
+  to:
+    | '/{-$locale}/about'
+    | '/{-$locale}/blog'
+    | '/{-$locale}'
+    | '/{-$locale}/places/$slug'
   id:
     | '__root__'
     | '/{-$locale}'
     | '/{-$locale}/about'
     | '/{-$locale}/blog'
     | '/{-$locale}/'
+    | '/{-$locale}/places/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -105,6 +124,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof Char123LocaleChar125BlogRouteImport
       parentRoute: typeof Char123LocaleChar125RouteRoute
     }
+    '/{-$locale}/places/$slug': {
+      id: '/{-$locale}/places/$slug'
+      path: '/places/$slug'
+      fullPath: '/{-$locale}/places/$slug'
+      preLoaderRoute: typeof Char123LocaleChar125PlacesSlugRouteImport
+      parentRoute: typeof Char123LocaleChar125RouteRoute
+    }
   }
 }
 
@@ -112,6 +138,7 @@ interface Char123LocaleChar125RouteRouteChildren {
   Char123LocaleChar125AboutRoute: typeof Char123LocaleChar125AboutRoute
   Char123LocaleChar125BlogRoute: typeof Char123LocaleChar125BlogRoute
   Char123LocaleChar125IndexRoute: typeof Char123LocaleChar125IndexRoute
+  Char123LocaleChar125PlacesSlugRoute: typeof Char123LocaleChar125PlacesSlugRoute
 }
 
 const Char123LocaleChar125RouteRouteChildren: Char123LocaleChar125RouteRouteChildren =
@@ -119,6 +146,7 @@ const Char123LocaleChar125RouteRouteChildren: Char123LocaleChar125RouteRouteChil
     Char123LocaleChar125AboutRoute: Char123LocaleChar125AboutRoute,
     Char123LocaleChar125BlogRoute: Char123LocaleChar125BlogRoute,
     Char123LocaleChar125IndexRoute: Char123LocaleChar125IndexRoute,
+    Char123LocaleChar125PlacesSlugRoute: Char123LocaleChar125PlacesSlugRoute,
   }
 
 const Char123LocaleChar125RouteRouteWithChildren =
