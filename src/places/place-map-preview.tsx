@@ -4,7 +4,7 @@ import { Popup, useMap, type PopupInstance } from '@vis.gl/react-maplibre'
 import { useEffect, useId, useRef } from 'react'
 import { useIntlayer, useLocale } from 'react-intlayer'
 
-import { Button } from '@/design-system/button'
+import { Button, buttonVariants } from '@/design-system/button'
 import {
   Card,
   CardAction,
@@ -107,24 +107,21 @@ export function PlaceMapPreview({ place, onClose }: { place: MapPlace; onClose: 
           <p className="line-clamp-3 text-sm/5 text-muted-foreground">{place.description}</p>
         </CardContent>
         <CardFooter>
-          <Button
-            variant="secondary"
-            size="lg"
-            className="min-h-11 w-full"
-            nativeButton={false}
-            render={
-              <Link
-                to="/{-$locale}/places/$slug"
-                params={{
-                  locale: locale === defaultLocale ? undefined : getLocalePathPrefix(locale),
-                  slug: place.slug,
-                }}
-              />
-            }
+          <Link
+            to="/{-$locale}/places/$slug"
+            params={{
+              locale: locale === defaultLocale ? undefined : getLocalePathPrefix(locale),
+              slug: place.slug,
+            }}
+            className={buttonVariants({
+              variant: 'secondary',
+              size: 'lg',
+              className: 'min-h-11 w-full',
+            })}
           >
             {mapLabels.viewReview}
             <RiArrowRightUpLine aria-hidden="true" data-icon="inline-end" />
-          </Button>
+          </Link>
         </CardFooter>
       </Card>
     </Popup>
