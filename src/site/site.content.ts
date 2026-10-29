@@ -98,6 +98,29 @@ export default {
         'zh-CN': '（在新标签页中打开）',
       }),
     },
+    blog: {
+      heading: t({
+        en: 'The blog is coming soon',
+        id: 'Blog segera hadir',
+        ja: 'ブログは近日公開です',
+        ko: '블로그는 곧 공개됩니다',
+        'zh-CN': '博客即将上线',
+      }),
+      description: t({
+        en: "Until then, read our reviews of the places we've visited in Bali.",
+        id: 'Sambil menunggu, baca ulasan tempat-tempat yang sudah kami kunjungi di Bali.',
+        ja: '公開までは、バリで私たちが訪れた場所のレビューをどうぞ。',
+        ko: '그때까지는 발리에서 직접 방문한 장소의 리뷰를 읽어 보세요.',
+        'zh-CN': '在此之前，可以先读我们在巴厘岛亲自到访过的地点评价。',
+      }),
+      seePlaces: t({
+        en: 'See the places',
+        id: 'Lihat tempatnya',
+        ja: '場所を見る',
+        ko: '장소 보기',
+        'zh-CN': '查看地点',
+      }),
+    },
     notFound: {
       description: t({
         en: 'The requested page could not be found.',
