@@ -493,6 +493,22 @@ export default {
         'zh-CN': '仅路边',
       }),
     },
+    more: {
+      heading: t({
+        en: 'More places',
+        id: 'Tempat lainnya',
+        ja: 'ほかの場所',
+        ko: '다른 장소',
+        'zh-CN': '更多地点',
+      }),
+      seeAll: t({
+        en: 'See all',
+        id: 'Lihat semua',
+        ja: 'すべて見る',
+        ko: '모두 보기',
+        'zh-CN': '查看全部',
+      }),
+    },
     badges: {
       approved: t({
         en: 'Approved',

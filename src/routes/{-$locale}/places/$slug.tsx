@@ -7,28 +7,34 @@ import { getLocaleFromPath } from '@/i18n/locale'
 import { PlaceAbout } from '@/places/place-about'
 import { PlaceBadge } from '@/places/place-badge'
 import { PlaceFindings } from '@/places/place-findings'
+import { PlaceMore } from '@/places/place-more'
 import { PlacePhotos } from '@/places/place-photos'
 import { PlaceReview } from '@/places/place-review'
-import { getPlace } from '@/places/places.functions'
+import { getPlace, getPlaces } from '@/places/places.functions'
 import { formatSpending } from '@/places/spending'
 import { site } from '@/site/site'
 
 export const Route = createFileRoute('/{-$locale}/places/$slug')({
   loader: async ({ location, params }) => {
-    const place = await getPlace({
-      data: { locale: getLocaleFromPath(location.pathname), slug: params.slug },
-    })
+    const locale = getLocaleFromPath(location.pathname)
+    const [place, places] = await Promise.all([
+      getPlace({ data: { locale, slug: params.slug } }),
+      getPlaces({ data: { locale } }),
+    ])
     if (!place) throw notFound()
-    return place
+    return {
+      place,
+      morePlaces: places.filter((item) => item.slug !== params.slug).slice(0, 3),
+    }
   },
   head: ({ loaderData }) => ({
-    meta: loaderData ? [{ title: `${loaderData.title} | ${site.name}` }] : [],
+    meta: loaderData ? [{ title: `${loaderData.place.title} | ${site.name}` }] : [],
   }),
   component: PlacePage,
 })
 
 function PlacePage() {
-  const place = Route.useLoaderData()
+  const { place, morePlaces } = Route.useLoaderData()
   const { listing, header } = useIntlayer('places')
   const { footer } = useIntlayer('site')
   const { locale } = useLocale()
@@ -88,6 +94,7 @@ function PlacePage() {
         <PlaceAbout place={place} />
         <PlaceReview place={place} />
         <PlaceFindings place={place} />
+        <PlaceMore places={morePlaces} />
       </article>
     </main>
   )
