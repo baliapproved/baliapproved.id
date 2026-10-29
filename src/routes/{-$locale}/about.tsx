@@ -14,6 +14,8 @@ export const Route = createFileRoute('/{-$locale}/about')({
 
 function About() {
   const places = Route.useLoaderData()
+  const latitudes = places.map((place) => place.coordinates.lat)
+  const longitudes = places.map((place) => place.coordinates.lng)
 
   return (
     <main className="flex-1 bg-border">
@@ -22,7 +24,20 @@ function About() {
           <Map
             workerUrl={workerUrl}
             mapStyle="https://tiles.openfreemap.org/styles/positron"
-            initialViewState={{ longitude: 115.19, latitude: -8.41, zoom: 8.5 }}
+            initialViewState={
+              places.length > 0
+                ? {
+                    bounds: [
+                      [Math.min(...longitudes), Math.min(...latitudes)],
+                      [Math.max(...longitudes), Math.max(...latitudes)],
+                    ],
+                    fitBoundsOptions: {
+                      padding: { top: 80, right: 40, bottom: 40, left: 40 },
+                      maxZoom: 15,
+                    },
+                  }
+                : { longitude: 115.19, latitude: -8.41, zoom: 8.5 }
+            }
             cooperativeGestures
             dragRotate={false}
             touchPitch={false}
