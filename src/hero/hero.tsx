@@ -1,6 +1,8 @@
 import { cn } from 'cn'
 import { useIntlayer } from 'react-intlayer'
 
+import { SubscribeForm } from '@/newsletter/subscribe-form'
+
 import paintTexture from './assets/paint-texture-green.webp'
 import styles from './hero.module.css'
 
@@ -53,6 +55,8 @@ export function Hero() {
         <p className="mt-3 text-sm/6 text-pretty text-foreground/65 sm:text-base/6">
           {content.description}
         </p>
+
+        <SubscribeForm />
       </div>
     </section>
   )

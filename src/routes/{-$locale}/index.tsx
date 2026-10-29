@@ -1,6 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router'
 
-import { Hero } from '@/hero/Hero'
+import { Hero } from '@/hero/hero'
 
 export const Route = createFileRoute('/{-$locale}/')({
   component: Home,

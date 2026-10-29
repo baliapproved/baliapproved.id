@@ -6,8 +6,8 @@ import { useIntlayer, useLocale } from 'react-intlayer'
 import { Button } from '@/design-system/button'
 import { Popover, PopoverContent, PopoverTrigger } from '@/design-system/popover'
 import { PopoverBackdrop } from '@/design-system/popover-backdrop'
-import { Search } from '@/search/Search'
-import { LocaleSwitcher } from '@/i18n/LocaleSwitcher'
+import { Search } from '@/search/search'
+import { LocaleSwitcher } from '@/i18n/locale-switcher'
 import { defaultLocale, getLocalePathPrefix } from '@/i18n/locale'
 
 const links = [

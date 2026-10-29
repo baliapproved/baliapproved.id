@@ -6,7 +6,7 @@ import { IntlayerProvider, useIntlayer } from 'react-intlayer'
 import appCss from '@/design-system/styles.css?url'
 import { getLocaleFromPath } from '@/i18n/locale'
 import { Analytics } from '@/analytics/analytics'
-import { Header } from '@/site/Header'
+import { Header } from '@/site/header'
 
 export const Route = createRootRoute({
   head: () => ({
