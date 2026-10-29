@@ -8,6 +8,7 @@ import appCss from '@/design-system/styles.css?url'
 import { getLocaleFromPath } from '@/i18n/locale'
 import { Analytics } from '@/analytics/analytics'
 import { Header } from '@/site/header'
+import { Footer } from '@/site/footer'
 
 export const Route = createRootRoute({
   head: async ({ matches }) => {
@@ -67,6 +68,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
           <IntlayerProvider locale={locale}>
             <Header />
             {children}
+            <Footer />
           </IntlayerProvider>
         </Analytics>
         <TanStackDevtools

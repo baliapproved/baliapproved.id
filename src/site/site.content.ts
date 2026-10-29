@@ -53,6 +53,51 @@ export default {
       search: t({ en: 'Search', id: 'Cari', ja: '検索', ko: '검색', 'zh-CN': '搜索' }),
       language: t({ en: 'Language', id: 'Bahasa', ja: '言語', ko: '언어', 'zh-CN': '语言' }),
     },
+    footer: {
+      navigation: t({
+        en: 'Footer',
+        id: 'Navigasi footer',
+        ja: 'フッター',
+        ko: '하단 메뉴',
+        'zh-CN': '页脚导航',
+      }),
+      explore: t({
+        en: 'Explore',
+        id: 'Jelajahi',
+        ja: '探索する',
+        ko: '탐색',
+        'zh-CN': '探索',
+      }),
+      follow: t({
+        en: 'Follow',
+        id: 'Ikuti kami',
+        ja: 'フォロー',
+        ko: '팔로우',
+        'zh-CN': '关注我们',
+      }),
+      reviewsBy: t({
+        en: 'Reviews by',
+        id: 'Ulasan oleh',
+        ja: 'レビュアー',
+        ko: '리뷰 작성자',
+        'zh-CN': '评价作者',
+      }),
+      description: t({
+        en: 'Honest reviews of cafés, stays, and experiences around Bali, from our own visits. Subscribe to get each new review by email.',
+        id: 'Ulasan jujur tentang kafe, penginapan, dan pengalaman di Bali dari kunjungan kami sendiri. Berlangganan untuk menerima setiap ulasan baru lewat email.',
+        ja: '実際に訪れたバリのカフェ、宿泊施設、体験を正直にレビュー。登録すると、新しいレビューをメールでお届けします。',
+        ko: '직접 방문한 발리의 카페, 숙소, 체험을 솔직하게 리뷰합니다. 구독하고 새로운 리뷰를 이메일로 받아보세요.',
+        'zh-CN':
+          '亲自探访巴厘岛的咖啡馆、住宿和体验，分享真实评价。订阅后，每篇新评价都会通过邮件发送给您。',
+      }),
+      opensInNewTab: t({
+        en: '(opens in a new tab)',
+        id: '(dibuka di tab baru)',
+        ja: '（新しいタブで開きます）',
+        ko: '(새 탭에서 열림)',
+        'zh-CN': '（在新标签页中打开）',
+      }),
+    },
     notFound: {
       description: t({
         en: 'The requested page could not be found.',

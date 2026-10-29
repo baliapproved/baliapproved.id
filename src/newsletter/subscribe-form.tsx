@@ -1,4 +1,4 @@
-import { useRef, useState, type SubmitEvent } from 'react'
+import { useId, useRef, useState, type SubmitEvent } from 'react'
 import { useIntlayer } from 'react-intlayer'
 
 import { useWebsiteAction } from '@/analytics/use-web-action'
@@ -23,8 +23,11 @@ import { subscribe, type SubscribeResult } from './subscribe'
 
 type Status = 'idle' | 'submitting' | 'success' | 'invalid' | 'rate-limited' | 'error'
 
-export function SubscribeForm() {
+export function SubscribeForm({ placement = 'hero' }: { placement?: 'hero' | 'footer' }) {
   const content = useIntlayer('newsletter')
+  const id = useId()
+  const emailId = `${id}-email`
+  const messageId = `${id}-message`
   const trackWebsiteAction = useWebsiteAction()
   const [status, setStatus] = useState<Status>('idle')
   const [open, setOpen] = useState(false)
@@ -59,7 +62,7 @@ export function SubscribeForm() {
     // The dashboard counts website_action events by action_id. Sent after the result is
     // shown so analytics can never change an accepted signup.
     if (result.status === 'success') {
-      trackWebsiteAction('newsletter_signup_accepted', 'hero')
+      trackWebsiteAction('newsletter_signup_accepted', placement)
     }
   }
 
@@ -81,13 +84,13 @@ export function SubscribeForm() {
         aria-busy={status === 'submitting'}
       >
         <Field data-invalid={status === 'invalid' || undefined}>
-          <FieldLabel htmlFor="newsletter-email" className="sr-only">
+          <FieldLabel htmlFor={emailId} className="sr-only">
             {content.emailLabel}
           </FieldLabel>
           <InputGroup className="bg-background">
             <InputGroupInput
               ref={emailInput}
-              id="newsletter-email"
+              id={emailId}
               name="email"
               type="email"
               required
@@ -95,7 +98,7 @@ export function SubscribeForm() {
               inputMode="email"
               placeholder="you@example.com"
               aria-invalid={status === 'invalid'}
-              aria-describedby={message ? 'newsletter-message' : undefined}
+              aria-describedby={message ? messageId : undefined}
             />
             <InputGroupAddon align="inline-end">
               <InputGroupButton type="submit" disabled={status === 'submitting'}>
@@ -103,7 +106,7 @@ export function SubscribeForm() {
               </InputGroupButton>
             </InputGroupAddon>
           </InputGroup>
-          <FieldError id="newsletter-message">{message}</FieldError>
+          <FieldError id={messageId}>{message}</FieldError>
         </Field>
 
         {/* Honeypot. Hidden from people and assistive tech, bots fill it. */}
