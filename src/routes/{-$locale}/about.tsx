@@ -1,6 +1,7 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { FullscreenControl, Map, Marker } from '@vis.gl/react-maplibre'
 import { cn } from 'cn'
+import { getIntlayerAsync } from 'intlayer'
 import 'maplibre-gl/dist/maplibre-gl.css'
 import workerUrl from 'maplibre-gl/dist/maplibre-gl-worker.mjs?worker&url'
 import { useRef, useState } from 'react'
@@ -10,10 +11,15 @@ import { getLocaleFromPath } from '@/i18n/locale'
 import { PlaceMapPreview } from '@/places/place-map-preview'
 import { getMapPlaces } from '@/places/places.functions'
 import styles from '@/places/place-map.module.css'
+import { site } from '@/site/site'
 
 export const Route = createFileRoute('/{-$locale}/about')({
   loader: ({ location }) =>
     getMapPlaces({ data: { locale: getLocaleFromPath(location.pathname) } }),
+  head: async ({ match }) => {
+    const { navigation } = await getIntlayerAsync('site', getLocaleFromPath(match.pathname))
+    return { meta: [{ title: `${navigation.about} | ${site.name}` }] }
+  },
   component: About,
 })
 
