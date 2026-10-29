@@ -1,5 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { FullscreenControl, Map, Marker } from '@vis.gl/react-maplibre'
+import { cn } from 'cn'
 import 'maplibre-gl/dist/maplibre-gl.css'
 import workerUrl from 'maplibre-gl/dist/maplibre-gl-worker.mjs?worker&url'
 import { useRef, useState } from 'react'
@@ -7,6 +8,7 @@ import { useRef, useState } from 'react'
 import { getLocaleFromPath } from '@/i18n/locale'
 import { PlaceMapPreview } from '@/places/place-map-preview'
 import { getMapPlaces } from '@/places/places.functions'
+import styles from '@/places/place-map.module.css'
 
 export const Route = createFileRoute('/{-$locale}/about')({
   loader: ({ location }) =>
@@ -31,7 +33,10 @@ function About() {
     <main className="flex-1 bg-border">
       <div className="mx-auto w-full max-w-150 px-5 pb-12 sm:pt-10">
         <div
-          className="-mx-5 aspect-4/5 overflow-hidden bg-muted sm:mx-0 sm:aspect-4/3 sm:rounded-3xl lg:-mx-48 lg:aspect-16/9"
+          className={cn(
+            styles.map,
+            '-mx-5 aspect-4/5 overflow-hidden bg-muted sm:mx-0 sm:aspect-4/3 sm:rounded-3xl lg:-mx-48 lg:aspect-16/9',
+          )}
           onKeyDown={(event) => {
             if (event.key === 'Escape' && selected) {
               event.stopPropagation()
