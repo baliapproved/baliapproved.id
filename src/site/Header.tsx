@@ -119,7 +119,7 @@ export function Header() {
                         activeOptions={{ exact: true }}
                         // Pages don't reload on navigation, so close the menu here.
                         onClick={() => setMobileNavOpen(false)}
-                        className="flex min-h-12 items-center rounded-2xl px-4 text-lg font-medium transition-colors hover:bg-muted focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-ring"
+                        className="flex min-h-11 items-center rounded-2xl px-4 text-base font-medium transition-colors hover:bg-muted focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-ring"
                         activeProps={{ className: 'bg-muted text-foreground' }}
                         inactiveProps={{ className: 'text-foreground/65' }}
                       >
