@@ -1,13 +1,20 @@
 import { createFileRoute } from '@tanstack/react-router'
-import { Map } from '@vis.gl/react-maplibre'
+import { Map, Marker } from '@vis.gl/react-maplibre'
 import 'maplibre-gl/dist/maplibre-gl.css'
 import workerUrl from 'maplibre-gl/dist/maplibre-gl-worker.mjs?worker&url'
 
+import { getLocaleFromPath } from '@/i18n/locale'
+import { getMapPlaces } from '@/places/places.functions'
+
 export const Route = createFileRoute('/{-$locale}/about')({
+  loader: ({ location }) =>
+    getMapPlaces({ data: { locale: getLocaleFromPath(location.pathname) } }),
   component: About,
 })
 
 function About() {
+  const places = Route.useLoaderData()
+
   return (
     <main className="flex-1 bg-border">
       <div className="mx-auto w-full max-w-150 px-5 pb-12 sm:pt-10">
@@ -19,7 +26,15 @@ function About() {
             cooperativeGestures
             dragRotate={false}
             touchPitch={false}
-          />
+          >
+            {places.map((place) => (
+              <Marker
+                key={place.slug}
+                longitude={place.coordinates.lng}
+                latitude={place.coordinates.lat}
+              />
+            ))}
+          </Map>
         </div>
       </div>
     </main>

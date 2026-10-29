@@ -2,7 +2,7 @@ import { getIntlayerAsync } from 'intlayer'
 
 import type { Locale } from '@/i18n/locale'
 
-import { placePageSchema, placeSchema, type Place } from './places.schema'
+import { mapPlaceSchema, placePageSchema, placeSchema, type Place } from './places.schema'
 
 const images = import.meta.glob<string>('./content/*/*.webp', {
   eager: true,
@@ -30,6 +30,13 @@ export async function readPlaces(locale: Locale): Promise<Place[]> {
   return places.sort(
     (a, b) => b.lastVisitedAt.localeCompare(a.lastVisitedAt) || a.slug.localeCompare(b.slug),
   )
+}
+
+export async function readMapPlaces(locale: Locale) {
+  const records = await getIntlayerAsync('place', locale)
+  return records
+    .filter((record) => record.visitedAt.length > 0)
+    .map((record) => mapPlaceSchema.parse(record))
 }
 
 export async function readPlace(locale: Locale, slug: string) {
