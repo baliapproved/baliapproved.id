@@ -136,9 +136,14 @@
       'Hiragino Sans', 'Hiragino Kaku Gothic ProN', 'Yu Gothic UI', 'Yu Gothic', Meiryo,
       'Noto Sans CJK JP', sans-serif;
   }
-  :lang(zh-TW) {
+  :lang(zh-CN) {
     --font-cjk:
-      'PingFang TC', 'Microsoft JhengHei UI', 'Microsoft JhengHei', 'Noto Sans CJK TC', sans-serif;
+      'PingFang SC', 'Microsoft YaHei UI', 'Microsoft YaHei', 'Noto Sans CJK SC', sans-serif;
+  }
+  :lang(ko) {
+    word-break: keep-all;
+    --font-cjk:
+      'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans CJK KR', 'Noto Sans KR', sans-serif;
   }
   /* Redeclared on every lang root so nested ones, like the language picker's links, pick up their own --font-cjk. */
   html,

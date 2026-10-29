@@ -11,18 +11,21 @@ Local development runs at http://localhost:4321.
 
 ## Languages
 
-Intlayer serves the existing site in English, Indonesian, Japanese, and Taiwanese Traditional Chinese (`zh-TW`). URLs determine the language on both the server and client:
+Intlayer serves the existing site in English, Indonesian, Japanese, Korean, and Chinese. URLs determine the language on both the server and client:
 
-| Language                     | Home     | About          | Blog          |
-| ---------------------------- | -------- | -------------- | ------------- |
-| English                      | `/`      | `/about`       | `/blog`       |
-| Indonesian                   | `/id`    | `/id/about`    | `/id/blog`    |
-| Japanese                     | `/ja`    | `/ja/about`    | `/ja/blog`    |
-| Traditional Chinese (Taiwan) | `/zh-TW` | `/zh-TW/about` | `/zh-TW/blog` |
+| Language   | Home  | About       | Blog       |
+| ---------- | ----- | ----------- | ---------- |
+| English    | `/`   | `/about`    | `/blog`    |
+| Indonesian | `/id` | `/id/about` | `/id/blog` |
+| Japanese   | `/ja` | `/ja/about` | `/ja/blog` |
+| Korean     | `/ko` | `/ko/about` | `/ko/blog` |
+| Chinese    | `/zh` | `/zh/about` | `/zh/blog` |
 
-The picker keeps the current page, query string, and hash. Language changes use document navigation so each selection starts with the correct server-rendered language. Regular page links use TanStack client navigation and retain the current locale. Browser preferences and cookies do not override a public URL. `/en/...` redirects permanently to the unprefixed English URL; unsupported prefixes return 404.
+The picker keeps the current page, query string, and hash. Language changes use document navigation so each selection starts with the correct server-rendered language. Regular page links use TanStack client navigation and retain the current locale. Browser preferences and cookies do not override a public URL. `/en/...` redirects permanently to the unprefixed English URL. The previous `/ko-KR/...` and `/zh-TW/...` URLs redirect permanently to `/ko/...` and `/zh/...`, keeping the page, query string, and hash. Unsupported prefixes return 404.
 
-Translations live with the functionality that owns them. Each content declaration contains all four languages:
+Chinese uses Simplified Chinese with the `zh-CN` locale, dictionary keys, and document and picker language tags. Its public URL prefix stays `/zh`; `/zh-CN/...` also redirects permanently to `/zh/...`. Korean uses `/ko`.
+
+Translations live with the functionality that owns them. Each content declaration contains all five languages:
 
 ```text
 intlayer.config.ts
@@ -46,7 +49,7 @@ src/
       blog.tsx
 ```
 
-Add copy to the owning `.content.ts` file with `t({ en: '...', id: '...', ja: '...', 'zh-TW': '...' })`. Components read typed content with `useIntlayer('hero')` or `useIntlayer('site')`; render the returned fields directly in JSX and use `.value` for string attributes such as `aria-label`.
+Add copy to the owning `.content.ts` file with `t({ en: '...', id: '...', ja: '...', ko: '...', 'zh-CN': '...' })`. Components read typed content with `useIntlayer('hero')` or `useIntlayer('site')`; render the returned fields directly in JSX and use `.value` for string attributes such as `aria-label`.
 
 Strict mode requires every supported language. Intlayer generates dictionary types and per-language chunks in the ignored `.intlayer/` directory. Development and builds regenerate them automatically; `pnpm typecheck` also regenerates them for a fresh checkout. Generated files are never edited or committed. Production loads the requested language's chunks.
 

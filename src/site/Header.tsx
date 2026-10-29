@@ -8,7 +8,7 @@ import { Popover, PopoverContent, PopoverTrigger } from '@/design-system/popover
 import { PopoverBackdrop } from '@/design-system/popover-backdrop'
 import { Search } from '@/search/Search'
 import { LocaleSwitcher } from '@/i18n/LocaleSwitcher'
-import { defaultLocale } from '@/i18n/locale'
+import { defaultLocale, getLocalePathPrefix } from '@/i18n/locale'
 
 const links = [
   { label: 'discover', href: '/{-$locale}' },
@@ -19,7 +19,7 @@ const links = [
 export function Header() {
   const { navigation } = useIntlayer('site')
   const { locale } = useLocale()
-  const params = { locale: locale === defaultLocale ? undefined : locale }
+  const params = { locale: locale === defaultLocale ? undefined : getLocalePathPrefix(locale) }
   const homeMatch = useMatch({ from: '/{-$locale}/', shouldThrow: false })
   const [mobileNavOpen, setMobileNavOpen] = useState(false)
 
