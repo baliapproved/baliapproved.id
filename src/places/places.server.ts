@@ -5,10 +5,24 @@ import type { Locale } from '@/i18n/locale'
 
 import { placeSchema, type Place } from './places.schema'
 
-// Photo strip only. The listing schema stays narrow, and the rest of the place stays in the content file.
-const placePhotosSchema = z.object({
+// Fields the place page renders so far. The listing schema stays narrow.
+const placePageSchema = z.object({
   slug: z.string(),
   title: z.string().trim().min(1),
+  area: z.string().trim().min(1),
+  category: z.enum(['cafes', 'restaurants', 'stays', 'clubs']),
+  badge: z.enum(['approved', 'good-find']).optional(),
+  spending: z
+    .object({
+      min: z.number().int().positive().optional(),
+      max: z.number().int().positive(),
+    })
+    .optional(),
+  cutout: z.object({
+    src: z.string().trim().min(1),
+    alt: z.string().trim().min(1),
+  }),
+  mapsUrl: z.string().trim().min(1),
   gallery: z
     .array(
       z.object({
@@ -47,14 +61,20 @@ export async function readPlaces(locale: Locale): Promise<Place[]> {
   )
 }
 
-export async function readPlacePhotos(locale: Locale, slug: string) {
+export async function readPlace(locale: Locale, slug: string) {
   const records = await getIntlayerAsync('place', locale)
   const record = records.find((item) => item.slug === slug)
   if (!record) return null
 
-  const place = placePhotosSchema.parse(record)
+  const place = placePageSchema.parse(record)
   return {
     title: place.title,
+    area: place.area,
+    category: place.category,
+    badge: place.badge,
+    spending: place.spending,
+    mapsUrl: place.mapsUrl,
+    cutout: { ...place.cutout, src: imageUrl(place.slug, place.cutout.src) },
     photos: place.gallery.map((photo) => ({
       alt: photo.alt,
       src: imageUrl(place.slug, photo.src),

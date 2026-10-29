@@ -100,6 +100,22 @@ export default {
         'zh-CN': '俱乐部',
       }),
     },
+    header: {
+      spending: t({
+        en: 'Spending',
+        id: 'Pengeluaran',
+        ja: '予算',
+        ko: '비용',
+        'zh-CN': '花费',
+      }),
+      openInMaps: t({
+        en: 'Open in Maps',
+        id: 'Buka di Maps',
+        ja: 'マップで開く',
+        ko: '지도에서 열기',
+        'zh-CN': '在地图中打开',
+      }),
+    },
     photos: {
       label: insert(
         t({
