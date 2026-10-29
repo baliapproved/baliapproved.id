@@ -11,7 +11,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@/design-system/dialog'
-import { Field, FieldError, FieldLabel } from '@/design-system/field'
+import { Field, FieldLabel } from '@/design-system/field'
 import {
   InputGroup,
   InputGroupAddon,
@@ -21,13 +21,12 @@ import {
 
 import { subscribe, type SubscribeResult } from './subscribe'
 
-type Status = 'idle' | 'submitting' | 'success' | 'rate-limited' | 'error'
+type Status = 'idle' | 'submitting' | 'success'
 
 export function SubscribeForm({ placement = 'hero' }: { placement?: 'hero' | 'footer' }) {
   const content = useIntlayer('newsletter')
   const id = useId()
   const emailId = `${id}-email`
-  const messageId = `${id}-message`
   const trackWebsiteAction = useWebsiteAction()
   const [status, setStatus] = useState<Status>('idle')
   const [open, setOpen] = useState(false)
@@ -47,22 +46,27 @@ export function SubscribeForm({ placement = 'hero' }: { placement?: 'hero' | 'fo
     } catch {
       result = { status: 'error' }
     }
-    setStatus(result.status)
 
-    if (result.status === 'success') {
-      formElement.reset()
-      setOpen(true)
+    if (result.status === 'rate-limited') {
+      setStatus('idle')
+      alert(content.rateLimited.value)
+      return
     }
+
+    if (result.status === 'error') {
+      setStatus('idle')
+      alert(content.error.value)
+      return
+    }
+
+    setStatus('success')
+    formElement.reset()
+    setOpen(true)
 
     // The dashboard counts website_action events by action_id. Sent after the result is
     // shown so analytics can never change an accepted signup.
-    if (result.status === 'success') {
-      trackWebsiteAction('newsletter_signup_accepted', placement)
-    }
+    trackWebsiteAction('newsletter_signup_accepted', placement)
   }
-
-  const message =
-    status === 'rate-limited' ? content.rateLimited : status === 'error' ? content.error : null
 
   return (
     <>
@@ -71,7 +75,7 @@ export function SubscribeForm({ placement = 'hero' }: { placement?: 'hero' | 'fo
         className="mt-6 w-full sm:max-w-md"
         aria-busy={status === 'submitting'}
       >
-        <Field data-invalid={Boolean(message) || undefined}>
+        <Field>
           <FieldLabel htmlFor={emailId} className="sr-only">
             {content.emailLabel}
           </FieldLabel>
@@ -85,8 +89,6 @@ export function SubscribeForm({ placement = 'hero' }: { placement?: 'hero' | 'fo
               autoComplete="email"
               inputMode="email"
               placeholder="you@example.com"
-              aria-invalid={Boolean(message)}
-              aria-describedby={message ? messageId : undefined}
             />
             <InputGroupAddon align="inline-end">
               <InputGroupButton type="submit" disabled={status === 'submitting'}>
@@ -94,7 +96,6 @@ export function SubscribeForm({ placement = 'hero' }: { placement?: 'hero' | 'fo
               </InputGroupButton>
             </InputGroupAddon>
           </InputGroup>
-          <FieldError id={messageId}>{message}</FieldError>
         </Field>
 
         {/* Honeypot. Hidden from people and assistive tech, bots fill it. */}
