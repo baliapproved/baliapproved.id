@@ -21,7 +21,7 @@ import {
 
 import { subscribe, type SubscribeResult } from './subscribe'
 
-type Status = 'idle' | 'submitting' | 'success' | 'invalid' | 'rate-limited' | 'error'
+type Status = 'idle' | 'submitting' | 'success' | 'rate-limited' | 'error'
 
 export function SubscribeForm({ placement = 'hero' }: { placement?: 'hero' | 'footer' }) {
   const content = useIntlayer('newsletter')
@@ -39,11 +39,6 @@ export function SubscribeForm({ placement = 'hero' }: { placement?: 'hero' | 'fo
     const form = new FormData(formElement)
     const email = String(form.get('email') ?? '').trim()
     const company = String(form.get('company') ?? '')
-
-    if (!event.currentTarget.checkValidity()) {
-      setStatus('invalid')
-      return
-    }
 
     setStatus('submitting')
     let result: SubscribeResult
@@ -67,23 +62,16 @@ export function SubscribeForm({ placement = 'hero' }: { placement?: 'hero' | 'fo
   }
 
   const message =
-    status === 'invalid'
-      ? content.invalidEmail
-      : status === 'rate-limited'
-        ? content.rateLimited
-        : status === 'error'
-          ? content.error
-          : null
+    status === 'rate-limited' ? content.rateLimited : status === 'error' ? content.error : null
 
   return (
     <>
       <form
         onSubmit={onSubmit}
-        noValidate
         className="mt-6 w-full sm:max-w-md"
         aria-busy={status === 'submitting'}
       >
-        <Field data-invalid={status === 'invalid' || undefined}>
+        <Field data-invalid={Boolean(message) || undefined}>
           <FieldLabel htmlFor={emailId} className="sr-only">
             {content.emailLabel}
           </FieldLabel>
@@ -97,7 +85,7 @@ export function SubscribeForm({ placement = 'hero' }: { placement?: 'hero' | 'fo
               autoComplete="email"
               inputMode="email"
               placeholder="you@example.com"
-              aria-invalid={status === 'invalid'}
+              aria-invalid={Boolean(message)}
               aria-describedby={message ? messageId : undefined}
             />
             <InputGroupAddon align="inline-end">
