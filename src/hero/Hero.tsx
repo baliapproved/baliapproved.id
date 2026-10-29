@@ -27,7 +27,7 @@ export function Hero() {
         <p
           className={cn(
             styles.weeklyBadge,
-            'relative inline-flex items-center gap-2 rounded-full border border-transparent px-3 py-1 text-sm text-foreground/65',
+            'relative inline-flex items-center gap-2 rounded-full border border-transparent px-3 py-1 text-xs text-foreground/65 sm:text-sm',
           )}
         >
           <svg
@@ -46,11 +46,13 @@ export function Hero() {
           {content.updateSchedule}
         </p>
 
-        <h1 className="mt-6 text-4xl/10 font-medium tracking-tight text-balance sm:text-[2.5rem]/11">
+        <h1 className="mt-5 text-[1.625rem]/8 font-medium tracking-tight text-balance sm:mt-6 sm:text-[2.5rem]/11">
           {content.heading}
         </h1>
 
-        <p className="mt-3 text-base/6 text-pretty text-foreground/65">{content.description}</p>
+        <p className="mt-3 text-sm/6 text-pretty text-foreground/65 sm:text-base/6">
+          {content.description}
+        </p>
       </div>
     </section>
   )
