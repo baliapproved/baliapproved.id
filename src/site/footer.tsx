@@ -37,7 +37,7 @@ const externalColumns = [
 ] as const
 
 const linkClassName =
-  'inline-flex min-h-9 items-center rounded-sm py-1 transition-colors hover:text-foreground focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring'
+  'transition-colors hover:text-foreground focus-visible:rounded-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring'
 
 export function Footer() {
   // Workers have no request clock at module initialization (the year is 1970).
@@ -56,17 +56,17 @@ export function Footer() {
               to="/{-$locale}"
               params={params}
               aria-label={navigation.home.value}
-              className="inline-flex min-h-11 items-center gap-3 rounded-full transition-opacity hover:opacity-80 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring"
+              className="inline-flex items-center gap-3 rounded-full transition-opacity hover:opacity-80 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring"
             >
               <img
                 src={baliApprovedLogo}
                 alt=""
-                width={96}
-                height={96}
+                width={112}
+                height={112}
                 loading="lazy"
-                className="size-12 shrink-0 rounded-full bg-[#005f43] p-1"
+                className="size-14 shrink-0 rounded-full bg-[#005f43] p-1.5"
               />
-              <span className="text-lg font-medium tracking-tight">{site.name}</span>
+              <span className="text-lg font-medium">{site.name}</span>
             </Link>
 
             <SubscribeForm placement="footer" />
@@ -82,7 +82,7 @@ export function Footer() {
               <h2 className="font-medium">{footer.explore}</h2>
               <ul className="mt-2 flex flex-col text-foreground/65">
                 {exploreLinks.map(({ label, href }) => (
-                  <li key={href}>
+                  <li key={href} className="py-1.5">
                     <Link to={href} params={params} className={linkClassName}>
                       {navigation[label]}
                     </Link>
@@ -96,7 +96,7 @@ export function Footer() {
                 <h2 className="font-medium">{footer[title]}</h2>
                 <ul className="mt-2 flex flex-col text-foreground/65">
                   {links.map(({ label, href, action }) => (
-                    <li key={href}>
+                    <li key={href} className="py-1.5">
                       <a
                         href={href}
                         target="_blank"
