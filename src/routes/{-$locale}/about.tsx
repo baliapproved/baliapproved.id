@@ -41,6 +41,12 @@ function About() {
             cooperativeGestures
             dragRotate={false}
             touchPitch={false}
+            onLoad={({ target: map }) => {
+              map.setPaintProperty('background', 'background-color', '#f7f5f2')
+              map.setPaintProperty('water', 'fill-color', '#d6e1de')
+              map.setLayoutProperty('label_village', 'visibility', 'none')
+              map.setLayoutProperty('label_other', 'visibility', 'none')
+            }}
           >
             <FullscreenControl />
 
