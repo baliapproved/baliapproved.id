@@ -31,13 +31,13 @@ export function PlaceReview({
         {place.badge && <PlaceBadge badge={place.badge} />}
       </div>
       <p className="mt-3 text-base/7 text-pretty text-muted-foreground">{place.description}</p>
-      <div className="relative mt-6 overflow-hidden rounded-3xl border border-[#128a52]/15 bg-[#42e89a]/12 p-1">
+      <div className="relative mt-6 overflow-hidden rounded-3xl border border-[#2a8c8c]/15 bg-[#2a8c8c]/8 p-1">
         <RiCalendarCheckFill
           aria-hidden
-          className="pointer-events-none absolute -right-4 -bottom-6 size-28 -rotate-12 text-[#42e89a]/45"
+          className="pointer-events-none absolute -right-4 -bottom-6 size-28 -rotate-12 text-[#2a8c8c]/10"
         />
-        <div className="relative flex gap-3 rounded-2xl border border-[#128a52]/20 px-4 py-3">
-          <RiCalendarCheckFill aria-hidden className="mt-0.5 size-5 shrink-0 text-[#128a52]" />
+        <div className="relative flex gap-3 rounded-2xl border border-[#2a8c8c]/25 px-4 py-3">
+          <RiCalendarCheckFill aria-hidden className="mt-0.5 size-5 shrink-0 text-[#2a8c8c]" />
           <div>
             <p className="italic">
               {review.lastVisited}{' '}

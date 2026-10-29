@@ -120,7 +120,12 @@ export function PlaceFindings({
       <ul className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
         {items.map((item) => (
           <li key={item.key} className="min-w-0">
-            <PlaceFact icon={item.icon} label={item.label} value={item.value} />
+            <PlaceFact
+              icon={item.icon}
+              label={item.label}
+              value={item.value}
+              tone="bg-[#2a8c8c]/12 text-[#2a8c8c]"
+            />
           </li>
         ))}
       </ul>

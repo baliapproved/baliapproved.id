@@ -16,7 +16,7 @@ export function PlaceFact({
   value: ReactNode
   href?: string
   newTabLabel?: ReactNode
-  // Platform color for the icon bubble. Findings leave this off and stay black.
+  // Icon bubble color. About passes a platform color; findings pass the visit green.
   tone?: string
 }) {
   const external = href?.startsWith('http')
