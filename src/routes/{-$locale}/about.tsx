@@ -4,6 +4,7 @@ import { cn } from 'cn'
 import 'maplibre-gl/dist/maplibre-gl.css'
 import workerUrl from 'maplibre-gl/dist/maplibre-gl-worker.mjs?worker&url'
 import { useRef, useState } from 'react'
+import { useIntlayer } from 'react-intlayer'
 
 import { getLocaleFromPath } from '@/i18n/locale'
 import { PlaceMapPreview } from '@/places/place-map-preview'
@@ -18,6 +19,7 @@ export const Route = createFileRoute('/{-$locale}/about')({
 
 function About() {
   const places = Route.useLoaderData()
+  const { map } = useIntlayer('places')
   const [selectedSlug, setSelectedSlug] = useState<string>()
   const selectedMarker = useRef<HTMLButtonElement | null>(null)
   const selected = places.find((place) => place.slug === selectedSlug)
@@ -31,11 +33,11 @@ function About() {
 
   return (
     <main className="flex-1 bg-border">
-      <div className="mx-auto w-full max-w-150 px-5 pb-12 sm:pt-10">
+      <figure className="mx-auto w-full max-w-150 px-5 pb-12 sm:pt-10">
         <div
           className={cn(
             styles.map,
-            '-mx-5 aspect-4/5 overflow-hidden bg-muted sm:mx-0 sm:aspect-4/3 sm:rounded-3xl lg:-mx-48 lg:aspect-16/9',
+            '-mx-5 aspect-4/5 overflow-hidden bg-muted ring-1 ring-foreground/5 has-[canvas:focus-visible]:ring-2 has-[canvas:focus-visible]:ring-ring sm:mx-0 sm:aspect-4/3 sm:rounded-3xl sm:shadow-md sm:ring-offset-3 sm:ring-offset-background lg:-mx-48 lg:aspect-16/9 [&_canvas]:outline-none',
           )}
           onKeyDown={(event) => {
             if (event.key === 'Escape' && selected) {
@@ -107,7 +109,10 @@ function About() {
             )}
           </Map>
         </div>
-      </div>
+        <figcaption className="mt-4 text-center text-sm/5 text-pretty text-muted-foreground">
+          {map.caption}
+        </figcaption>
+      </figure>
     </main>
   )
 }

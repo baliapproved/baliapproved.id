@@ -101,6 +101,13 @@ export default {
       }),
     },
     map: {
+      caption: t({
+        en: 'Every place we’ve reviewed. Tap a pin for details.',
+        id: 'Tempat yang kami ulas. Ketuk pin untuk detail.',
+        ja: '私たちがレビューしたすべてのスポット。ピンをタップすると詳細が見られます。',
+        ko: '저희가 리뷰한 모든 장소입니다. 핀을 눌러 자세히 살펴보세요.',
+        'zh-CN': '我们评价过的每一个地点。点击标记查看详情。',
+      }),
       closePreview: t({
         en: 'Close place preview',
         id: 'Tutup pratinjau tempat',
