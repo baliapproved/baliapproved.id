@@ -5,6 +5,7 @@ import { IntlayerProvider, useIntlayer } from 'react-intlayer'
 import { getIntlayerAsync } from 'intlayer'
 
 import appCss from '@/design-system/styles.css?url'
+import { Toaster } from '@/design-system/sonner'
 import { getLocaleFromPath } from '@/i18n/locale'
 import { Analytics } from '@/analytics/analytics'
 import { Header } from '@/site/header'
@@ -71,6 +72,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
             <Footer />
           </IntlayerProvider>
         </Analytics>
+        <Toaster richColors position="top-center" />
         <TanStackDevtools
           config={{
             position: 'bottom-right',

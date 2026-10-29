@@ -151,3 +151,12 @@
     @apply font-sans;
   }
 }
+
+/* Sonner injects styles after ours; increase font specificity and preserve Nova's toast shape. */
+html [data-sonner-toaster] {
+  font-family: var(--font-sans), sans-serif;
+}
+
+.cn-toast {
+  @apply rounded-2xl! border-3!;
+}

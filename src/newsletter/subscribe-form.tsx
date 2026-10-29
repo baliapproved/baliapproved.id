@@ -1,5 +1,6 @@
 import { useId, useRef, useState, type SubmitEvent } from 'react'
 import { useIntlayer } from 'react-intlayer'
+import { toast } from 'sonner'
 
 import { useWebsiteAction } from '@/analytics/use-web-action'
 import { Button } from '@/design-system/button'
@@ -49,13 +50,13 @@ export function SubscribeForm({ placement = 'hero' }: { placement?: 'hero' | 'fo
 
     if (result.status === 'rate-limited') {
       setStatus('idle')
-      alert(content.rateLimited.value)
+      toast.error(content.rateLimited.value)
       return
     }
 
     if (result.status === 'error') {
       setStatus('idle')
-      alert(content.error.value)
+      toast.error(content.error.value)
       return
     }
 
