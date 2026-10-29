@@ -5,6 +5,7 @@ import { IntlayerProvider, useIntlayer } from 'react-intlayer'
 
 import appCss from '@/design-system/styles.css?url'
 import { getLocaleFromPath } from '@/i18n/locale'
+import { Analytics } from '@/analytics/analytics'
 import { Header } from '@/site/Header'
 
 export const Route = createRootRoute({
@@ -53,10 +54,12 @@ function RootDocument({ children }: { children: React.ReactNode }) {
         <HeadContent />
       </head>
       <body className="flex min-h-dvh flex-col">
-        <IntlayerProvider locale={locale}>
-          <Header />
-          {children}
-        </IntlayerProvider>
+        <Analytics>
+          <IntlayerProvider locale={locale}>
+            <Header />
+            {children}
+          </IntlayerProvider>
+        </Analytics>
         <TanStackDevtools
           config={{
             position: 'bottom-right',

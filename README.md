@@ -52,6 +52,12 @@ Strict mode requires every supported language. Intlayer generates dictionary typ
 
 The document head retains the template defaults. SEO work, page-specific metadata, and Places content are deferred. About and Blog remain placeholders.
 
+## Analytics
+
+PostHog loads in the browser through `PostHogProvider`. Pageviews follow route changes and carry the page language as `locale`.
+
+Settings are baked in at build time. Copy `.env.example` to `.env.local` for development, or set `VITE_POSTHOG_PROJECT_TOKEN` and `VITE_POSTHOG_HOST` in Cloudflare's build environment for production. Leave the token empty to disable analytics. Runtime Worker variables cannot change analytics in a site that is already built.
+
 ## Checks and builds
 
 ```bash
