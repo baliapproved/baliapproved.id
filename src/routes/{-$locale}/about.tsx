@@ -4,7 +4,7 @@ import { cn } from 'cn'
 import 'maplibre-gl/dist/maplibre-gl.css'
 import workerUrl from 'maplibre-gl/dist/maplibre-gl-worker.mjs?worker&url'
 import { useRef, useState } from 'react'
-import { useIntlayer } from 'react-intlayer'
+import { useIntlayer, useLocale } from 'react-intlayer'
 
 import { getLocaleFromPath } from '@/i18n/locale'
 import { PlaceMapPreview } from '@/places/place-map-preview'
@@ -20,6 +20,7 @@ export const Route = createFileRoute('/{-$locale}/about')({
 function About() {
   const places = Route.useLoaderData()
   const { map } = useIntlayer('places')
+  const { locale } = useLocale()
   const [selectedSlug, setSelectedSlug] = useState<string>()
   const selectedMarker = useRef<HTMLButtonElement | null>(null)
   const selected = places.find((place) => place.slug === selectedSlug)
@@ -47,7 +48,15 @@ function About() {
           }}
         >
           <Map
+            key={locale}
             workerUrl={workerUrl}
+            locale={{
+              'FullscreenControl.Enter': map.controls.enterFullscreen.value,
+              'FullscreenControl.Exit': map.controls.exitFullscreen.value,
+              'CooperativeGesturesHandler.WindowsHelpText': map.controls.zoomWithCtrl.value,
+              'CooperativeGesturesHandler.MacHelpText': map.controls.zoomWithCommand.value,
+              'CooperativeGesturesHandler.MobileHelpText': map.controls.moveWithTwoFingers.value,
+            }}
             mapStyle="https://tiles.openfreemap.org/styles/positron"
             initialViewState={
               places.length > 0
@@ -83,13 +92,13 @@ function About() {
                 style={{ zIndex: selectedSlug === place.slug ? 1 : undefined }}
               >
                 <button
+                  ref={selectedSlug === place.slug ? selectedMarker : undefined}
                   type="button"
                   aria-label={place.title}
                   aria-haspopup="dialog"
                   aria-expanded={selectedSlug === place.slug}
                   onClick={(event) => {
                     event.stopPropagation()
-                    selectedMarker.current = event.currentTarget
                     setSelectedSlug(selectedSlug === place.slug ? undefined : place.slug)
                   }}
                   className="block size-10 cursor-pointer rounded-full bg-background p-1 shadow-md ring-1 ring-foreground/5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring aria-expanded:ring-2 aria-expanded:ring-primary motion-safe:transition-transform motion-safe:hover:scale-110"

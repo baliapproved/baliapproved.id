@@ -101,6 +101,43 @@ export default {
       }),
     },
     map: {
+      controls: {
+        enterFullscreen: t({
+          en: 'Enter fullscreen',
+          id: 'Buka layar penuh',
+          ja: '全画面で表示',
+          ko: '전체 화면으로 보기',
+          'zh-CN': '进入全屏',
+        }),
+        exitFullscreen: t({
+          en: 'Exit fullscreen',
+          id: 'Keluar layar penuh',
+          ja: '全画面表示を終了',
+          ko: '전체 화면 종료',
+          'zh-CN': '退出全屏',
+        }),
+        zoomWithCtrl: t({
+          en: 'Use Ctrl + scroll to zoom the map',
+          id: 'Gunakan Ctrl + gulir untuk zoom peta',
+          ja: 'Ctrl キーを押しながらスクロールして地図を拡大・縮小',
+          ko: 'Ctrl 키를 누른 채 스크롤하여 지도를 확대·축소하세요',
+          'zh-CN': '按住 Ctrl 并滚动以缩放地图',
+        }),
+        zoomWithCommand: t({
+          en: 'Use ⌘ + scroll to zoom the map',
+          id: 'Gunakan ⌘ + gulir untuk zoom peta',
+          ja: '⌘ キーを押しながらスクロールして地図を拡大・縮小',
+          ko: '⌘ 키를 누른 채 스크롤하여 지도를 확대·축소하세요',
+          'zh-CN': '按住 ⌘ 并滚动以缩放地图',
+        }),
+        moveWithTwoFingers: t({
+          en: 'Use two fingers to move the map',
+          id: 'Gunakan dua jari untuk menggeser peta',
+          ja: '2本の指で地図を動かせます',
+          ko: '두 손가락으로 지도를 이동하세요',
+          'zh-CN': '用双指移动地图',
+        }),
+      },
       caption: t({
         en: 'Every place we’ve reviewed. Tap a pin for details.',
         id: 'Tempat yang kami ulas. Ketuk pin untuk detail.',
