@@ -1,13 +1,12 @@
-import { createFileRoute, Link } from '@tanstack/react-router'
-import { FullscreenControl, Map, Marker, Popup } from '@vis.gl/react-maplibre'
+import { createFileRoute } from '@tanstack/react-router'
+import { FullscreenControl, Map, Marker } from '@vis.gl/react-maplibre'
 import 'maplibre-gl/dist/maplibre-gl.css'
 import workerUrl from 'maplibre-gl/dist/maplibre-gl-worker.mjs?worker&url'
 import { useRef, useState } from 'react'
-import { useIntlayer, useLocale } from 'react-intlayer'
 
-import { defaultLocale, getLocaleFromPath, getLocalePathPrefix } from '@/i18n/locale'
+import { getLocaleFromPath } from '@/i18n/locale'
+import { PlaceMapPreview } from '@/places/place-map-preview'
 import { getMapPlaces } from '@/places/places.functions'
-import { formatSpending } from '@/places/spending'
 
 export const Route = createFileRoute('/{-$locale}/about')({
   loader: ({ location }) =>
@@ -17,8 +16,6 @@ export const Route = createFileRoute('/{-$locale}/about')({
 
 function About() {
   const places = Route.useLoaderData()
-  const { map, listing, categories } = useIntlayer('places')
-  const { locale } = useLocale()
   const [selectedSlug, setSelectedSlug] = useState<string>()
   const selectedMarker = useRef<HTMLButtonElement | null>(null)
   const selected = places.find((place) => place.slug === selectedSlug)
@@ -81,6 +78,7 @@ function About() {
                 <button
                   type="button"
                   aria-label={place.title}
+                  aria-haspopup="dialog"
                   aria-expanded={selectedSlug === place.slug}
                   onClick={(event) => {
                     event.stopPropagation()
@@ -100,40 +98,7 @@ function About() {
             ))}
 
             {selected && (
-              <Popup
-                key={selected.slug}
-                longitude={selected.coordinates.lng}
-                latitude={selected.coordinates.lat}
-                offset={28}
-                onClose={closePopup}
-                style={{ zIndex: 2 }}
-              >
-                <p className="pr-4 font-sans text-sm font-medium">{selected.title}</p>
-                <p className="flex flex-wrap justify-between gap-x-2 font-sans text-sm">
-                  <span>{categories[selected.category]}</span>
-                  <span>{selected.area}</span>
-                </p>
-                {selected.spending && (
-                  <p className="font-sans text-sm">
-                    {selected.spending.min === undefined && <>{listing.under} </>}
-                    {formatSpending(selected.spending, locale)}
-                    <span className="block text-xs">
-                      {selected.category === 'stays' ? listing.perNight : listing.perPerson}
-                    </span>
-                  </p>
-                )}
-                <p className="mt-2 line-clamp-3 font-sans text-sm/5">{selected.description}</p>
-                <Link
-                  to="/{-$locale}/places/$slug"
-                  params={{
-                    locale: locale === defaultLocale ? undefined : getLocalePathPrefix(locale),
-                    slug: selected.slug,
-                  }}
-                  className="mt-1 block font-sans text-sm underline underline-offset-4 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
-                >
-                  {map.viewReview}
-                </Link>
-              </Popup>
+              <PlaceMapPreview key={selected.slug} place={selected} onClose={closePopup} />
             )}
           </Map>
         </div>

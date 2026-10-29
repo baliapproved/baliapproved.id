@@ -101,6 +101,13 @@ export default {
       }),
     },
     map: {
+      closePreview: t({
+        en: 'Close place preview',
+        id: 'Tutup pratinjau tempat',
+        ja: 'スポットのプレビューを閉じる',
+        ko: '장소 미리보기 닫기',
+        'zh-CN': '关闭地点预览',
+      }),
       viewReview: t({
         en: 'View review',
         id: 'Lihat ulasan',

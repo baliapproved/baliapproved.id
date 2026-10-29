@@ -1,0 +1,8 @@
+/* Let the site's Card provide the popup surface instead of MapLibre's defaults. */
+.preview :global(.maplibregl-popup-content) {
+  padding: 0;
+  border-radius: var(--radius-4xl);
+  background: transparent;
+  box-shadow: none;
+  font-family: var(--font-sans);
+}

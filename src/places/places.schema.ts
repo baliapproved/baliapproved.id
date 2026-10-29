@@ -59,6 +59,8 @@ export const mapPlaceSchema = z.object({
   }),
 })
 
+export type MapPlace = z.output<typeof mapPlaceSchema>
+
 export const placePageSchema = z.object({
   slug: z.string(),
   title: z.string().trim().min(1),
