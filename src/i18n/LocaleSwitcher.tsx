@@ -20,11 +20,11 @@ export function LocaleSwitcher() {
             variant="outline"
             size="icon-lg"
             aria-label={navigation.language.value}
-            className="min-h-11 min-w-11 rounded-full"
+            className="size-[44px] rounded-full"
           />
         }
       >
-        <RiGlobalLine aria-hidden="true" />
+        <RiGlobalLine aria-hidden="true" className="size-[16px]" />
       </PopoverTrigger>
       <PopoverContent align="end" className="w-60 gap-2 p-2">
         <PopoverTitle className="px-3 py-2">{navigation.language}</PopoverTitle>

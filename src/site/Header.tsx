@@ -1,4 +1,4 @@
-import { RiCloseLine, RiMenu2Line } from '@remixicon/react'
+import { RiCloseLargeLine, RiMenu2Line } from '@remixicon/react'
 import { Link, useMatch } from '@tanstack/react-router'
 import { useState } from 'react'
 import { useIntlayer, useLocale } from 'react-intlayer'
@@ -25,17 +25,17 @@ export function Header() {
 
   return (
     <header className={homeMatch ? 'relative z-10' : 'bg-border'}>
-      <div className="mx-auto grid w-full max-w-[1920px] grid-cols-[1fr_auto] items-center gap-2 px-5 py-5 sm:grid-cols-[1fr_auto_1fr] sm:px-8 sm:py-6 lg:px-12 xl:px-20">
+      <div className="mx-auto grid w-full max-w-[1920px] grid-cols-[auto_minmax(0,1fr)] items-center gap-2 px-5 py-5 sm:grid-cols-[1fr_auto_1fr] sm:px-8 sm:py-6 lg:px-12 xl:px-20">
         <Link
           to="/{-$locale}"
           params={params}
           aria-label={navigation.home.value}
-          className="grid size-11 place-items-center justify-self-start rounded-full transition-opacity hover:opacity-80 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring"
+          className="grid size-[44px] place-items-center justify-self-start rounded-full transition-opacity hover:opacity-80 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring"
         >
           <svg
             viewBox="0 0 64 64"
             fill="none"
-            className="size-10 overflow-visible"
+            className="size-[40px] overflow-visible"
             aria-hidden="true"
           >
             <defs>
@@ -82,7 +82,8 @@ export function Header() {
           </ul>
         </nav>
 
-        <div className="flex items-center gap-2.5 justify-self-end">
+        {/* Icon controls are sized in px so large text settings can't push them off screen. */}
+        <div className="flex flex-wrap items-center justify-end gap-2.5 justify-self-end">
           <LocaleSwitcher />
           <Search />
           <Popover open={mobileNavOpen} onOpenChange={setMobileNavOpen}>
@@ -92,14 +93,14 @@ export function Header() {
                   variant="outline"
                   size="icon-lg"
                   aria-label={navigation.menu.value}
-                  className="min-h-11 min-w-11 rounded-full sm:hidden"
+                  className="size-[44px] rounded-full sm:hidden"
                 />
               }
             >
               {mobileNavOpen ? (
-                <RiCloseLine aria-hidden="true" />
+                <RiCloseLargeLine aria-hidden="true" className="size-[16px]" />
               ) : (
-                <RiMenu2Line aria-hidden="true" />
+                <RiMenu2Line aria-hidden="true" className="size-[16px]" />
               )}
             </PopoverTrigger>
             <PopoverBackdrop className="sm:hidden" />

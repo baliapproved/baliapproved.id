@@ -12,9 +12,9 @@ export function Search() {
       variant="outline"
       size="icon-lg"
       aria-label={navigation.search.value}
-      className="min-h-11 min-w-11 rounded-full"
+      className="size-[44px] rounded-full"
     >
-      <RiSearchLine aria-hidden="true" />
+      <RiSearchLine aria-hidden="true" className="size-[16px]" />
     </Button>
   )
 }
