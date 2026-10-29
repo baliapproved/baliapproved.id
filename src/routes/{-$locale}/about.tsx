@@ -1,5 +1,5 @@
 import { createFileRoute } from '@tanstack/react-router'
-import { Map, Marker } from '@vis.gl/react-maplibre'
+import { FullscreenControl, Map, Marker } from '@vis.gl/react-maplibre'
 import 'maplibre-gl/dist/maplibre-gl.css'
 import workerUrl from 'maplibre-gl/dist/maplibre-gl-worker.mjs?worker&url'
 
@@ -42,6 +42,8 @@ function About() {
             dragRotate={false}
             touchPitch={false}
           >
+            <FullscreenControl />
+
             {places.map((place) => (
               <Marker
                 key={place.slug}
