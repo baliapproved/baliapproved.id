@@ -130,6 +130,8 @@
   }
   /* Instrument Sans is Latin only, so CJK text falls through to each platform's font for that language. */
   :lang(ja) {
+    /* Break between phrases rather than mid-word. Chrome only; other browsers keep their default breaking. */
+    word-break: auto-phrase;
     --font-cjk:
       'Hiragino Sans', 'Hiragino Kaku Gothic ProN', 'Yu Gothic UI', 'Yu Gothic', Meiryo,
       'Noto Sans CJK JP', sans-serif;
