@@ -7,6 +7,7 @@ import { useIntlayer, useLocale } from 'react-intlayer'
 
 import { defaultLocale, getLocaleFromPath, getLocalePathPrefix } from '@/i18n/locale'
 import { getMapPlaces } from '@/places/places.functions'
+import { formatSpending } from '@/places/spending'
 
 export const Route = createFileRoute('/{-$locale}/about')({
   loader: ({ location }) =>
@@ -16,7 +17,7 @@ export const Route = createFileRoute('/{-$locale}/about')({
 
 function About() {
   const places = Route.useLoaderData()
-  const { map } = useIntlayer('places')
+  const { map, listing, categories } = useIntlayer('places')
   const { locale } = useLocale()
   const [selectedSlug, setSelectedSlug] = useState<string>()
   const selectedMarker = useRef<HTMLButtonElement | null>(null)
@@ -108,6 +109,20 @@ function About() {
                 style={{ zIndex: 2 }}
               >
                 <p className="pr-4 font-sans text-sm font-medium">{selected.title}</p>
+                <p className="flex flex-wrap justify-between gap-x-2 font-sans text-sm">
+                  <span>{categories[selected.category]}</span>
+                  <span>{selected.area}</span>
+                </p>
+                {selected.spending && (
+                  <p className="font-sans text-sm">
+                    {selected.spending.min === undefined && <>{listing.under} </>}
+                    {formatSpending(selected.spending, locale)}
+                    <span className="block text-xs">
+                      {selected.category === 'stays' ? listing.perNight : listing.perPerson}
+                    </span>
+                  </p>
+                )}
+                <p className="mt-2 line-clamp-3 font-sans text-sm/5">{selected.description}</p>
                 <Link
                   to="/{-$locale}/places/$slug"
                   params={{
