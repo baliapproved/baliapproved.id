@@ -8,7 +8,6 @@ export interface RateLimiterLike {
 
 export interface SubscribeHandlerEnv {
   KIT_API_KEY?: string
-  KIT_FORM_ID?: string
   SIGNUP_LIMITER?: RateLimiterLike
 }
 
@@ -18,6 +17,7 @@ export interface SubscribeHandlerOptions {
 }
 
 const KIT_API = 'https://api.kit.com/v4'
+const KIT_FORM_ID = '10086334'
 const SITE_URL = 'https://baliapproved.id'
 const MAX_BODY_BYTES = 4096
 const KIT_TIMEOUT_MS = 30_000
@@ -30,7 +30,6 @@ const subscribeInput = z.object({
 
 const kitEnvSchema = z.object({
   KIT_API_KEY: z.string().min(1),
-  KIT_FORM_ID: z.coerce.number().int().positive(),
 })
 
 const createdResponse = z.object({
@@ -208,7 +207,7 @@ export async function handleSubscribeRequest(
     }
 
     const added = await kitRequest(
-      `/forms/${parsedEnv.data.KIT_FORM_ID}/subscribers`,
+      `/forms/${KIT_FORM_ID}/subscribers`,
       parsedEnv.data.KIT_API_KEY,
       {
         email_address: parsedInput.data.email,
