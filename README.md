@@ -9,6 +9,12 @@ pnpm dev
 
 Local development runs at http://localhost:4321.
 
+## Migration scope
+
+Use Astro's `main` branch as a reference for intended content and behavior. Adapt each feature to this branch's TanStack Start architecture rather than copying its implementation unchanged.
+
+The closing About-page brand block (Bali Approved logo and “Powered by shorj.com” link) is intentionally excluded from the migration.
+
 ## Languages
 
 Intlayer serves the existing site in English, Indonesian, Japanese, Korean, and Chinese. URLs determine the language on both the server and client:
