@@ -85,7 +85,7 @@ export function Header() {
         {/* Icon controls are sized in px so large text settings can't push them off screen. */}
         <div className="flex flex-wrap items-center justify-end gap-2.5 justify-self-end">
           <LocaleSwitcher />
-          <Search />
+          <Search key={locale} />
           <Popover open={mobileNavOpen} onOpenChange={setMobileNavOpen}>
             <PopoverTrigger
               render={
