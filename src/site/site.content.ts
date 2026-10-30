@@ -121,14 +121,5 @@ export default {
         'zh-CN': '查看地点',
       }),
     },
-    notFound: {
-      description: t({
-        en: 'The requested page could not be found.',
-        id: 'Halaman yang Anda cari tidak ditemukan.',
-        ja: 'お探しのページが見つかりませんでした。',
-        ko: '요청하신 페이지를 찾을 수 없습니다.',
-        'zh-CN': '找不到您请求的页面。',
-      }),
-    },
   },
 } satisfies Dictionary

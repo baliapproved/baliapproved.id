@@ -11,13 +11,14 @@ import { site } from '@/site/site'
 
 export const Route = createFileRoute('/{-$locale}/newsletter/subscribed')({
   head: async ({ match }) => {
-    const { subscribedHeading } = await getIntlayerAsync(
+    const { subscribedHeading, subscribedDescription } = await getIntlayerAsync(
       'newsletter',
       getLocaleFromPath(match.pathname),
     )
     return {
       meta: [
         { title: `${subscribedHeading} | ${site.name}` },
+        { name: 'description', content: subscribedDescription },
         { name: 'robots', content: 'noindex' },
       ],
     }

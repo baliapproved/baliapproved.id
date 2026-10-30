@@ -44,8 +44,11 @@ src/
     hero.content.ts          # Hero copy, all languages
   site/
     Header.tsx
-    site.content.ts          # Metadata, navigation, and 404 copy, all languages
+    site.content.ts          # Metadata and navigation copy, all languages
     site.ts                  # Existing site constants
+  not-found/
+    not-found.tsx
+    not-found.content.ts     # 404 copy, all languages
   i18n/
     locale.ts                # Supported locales and URL behavior
     LocaleSwitcher.tsx
