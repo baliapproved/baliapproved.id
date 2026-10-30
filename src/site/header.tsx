@@ -1,5 +1,5 @@
 import { RiCloseLargeLine, RiMenu2Line } from '@remixicon/react'
-import { Link, useMatch } from '@tanstack/react-router'
+import { Link, useLocation } from '@tanstack/react-router'
 import { useState } from 'react'
 import { useIntlayer, useLocale } from 'react-intlayer'
 
@@ -20,11 +20,13 @@ export function Header() {
   const { navigation } = useIntlayer('site')
   const { locale } = useLocale()
   const params = { locale: locale === defaultLocale ? undefined : getLocalePathPrefix(locale) }
-  const homeMatch = useMatch({ from: '/{-$locale}/', shouldThrow: false })
+  const pathname = useLocation({ select: (location) => location.pathname })
+  const homePath = params.locale ? `/${params.locale}` : '/'
+  const isHome = pathname === homePath || (homePath !== '/' && pathname === `${homePath}/`)
   const [mobileNavOpen, setMobileNavOpen] = useState(false)
 
   return (
-    <header className={homeMatch ? 'relative z-10' : 'bg-border'}>
+    <header className={isHome ? 'relative z-10' : 'bg-border'}>
       <div className="mx-auto grid w-full max-w-[1920px] grid-cols-[auto_minmax(0,1fr)] items-center gap-2 px-5 py-5 sm:grid-cols-[1fr_auto_1fr] sm:px-8 sm:py-6 lg:px-12 xl:px-20">
         <Link
           to="/{-$locale}"
