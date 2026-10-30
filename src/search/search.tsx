@@ -1,4 +1,5 @@
 import { RiSearchLine } from '@remixicon/react'
+import { useNavigate } from '@tanstack/react-router'
 import { useState } from 'react'
 import { useIntlayer, useLocale } from 'react-intlayer'
 
@@ -12,6 +13,7 @@ import {
   CommandItem,
   CommandList,
 } from '@/design-system/command'
+import { defaultLocale, getLocalePathPrefix } from '@/i18n/locale'
 import { getSearchPlaces } from '@/places/places.functions'
 
 type SearchState =
@@ -19,6 +21,7 @@ type SearchState =
   | { status: 'success'; places: Awaited<ReturnType<typeof getSearchPlaces>> }
 
 export function Search() {
+  const navigate = useNavigate()
   const { navigation } = useIntlayer('site')
   const content = useIntlayer('search')
   const { locale } = useLocale()
@@ -63,7 +66,21 @@ export function Search() {
                 <CommandEmpty>{content.empty}</CommandEmpty>
                 <CommandGroup>
                   {state.places.map((place) => (
-                    <CommandItem key={place.slug} value={place.title}>
+                    <CommandItem
+                      key={place.slug}
+                      value={place.title}
+                      onSelect={() => {
+                        setOpen(false)
+                        void navigate({
+                          to: '/{-$locale}/places/$slug',
+                          params: {
+                            locale:
+                              locale === defaultLocale ? undefined : getLocalePathPrefix(locale),
+                            slug: place.slug,
+                          },
+                        })
+                      }}
+                    >
                       {place.title}
                     </CommandItem>
                   ))}
