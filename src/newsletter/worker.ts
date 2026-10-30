@@ -2,7 +2,6 @@ import { handleSubscribeRequest } from './subscribe.server'
 
 type WorkerEnv = Env & {
   KIT_API_KEY?: string
-  KIT_FORM_ID?: string
 }
 
 export default {
