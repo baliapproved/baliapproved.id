@@ -1,0 +1,35 @@
+.map :global(.maplibregl-ctrl-group:has(.maplibregl-ctrl-fullscreen, .maplibregl-ctrl-shrink)) {
+  margin: 12px 12px 0 0;
+  border-radius: 9999px;
+  background: var(--background);
+  box-shadow:
+    0 0 0 1px color-mix(in oklch, var(--foreground) 5%, transparent),
+    0 4px 6px -1px rgb(0 0 0 / 0.1),
+    0 2px 4px -2px rgb(0 0 0 / 0.1);
+
+  button {
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 9999px;
+
+    &:focus-visible {
+      outline: 2px solid var(--ring);
+      outline-offset: 2px;
+      box-shadow: none;
+    }
+
+    :global(.maplibregl-ctrl-icon) {
+      width: 20px;
+      height: 20px;
+      background: var(--foreground);
+      mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M8 3V5H4V9H2V3H8ZM2 21V15H4V19H8V21H2ZM22 21H16V19H20V15H22V21ZM22 9H20V5H16V3H22V9Z'/%3E%3C/svg%3E")
+        center / contain no-repeat;
+    }
+
+    &:global(.maplibregl-ctrl-shrink) :global(.maplibregl-ctrl-icon) {
+      mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M18 7H22V9H16V3H18V7ZM8 9H2V7H6V3H8V9ZM18 17V21H16V15H22V17H18ZM8 15V21H6V17H2V15H8Z'/%3E%3C/svg%3E");
+    }
+  }
+}
