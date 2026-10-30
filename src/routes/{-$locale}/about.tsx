@@ -67,7 +67,7 @@ function About() {
             target="_blank"
             rel="noopener noreferrer"
             onClick={() => trackWebsiteAction('collaboration_click', 'about')}
-            className={cn(buttonVariants({ size: 'lg' }), 'mt-5 min-h-11 w-full sm:w-auto')}
+            className={cn(buttonVariants({ size: 'lg' }), 'mt-5 w-full sm:w-auto')}
           >
             <RiWhatsappLine aria-hidden="true" data-icon="inline-start" />
             {about.workWithUs.contact}

@@ -42,7 +42,7 @@ function Subscribed() {
         <Link
           to="/{-$locale}"
           params={{ locale: locale === defaultLocale ? undefined : getLocalePathPrefix(locale) }}
-          className={buttonVariants({ size: 'lg', className: 'mt-8 min-h-11 w-full sm:w-auto' })}
+          className={buttonVariants({ size: 'lg', className: 'mt-8 w-full sm:w-auto' })}
         >
           {seePlaces}
         </Link>
