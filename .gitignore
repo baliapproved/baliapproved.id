@@ -1,30 +1,19 @@
-# build output
-dist/
-
-# generated types
-.astro/
-/worker-configuration.d.ts
-
-# dependencies
-node_modules/
-
-# logs
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-pnpm-debug.log*
-
-# environment variables
-.env
-.env.production
-.env.local
-
-# macOS-specific files
+node_modules
 .DS_Store
+dist
+dist-ssr
+*.local
+.env*
+!.env.example
+.nitro
+.tanstack
+.intlayer
+.wrangler
+/worker-configuration.d.ts
+.output
+.vinxi
+__unconfig*
+todos.json
 
-# editor settings
-.idea/
-.vscode/
-
-# wrangler local state
-.wrangler/
+# typescript
+*.tsbuildinfo
