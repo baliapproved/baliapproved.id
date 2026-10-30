@@ -3,6 +3,13 @@ import { t, type Dictionary } from 'intlayer'
 export default {
   key: 'not-found',
   content: {
+    title: t({
+      en: 'Page not found',
+      id: 'Halaman tidak ditemukan',
+      ja: 'ページが見つかりません',
+      ko: '페이지를 찾을 수 없습니다',
+      'zh-CN': '页面未找到',
+    }),
     heading: t({
       en: 'We couldn’t find this page',
       id: 'Halaman ini tidak ditemukan',

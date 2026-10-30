@@ -8,6 +8,7 @@ import appCss from '@/design-system/styles.css?url'
 import { Toaster } from '@/design-system/sonner'
 import { getLocaleFromPath } from '@/i18n/locale'
 import { NotFound } from '@/not-found/not-found'
+import { getNotFoundTitle } from '@/not-found/not-found.head'
 import { Analytics } from '@/analytics/analytics'
 import { Header } from '@/site/header'
 import { Footer } from '@/site/footer'
@@ -15,7 +16,9 @@ import { Footer } from '@/site/footer'
 export const Route = createRootRoute({
   head: async ({ matches }) => {
     const pathname = matches.at(-1)?.pathname ?? '/'
-    const { seo } = await getIntlayerAsync('site', getLocaleFromPath(pathname))
+    const locale = getLocaleFromPath(pathname)
+    const { seo } = await getIntlayerAsync('site', locale)
+    const title = (await getNotFoundTitle(matches, locale)) ?? seo.title
 
     return {
       meta: [
@@ -27,7 +30,7 @@ export const Route = createRootRoute({
           content: 'width=device-width, initial-scale=1',
         },
         {
-          title: seo.title,
+          title,
         },
         { name: 'description', content: seo.description },
       ],
