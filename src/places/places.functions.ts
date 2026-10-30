@@ -14,7 +14,12 @@ export const getPlaces = createServerFn({ method: 'GET' })
 export const getSearchPlaces = createServerFn({ method: 'GET' })
   .validator(localeInput)
   .handler(async ({ data }) =>
-    (await readPlaces(data.locale)).map(({ slug, title, area }) => ({ slug, title, area })),
+    (await readPlaces(data.locale)).map(({ slug, title, area, cutout }) => ({
+      slug,
+      title,
+      area,
+      cutout: cutout.src,
+    })),
   )
 
 export const getMapPlaces = createServerFn({ method: 'GET' })

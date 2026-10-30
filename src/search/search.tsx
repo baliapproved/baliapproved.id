@@ -82,6 +82,14 @@ export function Search() {
                         })
                       }}
                     >
+                      <img
+                        src={place.cutout}
+                        alt=""
+                        width={36}
+                        height={36}
+                        loading="lazy"
+                        className="size-9 shrink-0 object-contain"
+                      />
                       <span>
                         {place.title}
                         <span className="font-normal text-muted-foreground"> · {place.area}</span>
