@@ -33,7 +33,13 @@ function Home() {
   return (
     <main className="flex-1 bg-border">
       <Hero />
-      <section className="mx-auto w-full max-w-[1920px] px-5 pb-12 sm:px-8 sm:pb-16 lg:px-12 xl:px-20">
+      <section
+        aria-labelledby="catalog-heading"
+        className="mx-auto w-full max-w-[1920px] px-5 pb-12 sm:px-8 sm:pb-16 lg:px-12 xl:px-20"
+      >
+        <h2 id="catalog-heading" className="sr-only">
+          {listing.heading}
+        </h2>
         <fieldset className="-mx-1.5 flex flex-wrap gap-2 p-1.5">
           <legend className="sr-only">{listing.filters.show}</legend>
           {filters.map(({ key, icon: Icon, disabled }) => (

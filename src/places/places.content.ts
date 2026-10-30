@@ -4,6 +4,13 @@ export default {
   key: 'places',
   content: {
     listing: {
+      heading: t({
+        en: 'Reviews',
+        id: 'Ulasan',
+        ja: 'レビュー',
+        ko: '리뷰',
+        'zh-CN': '评价',
+      }),
       filters: {
         show: t({
           en: 'Show',

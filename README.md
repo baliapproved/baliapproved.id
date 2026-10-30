@@ -18,6 +18,10 @@ The following are intentionally excluded from the migration:
 - The closing About-page brand block (Bali Approved logo and “Powered by shorj.com” link).
 - Hiding the footer newsletter signup on the subscription confirmation page. Keep the signup visible there.
 
+Deferred migration work:
+
+- Use each place’s existing localized description as its page meta description. The route loader already provides the data; place pages currently inherit the generic site description.
+
 ## Languages
 
 Intlayer serves the existing site in English, Indonesian, Japanese, Korean, and Chinese. URLs determine the language on both the server and client:
