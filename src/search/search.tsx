@@ -69,6 +69,7 @@ export function Search() {
                     <CommandItem
                       key={place.slug}
                       value={place.title}
+                      keywords={[place.area]}
                       onSelect={() => {
                         setOpen(false)
                         void navigate({
@@ -81,7 +82,10 @@ export function Search() {
                         })
                       }}
                     >
-                      {place.title}
+                      <span>
+                        {place.title}
+                        <span className="font-normal text-muted-foreground"> · {place.area}</span>
+                      </span>
                     </CommandItem>
                   ))}
                 </CommandGroup>
