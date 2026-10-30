@@ -1,0 +1,72 @@
+.surface {
+  background-image: linear-gradient(
+    color-mix(in oklab, var(--color-surface) 84%, #2cd88a),
+    transparent
+  );
+}
+
+@property --weekly-angle {
+  syntax: '<angle>';
+  inherits: true;
+  initial-value: 0deg;
+}
+
+.weeklyBadge {
+  --weekly-glow: color-mix(in oklab, #2cd88a 40%, transparent);
+  --weekly-edge: color-mix(in oklab, var(--color-foreground) 10%, transparent);
+  background:
+    linear-gradient(var(--color-surface), var(--color-surface)) padding-box,
+    conic-gradient(
+        from var(--weekly-angle),
+        var(--weekly-edge) 0 65%,
+        var(--weekly-glow) 85%,
+        var(--weekly-edge)
+      )
+      border-box;
+  animation: weekly-sweep 8s linear infinite;
+}
+
+/* Thicker green streak over the 1px border. */
+.weeklyBadge::before {
+  content: '';
+  position: absolute;
+  inset: -1.5px;
+  padding: 2px;
+  border-radius: inherit;
+  background: conic-gradient(
+    from var(--weekly-angle),
+    transparent 0 65%,
+    var(--weekly-glow) 85%,
+    transparent
+  );
+  mask:
+    linear-gradient(#000 0 0) content-box exclude,
+    linear-gradient(#000 0 0);
+  pointer-events: none;
+}
+
+.weeklyTick {
+  animation: weekly-tick 4s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .weeklyBadge,
+  .weeklyTick {
+    animation: none;
+  }
+}
+
+@keyframes weekly-sweep {
+  to {
+    --weekly-angle: 360deg;
+  }
+}
+
+@keyframes weekly-tick {
+  75% {
+    rotate: 0deg;
+  }
+  100% {
+    rotate: 90deg;
+  }
+}
