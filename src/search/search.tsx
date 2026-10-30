@@ -1,6 +1,6 @@
 import { RiSearchLine } from '@remixicon/react'
 import { useNavigate } from '@tanstack/react-router'
-import { useState } from 'react'
+import { useEffect, useEffectEvent, useState } from 'react'
 import { useIntlayer, useLocale } from 'react-intlayer'
 
 import { Button } from '@/design-system/button'
@@ -41,12 +41,38 @@ export function Search() {
     }
   }
 
+  const onSearchShortcut = useEffectEvent((event: KeyboardEvent) => {
+    if (
+      event.defaultPrevented ||
+      event.isComposing ||
+      event.altKey ||
+      event.shiftKey ||
+      event.key.toLowerCase() !== 'k' ||
+      !(event.metaKey || event.ctrlKey)
+    ) {
+      return
+    }
+
+    event.preventDefault()
+    if (event.repeat) return
+
+    if (open) setOpen(false)
+    else void openSearch()
+  })
+
+  useEffect(() => {
+    // Capture before cmdk handles Ctrl+K as its previous-item shortcut.
+    document.addEventListener('keydown', onSearchShortcut, true)
+    return () => document.removeEventListener('keydown', onSearchShortcut, true)
+  }, [])
+
   return (
     <>
       <Button
         variant="outline"
         size="icon-lg"
         aria-label={navigation.search.value}
+        aria-keyshortcuts="Meta+K Control+K"
         onClick={openSearch}
         className="size-11 rounded-full"
       >
