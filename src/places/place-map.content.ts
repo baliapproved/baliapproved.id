@@ -1,0 +1,81 @@
+import { t, type Dictionary } from 'intlayer'
+
+export default {
+  key: 'place-map',
+  content: {
+    label: t({
+      en: 'Map of places we’ve reviewed',
+      id: 'Peta tempat yang sudah kami ulas',
+      ja: 'レビューしたスポットの地図',
+      ko: '저희가 리뷰한 장소 지도',
+      'zh-CN': '我们评价过的地点地图',
+      ru: 'Карта мест, на которые мы написали обзоры',
+    }),
+    controls: {
+      enterFullscreen: t({
+        en: 'Enter fullscreen',
+        id: 'Buka layar penuh',
+        ja: '全画面で表示',
+        ko: '전체 화면으로 보기',
+        'zh-CN': '进入全屏',
+        ru: 'Во весь экран',
+      }),
+      exitFullscreen: t({
+        en: 'Exit fullscreen',
+        id: 'Keluar layar penuh',
+        ja: '全画面表示を終了',
+        ko: '전체 화면 종료',
+        'zh-CN': '退出全屏',
+        ru: 'Выйти из полноэкранного режима',
+      }),
+      zoomWithCtrl: t({
+        en: 'Use Ctrl + scroll to zoom the map',
+        id: 'Gunakan Ctrl + gulir untuk zoom peta',
+        ja: 'Ctrl キーを押しながらスクロールして地図を拡大・縮小',
+        ko: 'Ctrl 키를 누른 채 스크롤하여 지도를 확대·축소하세요',
+        'zh-CN': '按住 Ctrl 并滚动以缩放地图',
+        ru: 'Зажмите Ctrl и прокручивайте, чтобы изменить масштаб карты',
+      }),
+      zoomWithCommand: t({
+        en: 'Use ⌘ + scroll to zoom the map',
+        id: 'Gunakan ⌘ + gulir untuk zoom peta',
+        ja: '⌘ キーを押しながらスクロールして地図を拡大・縮小',
+        ko: '⌘ 키를 누른 채 스크롤하여 지도를 확대·축소하세요',
+        'zh-CN': '按住 ⌘ 并滚动以缩放地图',
+        ru: 'Зажмите ⌘ и прокручивайте, чтобы изменить масштаб карты',
+      }),
+      moveWithTwoFingers: t({
+        en: 'Use two fingers to move the map',
+        id: 'Gunakan dua jari untuk menggeser peta',
+        ja: '2本の指で地図を動かせます',
+        ko: '두 손가락으로 지도를 이동하세요',
+        'zh-CN': '用双指移动地图',
+        ru: 'Перемещайте карту двумя пальцами',
+      }),
+    },
+    caption: t({
+      en: 'Every place we’ve reviewed. Tap a pin for details.',
+      id: 'Tempat yang kami ulas. Ketuk pin untuk detail.',
+      ja: '私たちがレビューしたすべてのスポット。ピンをタップすると詳細が見られます。',
+      ko: '저희가 리뷰한 모든 장소입니다. 핀을 눌러 자세히 살펴보세요.',
+      'zh-CN': '我们评价过的每一个地点。点击标记查看详情。',
+      ru: 'Все места, где мы побывали. Нажмите на метку, чтобы узнать подробности.',
+    }),
+    closePreview: t({
+      en: 'Close place preview',
+      id: 'Tutup pratinjau tempat',
+      ja: 'スポットのプレビューを閉じる',
+      ko: '장소 미리보기 닫기',
+      'zh-CN': '关闭地点预览',
+      ru: 'Закрыть карточку места',
+    }),
+    viewReview: t({
+      en: 'View review',
+      id: 'Lihat ulasan',
+      ja: 'レビューを見る',
+      ko: '후기 보기',
+      'zh-CN': '查看评价',
+      ru: 'Читать обзор',
+    }),
+  },
+} satisfies Dictionary

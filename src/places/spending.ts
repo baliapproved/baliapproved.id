@@ -1,16 +1,23 @@
-import type { CollectionEntry } from "astro:content";
-import { site } from "@/site/site";
+import type { Places } from './places.schema'
 
-const rupiah = new Intl.NumberFormat(site.language, {
-  style: "currency",
-  currency: "IDR",
-  currencyDisplay: "narrowSymbol",
-  notation: "compact",
-});
-
-type Spending = NonNullable<CollectionEntry<"places">["data"]["spending"]>;
-
-/** Compact rupiah range, e.g. "Rp 30–100K", or "Under Rp 500K" when only the max is known. */
-export function formatSpending({ min, max }: Spending) {
-  return min ? rupiah.formatRange(min, max) : `Under ${rupiah.format(max)}`;
+export function formatSpending(spending: Places[number]['spending'], locale: string) {
+  if (!spending) return undefined
+  const formatter = new Intl.NumberFormat(locale, {
+    style: 'currency',
+    currency: 'IDR',
+    currencyDisplay: 'narrowSymbol',
+    notation: 'compact',
+    maximumFractionDigits: 0,
+  })
+  if (spending.min != null && spending.max != null) {
+    const rangeFormatter = formatter as Intl.NumberFormat & {
+      formatRange?: (start: number, end: number) => string
+    }
+    return (
+      rangeFormatter.formatRange?.(spending.min, spending.max) ??
+      `${formatter.format(spending.min)}–${formatter.format(spending.max)}`
+    )
+  }
+  const amount = spending.max ?? spending.min
+  return amount == null ? undefined : formatter.format(amount)
 }

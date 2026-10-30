@@ -1,0 +1,16 @@
+@media (prefers-reduced-motion: no-preference) {
+  .envelope {
+    animation: arrive 600ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+}
+
+@keyframes arrive {
+  from {
+    opacity: 0;
+    transform: translateY(0.5rem) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}

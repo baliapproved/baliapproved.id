@@ -5,7 +5,7 @@
   "tsx": true,
   "tailwind": {
     "config": "",
-    "css": "src/design-system/global.css",
+    "css": "src/design-system/styles.css",
     "baseColor": "taupe",
     "cssVariables": true,
     "prefix": ""

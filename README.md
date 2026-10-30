@@ -1,45 +1,42 @@
 # Bali Approved
 
-Firsthand reviews of places around Bali.
+TanStack Start (SSG), React, Sanity, Intlayer, Tailwind CSS, shadcn/ui (Base UI), and Cloudflare Workers.
 
-## Brand identity
+## Development
 
-The BA seal is the Bali Approved logo. Use it for browser and home-screen icons,
-the social-share image, and the brand identity in the footer and About page.
+```bash
+pnpm install
+pnpm dev
+```
 
-The glowing petal is a decorative site graphic used in the header and weekly
-update badge. It is not a replacement for the BA logo.
+Local development runs at `http://localhost:4321`.
 
-## Cloudflare setup
+## Architecture
 
-Two zone settings live in the Cloudflare dashboard, not in `wrangler.jsonc`.
-Turn on SSL/TLS → Edge Certificates → Always Use HTTPS, or the site is also
-served over plain HTTP. Add a 301 redirect from `www` to the apex domain.
+- **Static generation**: `pnpm build` prerenders all localized pages and caches Sanity `place` queries into `dist/client` via `@tanstack/start-static-server-functions`.
+- **Edge hosting & API**: Cloudflare Workers Static Assets (`wrangler.jsonc`) serves prerendered HTML, assets, and localized `404.html` directly from the edge. The Worker (`src/newsletter/worker.ts`) runs only on `/api/*` (`POST /api/subscribe` with rate limiting and Kit double opt-in).
+- **Environment**: Copy `.env.example` to `.env.local` for local Kit credentials (`KIT_API_KEY`, `KIT_FORM_ID`; deployed as Cloudflare Worker secrets). Optional `VITE_POSTHOG_PROJECT_TOKEN` and `VITE_POSTHOG_HOST` are baked in at build time (leave the token empty to disable analytics).
 
-## Analytics
+## Languages
 
-PostHog settings are baked in at build time. Set the project token and ingestion
-host in Cloudflare's build environment, and in your local environment for
-production builds, before deploying. Runtime Worker variables cannot change
-analytics in a site that is already built.
+URLs determine the locale across six supported languages:
 
-## Newsletter
+| Language   | Locale  | Prefix |
+| ---------- | ------- | ------ |
+| English    | `en`    | `/`    |
+| Indonesian | `id`    | `/id`  |
+| Japanese   | `ja`    | `/ja`  |
+| Korean     | `ko`    | `/ko`  |
+| Chinese    | `zh-CN` | `/zh`  |
+| Russian    | `ru`    | `/ru`  |
 
-`KIT_API_KEY` has to be a runtime Secret, not a Build variable like PostHog's
-token. Keep the local key in `.env.local`. Do not create `.dev.vars`: when that
-file exists, Wrangler ignores `.env` files.
+UI copy lives in each vertical's `*.content.ts` file (strict mode requires all six locales). Untranslated Sanity fields fall back to English with a matching `lang` attribute.
 
-After a reader confirms, send them to `https://baliapproved.id/newsletter/subscribed`.
-Set that URL on the Kit form, under Confirmation email, After confirming
-redirect to.
+## Checks & Build
 
-Kit confirmation emails inherit the account's default email template. After
-editing `src/newsletter/confirmation-template.html`, paste the whole file into
-[Bali Approved Confirmation](https://app.kit.com/account/email_layout_templates/5634036/edit)
-and save; deploying the website does not update Kit. Keep it as the default in
-Email templates. The form owns the subject, message, envelope image, and generated
-confirmation link; the HTML template wraps that content through `message_content`.
-Choose a separate template explicitly when designing future broadcasts.
-
-The measured signup CPU and the rate limit's per-location behavior are in
-[closed issue #15](https://github.com/baliapproved/baliapproved.id/issues/15).
+```bash
+pnpm typecheck
+pnpm lint
+pnpm format:check
+pnpm build
+```
