@@ -85,7 +85,7 @@ export function Search() {
         description={content.description.value}
       >
         <Command label={content.title.value}>
-          <CommandInput placeholder={content.placeholder.value} />
+          <CommandInput placeholder={content.placeholder.value} className="text-base md:text-sm" />
           <CommandList aria-label={content.title.value} aria-busy={state.status === 'loading'}>
             {state.status === 'success' ? (
               <>
