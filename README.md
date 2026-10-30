@@ -73,7 +73,7 @@ The document head uses the localized Bali Approved title and description from `s
 
 ## Place visit status
 
-A place keeps the same fields when it has not been visited. Omitted visit data uses an empty default: `visitedAt`, `gallery`, and `seating` are `[]`, and review text is `''`. The detail page then shows the translated “Not visited yet” notice and skips the gallery and findings. The catalog card keeps the usual preview row, using the cutout when the gallery is empty. Unvisited places sort after visited places and stay off the About page’s visited-places map. Bread Yard in Seminyak, Iris Cafe Bali in Kuta, Maha Matcha in Canggu, Pahdi Specialty Coffee in Kintamani, Sensa Koffie in Kuta, and Twenty Milli Coffee and Roastery in Denpasar are the unvisited listings migrated from `main`.
+A place keeps the same listing fields when it has not been visited. Omitted visit data uses an empty default: `visitedAt` and `gallery` are `[]`, and review text is `''`. Café findings and stay findings are separate schemas. They share wifi, cooling, noise, and parking. The detail page then shows the translated “Not visited yet” notice and skips the gallery and findings when `visitedAt` is empty. The catalog card keeps the usual preview row, using the cutout when the gallery is empty. Unvisited places sort after visited places and stay off the About page’s visited-places map. Bread Yard in Seminyak, Iris Cafe Bali in Kuta, Maha Matcha in Canggu, Pahdi Specialty Coffee in Kintamani, Sensa Koffie in Kuta, and Twenty Milli Coffee and Roastery in Denpasar are the unvisited listings migrated from `main`. Tulus Coliving in Kuta is the first stay.
 
 ## Analytics
 

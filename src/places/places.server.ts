@@ -2,7 +2,14 @@ import { getIntlayerAsync } from 'intlayer'
 
 import type { Locale } from '@/i18n/locale'
 
-import { mapPlaceSchema, placePageSchema, placeSchema, type Place } from './places.schema'
+import {
+  cafeFindingsSchema,
+  mapPlaceSchema,
+  placePageSchema,
+  placeSchema,
+  stayFindingsSchema,
+  type Place,
+} from './places.schema'
 
 const images = import.meta.glob<string>('./content/*/*.webp', {
   eager: true,
@@ -55,10 +62,9 @@ export async function readPlace(locale: Locale, slug: string) {
   if (!record) return null
 
   const place = placePageSchema.parse(record)
-  return {
+  const shared = {
     title: place.title,
     area: place.area,
-    category: place.category,
     badge: place.badge,
     spending: place.spending,
     mapsUrl: place.mapsUrl,
@@ -73,19 +79,17 @@ export async function readPlace(locale: Locale, slug: string) {
     phone: place.phone,
     address: place.address,
     lastVisitedAt: place.visitedAt.reduce((latest, visit) => (visit > latest ? visit : latest), ''),
-    wifi: place.wifi,
-    power: place.power,
-    seating: place.seating,
-    cooling: place.cooling,
-    noise: place.noise,
-    music: place.music,
-    toilet: place.toilet,
-    reservation: place.reservation,
-    parking: place.parking,
     cutout: { ...place.cutout, src: imageUrl(place.slug, place.cutout.src) },
     photos: place.gallery.map((photo) => ({
       alt: photo.alt,
       src: imageUrl(place.slug, photo.src),
     })),
   }
+
+  // Restaurants and clubs reuse café findings until a place of that category exists.
+  if (place.category === 'stays') {
+    return { ...shared, ...stayFindingsSchema.parse(record), category: 'stays' as const }
+  }
+
+  return { ...shared, ...cafeFindingsSchema.parse(record), category: place.category }
 }

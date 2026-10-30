@@ -3,9 +3,13 @@ import {
   RiCalendarTodoFill,
   RiCarFill,
   RiDoorOpenFill,
+  RiFridgeFill,
+  RiHotelBedFill,
+  RiLifebuoyFill,
   RiMotorbikeFill,
   RiMusic2Fill,
   RiPlugFill,
+  RiTempColdFill,
   RiVolumeDownFill,
   RiWifiFill,
   type RemixiconComponentType,
@@ -13,11 +17,12 @@ import {
 import type { ReactNode } from 'react'
 import { useIntlayer } from 'react-intlayer'
 
-import type { Amount, Parking } from './places.schema'
+import type { CafeFindings, Parking, StayFindings } from './places.schema'
 import { PlaceFact } from './place-fact'
 
-type Seating = 'indoor' | 'outdoor' | 'semi-outdoor'
-type Cooling = 'ac' | 'fan' | 'ac-and-fan' | 'open-air'
+type Visit = { caveats: string; lastVisitedAt: string }
+type CafePlace = Visit & CafeFindings & { category: 'cafes' | 'restaurants' | 'clubs' }
+type StayPlace = Visit & StayFindings & { category: 'stays' }
 
 // A range rather than the exact test result, which changes from test to test.
 function wifiRange(mbps: number) {
@@ -26,24 +31,9 @@ function wifiRange(mbps: number) {
   return { low, high: low + step }
 }
 
-export function PlaceFindings({
-  place,
-}: {
-  place: {
-    caveats: string
-    wifi: number | 'available'
-    power: Amount
-    seating: Seating[]
-    cooling: Cooling
-    noise: 'quiet' | 'moderate' | 'loud'
-    music: boolean | null
-    toilet: boolean
-    reservation: 'not-needed' | 'recommended' | 'required'
-    parking: { motorbike: Parking; car: Parking }
-  }
-}) {
+export function PlaceFindings({ place }: { place: CafePlace | StayPlace }) {
   const { findings } = useIntlayer('places')
-  if (place.seating.length === 0) return null
+  if (place.lastVisitedAt === '') return null
 
   const range = place.wifi === 'available' ? null : wifiRange(place.wifi)
   const wifi =
@@ -52,55 +42,9 @@ export function PlaceFindings({
       : range.low === 0
         ? findings.wifiUnder
         : `${range.low}–${range.high} Mbps`
-  const seating = place.seating
-    .map((area) => {
-      const name = findings.areas[area].value
-      if (area !== 'indoor') return name
-      return `${name} (${findings.coolingShort[place.cooling].value})`
-    })
-    .join(findings.joiner.value)
-
   const parkingLabel = (value: Parking) =>
     value === 'street' ? findings.street : findings.amount[value]
-
-  const items: {
-    key: string
-    icon: RemixiconComponentType
-    label: ReactNode
-    value: ReactNode
-  }[] = [
-    { key: 'wifi', icon: RiWifiFill, label: findings.wifi, value: wifi },
-    { key: 'power', icon: RiPlugFill, label: findings.power, value: findings.amount[place.power] },
-    { key: 'seating', icon: RiArmchairFill, label: findings.seating, value: seating },
-    {
-      key: 'noise',
-      icon: RiVolumeDownFill,
-      label: findings.noise,
-      value: findings.noiseValues[place.noise],
-    },
-    {
-      key: 'music',
-      icon: RiMusic2Fill,
-      label: findings.music,
-      value:
-        place.music === null
-          ? findings.availability.unknown
-          : place.music
-            ? findings.availability.available
-            : findings.availability.unavailable,
-    },
-    {
-      key: 'toilet',
-      icon: RiDoorOpenFill,
-      label: findings.toilet,
-      value: place.toilet ? findings.availability.available : findings.availability.unavailable,
-    },
-    {
-      key: 'reservation',
-      icon: RiCalendarTodoFill,
-      label: findings.reservation,
-      value: findings.reservationValues[place.reservation],
-    },
+  const parking = [
     {
       key: 'motorbike',
       icon: RiMotorbikeFill,
@@ -114,6 +58,109 @@ export function PlaceFindings({
       value: parkingLabel(place.parking.car),
     },
   ]
+  const items: {
+    key: string
+    icon: RemixiconComponentType
+    label: ReactNode
+    value: ReactNode
+  }[] =
+    place.category === 'stays'
+      ? [
+          {
+            key: 'roomType',
+            icon: RiHotelBedFill,
+            label: findings.roomType,
+            value: findings.roomTypes[place.roomType],
+          },
+          {
+            key: 'bathroom',
+            icon: RiDoorOpenFill,
+            label: findings.bathroom,
+            value: findings.privacy[place.bathroom],
+          },
+          {
+            key: 'cooling',
+            icon: RiTempColdFill,
+            label: findings.cooling,
+            value: findings.coolingValues[place.cooling],
+          },
+          { key: 'wifi', icon: RiWifiFill, label: findings.wifi, value: wifi },
+          {
+            key: 'noise',
+            icon: RiVolumeDownFill,
+            label: findings.noise,
+            value: findings.noiseValues[place.noise],
+          },
+          {
+            key: 'kitchen',
+            icon: RiFridgeFill,
+            label: findings.kitchen,
+            value:
+              place.kitchen === 'unavailable'
+                ? findings.availability.unavailable
+                : findings.privacy[place.kitchen],
+          },
+          {
+            key: 'pool',
+            icon: RiLifebuoyFill,
+            label: findings.pool,
+            value: place.pool ? findings.availability.available : findings.availability.unavailable,
+          },
+          ...parking,
+        ]
+      : [
+          { key: 'wifi', icon: RiWifiFill, label: findings.wifi, value: wifi },
+          {
+            key: 'power',
+            icon: RiPlugFill,
+            label: findings.power,
+            value: findings.amount[place.power],
+          },
+          {
+            key: 'seating',
+            icon: RiArmchairFill,
+            label: findings.seating,
+            value: place.seating
+              .map((area) => {
+                const name = findings.areas[area].value
+                if (area !== 'indoor') return name
+                return `${name} (${findings.coolingShort[place.cooling].value})`
+              })
+              .join(findings.joiner.value),
+          },
+          {
+            key: 'noise',
+            icon: RiVolumeDownFill,
+            label: findings.noise,
+            value: findings.noiseValues[place.noise],
+          },
+          {
+            key: 'music',
+            icon: RiMusic2Fill,
+            label: findings.music,
+            value:
+              place.music === null
+                ? findings.availability.unknown
+                : place.music
+                  ? findings.availability.available
+                  : findings.availability.unavailable,
+          },
+          {
+            key: 'toilet',
+            icon: RiDoorOpenFill,
+            label: findings.toilet,
+            value: place.toilet
+              ? findings.availability.available
+              : findings.availability.unavailable,
+          },
+          {
+            key: 'reservation',
+            icon: RiCalendarTodoFill,
+            label: findings.reservation,
+            value: findings.reservationValues[place.reservation],
+          },
+          ...parking,
+        ]
 
   return (
     <section aria-labelledby="what-we-found" className="mt-12">

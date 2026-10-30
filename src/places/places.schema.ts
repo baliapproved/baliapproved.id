@@ -62,6 +62,38 @@ export const mapPlaceSchema = z.object({
 
 export type MapPlace = z.output<typeof mapPlaceSchema>
 
+// Shared by every visited category. Stand-ins keep an unvisited place valid.
+// Findings render only when visitedAt has a date.
+const sharedFindings = {
+  wifi: z.union([z.number().positive(), z.literal('available')]).default('available'),
+  cooling: z.enum(['ac', 'fan', 'ac-and-fan', 'open-air']).default('open-air'),
+  noise: z.enum(['quiet', 'moderate', 'loud']).default('moderate'),
+  parking: z
+    .object({ motorbike: parking, car: parking })
+    .default({ motorbike: 'unavailable', car: 'unavailable' }),
+}
+
+export const cafeFindingsSchema = z.object({
+  ...sharedFindings,
+  power: amount.default('unavailable'),
+  seating: z.array(z.enum(['indoor', 'outdoor', 'semi-outdoor'])).default([]),
+  // null means the visit did not confirm whether music was playing.
+  music: z.boolean().nullable().default(null),
+  toilet: z.boolean().default(false),
+  reservation: z.enum(['not-needed', 'recommended', 'required']).default('not-needed'),
+})
+
+export const stayFindingsSchema = z.object({
+  ...sharedFindings,
+  roomType: z.enum(['private-studio', 'private-room', 'shared-dorm']).default('private-room'),
+  bathroom: z.enum(['private', 'shared']).default('shared'),
+  kitchen: z.enum(['private', 'shared', 'unavailable']).default('unavailable'),
+  pool: z.boolean().default(false),
+})
+
+export type CafeFindings = z.output<typeof cafeFindingsSchema>
+export type StayFindings = z.output<typeof stayFindingsSchema>
+
 export const placePageSchema = z.object({
   slug: z.string(),
   title: z.string().trim().min(1),
@@ -90,19 +122,6 @@ export const placePageSchema = z.object({
   phone: z.string().trim().min(1).optional(),
   address: z.string().trim().min(1),
   visitedAt: z.array(z.iso.date()).default([]),
-  // Stand-ins for a place with no visit. Findings render only when seating is recorded.
-  wifi: z.union([z.number().positive(), z.literal('available')]).default('available'),
-  power: amount.default('unavailable'),
-  seating: z.array(z.enum(['indoor', 'outdoor', 'semi-outdoor'])).default([]),
-  cooling: z.enum(['ac', 'fan', 'ac-and-fan', 'open-air']).default('open-air'),
-  noise: z.enum(['quiet', 'moderate', 'loud']).default('moderate'),
-  // null means the visit did not confirm whether music was playing.
-  music: z.boolean().nullable().default(null),
-  toilet: z.boolean().default(false),
-  reservation: z.enum(['not-needed', 'recommended', 'required']).default('not-needed'),
-  parking: z
-    .object({ motorbike: parking, car: parking })
-    .default({ motorbike: 'unavailable', car: 'unavailable' }),
   gallery: z
     .array(
       z.object({
