@@ -1,0 +1,2 @@
+# Permanently canonicalize trailing-slash page URLs.
+/*/ /:splat 301
