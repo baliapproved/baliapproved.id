@@ -38,6 +38,13 @@ export default {
       ko: '받은 편지함을 확인해 주세요',
       'zh-CN': '查看收件箱',
     }),
+    subscribedHeading: t({
+      en: 'You’re subscribed',
+      id: 'Kamu sudah berlangganan',
+      ja: '登録が完了しました',
+      ko: '구독이 완료되었습니다',
+      'zh-CN': '订阅成功',
+    }),
     backToExploring: t({
       en: 'Back to exploring',
       id: 'Kembali menjelajah',

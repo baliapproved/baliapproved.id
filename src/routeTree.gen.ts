@@ -13,6 +13,7 @@ import { Route as Char123LocaleChar125RouteRouteImport } from './routes/{-$local
 import { Route as Char123LocaleChar125IndexRouteImport } from './routes/{-$locale}/index'
 import { Route as Char123LocaleChar125AboutRouteImport } from './routes/{-$locale}/about'
 import { Route as Char123LocaleChar125BlogRouteImport } from './routes/{-$locale}/blog'
+import { Route as Char123LocaleChar125NewsletterSubscribedRouteImport } from './routes/{-$locale}/newsletter/subscribed'
 import { Route as Char123LocaleChar125PlacesSlugRouteImport } from './routes/{-$locale}/places/$slug'
 
 const Char123LocaleChar125RouteRoute =
@@ -39,6 +40,12 @@ const Char123LocaleChar125BlogRoute =
     path: '/blog',
     getParentRoute: () => Char123LocaleChar125RouteRoute,
   } as any)
+const Char123LocaleChar125NewsletterSubscribedRoute =
+  Char123LocaleChar125NewsletterSubscribedRouteImport.update({
+    id: '/newsletter/subscribed',
+    path: '/newsletter/subscribed',
+    getParentRoute: () => Char123LocaleChar125RouteRoute,
+  } as any)
 const Char123LocaleChar125PlacesSlugRoute =
   Char123LocaleChar125PlacesSlugRouteImport.update({
     id: '/places/$slug',
@@ -51,12 +58,14 @@ export interface FileRoutesByFullPath {
   '/{-$locale}/about': typeof Char123LocaleChar125AboutRoute
   '/{-$locale}/blog': typeof Char123LocaleChar125BlogRoute
   '/{-$locale}/': typeof Char123LocaleChar125IndexRoute
+  '/{-$locale}/newsletter/subscribed': typeof Char123LocaleChar125NewsletterSubscribedRoute
   '/{-$locale}/places/$slug': typeof Char123LocaleChar125PlacesSlugRoute
 }
 export interface FileRoutesByTo {
   '/{-$locale}/about': typeof Char123LocaleChar125AboutRoute
   '/{-$locale}/blog': typeof Char123LocaleChar125BlogRoute
   '/{-$locale}': typeof Char123LocaleChar125IndexRoute
+  '/{-$locale}/newsletter/subscribed': typeof Char123LocaleChar125NewsletterSubscribedRoute
   '/{-$locale}/places/$slug': typeof Char123LocaleChar125PlacesSlugRoute
 }
 export interface FileRoutesById {
@@ -65,6 +74,7 @@ export interface FileRoutesById {
   '/{-$locale}/about': typeof Char123LocaleChar125AboutRoute
   '/{-$locale}/blog': typeof Char123LocaleChar125BlogRoute
   '/{-$locale}/': typeof Char123LocaleChar125IndexRoute
+  '/{-$locale}/newsletter/subscribed': typeof Char123LocaleChar125NewsletterSubscribedRoute
   '/{-$locale}/places/$slug': typeof Char123LocaleChar125PlacesSlugRoute
 }
 export interface FileRouteTypes {
@@ -74,12 +84,14 @@ export interface FileRouteTypes {
     | '/{-$locale}/about'
     | '/{-$locale}/blog'
     | '/{-$locale}/'
+    | '/{-$locale}/newsletter/subscribed'
     | '/{-$locale}/places/$slug'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/{-$locale}/about'
     | '/{-$locale}/blog'
     | '/{-$locale}'
+    | '/{-$locale}/newsletter/subscribed'
     | '/{-$locale}/places/$slug'
   id:
     | '__root__'
@@ -87,6 +99,7 @@ export interface FileRouteTypes {
     | '/{-$locale}/about'
     | '/{-$locale}/blog'
     | '/{-$locale}/'
+    | '/{-$locale}/newsletter/subscribed'
     | '/{-$locale}/places/$slug'
   fileRoutesById: FileRoutesById
 }
@@ -124,6 +137,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof Char123LocaleChar125BlogRouteImport
       parentRoute: typeof Char123LocaleChar125RouteRoute
     }
+    '/{-$locale}/newsletter/subscribed': {
+      id: '/{-$locale}/newsletter/subscribed'
+      path: '/newsletter/subscribed'
+      fullPath: '/{-$locale}/newsletter/subscribed'
+      preLoaderRoute: typeof Char123LocaleChar125NewsletterSubscribedRouteImport
+      parentRoute: typeof Char123LocaleChar125RouteRoute
+    }
     '/{-$locale}/places/$slug': {
       id: '/{-$locale}/places/$slug'
       path: '/places/$slug'
@@ -138,6 +158,7 @@ interface Char123LocaleChar125RouteRouteChildren {
   Char123LocaleChar125AboutRoute: typeof Char123LocaleChar125AboutRoute
   Char123LocaleChar125BlogRoute: typeof Char123LocaleChar125BlogRoute
   Char123LocaleChar125IndexRoute: typeof Char123LocaleChar125IndexRoute
+  Char123LocaleChar125NewsletterSubscribedRoute: typeof Char123LocaleChar125NewsletterSubscribedRoute
   Char123LocaleChar125PlacesSlugRoute: typeof Char123LocaleChar125PlacesSlugRoute
 }
 
@@ -146,6 +167,8 @@ const Char123LocaleChar125RouteRouteChildren: Char123LocaleChar125RouteRouteChil
     Char123LocaleChar125AboutRoute: Char123LocaleChar125AboutRoute,
     Char123LocaleChar125BlogRoute: Char123LocaleChar125BlogRoute,
     Char123LocaleChar125IndexRoute: Char123LocaleChar125IndexRoute,
+    Char123LocaleChar125NewsletterSubscribedRoute:
+      Char123LocaleChar125NewsletterSubscribedRoute,
     Char123LocaleChar125PlacesSlugRoute: Char123LocaleChar125PlacesSlugRoute,
   }
 
