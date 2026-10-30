@@ -20,6 +20,7 @@ import {
   InputGroupInput,
 } from '@/design-system/input-group'
 
+import { NewsletterEnvelope } from './newsletter-envelope'
 import { subscribe, type SubscribeResult } from './subscribe'
 
 type Status = 'idle' | 'submitting' | 'success'
@@ -112,27 +113,7 @@ export function SubscribeForm({ placement = 'hero' }: { placement?: 'hero' | 'fo
             closeLabel={content.closeDialog.value}
             className="group/newsletter max-h-[calc(100dvh-2rem)] gap-5 overflow-y-auto px-6 pt-8 pb-6 duration-200 motion-reduce:animate-none sm:px-8 sm:pt-10 sm:pb-8"
           >
-            <svg
-              aria-hidden="true"
-              viewBox="0 0 180 136"
-              fill="none"
-              className="mx-auto h-24 w-32 motion-safe:duration-200 motion-safe:group-data-open/newsletter:animate-in motion-safe:group-data-open/newsletter:fade-in-0 sm:h-28 sm:w-40"
-            >
-              <g
-                transform="rotate(-7 90 68)"
-                stroke="#795449"
-                strokeWidth="1.2"
-                strokeLinejoin="round"
-              >
-                <path d="M22 58 86 17a7 7 0 0 1 8 0l64 41v55H22Z" fill="#DF8B73" />
-                <rect x="40" y="25" width="100" height="82" rx="2" fill="#FFF8EB" />
-                <path d="M51 42h39m-39 8h27m-27 16h59m-59 8h47" stroke="#B6A795" />
-                <path d="M116 33h16v21h-16z" fill="#CB654C" stroke="none" />
-                <circle cx="124" cy="43.5" r="4" fill="#FFF8EB" stroke="none" />
-                <path d="m22 58 68 44 68-44v55a4 4 0 0 1-4 4H26a4 4 0 0 1-4-4Z" fill="#EEAF99" />
-                <path d="m24 115 44-27m88 27-44-27" />
-              </g>
-            </svg>
+            <NewsletterEnvelope className="mx-auto h-24 w-32 motion-safe:duration-200 motion-safe:group-data-open/newsletter:animate-in motion-safe:group-data-open/newsletter:fade-in-0 sm:h-28 sm:w-40" />
             <DialogHeader className="items-center gap-3 text-center">
               <DialogTitle className="text-2xl leading-tight tracking-tight sm:text-3xl">
                 {content.checkInbox}

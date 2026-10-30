@@ -13,7 +13,10 @@ Local development runs at http://localhost:4321.
 
 Use Astro's `main` branch as a reference for intended content and behavior. Adapt each feature to this branch's TanStack Start architecture rather than copying its implementation unchanged.
 
-The closing About-page brand block (Bali Approved logo and “Powered by shorj.com” link) is intentionally excluded from the migration.
+The following are intentionally excluded from the migration:
+
+- The closing About-page brand block (Bali Approved logo and “Powered by shorj.com” link).
+- Hiding the footer newsletter signup on the subscription confirmation page. Keep the signup visible there.
 
 ## Languages
 

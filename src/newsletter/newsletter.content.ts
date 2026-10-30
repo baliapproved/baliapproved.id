@@ -45,6 +45,27 @@ export default {
       ko: '구독이 완료되었습니다',
       'zh-CN': '订阅成功',
     }),
+    subscribedDescription: t({
+      en: 'New reviews arrive every Friday, from the cafés, stays, and experiences we’ve tried.',
+      id: 'Setiap Jumat, kami mengirim ulasan baru tentang kafe, penginapan, dan pengalaman yang sudah kami coba.',
+      ja: '実際に訪れたカフェ、宿泊施設、体験の新しいレビューを毎週金曜日にお届けします。',
+      ko: '직접 방문한 카페, 숙소, 체험의 새로운 리뷰를 매주 금요일에 보내드립니다.',
+      'zh-CN': '每周五，我们都会发送亲自探访过的咖啡馆、住宿和体验的新评价。',
+    }),
+    seePlaces: t({
+      en: 'See the places',
+      id: 'Lihat tempatnya',
+      ja: '場所を見る',
+      ko: '장소 보기',
+      'zh-CN': '查看地点',
+    }),
+    unsubscribeHint: t({
+      en: 'Changed your mind? Unsubscribe from any review we send.',
+      id: 'Berubah pikiran? Berhenti berlangganan lewat tautan di setiap email ulasan yang kami kirim.',
+      ja: '気が変わりましたか？お送りするレビューのメールから、いつでも配信を停止できます。',
+      ko: '마음이 바뀌셨나요? 보내드리는 리뷰 이메일에서 언제든 구독을 취소할 수 있습니다.',
+      'zh-CN': '改变主意了？您可以通过我们发送的任何一封评价邮件取消订阅。',
+    }),
     backToExploring: t({
       en: 'Back to exploring',
       id: 'Kembali menjelajah',
