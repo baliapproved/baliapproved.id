@@ -17,10 +17,18 @@ The following are intentionally excluded from the migration:
 
 - The closing About-page brand block (Bali Approved logo and “Powered by shorj.com” link).
 - Hiding the footer newsletter signup on the subscription confirmation page. Keep the signup visible there.
+- The old underscore place URLs. `/places/starbucks_dewata`, `/places/chagee_discovery_mall`, `/places/seniman_coffee_renon`, `/places/ubud_backpacker_hostel`, `/places/st_ali_coffee`, and `/places/tulus_coliving` stay 404s, including their trailing-slash variants. `main` redirected them.
 
 Deferred migration work:
 
-- Use each place’s existing localized description as its page meta description. The route loader already provides the data; place pages currently inherit the generic site description.
+- Place meta description. Use the localized review when it exists, and the about text when the review is empty. The loader already has both. Place pages currently inherit the generic site description.
+- Share head. Add a canonical URL, Open Graph tags, and a Twitter card. The default share image is `og-image.png` from `main`. A place-specific description and cover image stay with the meta description item.
+- Place JSON-LD. Emit one schema.org object per place, using café, restaurant, stay, or club, with the address, map pin, and review. The page loader currently drops `postalCode` and `coordinates`.
+- Place click tracking. Record Instagram, Threads, TikTok, website, WhatsApp, phone, and maps from the place page. The action list currently has only Instagram and WhatsApp. The footer, About page, and newsletter already send `website_action`.
+- Homepage JSON-LD. Emit a `WebSite` and an `Organization` on the home page. The organization logo is `apple-touch-icon.png` from `main`, which is not in this branch yet.
+- Sitemap. Serve one `GET /sitemap.xml` route. No sitemap library and no `sitemap-index.xml`. List `/`, `/about`, `/blog`, and `/places/<slug>` for ``, `/id`, `/ja`, `/ko`, and `/zh`. Exclude `/newsletter/subscribed` and the redirect prefixes `/en`, `/ko-KR`, `/zh-TW`, and `/zh-CN`. Point `robots.txt` at `https://baliapproved.id/sitemap.xml`. No `lastmod`, `changefreq`, or priority.
+- Low priority: responsive images. Skip a resized `srcset` pipeline. The median gallery photo is already 98KB. Recompress the outliers if the weight matters: 16 gallery photos are over 500KB, Volken reaches 8MB, and cutouts are a median 428KB at 1254px for a card a few hundred pixels wide.
+- Response headers. Send `Strict-Transport-Security: max-age=31536000` with no `includeSubDomains`, and `X-Content-Type-Options: nosniff`, on every response. Fingerprinted files under `/assets/` also send `Cache-Control: public, max-age=31536000, immutable`. `main` set these in `public/_headers`. That file does not cover Worker HTML, and the Worker-side approach is still open.
 
 ## Languages
 
@@ -69,7 +77,7 @@ Add copy to the owning `.content.ts` file with `t({ en: '...', id: '...', ja: '.
 
 Strict mode requires every supported language. Intlayer generates dictionary types and per-language chunks in the ignored `.intlayer/` directory. Development and builds regenerate them automatically; `pnpm typecheck` also regenerates them for a fresh checkout. Generated files are never edited or committed. Production loads the requested language's chunks.
 
-The document head uses the localized Bali Approved title and description from `src/site/site.content.ts`, selected by the URL's language, with the existing favicon from `main` and a branded manifest. Shared site constants remain in `src/site/site.ts`. Page-specific metadata and Places content are deferred. About and Blog remain placeholders.
+The document head uses the localized Bali Approved title and description from `src/site/site.content.ts`, selected by the URL's language, with the existing favicon from `main` and a branded manifest. Shared site constants remain in `src/site/site.ts`. Page-specific metadata that is still open is listed under Deferred migration work.
 
 ## Place visit status
 
