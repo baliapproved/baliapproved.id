@@ -1,42 +1,41 @@
-import { getSecret } from "astro:env/server";
-import { z } from "astro/zod";
+export type SubscribeInput = {
+  email: string
+  company?: string
+}
 
-const created = z.object({ subscriber: z.object({ state: z.string() }) });
+export type SubscribeResult =
+  | { status: 'success' }
+  | { status: 'invalid-email' }
+  | { status: 'rate-limited' }
+  | { status: 'error' }
 
-// Enrolling an inactive subscriber in the form sends Kit's confirmation email.
-export async function subscribe(email: string) {
-  const apiKey = getSecret("KIT_API_KEY");
-  if (!apiKey) throw new Error("KIT_API_KEY is not set");
-  const headers = {
-    "X-Kit-Api-Key": apiKey,
-    "Content-Type": "application/json",
-  };
+const validStatuses = new Set<SubscribeResult['status']>([
+  'success',
+  'invalid-email',
+  'rate-limited',
+  'error',
+])
 
-  // Kit defaults new subscribers to active and keeps an existing one's state.
-  const createResponse = await fetch("https://api.kit.com/v4/subscribers", {
-    method: "POST",
-    headers,
-    body: JSON.stringify({ email_address: email, state: "inactive" }),
-    signal: AbortSignal.timeout(30_000),
-  });
-  if (!createResponse.ok) {
-    throw new Error(`Kit create failed: ${createResponse.status}`);
+export async function subscribe(input: SubscribeInput): Promise<SubscribeResult> {
+  const response = await fetch('/api/subscribe', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(input),
+  })
+
+  try {
+    const body = (await response.json()) as { status?: unknown }
+    if (
+      typeof body.status === 'string' &&
+      validStatuses.has(body.status as SubscribeResult['status'])
+    ) {
+      return { status: body.status as SubscribeResult['status'] }
+    }
+  } catch {
+    // Fall back to HTTP status codes below when response body is not JSON.
   }
-  const { subscriber } = created.parse(await createResponse.json());
 
-  // Only unconfirmed subscribers need the confirmation email.
-  if (subscriber.state !== "inactive") return;
-
-  const enrollResponse = await fetch(
-    "https://api.kit.com/v4/forms/10086334/subscribers",
-    {
-      method: "POST",
-      headers,
-      body: JSON.stringify({ email_address: email }),
-      signal: AbortSignal.timeout(30_000),
-    },
-  );
-  if (!enrollResponse.ok) {
-    throw new Error(`Kit enroll failed: ${enrollResponse.status}`);
-  }
+  if (response.status === 429) return { status: 'rate-limited' }
+  if (response.status === 400) return { status: 'invalid-email' }
+  return { status: 'error' }
 }
