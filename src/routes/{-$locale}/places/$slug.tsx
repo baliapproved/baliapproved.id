@@ -87,9 +87,7 @@ function PlacePage() {
           </div>
         </header>
 
-        <div className="mt-6">
-          <PlacePhotos title={place.title} photos={place.photos} />
-        </div>
+        <PlacePhotos title={place.title} photos={place.photos} />
 
         <PlaceAbout place={place} />
         <PlaceReview place={place} />

@@ -36,7 +36,7 @@ export async function readMapPlaces(locale: Locale) {
   const records = await getIntlayerAsync('place', locale)
   return (
     records
-      .filter((record) => record.visitedAt.length > 0)
+      .filter((record) => 'visitedAt' in record && record.visitedAt.length > 0)
       .map((record) => {
         const place = mapPlaceSchema.parse(record)
         return {
@@ -72,7 +72,7 @@ export async function readPlace(locale: Locale, slug: string) {
     whatsapp: place.whatsapp,
     phone: place.phone,
     address: place.address,
-    lastVisitedAt: place.visitedAt.reduce((latest, visit) => (visit > latest ? visit : latest)),
+    lastVisitedAt: place.visitedAt.reduce((latest, visit) => (visit > latest ? visit : latest), ''),
     wifi: place.wifi,
     power: place.power,
     seating: place.seating,

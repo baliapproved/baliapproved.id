@@ -20,6 +20,7 @@ const arrow =
 export function PlacePhotos({ title, photos }: { title: string; photos: PlacePhoto[] }) {
   const content = useIntlayer('places')
   const track = useRef<HTMLDivElement>(null)
+  if (photos.length === 0) return null
 
   return (
     <Carousel
@@ -32,7 +33,7 @@ export function PlacePhotos({ title, photos }: { title: string; photos: PlacePho
       aria-label={content.photos.label({ title }).value}
       tabIndex={0}
       // The ring follows the page column, not the full-bleed viewport.
-      className="-mx-(--pad) outline-none [--pad:--spacing(5)] after:pointer-events-none after:absolute after:inset-x-[calc(var(--pad)-0.25rem)] after:-inset-y-1 after:rounded-[calc(var(--radius-3xl)+0.25rem)] focus-visible:after:outline-2 focus-visible:after:outline-ring sm:[--pad:--spacing(8)] lg:[--pad:--spacing(12)] xl:[--pad:--spacing(20)]"
+      className="-mx-(--pad) mt-6 outline-none [--pad:--spacing(5)] after:pointer-events-none after:absolute after:inset-x-[calc(var(--pad)-0.25rem)] after:-inset-y-1 after:rounded-[calc(var(--radius-3xl)+0.25rem)] focus-visible:after:outline-2 focus-visible:after:outline-ring sm:[--pad:--spacing(8)] lg:[--pad:--spacing(12)] xl:[--pad:--spacing(20)]"
     >
       <CarouselContent ref={track} className="ml-0 gap-2 pl-(--pad) sm:gap-4">
         {photos.map((photo, index) => (

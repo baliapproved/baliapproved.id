@@ -71,6 +71,10 @@ Strict mode requires every supported language. Intlayer generates dictionary typ
 
 The document head uses the localized Bali Approved title and description from `src/site/site.content.ts`, selected by the URL's language, with the existing favicon from `main` and a branded manifest. Shared site constants remain in `src/site/site.ts`. Page-specific metadata and Places content are deferred. About and Blog remain placeholders.
 
+## Place visit status
+
+A place keeps the same fields when it has not been visited. Omitted visit data uses an empty default: `visitedAt`, `gallery`, and `seating` are `[]`, and review text is `''`. The detail page then shows the translated “Not visited yet” notice and skips the gallery and findings. The catalog card keeps the usual preview row, using the cutout when the gallery is empty. Unvisited places sort after visited places and stay off the About page’s visited-places map. Bread Yard in Seminyak is the first unvisited listing migrated from `main`.
+
 ## Analytics
 
 PostHog loads in the browser through `PostHogProvider`. Pageviews follow route changes and carry the page language as `locale`.

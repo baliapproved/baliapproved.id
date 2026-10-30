@@ -43,6 +43,8 @@ export function PlaceFindings({
   }
 }) {
   const { findings } = useIntlayer('places')
+  if (place.seating.length === 0) return null
+
   const range = place.wifi === 'available' ? null : wifiRange(place.wifi)
   const wifi =
     range === null

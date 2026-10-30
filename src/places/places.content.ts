@@ -285,6 +285,20 @@ export default {
       },
     },
     review: {
+      notVisited: t({
+        en: 'Not visited yet',
+        id: 'Belum dikunjungi',
+        ja: 'まだ訪問していません',
+        ko: '아직 방문하지 않았습니다',
+        'zh-CN': '尚未到访',
+      }),
+      afterVisit: t({
+        en: 'We’ll add our review and photos after our visit. Until then, check their socials for the latest updates.',
+        id: 'Kami akan menambahkan ulasan dan foto setelah berkunjung. Sementara itu, cek media sosial mereka untuk informasi terbaru.',
+        ja: '訪問後にレビューと写真を追加します。それまでは、最新情報を公式のSNSでご確認ください。',
+        ko: '방문 후 리뷰와 사진을 추가하겠습니다. 그때까지는 소셜 미디어에서 최신 소식을 확인해 주세요.',
+        'zh-CN': '到访后，我们会添加评价和照片。在此之前，请查看他们的社交媒体获取最新消息。',
+      }),
       heading: t({
         en: 'Our review',
         id: 'Ulasan kami',

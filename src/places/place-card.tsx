@@ -101,7 +101,7 @@ export function PlaceCard({ place }: { place: Place }) {
               </span>
             </p>
           )}
-          {place.previews.length > 0 && <PhotoPreviews photos={place.previews} />}
+          <PhotoPreviews photos={place.previews} />
         </div>
       </CardContent>
     </Card>

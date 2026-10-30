@@ -28,14 +28,15 @@ export const placeSchema = z
         max: z.number().int().positive(),
       })
       .optional(),
-    visitedAt: z.array(z.iso.date()).min(1),
+    visitedAt: z.array(z.iso.date()).default([]),
     badge: z.enum(['approved', 'good-find']).optional(),
-    gallery: z.array(z.object({ src: z.string().trim().min(1) })).min(1),
+    gallery: z.array(z.object({ src: z.string().trim().min(1) })).default([]),
   })
-  .transform(({ visitedAt, gallery, ...place }) => ({
+  .transform(({ visitedAt, gallery, cutout, ...place }) => ({
     ...place,
-    lastVisitedAt: visitedAt.reduce((latest, visit) => (visit > latest ? visit : latest)),
-    previews: gallery.slice(0, 3),
+    cutout,
+    lastVisitedAt: visitedAt.reduce((latest, visit) => (visit > latest ? visit : latest), ''),
+    previews: (gallery.length > 0 ? gallery : [{ src: cutout.src }]).slice(0, 3),
   }))
 
 export type Place = z.output<typeof placeSchema>
@@ -79,8 +80,8 @@ export const placePageSchema = z.object({
   }),
   mapsUrl: z.string().trim().min(1),
   about: z.string().trim().min(1),
-  description: z.string().trim().min(1),
-  caveats: z.string().trim().min(1),
+  description: z.string().trim().default(''),
+  caveats: z.string().trim().default(''),
   instagram: z.string().trim().min(1),
   threads: z.string().trim().min(1).optional(),
   tiktok: z.string().trim().min(1).optional(),
@@ -88,17 +89,20 @@ export const placePageSchema = z.object({
   whatsapp: z.string().trim().min(1).optional(),
   phone: z.string().trim().min(1).optional(),
   address: z.string().trim().min(1),
-  visitedAt: z.array(z.iso.date()).min(1),
-  wifi: z.union([z.number().positive(), z.literal('available')]),
-  power: amount,
-  seating: z.array(z.enum(['indoor', 'outdoor', 'semi-outdoor'])).min(1),
-  cooling: z.enum(['ac', 'fan', 'ac-and-fan', 'open-air']),
-  noise: z.enum(['quiet', 'moderate', 'loud']),
+  visitedAt: z.array(z.iso.date()).default([]),
+  // Stand-ins for a place with no visit. Findings render only when seating is recorded.
+  wifi: z.union([z.number().positive(), z.literal('available')]).default('available'),
+  power: amount.default('unavailable'),
+  seating: z.array(z.enum(['indoor', 'outdoor', 'semi-outdoor'])).default([]),
+  cooling: z.enum(['ac', 'fan', 'ac-and-fan', 'open-air']).default('open-air'),
+  noise: z.enum(['quiet', 'moderate', 'loud']).default('moderate'),
   // null means the visit did not confirm whether music was playing.
-  music: z.boolean().nullable(),
-  toilet: z.boolean(),
-  reservation: z.enum(['not-needed', 'recommended', 'required']),
-  parking: z.object({ motorbike: parking, car: parking }),
+  music: z.boolean().nullable().default(null),
+  toilet: z.boolean().default(false),
+  reservation: z.enum(['not-needed', 'recommended', 'required']).default('not-needed'),
+  parking: z
+    .object({ motorbike: parking, car: parking })
+    .default({ motorbike: 'unavailable', car: 'unavailable' }),
   gallery: z
     .array(
       z.object({
@@ -106,5 +110,5 @@ export const placePageSchema = z.object({
         alt: z.string().trim().min(1),
       }),
     )
-    .min(1),
+    .default([]),
 })
