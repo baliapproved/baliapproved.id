@@ -32,8 +32,8 @@ function Subscribed() {
   const { locale } = useLocale()
 
   return (
-    <main className="flex flex-1 bg-border px-5">
-      <article className="mx-auto flex w-full max-w-md flex-col items-center justify-center py-16 text-center sm:py-24">
+    <main className="flex flex-1 bg-border px-5 pb-24">
+      <article className="mx-auto flex w-full max-w-md flex-col items-center justify-center py-12 text-center">
         <NewsletterEnvelope className={cn(styles.envelope, 'h-32 w-44 sm:h-36 sm:w-52')} />
         <h1 className="mt-8 text-3xl/9 font-medium tracking-tight text-balance sm:text-4xl/10">
           {subscribedHeading}

@@ -13,8 +13,8 @@ export function NotFound() {
   const { locale } = useLocale()
 
   return (
-    <main className="flex flex-1 bg-border px-5">
-      <article className="mx-auto flex w-full max-w-md flex-col items-center justify-center py-16 text-center sm:py-24">
+    <main className="flex flex-1 bg-border px-5 pb-24">
+      <article className="mx-auto flex w-full max-w-md flex-col items-center justify-center py-12 text-center">
         <img
           src={notFoundMap}
           alt=""
