@@ -70,7 +70,7 @@ export function Header({ locale, places }: { locale: Locale; places: Places }) {
                 <Link
                   to={to}
                   params={params}
-                  activeOptions={{ exact: true }}
+                  activeOptions={{ exact: true, includeSearch: false }}
                   className="inline-flex min-h-11 items-center rounded-full px-4 text-base font-medium transition-colors focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-ring"
                   activeProps={{ className: 'bg-background text-foreground' }}
                   inactiveProps={{ className: 'text-foreground/65 hover:bg-foreground/5' }}
@@ -116,7 +116,7 @@ export function Header({ locale, places }: { locale: Locale; places: Places }) {
                       <Link
                         to={to}
                         params={params}
-                        activeOptions={{ exact: true }}
+                        activeOptions={{ exact: true, includeSearch: false }}
                         // Pages don't reload on navigation, so close the menu here.
                         onClick={() => setMobileNavOpen(false)}
                         className="flex min-h-11 items-center rounded-2xl px-4 text-base font-medium transition-colors hover:bg-muted focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-ring"
