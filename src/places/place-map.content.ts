@@ -11,6 +11,14 @@ export default {
       'zh-CN': '我们评价过的地点地图',
       ru: 'Карта мест, на которые мы написали обзоры',
     }),
+    loading: t({
+      en: 'Loading map…',
+      id: 'Memuat peta…',
+      ja: '地図を読み込み中…',
+      ko: '지도를 불러오는 중…',
+      'zh-CN': '正在加载地图…',
+      ru: 'Загружаем карту…',
+    }),
     controls: {
       enterFullscreen: t({
         en: 'Enter fullscreen',

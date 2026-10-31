@@ -5,6 +5,8 @@ import workerUrl from 'maplibre-gl/dist/maplibre-gl-worker.mjs?worker&url'
 import { useRef, useState } from 'react'
 import { useIntlayer, useLocale } from 'react-intlayer'
 
+import { Spinner } from '@/design-system/spinner'
+
 import { PlaceMapPreview, type MappedPlace } from './place-map-preview'
 import styles from './place-map.module.css'
 import type { Places } from './places.schema'
@@ -25,6 +27,7 @@ function toMappedPlaces(places: Places): MappedPlace[] {
 export function PlaceMap({ places, className }: { places: Places; className?: string }) {
   const map = useIntlayer('place-map')
   const { locale } = useLocale()
+  const [ready, setReady] = useState(false)
   const mappedPlaces = toMappedPlaces(places)
   const [selectedSlug, setSelectedSlug] = useState<string>()
   const selectedMarker = useRef<HTMLButtonElement | null>(null)
@@ -39,7 +42,7 @@ export function PlaceMap({ places, className }: { places: Places; className?: st
 
   return (
     <div
-      className={cn(styles.map, className)}
+      className={cn(styles.map, 'relative', className)}
       onKeyDown={(event) => {
         if (event.key === 'Escape' && selected) {
           event.stopPropagation()
@@ -49,6 +52,7 @@ export function PlaceMap({ places, className }: { places: Places; className?: st
     >
       <Map
         key={locale}
+        style={{ visibility: ready ? 'visible' : 'hidden' }}
         workerUrl={workerUrl}
         locale={{
           'Map.Title': map.label.value,
@@ -81,7 +85,9 @@ export function PlaceMap({ places, className }: { places: Places; className?: st
           target.setPaintProperty('water', 'fill-color', '#d6e1de')
           target.setLayoutProperty('label_village', 'visibility', 'none')
           target.setLayoutProperty('label_other', 'visibility', 'none')
+          setReady(true)
         }}
+        onRemove={() => setReady(false)}
       >
         <FullscreenControl />
 
@@ -116,6 +122,17 @@ export function PlaceMap({ places, className }: { places: Places; className?: st
 
         {selected && <PlaceMapPreview key={selected.slug} place={selected} onClose={closePopup} />}
       </Map>
+      {!ready && (
+        <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-muted px-6 text-center">
+          <Spinner
+            aria-hidden="true"
+            className="size-5 text-muted-foreground motion-reduce:animate-none"
+          />
+          <p role="status" className="text-sm text-muted-foreground">
+            {map.loading}
+          </p>
+        </div>
+      )}
     </div>
   )
 }
