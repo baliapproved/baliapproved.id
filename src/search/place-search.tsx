@@ -35,10 +35,16 @@ export function PlaceSearch({ places }: { places: Places }) {
         onOpenChange={setOpen}
         title={content.title.value}
         description={content.description.value}
+        className="top-[12dvh] sm:max-w-xl"
       >
-        <Command>
-          <CommandInput placeholder={content.placeholder.value} aria-label={content.title.value} />
-          <CommandList>
+        {/* 16px text stops iOS from zooming the page when the field is focused. */}
+        <Command className="**:data-[slot=input-group]:h-12 sm:**:data-[slot=input-group]:h-10">
+          <CommandInput
+            placeholder={content.placeholder.value}
+            aria-label={content.title.value}
+            className="text-base md:text-sm"
+          />
+          <CommandList className="max-h-[min(20rem,50dvh)]">
             <CommandEmpty>{content.empty}</CommandEmpty>
             <CommandGroup heading={content.group.value}>
               {places.map((place) => (
