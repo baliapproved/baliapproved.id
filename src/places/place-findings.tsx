@@ -45,7 +45,7 @@ export function PlaceFindings({ place }: { place: Places[number] }) {
         f.seating.map((value) => labels[value].value).join(', '),
       )
     if (f.noise) add('noise', RiVolumeDownFill, labels.noise, labels[f.noise])
-    if (f.music != null) add('music', RiMusic2Fill, labels.music, availability(f.music))
+    if (f.music) add('music', RiMusic2Fill, labels.music, labels[f.music])
     if (f.toilet != null) add('toilet', RiDoorOpenFill, labels.toilet, availability(f.toilet))
     if (f.reservation)
       add('reservation', RiCalendarTodoFill, labels.reservation, labels[f.reservation])

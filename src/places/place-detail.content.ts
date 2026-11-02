@@ -237,6 +237,14 @@ export default {
       'zh-CN': '无',
       ru: 'Нет',
     }),
+    unknown: t({
+      en: 'Unknown',
+      id: 'Tidak diketahui',
+      ja: '不明',
+      ko: '알 수 없음',
+      'zh-CN': '未知',
+      ru: 'Неизвестно',
+    }),
     unmeasured: t({
       en: 'Available',
       id: 'Tersedia',

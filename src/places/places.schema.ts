@@ -17,6 +17,13 @@ const imageSchema = z.object({
 
 const amountSchema = z.enum(['plenty', 'enough', 'limited', 'unavailable'])
 const parkingSchema = z.enum(['plenty', 'enough', 'limited', 'unavailable', 'street'])
+const musicSchema = z
+  .enum(['available', 'unavailable', 'unknown'])
+  .or(
+    z
+      .boolean()
+      .transform((value): 'available' | 'unavailable' => (value ? 'available' : 'unavailable')),
+  )
 
 export const placesSchema = z.array(
   z.object({
@@ -75,7 +82,7 @@ export const placesSchema = z.array(
 
         power: amountSchema.nullish(),
         seating: z.array(z.enum(['indoor', 'outdoor', 'semi-outdoor'])).nullish(),
-        music: z.boolean().nullish(),
+        music: musicSchema.nullish(),
         toilet: z.boolean().nullish(),
         reservation: z.enum(['not-needed', 'recommended', 'required']).nullish(),
 
