@@ -34,7 +34,7 @@ export const Route = createFileRoute('/{-$locale}/places/$slug')({
       title: `${place.name} | ${SITE_NAME}`,
       description: place.description.value,
       image: leadPhoto ? toSocialImageUrl(leadPhoto.url) : undefined,
-      imageAlt: leadPhoto ? (leadPhoto.alt?.value ?? place.name) : undefined,
+      imageAlt: leadPhoto ? leadPhoto.alt.value : undefined,
       jsonLd: buildPlaceJsonLd(place, locale),
     })
   },
@@ -57,8 +57,8 @@ function PlacePage() {
           <div className="flex min-w-0 flex-col items-start gap-3 sm:flex-row sm:items-center sm:gap-4">
             <img
               src={place.cutout.url}
-              alt={place.cutout.alt?.value ?? ''}
-              lang={place.cutout.alt?.language}
+              alt={place.cutout.alt.value}
+              lang={place.cutout.alt.language}
               width={place.cutout.width}
               height={place.cutout.height}
               loading="eager"

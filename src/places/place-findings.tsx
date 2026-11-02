@@ -18,42 +18,56 @@ import { useIntlayer } from 'react-intlayer'
 import type { ReactNode } from 'react'
 import type { Places } from './places.schema'
 
+function wifiRange(mbps: number) {
+  const step = mbps < 100 ? 10 : 50
+  const low = Math.floor(mbps / step) * step
+  return `${low}–${low + step} Mbps`
+}
+
 export function PlaceFindings({ place }: { place: Places[number] }) {
   const labels = useIntlayer('place-detail')
-  const f = place.findings
   const items: { key: string; icon: RemixiconComponentType; label: ReactNode; value: ReactNode }[] =
     []
   const add = (key: string, icon: RemixiconComponentType, label: ReactNode, value: ReactNode) =>
     items.push({ key, icon, label, value })
-  const availability = (value: boolean) => (value ? labels.available : labels.unavailable)
-  if (f) {
-    if (f.roomType) add('roomType', RiHotelBedFill, labels.roomType, labels[f.roomType])
-    if (f.bathroom) add('bathroom', RiDoorOpenFill, labels.bathroom, labels[f.bathroom])
-    if (f.cooling) add('cooling', RiTempColdFill, labels.cooling, labels[f.cooling])
-    if (f.wifiAvailable === false) add('wifi', RiWifiFill, labels.wifi, labels.unavailable)
-    else if (f.wifi != null) {
-      const step = f.wifi < 100 ? 10 : 50
-      const low = Math.floor(f.wifi / step) * step
-      add('wifi', RiWifiFill, labels.wifi, `${low}–${low + step} Mbps`)
-    } else if (f.wifiAvailable === true) add('wifi', RiWifiFill, labels.wifi, labels.unmeasured)
-    if (f.power) add('power', RiPlugFill, labels.power, labels[f.power])
-    if (f.seating?.length)
+  if (place.findings) {
+    const { wifi } = place.findings
+    const wifiValue =
+      wifi.status === 'measured'
+        ? wifiRange(wifi.mbps)
+        : wifi.status === 'unmeasured'
+          ? labels.unmeasured
+          : wifi.status === 'unavailable'
+            ? labels.unavailable
+            : labels.unknown
+    if (place.category === 'stay') {
+      const findings = place.findings
+      add('roomType', RiHotelBedFill, labels.roomType, labels[findings.roomType])
+      add('bathroom', RiDoorOpenFill, labels.bathroom, labels[findings.bathroom])
+      add('cooling', RiTempColdFill, labels.cooling, labels[findings.cooling])
+      add('wifi', RiWifiFill, labels.wifi, wifiValue)
+      add('noise', RiVolumeDownFill, labels.noise, labels[findings.noise])
+      add('kitchen', RiFridgeFill, labels.kitchen, labels[findings.kitchen])
+      add('pool', RiLifebuoyFill, labels.pool, labels[findings.pool])
+      add('motorbike', RiMotorbikeFill, labels.motorbike, labels[findings.parking.motorbike])
+      add('car', RiCarFill, labels.car, labels[findings.parking.car])
+    } else {
+      const findings = place.findings
+      add('wifi', RiWifiFill, labels.wifi, wifiValue)
+      add('power', RiPlugFill, labels.power, labels[findings.power])
       add(
         'seating',
         RiArmchairFill,
         labels.seating,
-        f.seating.map((value) => labels[value].value).join(', '),
+        findings.seating.map((value) => labels[value].value).join(', '),
       )
-    if (f.noise) add('noise', RiVolumeDownFill, labels.noise, labels[f.noise])
-    if (f.music) add('music', RiMusic2Fill, labels.music, labels[f.music])
-    if (f.toilet != null) add('toilet', RiDoorOpenFill, labels.toilet, availability(f.toilet))
-    if (f.reservation)
-      add('reservation', RiCalendarTodoFill, labels.reservation, labels[f.reservation])
-    if (f.kitchen) add('kitchen', RiFridgeFill, labels.kitchen, labels[f.kitchen])
-    if (f.pool != null) add('pool', RiLifebuoyFill, labels.pool, availability(f.pool))
-    if (f.parking?.motorbike)
-      add('motorbike', RiMotorbikeFill, labels.motorbike, labels[f.parking.motorbike])
-    if (f.parking?.car) add('car', RiCarFill, labels.car, labels[f.parking.car])
+      add('noise', RiVolumeDownFill, labels.noise, labels[findings.noise])
+      add('music', RiMusic2Fill, labels.music, labels[findings.music])
+      add('toilet', RiDoorOpenFill, labels.toilet, labels[findings.toilet])
+      add('reservation', RiCalendarTodoFill, labels.reservation, labels[findings.reservation])
+      add('motorbike', RiMotorbikeFill, labels.motorbike, labels[findings.parking.motorbike])
+      add('car', RiCarFill, labels.car, labels[findings.parking.car])
+    }
   }
   if (!items.length && !place.caveats) return null
   return (

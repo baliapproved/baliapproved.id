@@ -8,7 +8,7 @@ export const placesQuery = defineQuery(`*[_type == "place"] | order(name asc) {
   _id, name, category, area, badge, visitedAt, "slug": slug.current,
   spending { min, max },
   contactLocation { instagram, threads, tiktok, website, whatsapp, phone, address, postalCode, mapsUrl, coordinates { lat, lng } },
-  findings { wifiAvailable, wifi, cooling, noise, parking { motorbike, car }, power, seating, music, toilet, reservation, roomType, bathroom, kitchen, pool },
+  findings { wifi { status, mbps }, cooling, noise, parking { motorbike, car }, power, seating, music, toilet, reservation, roomType, bathroom, kitchen, pool },
   cutout {
     "url": asset->url, "width": asset->metadata.dimensions.width, "height": asset->metadata.dimensions.height,
     "alt": coalesce(alt[language == $locale && defined(value) && value != ""][0], alt[language == $fallback && defined(value) && value != ""][0]){language, value}

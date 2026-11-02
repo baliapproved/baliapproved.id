@@ -1,5 +1,11 @@
 import { getIntlayer } from 'intlayer'
-import type { CafeOrCoffeeShop, LodgingBusiness, Restaurant, WithContext } from 'schema-dts'
+import type {
+  CafeOrCoffeeShop,
+  LodgingBusiness,
+  NightClub,
+  Restaurant,
+  WithContext,
+} from 'schema-dts'
 
 import type { Locale } from '@/i18n/locale'
 import { SITE_NAME, SITE_URL, toSocialImageUrl } from '@/seo/seo'
@@ -11,12 +17,16 @@ const businessTypeByCategory = {
   cafe: 'CafeOrCoffeeShop',
   restaurant: 'Restaurant',
   stay: 'LodgingBusiness',
-} as const satisfies Record<Category, 'CafeOrCoffeeShop' | 'Restaurant' | 'LodgingBusiness'>
+  club: 'NightClub',
+} as const satisfies Record<
+  Category,
+  'CafeOrCoffeeShop' | 'Restaurant' | 'LodgingBusiness' | 'NightClub'
+>
 
 export function buildPlaceJsonLd(
   place: Places[number],
   locale: Locale,
-): WithContext<CafeOrCoffeeShop | Restaurant | LodgingBusiness> {
+): WithContext<CafeOrCoffeeShop | Restaurant | LodgingBusiness | NightClub> {
   const contact = place.contactLocation
   const leadPhoto = place.gallery?.[0]
   const image = leadPhoto ? toSocialImageUrl(leadPhoto.url) : place.cutout.url

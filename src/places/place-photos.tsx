@@ -35,8 +35,8 @@ export function PlacePhotos({ photos }: { photos: Places[number]['gallery'] }) {
           >
             <img
               src={photo.url}
-              alt={photo.alt?.value ?? ''}
-              lang={photo.alt?.language}
+              alt={photo.alt.value}
+              lang={photo.alt.language}
               width={photo.width}
               height={photo.height}
               loading={index < 4 ? 'eager' : 'lazy'}

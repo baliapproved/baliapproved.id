@@ -30,8 +30,8 @@ export function PlaceCard({ place }: { place: Places[number] }) {
       <CardContent className="px-3 sm:px-4">
         <img
           src={place.cutout.url}
-          alt={place.cutout.alt?.value ?? ''}
-          lang={place.cutout.alt?.language}
+          alt={place.cutout.alt.value}
+          lang={place.cutout.alt.language}
           width={place.cutout.width}
           height={place.cutout.height}
           loading="lazy"

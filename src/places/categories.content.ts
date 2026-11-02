@@ -21,5 +21,13 @@ export default {
       'zh-CN': '住宿',
       ru: 'Жильё',
     }),
+    club: t({
+      en: 'Club',
+      id: 'Klub',
+      ja: 'クラブ',
+      ko: '클럽',
+      'zh-CN': '俱乐部',
+      ru: 'Клуб',
+    }),
   } satisfies Record<Category, ReturnType<typeof t>>,
 } satisfies Dictionary

@@ -1,6 +1,6 @@
 import { z } from 'zod'
 
-export const categorySchema = z.enum(['cafe', 'restaurant', 'stay'])
+export const categorySchema = z.enum(['cafe', 'restaurant', 'stay', 'club'])
 export type Category = z.infer<typeof categorySchema>
 
 const localizedTextSchema = z.object({
@@ -12,83 +12,119 @@ const imageSchema = z.object({
   url: z.url(),
   width: z.number().positive(),
   height: z.number().positive(),
-  alt: localizedTextSchema.nullish(),
+  alt: localizedTextSchema,
 })
 
 const amountSchema = z.enum(['plenty', 'enough', 'limited', 'unavailable'])
 const parkingSchema = z.enum(['plenty', 'enough', 'limited', 'unavailable', 'street'])
+const presenceSchema = z.enum(['available', 'unavailable', 'unknown'])
 
-export const placesSchema = z.array(
-  z.object({
-    _id: z.string().trim().min(1),
-    name: z.string().trim().min(1),
-    slug: z.string().trim().min(1),
-    category: categorySchema,
-    area: z.string().trim().min(1),
+const wifiSchema = z.discriminatedUnion('status', [
+  z.object({ status: z.literal('unavailable') }),
+  z.object({ status: z.literal('unknown') }),
+  z.object({ status: z.literal('unmeasured') }),
+  z.object({ status: z.literal('measured'), mbps: z.number().positive() }),
+])
 
-    badge: z.enum(['approved', 'good-find']).nullish(),
-    spending: z
-      .object({
-        min: z.number().int().positive().nullish(),
-        max: z.number().int().positive().nullish(),
-      })
-      .nullish(),
+const spendingSchema = z
+  .object({
+    min: z.number().int().positive().nullable(),
+    max: z.number().int().positive().nullable(),
+  })
+  .refine(
+    (spending) => spending.min == null || spending.max == null || spending.max >= spending.min,
+  )
 
-    description: localizedTextSchema,
-    review: localizedTextSchema.nullish(),
-    caveats: localizedTextSchema.nullish(),
+const contactSchema = z.object({
+  instagram: z.string().nullish(),
+  threads: z.string().nullish(),
+  tiktok: z.string().nullish(),
+  website: z.url({ protocol: /^https?$/ }).nullish(),
+  whatsapp: z.string().nullish(),
+  phone: z.string().nullish(),
+  address: z.string().nullish(),
+  postalCode: z.string().nullish(),
+  mapsUrl: z.url({ protocol: /^https?$/ }).nullish(),
+  coordinates: z
+    .object({
+      lat: z.number().min(-90).max(90),
+      lng: z.number().min(-180).max(180),
+    })
+    .nullish(),
+})
 
-    contactLocation: z
-      .object({
-        instagram: z.string().nullish(),
-        threads: z.string().nullish(),
-        tiktok: z.string().nullish(),
-        website: z.url({ protocol: /^https?$/ }).nullish(),
-        whatsapp: z.string().nullish(),
-        phone: z.string().nullish(),
-        address: z.string().nullish(),
-        postalCode: z.string().nullish(),
-        mapsUrl: z.url({ protocol: /^https?$/ }).nullish(),
-        coordinates: z
-          .object({
-            lat: z.number().min(-90).max(90),
-            lng: z.number().min(-180).max(180),
-          })
-          .nullish(),
-      })
-      .nullish(),
+const identity = {
+  _id: z.string().trim().min(1),
+  name: z.string().trim().min(1),
+  slug: z.string().trim().min(1),
+  area: z.string().trim().min(1),
+  description: localizedTextSchema,
+  contactLocation: contactSchema.nullable(),
+  cutout: imageSchema,
+}
 
-    visitedAt: z.array(z.iso.date()).nullish(),
-
-    findings: z
-      .object({
-        wifiAvailable: z.boolean().nullish(),
-        wifi: z.number().positive().nullish(),
-        cooling: z.enum(['ac', 'fan', 'ac-and-fan', 'open-air']).nullish(),
-        noise: z.enum(['quiet', 'moderate', 'loud']).nullish(),
-        parking: z
-          .object({
-            motorbike: parkingSchema.nullish(),
-            car: parkingSchema.nullish(),
-          })
-          .nullish(),
-
-        power: amountSchema.nullish(),
-        seating: z.array(z.enum(['indoor', 'outdoor', 'semi-outdoor'])).nullish(),
-        music: z.enum(['available', 'unavailable', 'unknown']).nullish(),
-        toilet: z.boolean().nullish(),
-        reservation: z.enum(['not-needed', 'recommended', 'required']).nullish(),
-
-        roomType: z.enum(['private-studio', 'private-room', 'shared-dorm']).nullish(),
-        bathroom: z.enum(['private', 'shared']).nullish(),
-        kitchen: z.enum(['private', 'shared', 'unavailable']).nullish(),
-        pool: z.boolean().nullish(),
-      })
-      .nullish(),
-
-    cutout: imageSchema,
-    gallery: z.array(imageSchema).nullish(),
+const sharedFindings = {
+  wifi: wifiSchema,
+  noise: z.enum(['quiet', 'moderate', 'loud']),
+  parking: z.object({
+    motorbike: parkingSchema,
+    car: parkingSchema,
   }),
-)
+}
+
+const cafeFindings = z.object({
+  ...sharedFindings,
+  power: amountSchema,
+  seating: z.array(z.enum(['indoor', 'outdoor', 'semi-outdoor'])).min(1),
+  music: presenceSchema,
+  toilet: presenceSchema,
+  reservation: z.enum(['not-needed', 'recommended', 'required']),
+})
+
+const stayFindings = z.object({
+  ...sharedFindings,
+  cooling: z.enum(['ac', 'fan', 'ac-and-fan', 'open-air']),
+  roomType: z.enum(['private-studio', 'private-room', 'shared-dorm']),
+  bathroom: z.enum(['private', 'shared']),
+  kitchen: z.enum(['private', 'shared', 'unavailable']),
+  pool: presenceSchema,
+})
+
+const visited = {
+  visitedAt: z.array(z.iso.date()).min(1),
+  badge: z.enum(['approved', 'good-find']).nullable(),
+  spending: spendingSchema.nullable(),
+  review: localizedTextSchema,
+  caveats: localizedTextSchema,
+  gallery: z.array(imageSchema).min(1),
+}
+
+const notVisitedPlace = z.object({
+  ...identity,
+  category: categorySchema,
+  visitedAt: z.null(),
+  badge: z.null(),
+  spending: z.null(),
+  review: z.null(),
+  caveats: z.null(),
+  gallery: z.null(),
+  findings: z.null(),
+})
+
+const cafePlace = z.object({
+  ...identity,
+  ...visited,
+  category: z.enum(['cafe', 'restaurant', 'club']),
+  findings: cafeFindings,
+})
+
+const stayPlace = z.object({
+  ...identity,
+  ...visited,
+  category: z.literal('stay'),
+  findings: stayFindings,
+})
+
+export const placesSchema = z.array(z.union([cafePlace, stayPlace, notVisitedPlace]))
 
 export type Places = z.infer<typeof placesSchema>
