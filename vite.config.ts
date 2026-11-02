@@ -6,6 +6,7 @@ import viteReact from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
 import { intlayer } from 'vite-intlayer'
 import { startPrerenderConfig } from './src/seo/sitemap.vite.ts'
+import { placesStaticCache } from './src/places/places.cache.vite.ts'
 
 const config = defineConfig({
   server: { port: 4321 },
@@ -16,6 +17,7 @@ const config = defineConfig({
     tailwindcss(),
     intlayer(),
     tanstackStart(startPrerenderConfig),
+    placesStaticCache(),
     viteReact(),
   ],
 })
