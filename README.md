@@ -13,9 +13,10 @@ Local development runs at `http://localhost:4321`.
 
 ## Architecture
 
-- **Static generation**: `pnpm build` prerenders all localized pages and caches Sanity `place` queries into `dist/client` via `@tanstack/start-static-server-functions`.
-- **Edge hosting & API**: Cloudflare Workers Static Assets (`wrangler.jsonc`) serves prerendered HTML, assets, and localized `404.html` directly from the edge. The Worker (`src/newsletter/worker.ts`) runs only on `/api/*` (`POST /api/subscribe` with rate limiting and Kit double opt-in).
-- **Environment**: Copy `.env.example` to `.env.local` for local Kit credentials (`KIT_API_KEY`, `KIT_FORM_ID`; deployed as Cloudflare Worker secrets). Optional `VITE_POSTHOG_PROJECT_TOKEN` and `VITE_POSTHOG_HOST` are baked in at build time (leave the token empty to disable analytics).
+- **Static generation**: `pnpm build` prerenders all localized pages into static HTML in `dist/client`.
+- **Server functions**: The newsletter signup is a TanStack Start server function (`src/newsletter/subscribe.functions.ts`) that runs Kit double opt-in. `src/start.ts` adds TanStack Start's CSRF middleware to every server function.
+- **Hosting**: Cloudflare is only the deployment layer via `@cloudflare/vite-plugin`. Workers Static Assets (`wrangler.jsonc`) serves prerendered HTML, assets, and localized `404.html`. Only `/_serverFn/*` requests reach the Worker. The app has no Cloudflare bindings or rate limiters.
+- **Environment**: Copy `.env.example` to `.env.local` for local Kit credentials (`KIT_API_KEY`, read from `process.env` and deployed as a Worker secret). Optional `VITE_POSTHOG_PROJECT_TOKEN` and `VITE_POSTHOG_HOST` are baked in at build time (leave the token empty to disable analytics).
 
 ## Languages
 

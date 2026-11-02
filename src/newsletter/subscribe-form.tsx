@@ -21,7 +21,7 @@ import {
 } from '@/design-system/input-group'
 
 import { NewsletterEnvelope } from './newsletter-envelope'
-import { subscribe, type SubscribeResult } from './subscribe'
+import { subscribe, type SubscribeResult } from './subscribe.functions'
 
 type Status = 'idle' | 'submitting' | 'success'
 
@@ -44,7 +44,7 @@ export function SubscribeForm({ placement = 'hero' }: { placement?: 'hero' | 'fo
     setStatus('submitting')
     let result: SubscribeResult
     try {
-      result = await subscribe({ email, company })
+      result = await subscribe({ data: { email, company } })
     } catch {
       result = { status: 'error' }
     }
@@ -52,12 +52,6 @@ export function SubscribeForm({ placement = 'hero' }: { placement?: 'hero' | 'fo
     if (result.status === 'invalid-email') {
       setStatus('idle')
       toast.error(content.invalidEmail.value)
-      return
-    }
-
-    if (result.status === 'rate-limited') {
-      setStatus('idle')
-      toast.error(content.rateLimited.value)
       return
     }
 

@@ -107,14 +107,6 @@ export default {
       'zh-CN': '请输入有效的电子邮箱。',
       ru: 'Введите корректный адрес электронной почты.',
     }),
-    rateLimited: t({
-      en: 'Too many signup attempts. Please try again in a minute.',
-      id: 'Terlalu banyak percobaan. Silakan coba lagi dalam satu menit.',
-      ja: '登録の試行回数が多すぎます。1分後にもう一度お試しください。',
-      ko: '가입 시도가 너무 많습니다. 1분 후에 다시 시도해 주세요.',
-      'zh-CN': '注册尝试次数过多，请在一分钟后重试。',
-      ru: 'Слишком много попыток подписки. Попробуйте снова через минуту.',
-    }),
     error: t({
       en: 'Something went wrong. Please try again.',
       id: 'Terjadi kesalahan. Silakan coba lagi.',

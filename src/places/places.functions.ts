@@ -1,5 +1,4 @@
 import { createServerFn } from '@tanstack/react-start'
-import { staticFunctionMiddleware } from '@tanstack/start-static-server-functions'
 import { createClient } from '@sanity/client'
 import { defineQuery } from 'groq'
 import { z } from 'zod'
@@ -30,7 +29,6 @@ const query = defineQuery(`*[_type == "place"] | order(name asc) {
 
 export const getPlaces = createServerFn({ method: 'GET' })
   .validator(z.enum(locales))
-  .middleware([staticFunctionMiddleware])
   .handler(async ({ data: locale }) => {
     const client = createClient({
       projectId: 'd0erm1pj',

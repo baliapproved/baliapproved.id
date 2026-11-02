@@ -10,6 +10,7 @@ allowBuilds:
 
 minimumReleaseAgeExclude:
   - '@sanity/client@8.14.1'
-  - miniflare@5.20261023.3-beta
-  - wrangler@4.156.0
+  - '@cloudflare/vite-plugin@1.67.0'
+  - miniflare@5.20261101.0-beta
+  - wrangler@4.156.1
   - posthog-js@1.443.0
